@@ -4,39 +4,36 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import ModulesRoute, { Switch } from './Modules.Route';
+import UIComponents from './UI.Components';
 
 const css = require('./index.scss');
 
-/** 全局数据片段数据接口 */
+/** Redux接口 */
 interface IReduxStatePart {
-
+    
 }
 
-/** 组建的props接口 */
+/** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
 
 }
 
-/** 绑定全局数据到props */
+/** 绑定全局数据 */
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
-export default class Home extends ModulesBasic<IProps, ModulesState> {
+export default class Workbench extends ModulesBasic<IProps, ModulesState> {
 
-    /** 组建状态 */
     public state: ModulesState = new ModulesState();
 
-    /** 构造函数 */
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
 
-    // 这里尽量只调用UI组件
     render() {
         return (
             <div key={this.state.key} className={css.modules}>
-                <Switch>{ModulesRoute.getChildReact('/login')}</Switch>
+                <UIComponents />
             </div>
         );
     }

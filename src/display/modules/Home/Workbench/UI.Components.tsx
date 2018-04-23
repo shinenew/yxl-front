@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { ModulesBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
+import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import UIComponents from './UI.Components';
 
-const css = require('./index.scss');
+// const css = require('./index.scss');
 
 /** Redux接口 */
 interface IReduxStatePart {
@@ -18,22 +17,20 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 
 }
 
-/** 绑定全局数据 */
+/** 绑定全局数据到props */
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
-export default class Demo extends ModulesBasic<IProps, ModulesState> {
-
-    public state: ModulesState = new ModulesState();
+export default class UIComponents extends UIBasic<IProps, ModulesState> {
 
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
-
+    
     render() {
         return (
-            <div className={css.modules}>
-                <UIComponents />
+            <div>
+                工作台
             </div>
         );
     }

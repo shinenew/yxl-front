@@ -4,7 +4,8 @@ const parentName: string = 'home'; // 路由的跟节点；
 
 Route.addNode(
     parentName,
-    { nodeName: 'demo', path: '/demo', component: require('./Demo').default },
+    { nodeName: 'login', path: '/login', component: require('./Login').default },
+    { nodeName: 'workbench', path: '/workbench', component: require('./Workbench').default },
 );
 
 export default {

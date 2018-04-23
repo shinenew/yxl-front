@@ -12,18 +12,18 @@ export default abstract class ApiBasic<O, D> {
 
     /** 向服务器发送请求 */
     public call = async (request: Request, mock: boolean = false): Promise<any> => {
-        
+
         request = {
             ...request,
             options: this.getOptions(request.options)
         };
 
         MyStore.instance.dispatch(reducers.system.ActionTypes.addLoading, request.uri); // 添加loading
-        
+
         const data = await Agent.instance.call(request, this.domain, mock);
-        
+
         MyStore.instance.dispatch(reducers.system.ActionTypes.removeLoading, request.uri); // 删除loading
-        
+
         return data;
     }
 
@@ -31,7 +31,7 @@ export default abstract class ApiBasic<O, D> {
      * 执行api
      * @param option api 入参
      */
-    public run = async (option: O): Promise<Response<D>> => {
+    public run = async (target: any, option: O): Promise<Response<D>> => {
         return await this.api(option);
     }
 
