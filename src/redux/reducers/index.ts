@@ -2,6 +2,7 @@ import user from './user';
 import env from './env';
 import system from './system';
 import routes from './routes';
+import config from './config';
 
 export default {
     /** 用户数据 */
@@ -15,4 +16,7 @@ export default {
 
     /** 路由数据 */
     routes,
+
+    /** 配置数据 */
+    config,
 };

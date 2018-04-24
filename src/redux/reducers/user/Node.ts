@@ -1,11 +1,25 @@
+import { ICompany, IUserInfo } from 'src/dataModel';
+
 /**
  * 用户数据节点
  */
 export default class Node {
 
     /** 用户数据 */
-    public userInfo: any = null;
+    public userInfo: ICompany;
 
-    /** 用户的token */
-    public token: string = '用户的token';
+    /** 公司列表 */
+    public companyList: IUserInfo[];
+
+    /** 当前公司 */
+    public currentCompany: number;
+
+    /** 用户的全局token */
+    public gToken: string;
+
+    /** 用户的公司token */
+    public cToken: string;
+
+    /** 公司接口头 */
+    public zoneUrl: string;
 }

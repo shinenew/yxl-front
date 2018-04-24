@@ -1,17 +1,20 @@
 import { createReducer } from 'redux-act';
 import ActionTypes from './ActionTypes';
-import Node from './Node';
+
+console.log(JSON.parse(window.sessionStorage.getItem('$$/User/fnSetUserInfo')));
 
 const reducer = createReducer(
     {
         [ActionTypes.fnSetUserInfo as any]: (state, payload) => {
-            return {
+            const userInfo = {
                 ...state,
-                userInfo: payload,
+                ...payload
             };
+            window.sessionStorage.setItem('$$/User/fnSetUserInfo', JSON.stringify(userInfo));
+            return userInfo;
         },
     },
-    new Node()
+    JSON.parse(window.sessionStorage.getItem('$$/User/fnSetUserInfo')) || {}
 );
 
 export default reducer;

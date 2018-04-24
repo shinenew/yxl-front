@@ -3,6 +3,8 @@ import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import { Card, Form, Button, Select } from 'antd';
+import { ICompany } from 'src/dataModel';
+import { company } from 'src/api';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 
@@ -19,7 +21,8 @@ const formItemLayout = {
 
 /** Redux接口 */
 interface IReduxStatePart {
-
+    loading: string[];
+    companyList: ICompany[];
 }
 
 /** Props接口 */
@@ -28,15 +31,22 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 选中公司面板 */
-@connect((state: ReduxState): IReduxStatePart => ({}), true)
+@connect((state: ReduxState): IReduxStatePart => ({
+    loading: state.system.loading,
+    companyList: state.user.companyList || [],
+}), true)
 export default class UIPanel extends UIBasic<IProps, ModulesState> {
 
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
 
+    componentDidMount() {
+        ModulesAction.updateCompanyList();
+    }
+
     render() {
-        const { form } = this.props;
+        const { form, loading, companyList } = this.props;
         const { getFieldDecorator } = form;
         return (
             <Card className={`${css.uipanel}`} title="选择公司">
@@ -50,14 +60,14 @@ export default class UIPanel extends UIBasic<IProps, ModulesState> {
                             }],
                         })(
                             <Select placeholder="请选公司">
-                                <Select.Option value="jack">Jack</Select.Option>
-                                <Select.Option value="lucy">Lucy</Select.Option>
-                                <Select.Option value="Yiminghe">yiminghe</Select.Option>
+                                {companyList.map((value: ICompany, i: number) => (
+                                    <Select.Option key={i} value={i.toString()}>{value.companyName}</Select.Option>
+                                ))}
                             </Select>
                         )}
                     </Form.Item>
                     <Form.Item wrapperCol={{ offset: 6 }} >
-                        <Button onClick={this.onEnterClickHandler} type="primary" htmlType="submit">
+                        <Button loading={loading.length > 0} onClick={this.onEnterClickHandler} type="primary" htmlType="submit">
                             进入
                         </Button>
                     </Form.Item>
@@ -68,10 +78,17 @@ export default class UIPanel extends UIBasic<IProps, ModulesState> {
 
     /** 点击了进入 */
     private onEnterClickHandler = () => {
-        this.props.form.validateFields((er: any, values: any) => {
+        const { companyList } = this.props;
+        this.props.form.validateFields(async (er: any, values: any) => {
             if (er) {
                 return;
             }
+
+            const data = await company.switching(this, { companyId: companyList[values.company].companyId });
+            if (data.er) {
+                return;
+            }
+
             this.props.history.push(`/workbench`);
         });
     }

@@ -32,7 +32,7 @@ export default class Login extends ModulesBasic<IProps, ModulesState> {
 
     render() {
         return (
-            <div key={this.state.key} className={css.modules}>
+            <div className={css.modules}>
                 {ModulesRoute.getChildReact()}
             </div>
         );
