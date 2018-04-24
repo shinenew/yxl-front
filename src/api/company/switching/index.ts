@@ -30,6 +30,7 @@ class Switching extends ApiBasic<IOptions, IData> {
         for (let i = 0; i < user.companyList.length; i++) {
             if (user.companyList[i].companyId === option.companyId) {
                 user.currentCompany = i;
+                break;
             }
         }
         
