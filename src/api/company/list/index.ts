@@ -19,14 +19,16 @@ class List extends ApiBasic<IOptions, IData> {
 
         let data: Response<IData> = await this.callGlobal(req);
 
-        if (!data.er) {
-            MyStore.instance.dispatch(reducers.user.ActionTypes.fnSetUserInfo, {
-                companyList: data.res,
-                currentCompany: -1,
-            });
+        if (data.er) {
+            return data;
         }
 
-        return data;
+        MyStore.instance.dispatch(reducers.user.ActionTypes.fnSetUserInfo, {
+            companyList: data.res,
+            currentCompany: -1,
+        });
+
+        return new Response(null);
     }
 }
 

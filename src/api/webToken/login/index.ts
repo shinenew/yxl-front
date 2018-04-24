@@ -17,13 +17,15 @@ class Login extends ApiBasic<IOptions, IData> {
 
         const req: Request = new Request(CallType.POST, Urls.WEB_TOKEN_LOGIN, option);
 
-        let data: any = await this.callGlobal(req);
+        let data: Response<any> = await this.callGlobal(req);
         
-        if (!data.er) {
-            MyStore.instance.dispatch(reducers.user.ActionTypes.fnSetUserInfo, { gToken: data.res.token });
+        if (data.er) {
+            return data;
         }
+        
+        MyStore.instance.dispatch(reducers.user.ActionTypes.fnSetUserInfo, { gToken: data.res.token });
 
-        return data;
+        return new Response(null);
     }
 }
 
