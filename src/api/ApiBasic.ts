@@ -91,7 +91,7 @@ export default abstract class ApiBasic<O, D> {
         const { env, config } = MyStore.instance.getState();
         switch (env.NODE_ENV) {
             case NodeEnvType.开发环境:
-                return config.rootConfig.DEV_URI;
+                return env.API_URI || config.rootConfig.DEV_URI;
             case NodeEnvType.生产环境:
                 return config.rootConfig.API_URI;
             case NodeEnvType.测试环境:
