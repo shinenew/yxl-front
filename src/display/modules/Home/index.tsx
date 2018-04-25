@@ -42,7 +42,7 @@ export default class Home extends ModulesBasic<IProps, ModulesState> {
     render() {
         return (
             <div key={this.state.key} className={css.modules}>
-                <Switch>{ModulesRoute.getChildReact('/workbench')}</Switch>
+                <Switch>{ModulesRoute.getChildReact()}</Switch>
             </div>
         );
     }
@@ -60,10 +60,8 @@ export default class Home extends ModulesBasic<IProps, ModulesState> {
             if (location.pathname !== '/login/company') {
                 history.push('/login/company');
             }
-        } else if (location.pathname.indexOf('/login') === 0 || location.pathname === '/') {
-            if (location.pathname !== '/workbench') {
-                history.push('/workbench');
-            }
+        } else if (location.pathname.indexOf('/workbench') !== 0) {
+            history.push('/workbench');
         }
     }
 }

@@ -57,7 +57,7 @@ export default class UIPanel extends UIBasic<IProps, ModulesState> {
                     <Form.Item {...formItemLayout} label="密码">
                         {getFieldDecorator('password', {
                             initialValue: env.PASSWORD,
-                            rules: [Decorators.password()],
+                            rules: [],
                         })(
                             <Input type="password" placeholder="请输入密码" />
                         )}

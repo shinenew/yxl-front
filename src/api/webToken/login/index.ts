@@ -14,7 +14,7 @@ class Login extends ApiBasic<IOptions, IData> {
 
     /** 入口 */
     public async api(option: IOptions): Promise<Response<IData>> {
-
+        
         const req: Request = new Request(CallType.POST, Urls.WEB_TOKEN_LOGIN, option);
 
         let data: Response<any> = await this.callGlobal(req);

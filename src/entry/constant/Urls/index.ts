@@ -7,6 +7,9 @@ enum Urls {
 
     /** 登录公司 */
     AUTH_CWEB_LOGIN = '/global/auth/cweb/login',
+
+    /** 获取公司已安装应用列表 */
+    APP_INSTANCE_QUERY = '/zone/open/app-instance/query',
 }
 
 export default Urls;

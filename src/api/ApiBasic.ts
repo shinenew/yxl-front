@@ -17,12 +17,12 @@ export default abstract class ApiBasic<O, D> {
         request.options.Authorization = user.gToken || undefined;
         return await this.call(request, this.domain, mock);
     }
-
+    
     /** 向服务器发送请求(Company) */
     public callCompany = async (request: Request, mock: boolean = false): Promise<any> => {
         const { user } = MyStore.instance.getState();
         request.options.Authorization = user.cToken;
-        return await this.call(request, user.zoneUrl, mock);
+        return await this.call(request, `//${user.zoneUrl}`, mock);
     }
 
     /** 向服务器发送请求 */
@@ -35,28 +35,33 @@ export default abstract class ApiBasic<O, D> {
         MyStore.instance.dispatch(reducers.system.ActionTypes.removeLoading, request.uri); // 删除loading
 
         // 通信错误
-        if (res.er) {
-            this.messageError(request, '服务器异常');
-            return res;
-        }
-
-        // 通行错误
-        if (res.res.ok === false) {
-            this.messageError(request, '系统异常');
-            return new Response(res.res);
-        }
-
-        // 业务失败
-        if (res.res.body.ok === false) {
-            if (res.res.body.status && res.res.body.status.description) {
-                if (res.res.body.status.returnCode === '02001') {
-                    MyStore.instance.dispatch(reducers.user.ActionTypes.fnSetUserInfo, { token: null });
-                    history.push('/');
-                }
-                this.messageError(request, res.res.body.status.description);
-            } else {
-                this.messageError(request, '系统错误');
+        try {
+            if (res.er) {
+                this.messageError(request, '服务器异常');
+                return res;
             }
+
+            // 通行错误
+            if (res.res.ok === false) {
+                this.messageError(request, '系统异常');
+                return new Response(res.res);
+            }
+
+            // 业务失败
+            if (res.res.body.ok === false) {
+                if (res.res.body.status && res.res.body.status.description) {
+                    if (res.res.body.status.returnCode === '02001') {
+                        MyStore.instance.dispatch(reducers.user.ActionTypes.fnSetUserInfo, { token: null });
+                        history.push('/');
+                    }
+                    this.messageError(request, res.res.body.status.description);
+                } else {
+                    this.messageError(request, '系统错误');
+                }
+                return new Response(res.res);
+            }
+        } catch (er) {
+            this.messageError(request, '系统错误');
             return new Response(res.res);
         }
 

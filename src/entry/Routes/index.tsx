@@ -15,6 +15,6 @@ const Routes = () => (
             {MyRoute.getChildReact(MyRoute.ROOT_NAME)}
         </Switch>
     </Router>
-        );
-        
+);
+
 export default Routes;

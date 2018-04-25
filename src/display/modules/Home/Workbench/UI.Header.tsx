@@ -4,12 +4,11 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-
-// const css = require('./index.scss');
+import { IAppInfo } from 'src/dataModel';
 
 /** Redux接口 */
 interface IReduxStatePart {
-    
+    appList?: IAppInfo[];
 }
 
 /** Props接口 */
@@ -17,21 +16,19 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 
 }
 
-/** 绑定全局数据到props */
+/** 选中公司面板 */
 @connect((state: ReduxState): IReduxStatePart => ({
-
+    appList: state.user.appList
 }))
-export default class UIComponents extends UIBasic<IProps, ModulesState> {
+export default class UIHeader extends UIBasic<IProps, ModulesState> {
 
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
-    
+
     render() {
         return (
-            <div>
-                工作台
-            </div>
+            <p>{}</p>
         );
     }
 }

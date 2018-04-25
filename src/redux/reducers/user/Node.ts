@@ -1,4 +1,4 @@
-import { ICompany, IUserInfo } from 'src/dataModel';
+import { ICompany, IUserInfo, IAppInfo } from 'src/dataModel';
 
 /**
  * 用户数据节点
@@ -13,6 +13,9 @@ export default class Node {
 
     /** 当前公司 */
     public currentCompany: number;
+
+    /** 已经安装的appList */
+    public appList: IAppInfo[];
 
     /** 用户的全局token */
     public gToken: string;
