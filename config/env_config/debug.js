@@ -4,4 +4,5 @@ module.exports = require('../../evn') || {
     USERNAME:'kxladmin',//默认用户名
     PASSWORD:'123456',//默认密码
     API_URI:undefined,//服务器API头
+    DOMAIN:'kxl.com',//根域名
 };

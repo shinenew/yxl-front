@@ -46,8 +46,9 @@ export default class UIIframe extends UIBasic<IProps, ModulesState> {
         return (
             <div className={css.iframe} >
                 {
+                    // this.appInfo.appIndexUri
                     this.appInfo
-                    ? <iframe src={this.appInfo.appIndexUri} />
+                    ? <iframe src={'http://b.kxl.com:3000?k=111'} />
                     : <p>没有找到app</p>
                 }
             </div>
