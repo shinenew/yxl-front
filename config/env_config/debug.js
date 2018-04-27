@@ -1,8 +1,8 @@
 let evn = {
     NODE_ENV: 'debug',
     IS_MOCK: true,//是否开启mock数据
-    USERNAME: undefined,//默认用户名
-    PASSWORD: undefined,//默认密码
+    USERNAME: 'jiangxuetong',//默认用户名
+    PASSWORD: '123',//默认密码
     API_URI: undefined,//服务器API头
     DOMAIN: 'xltec.cc',//根域名
 };
