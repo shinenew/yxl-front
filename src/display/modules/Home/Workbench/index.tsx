@@ -6,10 +6,9 @@ import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 import ModulesRoute from './Modules.Route';
 import UIAppList from './UI.AppList';
-import UIHeader from './UI.Header';
 import { Layout } from 'antd';
 
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 const css = require('./index.scss');
 
 /** Redux接口 */
@@ -37,9 +36,6 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
     render() {
         return (
             <Layout className={css.layout}>
-                <Header>
-                    <UIHeader {...this.props} />
-                </Header>
                 <Layout>
                     <Sider collapsible={true} >
                         <UIAppList {...this.props} />

@@ -6,7 +6,7 @@ enum AppState {
     已启用 = 1,
     已禁用 = 3,
     已禁止 = 4,
-    已卸载 = 5,
+    已卸载 = 5, 
 }
 
 export default AppState;

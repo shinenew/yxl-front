@@ -13,12 +13,3 @@ ReactDOM.render(
   <App />,
   document.getElementById('root') as HTMLElement
 );
-
-// enum A {
-//   a = 0,
-//   b = 2,
-//   c,
-//   d
-// }
-
-// console.log(d);
