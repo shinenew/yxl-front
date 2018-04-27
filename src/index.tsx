@@ -6,7 +6,7 @@ import './index.less';
 try {
   window.document.domain = window['$$_kxl_env']['DOMAIN'];
 } catch (er) {
-  console.error('domain设置失败');
+  console.error('domain设置失败。');
 }
 
 ReactDOM.render(
