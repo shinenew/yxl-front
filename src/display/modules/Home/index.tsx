@@ -1,17 +1,15 @@
 import * as React from 'react';
 import { ModulesBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
-import { connect } from 'src/redux';
+import { MyStore, connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 import ModulesRoute, { Switch } from './Modules.Route';
-import UIComponents from './UI.Components';
 
 const css = require('./index.scss');
 
 /** 全局数据片段数据接口 */
 interface IReduxStatePart {
-
 }
 
 /** 组建的props接口 */
@@ -21,7 +19,6 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 
 /** 绑定全局数据到props */
 @connect((state: ReduxState): IReduxStatePart => ({
-
 }))
 export default class Home extends ModulesBasic<IProps, ModulesState> {
 
@@ -33,14 +30,38 @@ export default class Home extends ModulesBasic<IProps, ModulesState> {
         super(props, ModulesAction);
     }
 
+    componentWillMount() {
+        this.redirection();
+    }
+
+    componentDidUpdate() {
+        this.redirection();
+    }
+
     // 这里尽量只调用UI组件
     render() {
-        const { } = this.props; // 获取你的props数据
         return (
             <div key={this.state.key} className={css.modules}>
-                <UIComponents />
-                <Switch>{ModulesRoute.getChildReact('/demo')}</Switch>
+                <Switch>{ModulesRoute.getChildReact()}</Switch>
             </div>
         );
+    }
+
+    /** 根据登录状态进行跳转 */
+    private redirection = () => {
+        const { user } = MyStore.instance.getState();
+        const { history, location } = this.props;
+
+        if (!user.gToken) {
+            if (location.pathname !== '/login') {
+                history.push('/login');
+            }
+        } else if (!user.cToken) {
+            if (location.pathname !== '/login/company') {
+                history.push('/login/company');
+            }
+        } else if (location.pathname.indexOf('/workbench') !== 0) {
+            history.push('/workbench');
+        }
     }
 }
