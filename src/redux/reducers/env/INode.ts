@@ -10,4 +10,13 @@ export default interface INode {
 
     /** 是否开启mock数据 */
     IS_MOCK: boolean;
+
+    /** 默认用户名 */
+    USERNAME: string;
+
+    /** 默认密码 */
+    PASSWORD: string;
+
+    /** 服务端API地址头 */
+    API_URI: string;
 }

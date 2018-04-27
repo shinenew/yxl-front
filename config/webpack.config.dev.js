@@ -25,7 +25,7 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 // 配置地址
-// const configUrl = require("./create_config");
+const configUrl = require("./config_url");
 // 站点环境变量
 const webEnv = require('./env_config');
 // mock 数据
@@ -323,7 +323,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
-      // config: configUrl,
+      config: configUrl,
       env: webEnv,
       mock: mockData,
       version: new Date().getTime(),

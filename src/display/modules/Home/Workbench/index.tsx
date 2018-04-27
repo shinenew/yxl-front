@@ -4,13 +4,16 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import UIComponents from './UI.Components';
+import ModulesRoute from './Modules.Route';
+import UIAppList from './UI.AppList';
+import { Layout } from 'antd';
 
+const { Content, Sider } = Layout;
 const css = require('./index.scss');
 
 /** Redux接口 */
 interface IReduxStatePart {
-    
+
 }
 
 /** Props接口 */
@@ -22,7 +25,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
-export default class Demo extends ModulesBasic<IProps, ModulesState> {
+export default class Workbench extends ModulesBasic<IProps, ModulesState> {
 
     public state: ModulesState = new ModulesState();
 
@@ -32,9 +35,16 @@ export default class Demo extends ModulesBasic<IProps, ModulesState> {
 
     render() {
         return (
-            <div className={css.modules}>
-                <UIComponents />
-            </div>
+            <Layout className={css.layout}>
+                <Layout>
+                    <Sider collapsible={true} >
+                        <UIAppList {...this.props} />
+                    </Sider>
+                    <Content>
+                        {ModulesRoute.getChildReact()}
+                    </Content>
+                </Layout>
+            </Layout>
         );
     }
 }

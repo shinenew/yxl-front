@@ -19,6 +19,8 @@
 # dependencies
 /node_modules
 .idea
+/urls.js
+/evn.js
 
 package-lock.json
 
