@@ -11,6 +11,6 @@ module.exports = {
     USERNAME: undefined,//默认用户名
     PASSWORD: undefined,//默认密码
     API_URI: undefined,//服务器API头
-    DOMAIN: 'kxl.com',//根域名
+    DOMAIN: 'xltec.cc',//根域名
     ...evn
 };
