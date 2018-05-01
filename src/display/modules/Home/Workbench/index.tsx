@@ -5,7 +5,6 @@ import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 import ModulesRoute from './Modules.Route';
-// import UIAppList from './UI.AppList';
 import UIFeatures from './UI.Features';
 import UILog from './UI.Log';
 import { Layout } from 'antd';
@@ -39,17 +38,18 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
         return (
             <Layout className={css.layout}>
                 <Layout>
-                    <Sider 
-                        key={this.state.key}
+                    <Sider
                         width={180} 
                         trigger={null} 
                         collapsible={true} 
                         collapsed={this.state.collapsed} 
                         collapsedWidth={64}
                     >
-                        <UILog />
+                        {/* 图标和收折按钮 */}
+                        <UILog collapsed={this.state.collapsed} />
                         
-                        <UIFeatures />
+                        {/* 基础功能 */}
+                        <UIFeatures key={this.state.key} />
 
                         <div className={css.separation} />
                         

@@ -15,7 +15,8 @@ interface IReduxStatePart {
 
 /** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
-
+    /** 当前收起状态 */
+    collapsed: boolean;
 }
 
 /** iframe */
