@@ -5,7 +5,9 @@ import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 import ModulesRoute from './Modules.Route';
-import UIAppList from './UI.AppList';
+// import UIAppList from './UI.AppList';
+import UIFeatures from './UI.Features';
+import UILog from './UI.Log';
 import { Layout } from 'antd';
 
 const { Content, Sider } = Layout;
@@ -37,8 +39,21 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
         return (
             <Layout className={css.layout}>
                 <Layout>
-                    <Sider collapsible={true} >
-                        <UIAppList {...this.props} />
+                    <Sider 
+                        key={this.state.key}
+                        width={180} 
+                        trigger={null} 
+                        collapsible={true} 
+                        collapsed={this.state.collapsed} 
+                        collapsedWidth={64}
+                    >
+                        <UILog />
+                        
+                        <UIFeatures />
+
+                        <div className={css.separation} />
+                        
+                        {/* <UIAppList {...this.props} /> */}
                     </Sider>
                     <Content>
                         {ModulesRoute.getChildReact()}
