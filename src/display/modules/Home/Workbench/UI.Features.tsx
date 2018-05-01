@@ -6,7 +6,7 @@ import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 
-// const css = require('./index.scss');
+const css = require('./index.scss');
 
 /** Redux接口 */
 interface IReduxStatePart {
@@ -14,7 +14,6 @@ interface IReduxStatePart {
 
 /** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
-
 }
 
 /** 基础功能 */
@@ -29,12 +28,16 @@ export default class UIIframe extends UIBasic<IProps, ModulesState> {
     render() {
         return (
             <Menu
-                selectedKeys={['1', '5']}
                 theme="dark"
-                inlineIndent={64}
-                // inlineCollapsed={this.modulesState.collapsed}
+                inlineIndent={15}
+                mode="inline"
+                selectedKeys={['2']}
+                defaultOpenKeys={this.modulesState.collapsed ? [] : ['sub1']}
+                inlineCollapsed={this.modulesState.collapsed}
             >
                 <Menu.SubMenu
+                    key="sub1"
+                    className={css.menuSubMenu}
                     title={
                         <span>
                             <Icon type="pie-chart" />
