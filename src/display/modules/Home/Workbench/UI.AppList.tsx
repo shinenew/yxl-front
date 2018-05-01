@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
@@ -33,7 +32,7 @@ export default class UIAppList extends UIBasic<IProps, ModulesState> {
         const { appList } = this.props;
         return appList.map((value: IAppInfo) => (
             <Menu.Item key={`/workbench/app/${value.appId}`}>
-                <Link to={`/workbench/app/${value.appId}`}>{value.appName}</Link>
+                {value.appName}
             </Menu.Item>
         ));
     }
@@ -41,7 +40,12 @@ export default class UIAppList extends UIBasic<IProps, ModulesState> {
     render() {
         const { location } = this.props;
         return (
-            <Menu selectedKeys={[location.pathname]} theme="dark" >
+            <Menu
+                selectedKeys={[location.pathname]}
+                theme="dark"
+                inlineIndent={64}
+                // inlineCollapsed={this.modulesState.collapsed}
+            >
                 {this.appListElement}
             </Menu>
         );
