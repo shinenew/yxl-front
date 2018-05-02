@@ -6,7 +6,9 @@ import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 import ModulesRoute from './Modules.Route';
 import UIFeatures from './UI.Features';
+import UIAide from './UI.Aide';
 import UILog from './UI.Log';
+import UIUserPanel from './UI.UserPanel';
 import { Layout } from 'antd';
 
 const { Content, Sider } = Layout;
@@ -39,21 +41,29 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
             <Layout className={css.layout}>
                 <Layout>
                     <Sider
-                        width={180} 
-                        trigger={null} 
-                        collapsible={true} 
-                        collapsed={this.state.collapsed} 
+                        width={180}
+                        trigger={null}
+                        collapsible={true}
+                        collapsed={this.state.collapsed}
                         collapsedWidth={64}
                     >
                         {/* 图标和收折按钮 */}
                         <UILog collapsed={this.state.collapsed} />
-                        
+
                         {/* 基础功能 */}
-                        <UIFeatures key={this.state.key} />
+                        <UIFeatures collapsed={this.state.collapsed} />
 
                         <div className={css.separation} />
-                        
+
+                        {/* 已经安装的应用列表 */}
                         {/* <UIAppList {...this.props} /> */}
+                        <div className={css.separation} />
+
+                        {/* 辅助功能 */}
+                        <UIAide collapsed={this.state.collapsed} />
+
+                        {/* 用户面板 */}
+                        <UIUserPanel />
                     </Sider>
                     <Content>
                         {ModulesRoute.getChildReact()}

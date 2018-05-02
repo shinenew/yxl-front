@@ -14,6 +14,8 @@ interface IReduxStatePart {
 
 /** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
+    /** 当前收起状态 */
+    collapsed: boolean;
 }
 
 /** 基础功能 */
@@ -40,30 +42,27 @@ export default class UIIframe extends UIBasic<IProps, ModulesState> {
                     className={css.menuSubMenu}
                     title={
                         <span>
-                            <Icon type="pie-chart" />
+                            <Icon type="mail" />
                             <span>收件箱</span>
                         </span>
                     }
                 >
                     <Menu.Item key="1">
-                        <Icon type="pie-chart" />
                         <span>邮件1</span>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <Icon type="pie-chart" />
                         <span>邮件2</span>
                     </Menu.Item>
                     <Menu.Item key="3">
-                        <Icon type="pie-chart" />
                         <span>邮件3</span>
                     </Menu.Item>
                 </Menu.SubMenu>
                 <Menu.Item key="4">
-                    <Icon type="pie-chart" />
+                    <Icon type="global" />
                     <span>网络</span>
                 </Menu.Item>
                 <Menu.Item key="5">
-                    <Icon type="pie-chart" />
+                    <Icon type="shop" />
                     <span>公司信息</span>
                 </Menu.Item>
             </Menu>
