@@ -5,6 +5,9 @@ enum Urls {
     /** 用户的所有公司列表 */
     COMPANY_LIST = '/global/account/company/list',
 
+    /** 获取用户数据 */
+    COMPANY_USER_INFO = '/zone/company/user/info',
+
     /** 登录公司 */
     AUTH_CWEB_LOGIN = '/global/auth/cweb/login',
 
