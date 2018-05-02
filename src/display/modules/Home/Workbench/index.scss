@@ -1,6 +1,43 @@
 .layout{
+  $background : #414751;
   height: 100vh;
-  color: #fff;
+
+  :global(.ant-layout-sider) {
+    background: $background;
+  }
+
+  :global(.ant-menu-inline-collapsed){
+    width: 64px;
+    
+    :global(.ant-menu-submenu) :global(.ant-menu-submenu-title){
+      padding: 0px 24px !important;
+    }
+
+    :global(.ant-menu-item){
+      padding: 0px 24px !important;
+    }
+  }
+
+  :global(.ant-menu-item),
+  :global(.ant-menu-submenu-title)
+  {
+    color: #fff !important;
+    height: 42px !important;
+    margin: 0px !important;
+  }
+
+  :global(.ant-menu-item-active),
+  :global(.ant-menu-item-selected),
+  :global(.ant-menu-submenu-selected),
+  {
+    background: #2e3339 !important;
+    color: #bdbdbe !important;
+  }
+  
+  
+  ul,li{
+    background: $background;
+  }
 }
 
 .iframe{
@@ -13,4 +50,41 @@
     height: 100%;
     border: none;
   }
+}
+
+.logText{
+  position: relative;
+  right: 15px;
+}
+
+// 分割线
+.separation{
+  border: 1px #666666 solid;
+  margin: 14px 20px;
+}
+
+.log{
+  $height: 70px;
+  height: $height;
+  line-height: $height;
+  text-align: center;
+  position: relative; 
+  background: #2e3339;
+  color: #cccccc;
+  overflow: hidden;
+}
+
+.icon{
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.iconCollapsed{
+  cursor: pointer;
+  text-align: center;
+  font-size: 18px;
+  position: relative;
+  top: 2px;
 }

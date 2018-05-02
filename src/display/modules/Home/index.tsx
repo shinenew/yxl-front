@@ -42,7 +42,7 @@ export default class Home extends ModulesBasic<IProps, ModulesState> {
     render() {
         return (
             <div key={this.state.key} className={css.modules}>
-                <Switch>{ModulesRoute.getChildReact()}</Switch>
+                <Switch>{ModulesRoute.getChildReact('/login')}</Switch>
             </div>
         );
     }
@@ -60,8 +60,6 @@ export default class Home extends ModulesBasic<IProps, ModulesState> {
             if (location.pathname !== '/login/company') {
                 history.push('/login/company');
             }
-        } else if (location.pathname.indexOf('/workbench') !== 0) {
-            history.push('/workbench');
         }
     }
 }
