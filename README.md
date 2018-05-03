@@ -37,6 +37,7 @@ npm run cre [模块类型] [目录] [模块名称] <br>
 * a api模块  默认路径（src/api/system）<br>
 * p 代码片段  默认路径（src/display/part）<br>
 * app 内部APP  默认路径（src/display/app<br>
+* platform 平台APP  默认路径（src/display/platform<br>
 
 例子
 >yarn cre m . demo（在src/display/modules 下创建一个名为 demo的模块）<br>
@@ -49,10 +50,11 @@ npm run cre [模块类型] [目录] [模块名称] <br>
     * user（用户相关api）
   * dataModel（数据模型-回重复实例化，并且参与业务逻辑的数据对象）
   * display（显示对象）
-    * app (系统内部的APP)
-    * components（组件）
     * modules（模块-地理的业务逻辑，通过路由切换）
+    * app (系统内部的APP)
+    * platform（平台的基础功能包）
     * part（显示片段-可以同时出现多个，有很独立的业务逻辑）
+    * components（组件）
   * entry（类似条目的配置）
     * constant（全站用的常量）
     * Routes（路由的跟配置）

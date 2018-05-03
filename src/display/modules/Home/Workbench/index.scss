@@ -58,6 +58,13 @@ $background : #414751;
     height: 42px !important;
   }
 
+  // 基础功能
+  .features{
+    :global(.iconfont){
+      margin-right: 10px;
+    }
+  }
+
   // 用户界面
   .userPanel{
     width: 100%;
@@ -65,6 +72,11 @@ $background : #414751;
     position: absolute;
     bottom: 0px;
     left: 0px;
+    color: #ccc;
+
+    p{
+      margin-bottom: 10px;
+    }
 
     // 头像样式
     .headPortrait{
@@ -75,7 +87,37 @@ $background : #414751;
       margin-bottom: 10px;
     }
 
-    
+    // 用户昵称
+    .userPanelNickName{
+      margin-right: 5px;
+    }
+
+    // 用户系统管理员
+    .userPanelNickNameName{
+      color: #448aca;
+    }
+
+    // 菜单
+    .userPanelMenu{
+      margin-bottom: 15px !important;
+      a{
+        color: #ccc;
+      }
+    }
+
+    .userPanelMenu[data-collapsed='0']{
+      li{
+        display: inline-block;
+        margin-right: 8px !important;
+      }
+    }
+
+    .userPanelMenu[data-collapsed='1']{
+      margin: 15px 0 !important;
+      li{
+        margin: 10px 0 !important;
+      }
+    }
   }
 }
 
@@ -147,7 +189,7 @@ $background : #414751;
 .iconCollapsed{
   cursor: pointer;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px !important;
   position: relative;
   top: 2px;
 }
