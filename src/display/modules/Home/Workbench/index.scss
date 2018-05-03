@@ -1,17 +1,51 @@
+$background : #414751;
+
+@mixin item-selected {
+
+  :global(.ant-menu-item):global(.ant-menu-item-active),
+  :global(.ant-menu-item):global(.ant-menu-item-selected),
+  :global(.ant-menu-item):global(.ant-menu-submenu-selected),
+  {
+    position: relative;
+    background: #2e3339 !important;
+    color: #bdbdbe !important;
+  }
+
+  :global(.ant-menu-item):global(.ant-menu-item-selected)::before{
+    content: '';
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    left: 0px;
+    background: #00a0e9;
+  }
+
+  ul,li{
+    background: $background;
+    margin: 0px !important;
+  }
+}
+
 .layout{
-  $background : #414751;
+  
   height: 100vh;
+  position: relative;
 
   :global(.ant-layout-sider) {
     background: $background;
   }
 
+  @include item-selected;
+
   :global(.ant-menu-inline-collapsed){
     width: 64px;
     
-    :global(.ant-menu-submenu) :global(.ant-menu-submenu-title){
-      padding: 0px 24px !important;
-    }
+    :global(.ant-menu-submenu){
+      :global(.ant-menu-submenu-title){
+        padding: 0px 24px !important;
+      }
+    } 
 
     :global(.ant-menu-item){
       padding: 0px 24px !important;
@@ -19,24 +53,95 @@
   }
 
   :global(.ant-menu-item),
-  :global(.ant-menu-submenu-title)
-  {
+  :global(.ant-menu-submenu-title){
     color: #fff !important;
     height: 42px !important;
-    margin: 0px !important;
   }
 
-  :global(.ant-menu-item-active),
-  :global(.ant-menu-item-selected),
-  :global(.ant-menu-submenu-selected),
-  {
-    background: #2e3339 !important;
-    color: #bdbdbe !important;
+  // 基础功能
+  .features{
+    :global(.iconfont){
+      margin-right: 10px;
+    }
   }
-  
-  
-  ul,li{
+
+  // 用户界面
+  .userPanel{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    color: #ccc;
+
+    p{
+      margin-bottom: 10px;
+    }
+
+    // 头像样式
+    .headPortrait{
+      border-radius: 9999px;
+      $hw: 45px;
+      width: $hw;
+      height: $hw;
+      margin-bottom: 10px;
+    }
+
+    // 用户昵称
+    .userPanelNickName{
+      margin-right: 5px;
+    }
+
+    // 用户系统管理员
+    .userPanelNickNameName{
+      color: #448aca;
+    }
+
+    // 菜单
+    .userPanelMenu{
+      margin-bottom: 15px !important;
+      a{
+        color: #ccc;
+      }
+    }
+
+    .userPanelMenu[data-collapsed='0']{
+      li{
+        display: inline-block;
+        margin-right: 8px !important;
+      }
+    }
+
+    .userPanelMenu[data-collapsed='1']{
+      margin: 15px 0 !important;
+      li{
+        margin: 10px 0 !important;
+      }
+    }
+  }
+}
+
+.menuSubMenu{
+  :global(.ant-menu-submenu-title){
+    margin: 0 !important;
+  }
+}
+
+:global(.ant-menu-submenu-popup).menuSubMenu{
+  :global(.ant-menu){
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    left: -4px;
+    position: relative;
     background: $background;
+
+    @include item-selected;
+  }
+}
+
+:global(.ant-menu-submenu).menuSubMenu:global(.ant-menu-submenu-selected){
+  :global(.ant-menu-submenu-title){
+    background: #2e3339;
   }
 }
 
@@ -84,7 +189,7 @@
 .iconCollapsed{
   cursor: pointer;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px !important;
   position: relative;
   top: 2px;
 }

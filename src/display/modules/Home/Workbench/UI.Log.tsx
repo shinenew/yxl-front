@@ -15,7 +15,8 @@ interface IReduxStatePart {
 
 /** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
-
+    /** 当前收起状态 */
+    collapsed: boolean;
 }
 
 /** iframe */
@@ -37,8 +38,8 @@ export default class UIIframe extends UIBasic<IProps, ModulesState> {
                 }
                 {
                     this.modulesState.collapsed
-                    ? <Icon className={css.iconCollapsed} onClick={ModulesAction.switchingCollapsed} type="menu-unfold" />
-                    : <Icon className={css.icon} onClick={ModulesAction.switchingCollapsed} type="menu-fold" />
+                    ? <Icon className={css.iconCollapsed} onClick={ModulesAction.switchingCollapsed} type="shouqi" />
+                    : <Icon className={css.icon} onClick={ModulesAction.switchingCollapsed} type="shouqi" />
                 }
             </div>
         );

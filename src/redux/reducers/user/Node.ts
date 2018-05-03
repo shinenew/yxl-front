@@ -1,4 +1,4 @@
-import { ICompany, IUserInfo, IAppInfo } from 'src/dataModel';
+import { ICompany, IAppInfo, IUserInfo } from 'src/dataModel';
 
 /**
  * 用户数据节点
@@ -6,10 +6,10 @@ import { ICompany, IUserInfo, IAppInfo } from 'src/dataModel';
 export default class Node {
 
     /** 用户数据 */
-    public userInfo: ICompany;
+    public userInfo: IUserInfo;
 
     /** 公司列表 */
-    public companyList: IUserInfo[];
+    public companyList: ICompany[];
 
     /** 当前公司 */
     public currentCompany: number;
