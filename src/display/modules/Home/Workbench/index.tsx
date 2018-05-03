@@ -57,13 +57,14 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
 
                         {/* 已经安装的应用列表 */}
                         {/* <UIAppList {...this.props} /> */}
+
                         <div className={css.separation} />
 
                         {/* 辅助功能 */}
                         <UIAide collapsed={this.state.collapsed} />
 
                         {/* 用户面板 */}
-                        <UIUserPanel />
+                        <UIUserPanel collapsed={this.state.collapsed} />
                     </Sider>
                     <Content>
                         {ModulesRoute.getChildReact()}

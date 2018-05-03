@@ -37,15 +37,15 @@ export default class UIAppList extends UIBasic<IProps, ModulesState> {
                 inlineCollapsed={this.modulesState.collapsed}
             >
                 <Menu.Item key="4">
-                    <Icon type="appstore-o" />
+                    <Icon type="yingyong" />
                     <span>应用商店</span>
                 </Menu.Item>
                 <Menu.Item key="5">
-                    <Icon type="question-circle" />
+                    <Icon type="bangzhu" />
                     <span>帮助中心</span>
                 </Menu.Item>
                 <Menu.Item key="6">
-                    <Icon type="setting" />
+                    <Icon type="shezhi" />
                     <span>系统管理</span>
                 </Menu.Item>
             </Menu>
