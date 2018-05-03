@@ -4,6 +4,7 @@ import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
+import language from 'src/entry/Language';
 import ReduxState, { } from 'src/redux/ReduxState';
 import { UserType } from 'src/entry/constant';
 import ModulesState from './Modules.State';
@@ -36,17 +37,10 @@ export default class UIUserPanel extends UIBasic<IProps, ModulesState> {
     }
 
     /** 用户类型名称 */
-    private get nickNameName() {
-        switch (this.props.userType) {
-            case UserType.公司管理员:
-                return '公司管理员';
-            case UserType.普通用户:
-                return '普通用户';
-            case UserType.超级管理员:
-                return '超级管理员';
-            default:
-                return '未知';
-        }
+    private get nickNameName(): string {
+
+        const userTypeString: string = language.userTypeToString(this.props.userType);
+        return userTypeString || '未知';
     }
 
     render() {
