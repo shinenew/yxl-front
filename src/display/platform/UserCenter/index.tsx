@@ -4,7 +4,7 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import UIComponents from './UI.Components';
+import UIInfo from './UI.info';
 
 const css = require('./index.scss');
 
@@ -33,7 +33,7 @@ export default class UserCenter extends ModulesBasic<IProps, ModulesState> {
     render() {
         return (
             <div key={this.state.key} className={css.modules}>
-                <UIComponents />
+                <UIInfo />
             </div>
         );
     }
