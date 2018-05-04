@@ -1,10 +1,20 @@
 // 模块样式
-.modules {
-  margin: 0 auto;
+.info {
+  margin: 16px;
+  border: 1px solid #b3b6b9;
+  border-radius: 4px;
+  background: #ffffff;
+  :global(.ant-card-body) {
 
-  // 全局样式
-  // :global(.app) {
-  //  margin: 0 auto;
-  //}
+    padding: 32px 120px;
+  };
+  :global(.antd-pro-description-list-term) {
+    min-width: 82px;
+    padding-bottom: 32px;
+    padding-left: 12px;
+    text-align: right;
+  }
+  :global(.ant-card-head) {
+    border-radius: 4px;
+  }
 }
-
