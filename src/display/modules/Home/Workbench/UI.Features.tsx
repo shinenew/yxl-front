@@ -49,13 +49,16 @@ export default class UIFeatures extends UIBasic<IProps, ModulesState> {
                     }
                 >
                     <Menu.Item key="1">
-                        <span>邮件1</span>
+                        <span>文件</span>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <span>邮件2</span>
+                        <span>消息</span>
                     </Menu.Item>
                     <Menu.Item key="3">
-                        <span>邮件3</span>
+                        <span>任务</span>
+                    </Menu.Item>
+                    <Menu.Item key="13">
+                        <span>协作</span>
                     </Menu.Item>
                 </Menu.SubMenu>
                 <Menu.Item key="4">

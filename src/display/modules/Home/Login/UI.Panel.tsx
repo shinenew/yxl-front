@@ -74,8 +74,8 @@ export default class UIPanel extends UIBasic<IProps, ModulesState> {
 
     /** 点击了登录 */
     private onClickLanding = (): void => {
-        const { match } = this.props;
-        this.props.form.validateFields(async (er: any, values: any) => {
+        const { match, form } = this.props;
+        form.validateFields(async (er: any, values: any) => {
             if (er) {
                 return;
             }
