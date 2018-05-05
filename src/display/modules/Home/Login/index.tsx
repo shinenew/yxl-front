@@ -29,7 +29,7 @@ export default class Login extends ModulesBasic<IProps, ModulesState> {
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
-
+    
     render() {
         return (
             <div className={css.modules}>

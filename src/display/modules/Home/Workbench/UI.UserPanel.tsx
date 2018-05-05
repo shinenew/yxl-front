@@ -21,11 +21,10 @@ interface IReduxStatePart {
 
 /** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
-    /** 当前收起状态 */
-    collapsed: boolean;
 }
 
 /** 用户面板 */
+@ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
     nickName: state.user.userInfo.nickName,
     userType: state.user.userInfo.userType
@@ -48,16 +47,16 @@ export default class UIUserPanel extends UIBasic<IProps, ModulesState> {
             <div className={css.userPanel} >
                 <img className={css.headPortrait} src={HeadPortrait} />
                 {
-                    this.props.collapsed ||
+                    this.modulesState.collapsed ||
                     <p>
                         <span className={css.userPanelNickName} >{this.props.nickName}</span>
                         <span className={css.userPanelNickNameName} >{this.nickNameName}</span>
                     </p>
                 }
-                <ul className={css.userPanelMenu} data-collapsed={this.props.collapsed ? 1 : 0} >
+                <ul className={css.userPanelMenu} data-collapsed={this.modulesState.collapsed ? 1 : 0} >
                     <li><Link to="/workbench/platform/userCenter"><Icon type="userinfo-gerenxinxi" /></Link></li>
-                    <li><Icon type="exit" /></li>
-                    <li><Icon type="weibiaoti-_fuzhi" /></li>
+                    <li><Link to="/login"><Icon type="exit" /></Link></li>
+                    <li><Link to="/login/company"><Icon type="weibiaoti-_fuzhi" /></Link></li>
                 </ul>
             </div>
         );

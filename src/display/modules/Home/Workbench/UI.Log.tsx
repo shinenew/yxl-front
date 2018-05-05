@@ -15,11 +15,10 @@ interface IReduxStatePart {
 
 /** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
-    /** 当前收起状态 */
-    collapsed: boolean;
 }
 
 /** iframe */
+@ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
 }))
 export default class UIIframe extends UIBasic<IProps, ModulesState> {
