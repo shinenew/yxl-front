@@ -44,13 +44,14 @@ export default class UIIframe extends UIBasic<IProps, ModulesState> {
     }
 
     render() {
+        console.log(this.appInfo);
         return (
             <div className={css.iframe} >
-                {
-                    this.appInfo
-                    ? <iframe src={this.appInfo.appIndexUri} />
-                    : <p>没有找到app</p>
-                }
+            {
+                this.appInfo
+                ? <iframe src={this.appInfo.appIndexUri} />
+                : <p>没有找到app</p>
+            }
             </div>
         );
     }

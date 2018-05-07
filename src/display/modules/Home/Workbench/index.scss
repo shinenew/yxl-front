@@ -4,10 +4,16 @@ $background : #414751;
 
   :global(.ant-menu-item):global(.ant-menu-item-active),
   :global(.ant-menu-item):global(.ant-menu-item-selected),
-  :global(.ant-menu-item):global(.ant-menu-submenu-selected),
+  :global(.ant-menu-item):global(.ant-menu-submenu-selected)
   {
     position: relative;
     background: #2e3339 !important;
+    color: #bdbdbe !important;
+  }
+  :global(.ant-menu-item):global(.ant-menu-item-active) a,
+  :global(.ant-menu-item):global(.ant-menu-item-selected) a,
+  :global(.ant-menu-item):global(.ant-menu-submenu-selected) a
+  {
     color: #bdbdbe !important;
   }
 
@@ -54,10 +60,12 @@ $background : #414751;
   }
 
   :global(.ant-menu-item),
-  :global(.ant-menu-submenu-title){
+  :global(.ant-menu-item) a,
+  :global(.ant-menu-submenu-title),
+  :global(.ant-menu-submenu-title) a
+  {
     color: #fff !important;
     height: 42px !important;
-    
   }
 
   // 基础功能
