@@ -23,7 +23,7 @@ yarn start 或者 npm start
 ### 编译
 yarn build [环境参数] 或者 npm run build [环境参数]
 [环境参数]
-* dev 开发环境
+* dev 开发环境 [查看](http://dev.portal.xltec.cc)
 * test 测速环境
 * production 生产环境
 
