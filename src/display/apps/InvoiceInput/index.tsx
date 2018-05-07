@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ModulesBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
+import { ModulesBasic, IPropsBasic, ModulesRoot } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
@@ -10,7 +10,7 @@ const css = require('./index.scss');
 
 /** Redux接口 */
 interface IReduxStatePart {
-    
+
 }
 
 /** Props接口 */
@@ -32,9 +32,11 @@ export default class InvoiceInput extends ModulesBasic<IProps, ModulesState> {
 
     render() {
         return (
-            <div className={css.modules}>
-                <UIComponents />
-            </div>
+            <ModulesRoot action={ModulesAction}>
+                <div className={css.modules}>
+                    <UIComponents />
+                </div>
+            </ModulesRoot>
         );
     }
 }

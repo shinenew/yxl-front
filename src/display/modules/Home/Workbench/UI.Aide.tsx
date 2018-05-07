@@ -27,15 +27,13 @@ export default class UIAppList extends UIBasic<IProps, ModulesState> {
     }
 
     render() {
-        console.log(this.props);
-        console.log(this.props['modulesState']['collapsed']);
-        console.log(this.modulesState.collapsed);
+        const { location } = this.props;
         return (
             <Menu
                 theme="dark"
                 inlineIndent={15}
                 mode="inline"
-                selectedKeys={[this.props.location.pathname]}
+                selectedKeys={[ModulesAction.getMenuSelectedKeys(location.pathname)]}
                 inlineCollapsed={this.modulesState.collapsed}
             >
                 <Menu.Item key="4">

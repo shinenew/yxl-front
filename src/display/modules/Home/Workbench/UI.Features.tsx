@@ -27,11 +27,12 @@ export default class UIFeatures extends UIBasic<IProps, ModulesState> {
     }
 
     render() {
+        const { location } = this.props;
         return (
             <Menu
                 theme="dark"
                 mode="inline"
-                selectedKeys={[this.props.location.pathname]}
+                selectedKeys={[ModulesAction.getMenuSelectedKeys(location.pathname)]}
                 defaultOpenKeys={this.modulesState.collapsed ? [] : ['sub1']}
                 inlineCollapsed={this.modulesState.collapsed}
                 inlineIndent={15}

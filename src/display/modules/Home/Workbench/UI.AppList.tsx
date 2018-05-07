@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
+import { Link } from 'react-router-dom';
 import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 import { IAppInfo } from 'src/dataModel';
-import { Menu } from 'antd';
+import { Menu, Icon } from 'antd';
+
+const css = require('./index.scss');
 
 /** Redux接口 */
 interface IReduxStatePart {
@@ -28,26 +31,46 @@ export default class UIAppList extends UIBasic<IProps, ModulesState> {
         super(props, ModulesAction);
     }
 
-    /** appList 结构 */
-    private get appListElement(): JSX.Element[] {
+    /** appList 第三方结构 */
+    private get appListElementThree(): JSX.Element[] {
         const { appList } = this.props;
         return appList.map((value: IAppInfo) => (
             <Menu.Item key={`/workbench/app/${value.appId}`}>
-                {value.appName}
+                <Link to={`/workbench/app/${value.appId}`}>
+                    <Icon type="shezhi" />
+                    <span>{value.appName}</span>
+                </Link>
             </Menu.Item>
         ));
+    }
+
+    /** appList 内部结构 */
+    private get appListElementInternal(): JSX.Element[] {
+        return [
+            (
+            <Menu.Item key={`/workbench/invoiceInput`}>
+                <Link to={`/workbench/invoiceInput`}>
+                    <Icon type="shezhi" />
+                    <span>发票录入</span>
+                </Link>
+            </Menu.Item>
+            )
+        ];
     }
 
     render() {
         const { location } = this.props;
         return (
             <Menu
-                selectedKeys={[location.pathname]}
+                selectedKeys={[ModulesAction.getMenuSelectedKeys(location.pathname)]}
                 theme="dark"
-                inlineIndent={64}
-                // inlineCollapsed={this.modulesState.collapsed}
+                mode="inline"
+                className={css.features}
+                inlineIndent={15}
+                inlineCollapsed={this.modulesState.collapsed}
             >
-                {this.appListElement}
+                {this.appListElementInternal}
+                {this.appListElementThree}
             </Menu>
         );
     }
