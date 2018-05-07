@@ -1,5 +1,6 @@
-import Demo from './Demo';
+import InvoiceInput from './InvoiceInput';
 
 export default {
-    Demo,
+    /** 发票录入 */
+    InvoiceInput,
 };

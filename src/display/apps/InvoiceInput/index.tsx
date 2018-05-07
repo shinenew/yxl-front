@@ -18,11 +18,11 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 
 }
 
-/** 绑定全局数据 */
+/** 发票录入 */
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
-export default class Demo extends ModulesBasic<IProps, ModulesState> {
+export default class InvoiceInput extends ModulesBasic<IProps, ModulesState> {
 
     public state: ModulesState = new ModulesState();
 
@@ -32,7 +32,7 @@ export default class Demo extends ModulesBasic<IProps, ModulesState> {
 
     render() {
         return (
-            <div key={this.state.key} className={css.modules}>
+            <div className={css.modules}>
                 <UIComponents />
             </div>
         );

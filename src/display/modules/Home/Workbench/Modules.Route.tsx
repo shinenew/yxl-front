@@ -7,7 +7,7 @@ const parentName: string = 'workbench'; // 路由的跟节点；
 Route.addNode(
     parentName,
     { nodeName: 'workbench/app', path: '/workbench/app/:appid', component: require('./UI.Iframe').default },
-    { nodeName: 'workbench/demo', path: '/workbench/demo', title: '测速APP' , component: apps.Demo },
+    { nodeName: 'workbench/invoiceInput', path: '/workbench/invoiceInput', title: '发票录入' , component: apps.InvoiceInput },
     { nodeName: '/workbench/platform/userCenter', path: '/workbench/platform/userCenter', title: '用户中心' , component: platform.UserCenter },
 );
 

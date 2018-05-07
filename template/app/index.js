@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require("fs");
 const root = '../../src';
-const relatively = 'display/app';
+const relatively = 'display/apps';
 
 module.exports = function (modulePath, name) {
 
