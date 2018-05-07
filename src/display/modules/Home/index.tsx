@@ -41,7 +41,7 @@ export default class Home extends ModulesBasic<IProps, ModulesState> {
     // 这里尽量只调用UI组件
     render() {
         return (
-            <div key={this.state.key} className={css.modules}>
+            <div className={css.modules}>
                 <Switch>{ModulesRoute.getChildReact('/login')}</Switch>
             </div>
         );

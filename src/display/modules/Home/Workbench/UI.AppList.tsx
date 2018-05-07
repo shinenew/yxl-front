@@ -18,6 +18,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 选中公司面板 */
+@ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
     appList: state.user.appList || []
 }))

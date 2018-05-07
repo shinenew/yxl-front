@@ -29,7 +29,8 @@ $background : #414751;
 
 .layout{
   
-  height: 100vh;
+  // height: 100vh;
+  min-height: 100vh;
   position: relative;
 
   :global(.ant-layout-sider) {
@@ -56,6 +57,7 @@ $background : #414751;
   :global(.ant-menu-submenu-title){
     color: #fff !important;
     height: 42px !important;
+    
   }
 
   // 基础功能

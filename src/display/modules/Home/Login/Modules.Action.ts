@@ -2,6 +2,7 @@ import { ActionBasic } from 'kts-scaffold-framework/modules';
 import { webToken, company } from 'src/api';
 import { history } from 'src/routes';
 import ModulesState from './Modules.State';
+import { MyStore, reducers } from 'src/redux';
 
 class ModulesAction extends ActionBasic<ModulesState> {
 
@@ -16,6 +17,16 @@ class ModulesAction extends ActionBasic<ModulesState> {
         if (!data.er) {
             history.push(url);
         }
+    }
+
+    /** 登出用户 */
+    public unlogin = () => {
+        MyStore.instance.dispatch(reducers.user.ActionTypes.fnSetUserInfo, { gToken: null, cToken: null });
+    }
+
+    /** 登出公司 */
+    public unloginCompany = () => {
+        MyStore.instance.dispatch(reducers.user.ActionTypes.fnSetUserInfo, { cToken: null });
     }
 
     /** 更新公司列表 */

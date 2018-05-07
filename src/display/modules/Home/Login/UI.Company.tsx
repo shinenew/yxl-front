@@ -31,6 +31,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 选中公司面板 */
+@ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
     loading: state.system.loading,
     companyList: state.user.companyList || [],
@@ -41,7 +42,8 @@ export default class UIPanel extends UIBasic<IProps, ModulesState> {
         super(props, ModulesAction);
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        ModulesAction.unloginCompany();
         ModulesAction.updateCompanyList();
     }
 

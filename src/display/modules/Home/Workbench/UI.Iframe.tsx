@@ -19,6 +19,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** iframe */
+@ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
     appList: state.user.appList || []
 }))

@@ -46,12 +46,13 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
                         collapsible={true}
                         collapsed={this.state.collapsed}
                         collapsedWidth={64}
+                        style={{paddingBottom: 180}}
                     >
                         {/* 图标和收折按钮 */}
-                        <UILog collapsed={this.state.collapsed} />
+                        <UILog />
 
                         {/* 基础功能 */}
-                        <UIFeatures collapsed={this.state.collapsed} />
+                        <UIFeatures />
 
                         <div className={css.separation} />
 
@@ -61,10 +62,10 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
                         <div className={css.separation} />
 
                         {/* 辅助功能 */}
-                        <UIAide collapsed={this.state.collapsed} />
+                        <UIAide />
 
                         {/* 用户面板 */}
-                        <UIUserPanel collapsed={this.state.collapsed} />
+                        <UIUserPanel />   
                     </Sider>
                     <Content>
                         {ModulesRoute.getChildReact()}

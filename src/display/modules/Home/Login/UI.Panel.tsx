@@ -30,6 +30,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 熟人用户名密码面板 */
+@ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
     loading: state.system.loading,
     env: state.env
@@ -38,6 +39,10 @@ export default class UIPanel extends UIBasic<IProps, ModulesState> {
 
     constructor(props: IProps) {
         super(props, ModulesAction);
+    }
+
+    componentWillMount() {
+        ModulesAction.unlogin();
     }
 
     render() {
@@ -74,8 +79,8 @@ export default class UIPanel extends UIBasic<IProps, ModulesState> {
 
     /** 点击了登录 */
     private onClickLanding = (): void => {
-        const { match } = this.props;
-        this.props.form.validateFields(async (er: any, values: any) => {
+        const { match, form } = this.props;
+        form.validateFields(async (er: any, values: any) => {
             if (er) {
                 return;
             }

@@ -14,11 +14,10 @@ interface IReduxStatePart {
 
 /** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
-    /** 当前收起状态 */
-    collapsed: boolean;
 }
 
 /** 辅助功能 */
+@ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
 }))
 export default class UIAppList extends UIBasic<IProps, ModulesState> {
@@ -28,12 +27,15 @@ export default class UIAppList extends UIBasic<IProps, ModulesState> {
     }
 
     render() {
+        console.log(this.props);
+        console.log(this.props['modulesState']['collapsed']);
+        console.log(this.modulesState.collapsed);
         return (
             <Menu
                 theme="dark"
                 inlineIndent={15}
                 mode="inline"
-                selectedKeys={['2']}
+                selectedKeys={[this.props.location.pathname]}
                 inlineCollapsed={this.modulesState.collapsed}
             >
                 <Menu.Item key="4">

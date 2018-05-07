@@ -14,11 +14,10 @@ interface IReduxStatePart {
 
 /** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
-    /** 当前收起状态 */
-    collapsed: boolean;
 }
 
 /** 基础功能 */
+@ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
 }))
 export default class UIFeatures extends UIBasic<IProps, ModulesState> {
@@ -31,11 +30,11 @@ export default class UIFeatures extends UIBasic<IProps, ModulesState> {
         return (
             <Menu
                 theme="dark"
-                inlineIndent={15}
                 mode="inline"
-                selectedKeys={['2']}
+                selectedKeys={[this.props.location.pathname]}
                 defaultOpenKeys={this.modulesState.collapsed ? [] : ['sub1']}
                 inlineCollapsed={this.modulesState.collapsed}
+                inlineIndent={15}
                 className={css.features}
             >
                 <Menu.SubMenu
@@ -49,13 +48,16 @@ export default class UIFeatures extends UIBasic<IProps, ModulesState> {
                     }
                 >
                     <Menu.Item key="1">
-                        <span>邮件1</span>
+                        <span>文件</span>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <span>邮件2</span>
+                        <span>消息</span>
                     </Menu.Item>
                     <Menu.Item key="3">
-                        <span>邮件3</span>
+                        <span>任务</span>
+                    </Menu.Item>
+                    <Menu.Item key="13">
+                        <span>协作</span>
                     </Menu.Item>
                 </Menu.SubMenu>
                 <Menu.Item key="4">
