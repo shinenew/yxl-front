@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { ModulesBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
-import { Card } from 'antd';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import UIInfo from './UI.Info';
+import UIInfo from './UI.info';
 
 const css = require('./index.scss');
 
@@ -33,13 +32,9 @@ export default class UserCenter extends ModulesBasic<IProps, ModulesState> {
 
     render() {
         return (
-            <Card 
-                key={this.state.key} 
-                title="用户资料" 
-                className={`kts-app-ant-card ${css.info}`}
-            >
+            <div key={this.state.key} className={css.modules}>
                 <UIInfo />
-            </Card>
+            </div>
         );
     }
 }
