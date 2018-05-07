@@ -9,7 +9,7 @@ import ModulesAction from './Modules.Action';
 
 /** Redux接口 */
 interface IReduxStatePart {
-
+    
 }
 
 /** Props接口 */
@@ -18,6 +18,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 绑定全局数据到props */
+@ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
@@ -26,11 +27,11 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
-
+    
     render() {
         return (
             <div>
-                一个APP
+                发票录入
             </div>
         );
     }
