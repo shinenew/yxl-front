@@ -1,13 +1,12 @@
 /** 
  * 出参数据数据接口
  */
+import { IInvoiceData, IPageMeta} from 'src/dataModel';
 export default interface IData {
+    items: IItems[];
+    pageMeta: IPageMeta;
+}
 
-    fuzzySupplierName: string;
-    invoiceCode: string;
-    invoiceNumber: string;
-    invoiceDate: number;
-    amount: number;
-    tax: number;
+interface IItems extends IInvoiceData {
     state: string;
 }
