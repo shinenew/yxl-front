@@ -1,4 +1,4 @@
-import ComponentBasic from '../ComponentBasic';
+import ComponentBasic from 'kts-scaffold-framework/component/ComponentBasic';
 
 /** 组建的props接口 */
 interface IProps<T> {
