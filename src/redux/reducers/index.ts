@@ -3,6 +3,7 @@ import env from './env';
 import system from './system';
 import routes from './routes';
 import config from './config';
+import aside from './aside';
 
 export default {
     /** 用户数据 */
@@ -19,4 +20,7 @@ export default {
 
     /** 配置数据 */
     config,
+
+    /** 侧边栏 */
+    aside,
 };

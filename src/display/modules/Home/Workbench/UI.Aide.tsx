@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
+import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
@@ -44,9 +45,11 @@ export default class UIAppList extends UIBasic<IProps, ModulesState> {
                     <Icon type="bangzhu" />
                     <span>帮助中心</span>
                 </Menu.Item>
-                <Menu.Item key="6">
-                    <Icon type="shezhi" />
-                    <span>系统管理</span>
+                <Menu.Item key="/workbench/platform/systemManage">
+                    <Link to="/workbench/platform/systemManage">
+                        <Icon type="shezhi" />
+                        <span>系统管理</span>
+                    </Link>
                 </Menu.Item>
             </Menu>
         );
