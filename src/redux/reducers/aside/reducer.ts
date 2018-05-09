@@ -4,10 +4,10 @@ import Node from './Node';
 
 const reducer = createReducer(
     {
-        [ActionTypes.show as any]: (state: Node, newstate: any) => {
+        [ActionTypes.show as any]: (state: Node, payload) => {
             return {
                 ...state,
-                ...newstate,
+                ...payload,
                 collapsed: false
             };
         },

@@ -31,7 +31,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     render() {
         return (
             <div>
-                系统管理
+                系统管理{this.modulesState.a}
             </div>
         );
     }

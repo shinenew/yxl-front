@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ModulesBasic, IPropsBasic, ModulesRoot } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
+import { MyStore, reducers } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
@@ -42,6 +43,9 @@ export default class SystemManage extends ModulesBasic<IProps, ModulesState> {
     }
 
     private onClickHandler = () => {
-        ModulesAction.show(UIComponents);
+        MyStore.instance.dispatch(reducers.aside.ActionTypes.show, {
+            Components: <UIComponents />,
+            title: 'xxxx'
+        });
     }
 }

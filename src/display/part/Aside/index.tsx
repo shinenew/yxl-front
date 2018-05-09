@@ -49,7 +49,7 @@ export default class Aside extends ModulesBasic<IProps, ModulesState> {
                         {
                             Components
                             &&this.props.aside.collapsed===false
-                            &&<Components {...this.props.aside.props} />
+                            &&Components
                         }
                         </div>
                     </div>
