@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
+import { Link } from 'react-router-dom';
 import { connect } from 'src/redux';
 import { Menu, Icon } from 'antd';
 import ReduxState, { } from 'src/redux/ReduxState';
@@ -48,17 +49,25 @@ export default class UIFeatures extends UIBasic<IProps, ModulesState> {
                         </span>
                     }
                 >
-                    <Menu.Item key="1">
-                        <span>文件</span>
+                    <Menu.Item key="/workbench/platform/inBox/file">
+                        <Link to="/workbench/platform/inBox/file">
+                            <span>文件</span>
+                        </Link>
                     </Menu.Item>
-                    <Menu.Item key="2">
-                        <span>消息</span>
+                    <Menu.Item key="/workbench/platform/inBox/message">
+                        <Link to="/workbench/platform/inBox/message">
+                            <span>消息</span>
+                        </Link>
                     </Menu.Item>
-                    <Menu.Item key="3">
-                        <span>任务</span>
+                    <Menu.Item key="/workbench/platform/inBox/task">
+                        <Link to="/workbench/platform/inBox/task">
+                            <span>任务</span>
+                        </Link>
                     </Menu.Item>
-                    <Menu.Item key="13">
-                        <span>协作</span>
+                    <Menu.Item key="/workbench/platform/inBox/cooperation">
+                        <Link to="/workbench/platform/inBox/cooperation">
+                            <span>协作</span>
+                        </Link>
                     </Menu.Item>
                 </Menu.SubMenu>
                 <Menu.Item key="4">

@@ -3,6 +3,7 @@ import IUser from '../reducers/user/Node';
 import IEnv from '../reducers/env/INode';
 import IConfigINode from '../reducers/config/INode';
 import ISystem from '../reducers/system/Node';
+import IAside from '../reducers/aside/Node';
 import IRoutesTree from 'src/routes/INodeTree';
 
 /** 全局状态的跟节点 */
@@ -22,6 +23,9 @@ export default class ReduxState {
 
     /** 配置数据 */
     public config: IConfigINode = reducers.config.reducer as any;
+
+    /** 侧边栏 */
+    public aside: IAside = reducers.aside.reducer as any;
 }
 
 export {
@@ -39,4 +43,7 @@ export {
 
     /** 配置数据接口 */
     IConfigINode,
+
+    /** 侧边栏 */
+    IAside,
 };
