@@ -1,5 +1,5 @@
 /** 
- * 出参数据数据接口
+ * 发票数据结构
  */
 export default interface IInvoiceData {
     //销售方
