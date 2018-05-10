@@ -46,11 +46,11 @@ export default class Aside extends ModulesBasic<IProps, ModulesState> {
                     </header>
                     <div className="kts-aside-container">
                         <div className="kts-aside-panel" >
-                        {
-                            Components
-                            &&this.props.aside.collapsed===false
-                            &&Components
-                        }
+                            {
+                                Components
+                                && this.props.aside.collapsed === false
+                                && Components
+                            }
                         </div>
                     </div>
                 </div>
