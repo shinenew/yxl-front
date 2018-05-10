@@ -46,7 +46,7 @@ export default class SystemManage extends ModulesBasic<IProps, ModulesState> {
     private onClickHandler = () => {
         MyStore.instance.dispatch(reducers.aside.ActionTypes.show, {
             Components: <UIComponents />,
-            title: <a>'xxxx'</a>
+            title: 'xxxx'
         });
     }
 }

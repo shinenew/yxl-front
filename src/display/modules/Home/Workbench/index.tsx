@@ -78,6 +78,8 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
                         
                         {/* 侧边栏 */}
                         <Sider
+                            style={{background: 'none'}}
+                            width={485}
                             collapsed={this.props.aside.collapsed}
                             collapsedWidth={0}
                         >
