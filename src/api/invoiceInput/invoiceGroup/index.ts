@@ -10,10 +10,14 @@ class Invoice extends ApiBasic<IOptions, IData> {
     /** 入口 */
     public async api(option: IOptions): Promise<Response<IData>> {
         
-        const req: Request = new Request(CallType.POST, Urls.ZONE_INVOICELIST, option);
+        const req: Request = new Request(CallType.POST, Urls.ZONE_GROUPLIST, option);
 
-        const data = await this.callGlobal(req,true);
-        return data;
+        let data: Response<any> = await this.callGlobal(req,true);
+        if (data.er) {
+            return data;
+        }
+        
+        return new Response<IData>(null, {list: data.res.items});
     }
 }
 
