@@ -6,6 +6,12 @@
   margin-top: 12px;
 }
 .group {
+  &-formitem {
+    display: flex !important;
+    :global(.ant-form-item-label) {
+      width: 98px;
+    }
+  }
   &-handler {
     margin-right: 12px;
   }

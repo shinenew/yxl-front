@@ -36,12 +36,12 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     render() {
         const columns = [{
             title: '发票代码',
-            dataIndex: 'code',
+            dataIndex: 'invoiceCode',
             key: 'name',
             render: text => <a href="javascript:;">{text}</a>,
           }, {
             title: '发票号码',
-            dataIndex: 'number',
+            dataIndex: 'invoiceNumber',
             key: 'number',
           }, {
             title: '代收',
@@ -66,34 +66,34 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             key: 'action',
             render: (text, record) => (
               <span>
-                <a href="javascript:;" onClick={() => this.deleteInvoice('123')}>删除</a>
+                <a href="javascript:;" onClick={() => this.deleteInvoice('123')}>移除</a>
               </span>
             ),
           }
         ];
         const data = [{
             key: '1',
-            code: '123213123',
-            number: '123',
+            invoiceCode: '123213123',
+            invoiceNumber: '123',
             daishou: true,
             yishou: true,
           }, {
             key: '2',
-            code: '123213123123',
-            number: '123',
+            invoiceCode: '123213123123',
+            invoiceNumber: '123',
             daishou: false,
             yishou: false,
           }, {
             key: '3',
-            code: '123213123123',
-            number: '123',
+            invoiceCode: '123213123123',
+            invoiceNumber: '123',
             daishou: true,
             yishou: true,
           },
           {
             key: '4',
-            code: '123213123123',
-            number: '123',
+            invoiceCode: '123213123123',
+            invoiceNumber: '123',
             daishou: false,
             yishou: false,
           }

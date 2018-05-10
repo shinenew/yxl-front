@@ -38,23 +38,13 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     }
     
     render() {
-        const formItemLayout = {
-            labelCol: {
-                span: 1,
-                xs: 2
-            },
-            wrapperCol: {
-                span: 3,
-                xs: 2,
-            },
-        };
         const { form } = this.props;
         const { getFieldDecorator} = form;
 
         return (
             <Form onSubmit={this.handleSubmit}>
-                <FormItem {...formItemLayout} label="发票状态">收票中</FormItem>
-                <FormItem {...formItemLayout} label="发票租编号">
+                <FormItem className={css['group-formitem']} label="发票状态">收票中</FormItem>
+                <FormItem className={css['group-formitem']} label="发票租编号">
                     {getFieldDecorator('invoice', {
                         rules: [
                             {
