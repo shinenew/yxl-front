@@ -38,19 +38,21 @@ export default class Aside extends ModulesBasic<IProps, ModulesState> {
         return (
             <ModulesRoot action={ModulesAction}>
                 <div className={css.aside} >
-                    <header className="kts-aside-title">
-                        <span>{this.props.aside.title}</span>
-                        <a onClick={ModulesAction.hide} className="kts-aside-close">
-                            <Icon type="close" />
-                        </a>
-                    </header>
-                    <div className="kts-aside-container">
-                        <div className="kts-aside-panel" >
-                            {
-                                Components
-                                && this.props.aside.collapsed === false
-                                && Components
-                            }
+                    <div className="kts-aside">
+                        <header className="kts-aside-title">
+                            <span>{this.props.aside.title}</span>
+                            <a onClick={ModulesAction.hide} className="kts-aside-close">
+                                <Icon type="close" />
+                            </a>
+                        </header>
+                        <div className="kts-aside-container">
+                            <div className="kts-aside-panel" >
+                                {
+                                    Components
+                                    && this.props.aside.collapsed === false
+                                    && Components
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
