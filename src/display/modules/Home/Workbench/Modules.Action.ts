@@ -20,7 +20,12 @@ class ModulesAction extends ActionBasic<ModulesState> {
         
         // 内部APP跟地址
         const selectedKeysList: string[] = [
-            '/workbench/invoiceInput'
+            '/workbench/invoiceInput',
+            '/workbench/platform/inBox/file',
+            '/workbench/platform/inBox/message',
+            '/workbench/platform/inBox/task',
+            '/workbench/platform/inBox/cooperation',
+            '/workbench/platform/systemManage',
         ];
 
         // 三方APP跟地址

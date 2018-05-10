@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { ModulesBasic, IPropsBasic, ModulesRoot } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
-import ReduxState, { } from 'src/redux/ReduxState';
+import ReduxState, { IAside } from 'src/redux/ReduxState';
+import { Aside } from 'src/display/part';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 import ModulesRoute from './Modules.Route';
@@ -17,7 +18,7 @@ const css = require('./index.scss');
 
 /** Redux接口 */
 interface IReduxStatePart {
-
+    aside: IAside;
 }
 
 /** Props接口 */
@@ -27,7 +28,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 
 /** 绑定全局数据 */
 @connect((state: ReduxState): IReduxStatePart => ({
-
+    aside: state.aside
 }))
 export default class Workbench extends ModulesBasic<IProps, ModulesState> {
 
@@ -40,9 +41,10 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
     render() {
         return (
             <ModulesRoot action={ModulesAction}>
-                <Layout className={css.layout}>
+                <Layout >
                     <Layout>
                         <Sider
+                            className={css.layout}
                             width={180}
                             trigger={null}
                             collapsible={true}
@@ -69,9 +71,18 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
                             {/* 用户面板 */}
                             <UIUserPanel />
                         </Sider>
+
                         <Content>
                             {ModulesRoute.getChildReact()}
                         </Content>
+                        
+                        {/* 侧边栏 */}
+                        <Sider
+                            collapsed={this.props.aside.collapsed}
+                            collapsedWidth={0}
+                        >
+                            <Aside/>
+                        </Sider>
                     </Layout>
                 </Layout>
             </ModulesRoot>

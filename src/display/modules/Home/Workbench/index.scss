@@ -38,10 +38,7 @@ $background : #414751;
   // height: 100vh;
   min-height: 100vh;
   position: relative;
-
-  :global(.ant-layout-sider) {
-    background: $background;
-  }
+  background: $background !important;
 
   @include item-selected;
 

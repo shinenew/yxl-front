@@ -17,7 +17,7 @@
 .env.production.local
 
 # dependencies
-node_modules
+/node_modules
 .idea
 /urls.js
 /evn.js
