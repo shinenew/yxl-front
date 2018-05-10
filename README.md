@@ -39,7 +39,7 @@ npm run cre [模块类型] [目录] [模块名称] <br>
 * a api模块  默认路径（src/api/system）<br>
 * p 代码片段  默认路径（src/display/part）<br>
 * app 内部APP  默认路径（src/display/app<br>
-* platform 平台APP  默认路径（src/display/platform<br>
+* platform  平台APP  默认路径（src/display/platform<br>
 
 例子
 >yarn cre m . demo（在src/display/modules 下创建一个名为 demo的模块）<br>
