@@ -8,5 +8,5 @@ export default interface IData {
 }
 
 interface IItems extends IInvoiceData {
-    state: string;
+    state?: string;
 }
