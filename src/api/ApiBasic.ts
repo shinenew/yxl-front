@@ -6,7 +6,7 @@ import { NodeEnvType } from 'src/entry/constant';
 import { message } from 'antd';
 
 export default abstract class ApiBasic<O, D> {
-
+/*  */
     constructor() {
         this.api = this.api.bind(this);
     }
