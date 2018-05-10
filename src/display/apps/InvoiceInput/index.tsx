@@ -7,6 +7,8 @@ import ModulesAction from './Modules.Action';
 import UIComponents from './UI.Components';
 import ModulesRoute, { Switch } from './Modules.Route';
 
+// import UIComponents from './UI.Components';
+import UIForm from './TableList';
 const css = require('./index.scss');
 
 /** Redux接口 */
@@ -26,7 +28,6 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 export default class InvoiceInput extends ModulesBasic<IProps, ModulesState> {
 
     public state: ModulesState = new ModulesState();
-
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
@@ -37,6 +38,7 @@ export default class InvoiceInput extends ModulesBasic<IProps, ModulesState> {
                 <div className={css.modules}>
                     <UIComponents/>
                     <Switch>{ModulesRoute.getChildReact('/group')}</Switch>
+                    <UIForm/>
                 </div>
             </ModulesRoot>
         );

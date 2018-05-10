@@ -17,7 +17,7 @@ export default abstract class ApiBasic<O, D> {
         request.options.Authorization = user.gToken || undefined;
         return await this.call(request, this.domain, mock);
     }
-    
+
     /** 向服务器发送请求(Company) */
     public callCompany = async (request: Request, mock: boolean = false): Promise<any> => {
         const { user } = MyStore.instance.getState();
@@ -33,7 +33,7 @@ export default abstract class ApiBasic<O, D> {
         const res = await Agent.instance.call(request, domain, mock);
 
         MyStore.instance.dispatch(reducers.system.ActionTypes.removeLoading, request.uri); // 删除loading
-
+        
         // 通信错误
         try {
             if (res.er) {
