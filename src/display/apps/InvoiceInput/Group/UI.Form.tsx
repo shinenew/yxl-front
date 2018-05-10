@@ -11,7 +11,6 @@ import {
     Button,
     Row,
     Col,
-    Popconfirm
 } from 'antd';
 const FormItem  = Form.Item;
 
