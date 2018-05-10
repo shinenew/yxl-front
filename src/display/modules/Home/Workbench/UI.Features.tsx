@@ -34,7 +34,7 @@ export default class UIFeatures extends UIBasic<IProps, ModulesState> {
                 theme="dark"
                 mode="inline"
                 selectedKeys={[ModulesAction.getMenuSelectedKeys(location.pathname)]}
-                defaultOpenKeys={this.modulesState.collapsed ? [] : ['sub1']}
+                // defaultOpenKeys={this.modulesState.collapsed ? [] : ['sub1']}
                 inlineCollapsed={this.modulesState.collapsed}
                 inlineIndent={15}
                 className={css.features}

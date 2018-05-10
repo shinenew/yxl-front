@@ -12,13 +12,20 @@ export default abstract class ApiBasic<O, D> {
     }
 
     /** 向服务器发送请求(Global) */
+    public callAjax = async (request: Request, mock: boolean = false): Promise<any> => {
+        const { user } = MyStore.instance.getState();
+        request.options.Authorization = user.gToken || undefined;
+        return await this.call(request, this.domain, mock);
+    }
+
+    /** 向服务器发送请求(Global)(准备弃用) */
     public callGlobal = async (request: Request, mock: boolean = false): Promise<any> => {
         const { user } = MyStore.instance.getState();
         request.options.Authorization = user.gToken || undefined;
         return await this.call(request, this.domain, mock);
     }
 
-    /** 向服务器发送请求(Company) */
+    /** 向服务器发送请求(Company)(准备弃用) */
     public callCompany = async (request: Request, mock: boolean = false): Promise<any> => {
         const { user } = MyStore.instance.getState();
         request.options.Authorization = user.cToken;
