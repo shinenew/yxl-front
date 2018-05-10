@@ -26,6 +26,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 绑定全局数据到props */
+@ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
     userInfo: state.user.userInfo,
 }))

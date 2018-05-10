@@ -1,0 +1,12 @@
+// 模块样式
+.modules {
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 12px;
+  margin-top: 12px;
+}
+.group {
+  &-handler {
+    margin-right: 12px;
+  }
+}

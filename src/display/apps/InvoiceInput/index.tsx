@@ -5,6 +5,7 @@ import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 import UIComponents from './UI.Components';
+import ModulesRoute, { Switch } from './Modules.Route';
 
 const css = require('./index.scss');
 
@@ -34,7 +35,8 @@ export default class InvoiceInput extends ModulesBasic<IProps, ModulesState> {
         return (
             <ModulesRoot action={ModulesAction}>
                 <div className={css.modules}>
-                    <UIComponents />
+                    <UIComponents/>
+                    <Switch>{ModulesRoute.getChildReact('/group')}</Switch>
                 </div>
             </ModulesRoot>
         );

@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { ModulesBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
+import { ModulesBasic, IPropsBasic, ModulesRoot } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import UIInfo from './UI.Info';
+import UIForm from './UI.Form';
 
 const css = require('./index.scss');
 
@@ -18,11 +18,11 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 
 }
 
-/** 用户中心 */
+/** 绑定全局数据 */
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
-export default class UserCenter extends ModulesBasic<IProps, ModulesState> {
+export default class Group extends ModulesBasic<IProps, ModulesState> {
 
     public state: ModulesState = new ModulesState();
 
@@ -32,9 +32,11 @@ export default class UserCenter extends ModulesBasic<IProps, ModulesState> {
 
     render() {
         return (
-            <div className={css.modules}>
-                <UIInfo />
-            </div>
+            <ModulesRoot action={ModulesAction}>
+                <div className={css.modules}>
+                    <UIForm {...this.props}/>
+                </div>
+            </ModulesRoot>
         );
     }
 }
