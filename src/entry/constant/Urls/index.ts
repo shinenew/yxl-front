@@ -13,6 +13,14 @@ enum Urls {
 
     /** 获取公司已安装应用列表 */
     APP_INSTANCE_QUERY = '/zone/open/app-instance/query',
+    /**
+     * 发票组的发票组列表
+     */
+    ZONE_GROUPLIST = '/zone/grouplist',
+    /**
+     * 发票组的所有发票列表
+     */
+    ZONE_INVOICELIST='/zone/invoicelist',
 }
 
 export default Urls;

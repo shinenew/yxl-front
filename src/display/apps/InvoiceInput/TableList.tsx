@@ -1,12 +1,27 @@
 import React from 'react';
 import { Table, Card, Button } from 'antd';
 import AdvancedForm from './AdvancedForm';
+import ModulesAction from './Modules.Action';
+import { tree } from 'src/utils';
 const css = require('./index.scss');
 class UserForm extends React.Component<any, any> {
+
     private columns = [
         {
             title: '销售方名称',
-            dataIndex: 'applyName',
+            dataIndex: 'supplierName',
+            render: (text, record) => {
+                return (
+                    <span>
+                        {
+                            record.groupName ? 
+                            <span>{record.groupName}({record.matchCount}/{record.invoiceCount})</span>
+                            :<span>{text}</span>
+                        }
+                    </span>
+                );
+
+            }
         },
         {
             title: '发票代码',
@@ -24,11 +39,21 @@ class UserForm extends React.Component<any, any> {
             title: '税价合计',
             dataIndex: 'amount'
         },
+        {
+            title:'操作',
+            dataIndex: 'operation',
+            render:()=>{
+                return (
+                    <span>详情</span>
+                );
+            }
+        }
     ];
     constructor(props: any) {
         super(props);
         this.state = {
             list: null,
+            pageMeta: null,
             expand: false,
             fields: null,
             selectedRows: null,
@@ -54,13 +79,22 @@ class UserForm extends React.Component<any, any> {
     refreshInvoice = () => {
         console.log(2);
     }
+    componentDidMount() {
+        this.getData();
+    }
+
     render() {
-        let dataSource;
+
         let columns = this.columns;
-        let { selectedRowKeys, fields } = this.state;
+        let { selectedRowKeys, fields, list } = this.state;
+        let dataSource = list;
         const rowSelection = {
             selectedRowKeys,
             onChange: this.onChange,
+            hideDefaultSelections: true,
+            getCheckboxProps:(record)=>{
+                return {disabled:record.groupName};
+            }
         };
         const extraButtons = (
             <div>
@@ -78,12 +112,21 @@ class UserForm extends React.Component<any, any> {
                         bordered={true}
                         dataSource={dataSource}
                         columns={columns}
-                        rowKey="index"
+                        rowKey="id"
                         rowSelection={rowSelection}
                     />
                 </Card>
             </div >
         );
+    }
+
+    getData = async () => {
+        const data = await ModulesAction.getGroupData();
+        const treeData = tree(data.items);
+        this.setState({
+            list: treeData,
+            pageMeta: data.pageMeta
+        });
     }
 }
 export default UserForm;
