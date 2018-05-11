@@ -3,3 +3,4 @@ export { default as Urls } from './Urls'; // 枚举
 export { default as AppState } from './AppState'; // app状态枚举
 export { default as AcceptStatus } from './AcceptStatus'; // 用户邀请状态
 export { default as UserType } from './UserType'; // 用户类型
+export { default as MessageType } from './MessageType'; // 消息类型
