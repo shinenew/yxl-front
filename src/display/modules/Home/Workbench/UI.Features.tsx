@@ -2,7 +2,7 @@ import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { Link } from 'react-router-dom';
 import { connect } from 'src/redux';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon, Badge } from 'antd';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
@@ -46,27 +46,32 @@ export default class UIFeatures extends UIBasic<IProps, ModulesState> {
                         <span>
                             <Icon type="xiaoxi1" />
                             <span>收件箱</span>
+                            <Badge className={css.badge} status="error" />
                         </span>
                     }
                 >
                     <Menu.Item key="/workbench/platform/inBox/file">
                         <Link to="/workbench/platform/inBox/file">
                             <span className={css.p15}>文件</span>
+                            <Badge className={css.badge} count={1} />
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="/workbench/platform/inBox/message">
                         <Link to="/workbench/platform/inBox/message">
                             <span className={css.p15}>消息</span>
+                            <Badge className={css.badge} count={1} />
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="/workbench/platform/inBox/task">
                         <Link to="/workbench/platform/inBox/task">
                             <span className={css.p15}>任务</span>
+                            <Badge className={css.badge} count={1} />
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="/workbench/platform/inBox/cooperation">
                         <Link to="/workbench/platform/inBox/cooperation">
                             <span className={css.p15}>协作</span>
+                            <Badge className={css.badge} count={1} />
                         </Link>
                     </Menu.Item>
                 </Menu.SubMenu>

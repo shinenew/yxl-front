@@ -3,16 +3,22 @@
  */
 class Channel {
 
-    /**
-     * 发送消息
-     */
-    public call = () => {
+    /** 发送消息 */
+    public call = (options:any, ) => {
         console.log('发送消息');
     }
 
-    /**
-     * 注册监听
-     */
+    /** 用户登录 */
+    public login = () => {
+        console.log('用户登录');
+    }
+
+    /** 用户 */
+    public logout = () => {
+        console.log('用户登录');
+    }
+
+    /** 注册监听 */
     public on = () => {
         console.log('注册监听');
     }
