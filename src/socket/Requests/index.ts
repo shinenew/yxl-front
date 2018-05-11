@@ -2,18 +2,18 @@
 export default class Requests{
     
     /** 请求路由地址 */
-    public uri: string;
+    public msgType: string;
 
     /** 参数 */
-    public parameter: any;
+    public msgData: any;
 
     /**
      * 构造函数
      * @param uri 请求路由地址
      * @param parameter 请求参数
      */
-    constructor(uri: string, parameter: any = {}) {
-        this.uri = uri;
-        this.parameter = parameter; 
+    constructor(msgType: string, msgData: any = {}) {
+        this.msgType = msgType;
+        this.msgData = msgData; 
     }
 }
