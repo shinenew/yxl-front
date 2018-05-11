@@ -3,6 +3,7 @@ import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { Decorators } from 'kts-scaffold-framework/utils/doc';
 import { connect } from 'src/redux';
 import ReduxState, { IEnv } from 'src/redux/ReduxState';
+import { Urls } from 'src/entry/constant';
 import { Card, Form, Button, Input } from 'antd';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
@@ -20,7 +21,7 @@ const formItemLayout = {
 
 /** Redux接口 */
 interface IReduxStatePart {
-    loading: string[];
+    loadingUrls: Map<Urls, string>;
     env: IEnv;
 }
 
@@ -32,7 +33,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 /** 熟人用户名密码面板 */
 @ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
-    loading: state.system.loading,
+    loadingUrls: state.system.loadingUrls,
     env: state.env
 }), true)
 export default class UIPanel extends UIBasic<IProps, ModulesState> {
@@ -46,7 +47,7 @@ export default class UIPanel extends UIBasic<IProps, ModulesState> {
     }
 
     render() {
-        const { form, loading, env } = this.props;
+        const { form, loadingUrls, env } = this.props;
         const { getFieldDecorator } = form;
         return (
             <Card className={`${css.uipanel}`} title="选择公司">
@@ -68,7 +69,7 @@ export default class UIPanel extends UIBasic<IProps, ModulesState> {
                         )}
                     </Form.Item>
                     <Form.Item wrapperCol={{ offset: 6 }} >
-                        <Button loading={loading.length > 0} onClick={this.onClickLanding} type="primary" htmlType="submit">
+                        <Button loading={loadingUrls.size > 0} onClick={this.onClickLanding} type="primary" htmlType="submit">
                             登录
                         </Button>
                     </Form.Item>

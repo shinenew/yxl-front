@@ -38,7 +38,7 @@ export default class UIUserPanel extends UIBasic<IProps, ModulesState> {
     /** 用户类型名称 */
     private get nickNameName(): string {
 
-        const userTypeString: string = language.userTypeToString(this.props.userType);
+        const userTypeString: string = language.userTypeToString.get(this.props.userType);
         return userTypeString || '未知';
     }
 

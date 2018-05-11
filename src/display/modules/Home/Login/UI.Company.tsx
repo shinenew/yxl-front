@@ -5,6 +5,7 @@ import ReduxState, { } from 'src/redux/ReduxState';
 import { Card, Form, Button, Select } from 'antd';
 import { ICompany } from 'src/dataModel';
 import { company } from 'src/api';
+import { Urls } from 'src/entry/constant';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 
@@ -21,7 +22,7 @@ const formItemLayout = {
 
 /** Redux接口 */
 interface IReduxStatePart {
-    loading: string[];
+    loadingUrls: Map<Urls, string>;
     companyList: ICompany[];
 }
 
@@ -33,7 +34,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 /** 选中公司面板 */
 @ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
-    loading: state.system.loading,
+    loadingUrls: state.system.loadingUrls,
     companyList: state.user.companyList || [],
 }), true)
 export default class UIPanel extends UIBasic<IProps, ModulesState> {
@@ -48,7 +49,7 @@ export default class UIPanel extends UIBasic<IProps, ModulesState> {
     }
 
     render() {
-        const { form, loading, companyList } = this.props;
+        const { form, loadingUrls, companyList } = this.props;
         const { getFieldDecorator } = form;
         return (
             <Card className={`${css.uipanel}`} title="选择公司">
@@ -69,7 +70,7 @@ export default class UIPanel extends UIBasic<IProps, ModulesState> {
                         )}
                     </Form.Item>
                     <Form.Item wrapperCol={{ offset: 6 }} >
-                        <Button loading={loading.length > 0} onClick={this.onEnterClickHandler} type="primary" htmlType="submit">
+                        <Button loading={loadingUrls.size > 0} onClick={this.onEnterClickHandler} type="primary" htmlType="submit">
                             进入
                         </Button>
                     </Form.Item>
