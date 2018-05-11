@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { Icon } from 'antd';
+import { Icon, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
@@ -45,7 +45,7 @@ export default class UIUserPanel extends UIBasic<IProps, ModulesState> {
     render() {
         return (
             <div className={css.userPanel} >
-                <img className={css.headPortrait} src={HeadPortrait} />
+                <Avatar  className={css.headPortrait} src={HeadPortrait} />
                 {
                     this.modulesState.collapsed ||
                     <p>
