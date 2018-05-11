@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
 import { ReduxState } from 'src/redux';
-import { Form } from 'antd';
 
 /**
  * 绑定组件
  * @param reduxStatePart 一个返回全局对象片段的方法
  * @param isForm 是否关联 Form
  */
-function connectIndex(reduxStatePart: (state: ReduxState) => any, isForm: boolean = false) {
+function connectIndex(reduxStatePart: (state: ReduxState) => any) {
     const s2p = (state: any) => {
         return {
             ...
@@ -15,11 +14,7 @@ function connectIndex(reduxStatePart: (state: ReduxState) => any, isForm: boolea
         };
     };
     return (dom): any => {
-        if (isForm) {
-            return connect(s2p)(Form.create()(dom));
-        } else {
-            return connect(s2p)(dom);
-        }
+        return connect(s2p)(dom);
     };
 }
 

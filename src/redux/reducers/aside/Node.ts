@@ -4,7 +4,7 @@
 export default class Node {
     
     /** 当前收起状态 */
-    public collapsed?: boolean = false;
+    public collapsed?: boolean = true;
 
     /** 显示组件 */
     public Components: JSX.Element = null;
