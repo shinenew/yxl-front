@@ -1,14 +1,11 @@
 import React from 'react';
 import { Form, Input, message } from 'antd';
 import { alxd } from './VerifyInvoice';
-import { FormComponentProps } from 'antd/lib/form';
 import { invoiceImport } from 'src/api';
+import BaseImport, { IProps, create } from './BaseImport';
 const FormItem = Form.Item;
-interface IProps extends FormComponentProps {
-    url: any;
-    fnForceUpdate: () => {};
-}
-class Component extends React.Component<IProps, any> {
+@create()
+class Component extends BaseImport<IProps, any> {
     public queryTimeout: any;
     public textInput; any;
     constructor(props: IProps) {
@@ -41,7 +38,7 @@ class Component extends React.Component<IProps, any> {
                         message.error(err.status.description);
                         return null;
                     } else {
-                        this.props.fnForceUpdate();
+                        super.forceUpdate();
                         this.success();
                     }
                 });
@@ -179,7 +176,7 @@ class Component extends React.Component<IProps, any> {
                         )}
                     </FormItem>
                 </Form>
-                <img alt="扫描二维码" width="120" src="/img/scan.png" style={{ verticalAlign: 'top', marginTop: '60px' }} />
+                
                 <div style={{ width: 560, 'padding': '10px 0px 0', 'borderTop': '1px solid #cccccc', 'color': '#999999' }}>请将扫码枪靠近发票二维码，并保证二维码清晰，系统会自动进行发票录入。(扫码多次失败可以尝试把输入法设置成小写)</div>
             </div>
         );

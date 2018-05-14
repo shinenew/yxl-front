@@ -26,11 +26,24 @@ enum Urls {
      */
     logInvoice = '/invoice/income/logging/add',
     /**
-     * getUploadToken 批量上传
+     * getUploadToken 批量上传 文件上传提前获取token
      */
     getUploadToken = '/invoice/income/image/logToken',
 
-    
+    // 专票录入 Excel 模板文件下载
+    downloadTemplate = '/invoice/income/logging/downloadTemplate',
+
+    // 专票录入 Excel 模板文件上传
+    uploadFile = '/invoice/income/logging/updateFile',
+    //第三方ocr_token
+    third_ocr_token = '/global/invoice/third-realcheck/ocr-token',
+    //启动扫描仪
+    scanStart = 'http://localhost:8088',
+    //zone/caf/invoice-logging/ocr-token 发票组ocr
+    caf_ocr_token = '/zone/caf/invoice-logging/ocr-token',
+    ///invoice/income/logging/createLoggingOcrToken 发票ocr
+    createLoggingOcrToken = '/invoice/income/logging/createLoggingOcrToken'
+
 }
 
 export default Urls;

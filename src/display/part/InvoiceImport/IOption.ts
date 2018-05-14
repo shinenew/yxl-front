@@ -1,9 +1,7 @@
 export default interface IOption {
     //扫描上传和手工上传
     key4?: string;
-    //文件上传
-    imageUrl?: string;
-    //文件上传
+    //文件上传 获取token
     qrtoken?: string;
     //扫描仪
     scanerurl?: string;

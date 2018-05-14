@@ -1,15 +1,11 @@
 import { Button, Col, DatePicker, Form, Input, message, Row, InputNumber } from 'antd';
 import React from 'react';
 import { getSwjg, adm, alxd } from './VerifyInvoice';
-import { FormComponentProps } from 'antd/lib/form';
 import { invoiceImport } from 'src/api';
-
+import BaseImport, { IProps, create } from './BaseImport';
 const FormItem = Form.Item;
-interface IProps extends FormComponentProps {
-    url: any;
-    fnForceUpdate: () => {};
-}
-class Component extends React.Component<IProps, any> {
+@create()
+class Component extends BaseImport<IProps, any> {
     constructor(props: IProps) {
         super(props);
         this.state = {
@@ -39,16 +35,12 @@ class Component extends React.Component<IProps, any> {
 
                 invoiceImport.manualImport(this, data).then((response: any) => {
                     const err2 = response.err;
-                    const res = response.res;
                     this.setState({ loading: false });
                     if (err2) {
                         message.error(err2.status.description);
                         return null;
-                    }
-                    if (res.ok) {
+                    }else{
                         this.success();
-                    } else {
-                        this.error();
                     }
                 });
                 this.setState({ loading: true });
@@ -61,7 +53,7 @@ class Component extends React.Component<IProps, any> {
     }
     success = () => {
         message.success('录入成功');
-        this.props.fnForceUpdate();
+        super.callback();
     }
     error = () => {
         message.error('录入失败');
@@ -199,7 +191,7 @@ class Component extends React.Component<IProps, any> {
                 </Row>
                 <Row>
                     <Col span={24}>
-                        <FormItem className="btn-center">
+                        <FormItem className="text-center">
                             <Button type="primary" htmlType="submit" loading={this.state.loading}>
                                 确认保存
                             </Button>
