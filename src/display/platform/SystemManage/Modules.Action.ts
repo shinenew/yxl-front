@@ -172,10 +172,11 @@ class ModulesAction extends ActionBasic<ModulesState> {
         let companyId = user.userInfo.companyId;
         let userIds: string[] = this.modulesState.userIds;
         let data = await departmentApi.setUserDep(this, { companyId, departmentId, userIds });
-        console.log(data);
-        this.modulesState.isSetDepModal = false;
-        this.setModulesState(this.modulesState);
-        message.success('操作成功');
+        if (!data.er) {
+            this.modulesState.isSetDepModal = false;
+            this.setModulesState(this.modulesState);
+            message.success('操作成功');
+        }
     }
 
 
