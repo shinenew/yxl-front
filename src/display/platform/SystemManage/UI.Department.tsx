@@ -26,7 +26,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 
 }
 
-/** 绑定全局数据 */
+/** 绑定全局数据   */
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
