@@ -106,3 +106,12 @@
 .colPadding{
   padding: 20px !important;
 }
+
+// 改变表单样式
+:global {
+  .ant-table-thead>tr>th>span {
+    font-size: 12px;
+    font-family: 'SimHei';
+    font-weight: bold;
+  }
+}
