@@ -41,8 +41,6 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     }, {
         title: '用户状态',
         dataIndex: 'isActivated',
-        className: 'text-center',
-        // align: 'center',
         render: (text, record) => {
             return (
                 <div>
