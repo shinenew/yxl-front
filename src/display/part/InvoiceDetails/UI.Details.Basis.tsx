@@ -1,9 +1,5 @@
-import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
-import { connect } from 'src/redux';
-import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
-import ModulesAction from './Modules.Action';
 
 // const css = require('./index.scss');
 
@@ -14,25 +10,16 @@ interface IReduxStatePart {
 
 /** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
-
 }
 
 /** 详情基础累 */
-@ModulesAction.uiconnect
-@connect((state: ReduxState): IReduxStatePart => ({
-
-}))
-export default class DetailsBasis extends UIBasic<IProps, ModulesState> {
+export default class DetailsBasis<P extends IProps, M extends ModulesState, S = any > extends UIBasic<P, M, S> {
     
-    constructor(props: IProps) {
-        super(props, ModulesAction);
-    }
-    
-    render() {
-        return (
-            <div>
-                你的组件
-            </div>
-        );
+    constructor(props: P, aodulesAction: any) {
+        super(props, aodulesAction);
     }
 }
+
+export {
+    IProps
+};
