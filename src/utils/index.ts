@@ -1,1 +1,4 @@
-export {default as tree} from './BuildTree';
+import tree from './BuildTree';
+export default {
+    tree
+};
