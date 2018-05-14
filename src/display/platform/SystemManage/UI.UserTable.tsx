@@ -19,7 +19,7 @@ interface IReduxStatePart {
 interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
-/** 绑定全局数据 */
+/** 绑定全局数据   */
 @ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
 
