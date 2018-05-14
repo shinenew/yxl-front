@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
+import { create } from 'kts-scaffold-framework/utils/form';
 import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
@@ -17,10 +18,11 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 绑定全局数据到props */
+@create()
 @ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
 
-}), true)
+}))
 export default class UIComponents extends UIBasic<IProps, ModulesState> {
 
     /** 构造函数 */
