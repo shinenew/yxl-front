@@ -1,4 +1,1 @@
-import tree from './BuildTree';
-export default {
-    tree
-};
+export {default as tree} from './BuildTree';

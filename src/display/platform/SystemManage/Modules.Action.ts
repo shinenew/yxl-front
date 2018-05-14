@@ -2,7 +2,7 @@ import { ActionBasic } from 'kts-scaffold-framework/modules';
 import ModulesState from './Modules.State';
 import { system } from 'src/api';
 import departmentApi from 'src/api/systemManage/department';
-import Util from 'src/utils';
+import { tree } from 'src/utils';
 import { MyStore } from 'src/redux';
 import { message } from 'antd';
 import { Modal } from 'antd';
@@ -232,7 +232,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
             treeObj.pId = list[i].parentDepartmentId;
             buildTreeParam.push(treeObj);
         }
-        this.modulesState.treeData = Util.tree(buildTreeParam);
+        this.modulesState.treeData = tree(buildTreeParam);
         this.setModulesState(this.modulesState);
     }
 
