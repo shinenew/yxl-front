@@ -15,9 +15,9 @@ interface IReduxStatePart {
 
 /** 组建的props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
-    urlData?: IOption;
-    refreshInvoice?: () => {};
-    onClose?: () => {};
+    urlData: IOption;
+    refreshInvoice?: () => void;
+    onClose?: () => void;
 }
 
 /** 绑定全局数据到props */
@@ -35,8 +35,8 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
         this.props.onClose();
     }
     render() {
-        const { refreshInvoice } = this.props;
-        const { urlData, tabkey } = this.modulesState;
+        const { refreshInvoice,urlData } = this.props;
+        const { tabkey } = this.modulesState;
         return (
             <div>
                 <div style={{padding:15}}>

@@ -1,5 +1,9 @@
 import React from 'react';
 import { Modal, message, Upload } from 'antd';
+import MyStore from 'src/redux/MyStore';
+const uploadImage =require('../upload.png');
+const downloadImage= require('../download.png');
+const css=require('../index.scss');
 class Component extends React.Component<any, any>{
     constructor(props:any) {
         super(props);
@@ -21,14 +25,16 @@ class Component extends React.Component<any, any>{
         window.open(this.state.downloadFilePath);
     }
     render() {
+        const { user } = MyStore.instance.getState();
         const propsData = this.state.data;
-        const url = propsData.url;
-        const downloadUrl = propsData.downloadurl;
+        const url = '//'+user.zoneUrl+propsData.url;
+        const downloadUrl ='//'+ user.zoneUrl+propsData.downloadurl;
+        
         const data = {
             id: propsData.id
         };
         const headers = {
-            Authorization: sessionStorage.getItem('c')
+            Authorization: user.cToken
         };
         const props = {
             name: 'file',
@@ -46,7 +52,6 @@ class Component extends React.Component<any, any>{
                     } else {
                         if (info.file.response.ok) {
                             if (info.file.response.body.allSuccess) {
-                                //this.props.onClose();
                                 message.success('上传成功！');
                             } else {
                                 const downloadFilePath = info.file.response.body.downloadFilePath;
@@ -71,10 +76,10 @@ class Component extends React.Component<any, any>{
         };
         return (
             <div>
-                <div className="auth-excel">
+                <div className={css['auth-excel']}>
                     <div>
-                        <a href={downloadUrl} className="bn" target="_blank">
-                            <img src="/img/download.png" alt="" />
+                        <a href={downloadUrl} className={css.bn} target="_blank">
+                            <img src={downloadImage} alt="" />
                         </a>
                         <h3>Excel 模板下载</h3>
                         <p>点击图标下载模板</p>
@@ -82,8 +87,8 @@ class Component extends React.Component<any, any>{
 
                     <div>
                         <Upload {...props}>
-                            <span className="bn">
-                                <img src="/img/upload.png" alt="" />
+                            <span className={css.bn}>
+                                <img src={uploadImage} alt="" />
                             </span>
                         </Upload>
                         <h3>Excel 上传</h3>

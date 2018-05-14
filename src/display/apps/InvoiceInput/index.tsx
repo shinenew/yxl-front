@@ -4,7 +4,7 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import UIComponents from './UI.Components';
+//import UIComponents from './UI.Components';
 import ModulesRoute, { Switch } from './Modules.Route';
 
 // import UIComponents from './UI.Components';
@@ -36,7 +36,6 @@ export default class InvoiceInput extends ModulesBasic<IProps, ModulesState> {
         return (
             <ModulesRoot action={ModulesAction}>
                 <div className={css.modules}>
-                    <UIComponents/>
                     <Switch>{ModulesRoute.getChildReact()}</Switch>
                     <UIForm/>
                 </div>

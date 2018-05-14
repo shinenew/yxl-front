@@ -36,6 +36,11 @@ class Component extends React.Component<any, any>{
             });
         });
     }
+    callback=()=>{
+        if (this.props.fnForceUpdate) {
+            this.props.fnForceUpdate();
+        }
+    }
     render() {
         let { keyPrefix, token, uploadUrl } = this.state;
         const props = {
@@ -48,11 +53,11 @@ class Component extends React.Component<any, any>{
                 const status = info.file.status;
                 this.upload.props.data.key = keyPrefix + JSString.randomABC(8);
 
-                if (status === 'one') {
+                if (status === 'done') {
                     message.success(
                         `${info.file.name} 文件上传成功`
                     );
-                    window.setTimeout(() => { this.props.fnForceUpdate() ;}, 2000);
+                    window.setTimeout(() => { this.callback();}, 2000);
                 } else if (status === 'error') {
                     message.error(`${info.file.name} 文件上传失败.`);
                 }

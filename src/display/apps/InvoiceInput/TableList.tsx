@@ -5,7 +5,7 @@ import ModulesAction from './Modules.Action';
 import { tree } from 'src/utils';
 import { MyStore, reducers } from 'src/redux';
 import { InvoiceImport } from 'src/display/part';
-const css = require('./index.scss');
+import { Urls } from 'src/entry/constant';
 class UserForm extends React.Component<any, any> {
 
     private columns = [
@@ -85,9 +85,16 @@ class UserForm extends React.Component<any, any> {
         this.getData();
     }
     onOpenInvoiceImport = () => {
+        const urlData={
+            key4:Urls.logInvoice,
+            qrtoken:Urls.getUploadToken,
+            downloadurl:Urls.downloadTemplate,
+            url:Urls.uploadFile,
+            scanerurl:Urls.third_ocr_token
+        };
         MyStore.instance.dispatch(reducers.aside.ActionTypes.show, {
-            Components:<InvoiceImport/>,
-            title:'发票录入'
+            Components: <InvoiceImport urlData={urlData}/>,
+            title: '发票录入'
         });
     }
     render() {
@@ -100,14 +107,14 @@ class UserForm extends React.Component<any, any> {
             onChange: this.onChange,
             hideDefaultSelections: true,
             getCheckboxProps: (record) => {
-                return { disabled: record.groupName };
+                return { disabled: record.groupName ? true : false };
             }
         };
         const extraButtons = (
             <div>
-                <Button icon="sync" className={css.mr10} onClick={this.refreshInvoice} />
-                <Button className={css.mr10} type="primary">新增发票组</Button>
-                <Button className={css.mr10} type="primary" onClick={this.onOpenInvoiceImport}>发票录入</Button>
+                <Button icon="sync" className="mr10" onClick={this.refreshInvoice} />
+                <Button className="mr10" type="primary">新增发票组</Button>
+                <Button className="mr10" type="primary" onClick={this.onOpenInvoiceImport}>发票录入</Button>
             </div>
         );
         return (

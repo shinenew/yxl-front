@@ -1,4 +1,4 @@
-export function getSwjg(fpdm, ckflag) {
+export function getSwjg(fpdm:string, ckflag:number) {
   let citys = [{ 'code': '1100', 'sfmc': '北京', 'Ip': 'https://zjfpcyweb.bjsat.gov.cn:443', 'address': 'https://zjfpcyweb.bjsat.gov.cn:443' },
   { 'code': '1200', 'sfmc': '天津', 'Ip': 'https://fpcy.tjsat.gov.cn:443', 'address': 'https://fpcy.tjsat.gov.cn:443' },
   { 'code': '1300', 'sfmc': '河北', 'Ip': 'https://fpcy.he-n-tax.gov.cn:82', 'address': 'https://fpcy.he-n-tax.gov.cn:82' },
@@ -66,7 +66,7 @@ export function getSwjg(fpdm, ckflag) {
 
   return swjginfo;
 }
-export let bc=function(a){
+export let bc=function(a:string){
   let b;
   let d=new Date();
   let e=d.getFullYear();
@@ -82,20 +82,7 @@ export let bc=function(a){
   }
   return true;
 };
-export let adm = function (a) {
-  let b = /^1|0\d{11}$|^\d{6}[1-9]\d{2}0$/;
-  //let c = /^0{8}[1-9]?\w[1-9]\d*$/;
-
-  let e = b.test(a);
-  //let f = c.test(a);
-
-  if (e === true && bc(a) && alxd(a) !== '99') {
-    return true;
-  } else {
-    return false;
-  }
-};
-export let alxd = function (a) {
+export let alxd = function (a:any) {
   let b;
   let c = '99';
   let code = new Array('144031539110', '131001570151', '133011501118', '111001571071');
@@ -126,13 +113,27 @@ export let alxd = function (a) {
 
   } else if (a.length === 10) {
     b = a.substring(7, 8);
-    if (b === 1 || b === 5) {
+    if (b === '1' || b === '5') {
       c = '01';
-    } else if (b === 6 || b === 3) {
+    } else if (b === '6' || b === '3') {
       c = '04';
-    } else if (b === 7 || b === 2) {
+    } else if (b === '7' || b === '2') {
       c = '02';
     }
   }
   return c;
 };
+export let adm = function (a:any) {
+  let b = /^1|0\d{11}$|^\d{6}[1-9]\d{2}0$/;
+  //let c = /^0{8}[1-9]?\w[1-9]\d*$/;
+
+  let e = b.test(a);
+  //let f = c.test(a);
+
+  if (e === true && bc(a) && alxd(a) !== '99') {
+    return true;
+  } else {
+    return false;
+  }
+};
+

@@ -1,12 +1,9 @@
 import { Icon, message, Button,Form } from 'antd';
 import React from 'react';
-import { FormComponentProps } from 'antd/lib/form';
 import { invoiceImport } from 'src/api';
-interface IProps extends FormComponentProps {
-    url: any;
-    fnForceUpdate: () => {};
-}
-class Component extends React.Component<IProps, any> {
+import BaseImport, { IProps, create } from './BaseImport';
+@create()
+class Component extends BaseImport<IProps, any> {
     constructor(props: IProps) {
         super(props);
         this.state = {
@@ -41,7 +38,7 @@ class Component extends React.Component<IProps, any> {
             }
             if (res.ok) {
                 this.setState({
-                    message: res.body.message
+                    message: res.body.message 
                 });
             } else {
                 this.setState({
