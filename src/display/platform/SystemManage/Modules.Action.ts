@@ -2,19 +2,18 @@ import { ActionBasic } from 'kts-scaffold-framework/modules';
 import ModulesState from './Modules.State';
 import { system } from 'src/api';
 import departmentApi from 'src/api/systemManage/department';
-import Util from 'src/utils';
+import { tree } from 'src/utils';
 import { MyStore } from 'src/redux';
 import { message } from 'antd';
 import { Modal } from 'antd';
 import role from 'src/api/systemManage/role';
-const { user } = MyStore.instance.getState();
 
 class ModulesAction extends ActionBasic<ModulesState> {
-    /************************** 部门管理start ************************************/
+    /************************** 部门管理start  ************************************/
     /** 查询部门 */
     public departmentQuery = async () => {
+        const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
-        console.log(user);
         let data = await departmentApi.depList(this, { companyId });
         let queryData: any = data.res;
 
@@ -32,6 +31,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * @param 部门ID
      */
     public departmentUser = async (depId) => {
+        const { user } = MyStore.instance.getState();
         if (depId.length > 0) {
             let companyId = user.userInfo.companyId;
             let departmentId = depId[0];
@@ -50,7 +50,6 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /** 弹出新增窗口 */
     public addDepUserModal = async () => {
         this.modulesState.isDepModal = true;
-        console.log(this.modulesState.isDepModal);
         this.setModulesState(this.modulesState);
     }
 
@@ -68,7 +67,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /** 保存部门 */
     public saveDep = async (parentDepartmentId, depNumber, name, description?) => {
-
+        const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
             companyId: user.userInfo.companyId,
@@ -98,13 +97,13 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /** 删除部门 */
     public deleteDep = async (depId) => {
+        const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
         let departmentId = depId;
         // 调用接口
         let data = await departmentApi.deleteDep(this, { departmentId, companyId });
 
         if (!data.er) {
-            console.log(data);
             // 重新加载部门
             this.departmentQuery();
             message.success('删除成功');
@@ -128,7 +127,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /** 修改部门 */
     public updDep = async (dep) => {
-
+        const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
             companyId: user.userInfo.companyId,
@@ -145,7 +144,6 @@ class ModulesAction extends ActionBasic<ModulesState> {
         // 调用接口
         let data = await departmentApi.updateDep(this, department);
 
-        console.log(data);
         if (!data.er) {
             // 重新加载部门
             this.departmentQuery();
@@ -170,11 +168,9 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /** 设置员工部门 */
     public setUserDep = async (departmentId) => {
+        const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
         let userIds: string[] = this.modulesState.userIds;
-
-        console.log(userIds);
-
         let data = await departmentApi.setUserDep(this, { companyId, departmentId, userIds });
         console.log(data);
         this.modulesState.isSetDepModal = false;
@@ -185,6 +181,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /** 修改上级部门 */
     public updParentDep = async (dep) => {
+        const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
             companyId: user.userInfo.companyId,
@@ -200,8 +197,6 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
         // 调用接口
         let data = await departmentApi.updateParentDep(this, department);
-
-        console.log(data);
         if (!data.er) {
             // 重新加载部门
             this.departmentQuery();
@@ -232,7 +227,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
             treeObj.pId = list[i].parentDepartmentId;
             buildTreeParam.push(treeObj);
         }
-        this.modulesState.treeData = Util.tree(buildTreeParam);
+        this.modulesState.treeData = tree(buildTreeParam);
         this.setModulesState(this.modulesState);
     }
 
@@ -253,7 +248,6 @@ class ModulesAction extends ActionBasic<ModulesState> {
         select.forEach(element => {
             connectionId.push(element.connectionId);
         });
-        console.log(connectionId);
         await system.companyDisable(this, { list: connectionId });
         this.modulesState.companyState.selectedRowKeys = [];
         this.modulesState.companyState.selectedRows = [];
@@ -269,7 +263,6 @@ class ModulesAction extends ActionBasic<ModulesState> {
         select.forEach(element => {
             connectionId.push(element.connectionId);
         });
-        console.log(connectionId);
         await system.companyEnable(this, { list: connectionId });
         this.modulesState.companyState.selectedRowKeys = [];
         this.modulesState.companyState.selectedRows = [];
@@ -282,13 +275,11 @@ class ModulesAction extends ActionBasic<ModulesState> {
     public findCompanyList = async () => {
         let data = await system.findCompanyList(this, { companyId: this.modulesState.user.companyId });
         this.modulesState.company.list = data.res;
-        console.log(this.modulesState.company.list);
         this.setModulesState(this.modulesState);
     }
 
     /** 公司信息 禁用\启用 */
     public onUpdate = async (record: any) => {
-        console.log(record);
         if (record.connectionState === 1) {
             // 启用转禁用
             let connectionId: Array<string> = [];
@@ -324,7 +315,6 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /** 勾选关联公司 */
     onSelectChange = (selectedRowKeys, selectedRows) => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys, 'selectedRows', selectedRows);
         this.modulesState.companyState.selectedRowKeys = selectedRowKeys;
         this.modulesState.companyState.selectedRows = selectedRows;
         this.setModulesState(this.modulesState);
@@ -360,7 +350,6 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /** 更新集团公司信息 */
     updateGroupInfo = async (org: any) => {
         org.updateTime = new Date().getTime();
-        console.log(org);
         await system.updateGroupInfo(this, org);
         this.modulesState.groupInfo.disable = !this.modulesState.groupInfo.disable;
         this.setModulesState(this.modulesState);
@@ -620,6 +609,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * 新增角色保存
      */
     public saveRole = async (value) => {
+        const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
         let name = value.name;
         let description = value.description;
@@ -643,6 +633,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * 删除角色
      */
     public deleteRole = async (value) => {
+        const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
         let roleId = value.roleId;
         let data = await role.deleteRole(this, { companyId, roleId });
@@ -675,7 +666,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * 编辑保存的方法
      */
     public redactSaveVisible = async (value) => {
-        console.log(value);
+        const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
         let name = value.name;
         let description = value.description;
@@ -709,6 +700,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * 获取公司资料数据
      */
     public getCompanyInfo = async () => {
+        const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
         let data = await role.getCompanyInfoList(this, { companyId });
         if (!data.er) {
@@ -716,7 +708,9 @@ class ModulesAction extends ActionBasic<ModulesState> {
             this.setModulesState(this.modulesState);
         }
     }
-    /************************************* 角色管理 end  ******************************************************************** */
+
+
+    /************************************* 角色管理 End  ******************************************************************** */
 
 }
 
