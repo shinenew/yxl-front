@@ -9,7 +9,7 @@ import { Modal } from 'antd';
 import role from 'src/api/systemManage/role';
 
 class ModulesAction extends ActionBasic<ModulesState> {
-    /************************** 部门管理start ************************************/
+    /************************** 部门管理start  ************************************/
     /** 查询部门 */
     public departmentQuery = async () => {
         const { user } = MyStore.instance.getState();
