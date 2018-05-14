@@ -1,0 +1,7 @@
+deleteRole 		删除角色的api
+getCompanyInfoList 	查询公司信息的api
+getRoleList 		获取角色信息的api
+getRolePrivilegeList	获取角色权限列表的api
+saveRole 		新增角色的api
+updateRole		修改角色的api
+index			暴露以上api的调用方法

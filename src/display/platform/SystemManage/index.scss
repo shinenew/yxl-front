@@ -8,3 +8,98 @@
   //}
 }
 
+// 改写tabs样式
+.cardContainer {
+  background-color: #eceff2;
+  margin: 24px;
+  :global(.ant-tabs-content) {
+    height: auto;
+    margin-top: -17px;
+  }
+  :global(.ant-tabs-tabpane) {
+    background: #fff;
+    padding: 16px;
+    border: 1px solid #dbdddf;
+  }
+  :global(.ant-tabs-bar) {
+    border-color: #fff;
+  }
+  :global(.ant-tabs-tab) {
+    border-top: 1px solid #dbdddf;
+    border-left: 1px solid #dbdddf;
+    border-bottom: 2px solid #dbdddf;
+    background: transparent;
+    border-radius: 4px 4px 0 0;
+    background: #f5f7f8;
+    margin-right: 0px;
+    color: #666666;
+  }
+  :global(.ant-tabs-tab:last-child) {
+    border-right: 1px solid #dbdddf;
+  }
+  :global(.ant-tabs-tab:first) {
+    border-left: none;
+  }
+  :global(.ant-tabs-tab-active) {
+    border-bottom-color: #fff;
+    background: #fff;
+  }
+  :global(.ant-tabs-ink-bar) {
+    background: none;
+  }
+}
+
+// 关联公司按钮样式
+.pullRight{
+  float: right !important;
+}
+
+.textCenter{
+  text-align: center
+}
+
+.groupInput{
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.antInputDisabled {
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/*******************用户管理相关样式 开始*********************/
+.item{
+  line-height: 60px;
+}
+.float_right{  
+  float: right;  
+} 
+.hide{
+  display: none;
+}
+.text_right{
+  text-align: right;
+  
+}
+.text_center{
+  text-align: center
+}
+.mr_10 {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.display_none{
+  display: none;
+}
+.page_total{
+  position: absolute;
+  left: 0;
+  font-size: 18px;
+}
+.number {
+  font-weight: 700;
+}
+/*******************用户管理相关样式 结束*********************/
