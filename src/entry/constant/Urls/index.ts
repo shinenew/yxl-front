@@ -20,7 +20,17 @@ enum Urls {
     /**
      * 发票组的所有发票列表
      */
-    ZONE_INVOICELIST='/zone/invoicelist',
+    ZONE_INVOICELIST = '/zone/invoicelist',
+    /**
+     * 四要素录入接口
+     */
+    logInvoice = '/invoice/income/logging/add',
+    /**
+     * getUploadToken 批量上传
+     */
+    getUploadToken = '/invoice/income/image/logToken',
+
+    
 }
 
 export default Urls;
