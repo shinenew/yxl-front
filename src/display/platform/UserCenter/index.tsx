@@ -4,7 +4,7 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import UIInfo from './UI.Info';
+import UIInfo from './UI.info';
 
 const css = require('./index.scss');
 
