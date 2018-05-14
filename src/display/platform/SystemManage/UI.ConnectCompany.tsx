@@ -17,7 +17,7 @@ interface IReduxStatePart {
 }
 
 
-/** 组建的props接口 */
+/** 组建的props接口  */
 interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
