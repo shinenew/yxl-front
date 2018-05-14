@@ -17,11 +17,11 @@ interface IReduxStatePart {
 }
 
 
-/** 组建的props接口 */
+/** 组建的props接口   123  */
 interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
-/** 绑定全局数据到props */
+/** pp绑定全局数据到props */
 @create()
 @ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
@@ -29,7 +29,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 
 export default class UITable extends UIBasic<IProps, ModulesState> {
 
-  /** 构造函数 */
+  /** 构造函数p */
   constructor(props: IProps) {
     super(props, ModulesAction);
 
@@ -102,7 +102,7 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
       wrapperCol: { span: 18 },
     };
     let connectionName = this.props.form.getFieldValue('connectionName');
-    let connectionTaxId =this.props.form.getFieldValue('connectionTaxId');
+    let connectionTaxId = this.props.form.getFieldValue('connectionTaxId');
     return (
       <div>
         <Row>
@@ -111,19 +111,19 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
               <Button type="primary" onClick={() => ModulesAction.ban()}>
                 批量禁用
                     </Button>
-              <Button style={{ marginLeft: 20 }} type="primary" className="ml-10" onClick={() => ModulesAction.active()}>
+              <Button style={{ marginLeft: 10 }} type="primary" className="ml-10" onClick={() => ModulesAction.active()}>
                 批量启用
                     </Button>
-              <Button style={{ marginLeft: 20 }} className="ml-10 mb-10" onClick={ModulesAction.toggle}>
+              <Button style={{ marginLeft: 10 }} className="ml-10 mb-10" onClick={ModulesAction.toggle}>
                 筛选 <Icon type={this.modulesState.company.companyExpand ? 'up' : 'down'} />
               </Button>
             </div>
 
           </Col>
         </Row>
-        <div style={{ display: this.modulesState.company.companyExpand ? 'block' : 'none'}}>
+        <div style={{ display: this.modulesState.company.companyExpand ? 'block' : 'none' }}>
           <Form >
-            <Row style={{marginTop:20}}>
+            <Row style={{ marginTop: 20, marginBottom: -45 }}>
               <Col span={8} >
                 <FormItem
                   label="公司名称"
@@ -149,15 +149,15 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
                     <a target="_blank" href={this.modulesState.company.geturl}>
                       <Button className="mr-10">导出</Button>
                     </a>
-                    <Button style={{ marginLeft: 20 }} className="mr-10" onClick={this.handleReset}>清空</Button>
-                    <Button style={{ marginLeft: 20 }} type="primary" htmlType="submit" onClick={ModulesAction.selectCompany.bind(this, connectionName , connectionTaxId)}> 筛选</Button>
+                    <Button style={{ marginLeft: 10 }} className="mr-10" onClick={this.handleReset}>清空</Button>
+                    <Button style={{ marginLeft: 10 }} type="primary" htmlType="submit" onClick={ModulesAction.selectCompany.bind(this, connectionName, connectionTaxId)}> 筛选</Button>
                   </div>
                 </div>
               </Col>
             </Row>
           </Form>
         </div>
-        <Table pagination={{ pageSize: 10 }} rowSelection={rowSelection} columns={columns} dataSource={this.modulesState.company.list} rowKey="connectionId" />
+        <Table style={{ marginTop: 10 }} pagination={{ pageSize: 10 }} rowSelection={rowSelection} columns={columns} dataSource={this.modulesState.company.list} rowKey="connectionId" />
         {/* rowKey="connectionId" */}
       </div >
     );
