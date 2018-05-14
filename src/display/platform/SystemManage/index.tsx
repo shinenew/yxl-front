@@ -84,7 +84,7 @@ export default class TabsDemo extends ModulesBasic<IProps, ModulesState> {
 
         return (
             <ModulesRoot action={ModulesAction}>
-                <Tabs defaultActiveKey={this.activeKey} onChange={this.callback.bind(this, )} className={css.cardContainer}>
+                <Tabs defaultActiveKey={this.activeKey} onChange={this.callback.bind(this, )} className={css.cardContainer} animated={false}>
                     {items}
                 </Tabs>
             </ModulesRoot>

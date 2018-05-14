@@ -29,7 +29,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 
 export default class UITable extends UIBasic<IProps, ModulesState> {
 
-  /** 构造函数 */
+  /** 构造函数p */
   constructor(props: IProps) {
     super(props, ModulesAction);
 
@@ -157,7 +157,7 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
             </Row>
           </Form>
         </div>
-        <Table pagination={{ pageSize: 10 }} rowSelection={rowSelection} columns={columns} dataSource={this.modulesState.company.list} rowKey="connectionId" />
+        <Table style={{ marginTop: 10 }} pagination={{ pageSize: 10 }} rowSelection={rowSelection} columns={columns} dataSource={this.modulesState.company.list} rowKey="connectionId" />
         {/* rowKey="connectionId" */}
       </div >
     );
