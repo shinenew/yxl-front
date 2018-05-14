@@ -2,10 +2,8 @@ import React from 'react';
 import { Table, Card, Button } from 'antd';
 import AdvancedForm from './AdvancedForm';
 import ModulesAction from './Modules.Action';
-import { tree } from 'src/utils';
-import { MyStore, reducers } from 'src/redux';
-import { InvoiceImport } from 'src/display/part';
-import { Urls } from 'src/entry/constant';
+import tree from 'src/utils';
+const css = require('./index.scss');
 class UserForm extends React.Component<any, any> {
 
     private columns = [
@@ -16,9 +14,9 @@ class UserForm extends React.Component<any, any> {
                 return (
                     <span>
                         {
-                            record.groupName ?
-                                <span>{record.groupName}({record.matchCount}/{record.invoiceCount})</span>
-                                : <span>{text}</span>
+                            record.groupName ? 
+                            <span>{record.groupName}({record.matchCount}/{record.invoiceCount})</span>
+                            :<span>{text}</span>
                         }
                     </span>
                 );
@@ -42,9 +40,9 @@ class UserForm extends React.Component<any, any> {
             dataIndex: 'amount'
         },
         {
-            title: '操作',
+            title:'操作',
             dataIndex: 'operation',
-            render: () => {
+            render:()=>{
                 return (
                     <span>详情</span>
                 );
@@ -84,19 +82,7 @@ class UserForm extends React.Component<any, any> {
     componentDidMount() {
         this.getData();
     }
-    onOpenInvoiceImport = () => {
-        const urlData={
-            key4:Urls.logInvoice,
-            qrtoken:Urls.getUploadToken,
-            downloadurl:Urls.downloadTemplate,
-            url:Urls.uploadFile,
-            scanerurl:Urls.third_ocr_token
-        };
-        MyStore.instance.dispatch(reducers.aside.ActionTypes.show, {
-            Components: <InvoiceImport urlData={urlData}/>,
-            title: '发票录入'
-        });
-    }
+
     render() {
 
         let columns = this.columns;
@@ -106,15 +92,15 @@ class UserForm extends React.Component<any, any> {
             selectedRowKeys,
             onChange: this.onChange,
             hideDefaultSelections: true,
-            getCheckboxProps: (record) => {
-                return { disabled: record.groupName ? true : false };
+            getCheckboxProps:(record)=>{
+                return {disabled:record.groupName};
             }
         };
         const extraButtons = (
             <div>
-                <Button icon="sync" className="mr10" onClick={this.refreshInvoice} />
-                <Button className="mr10" type="primary">新增发票组</Button>
-                <Button className="mr10" type="primary" onClick={this.onOpenInvoiceImport}>发票录入</Button>
+                <Button icon="sync" className={css.mr10} onClick={this.refreshInvoice} />
+                <Button className={css.mr10} type="primary">新增发票组</Button>
+                <Button className={css.mr10} type="primary">发票录入</Button>
             </div>
         );
         return (
@@ -136,7 +122,7 @@ class UserForm extends React.Component<any, any> {
 
     getData = async () => {
         const data = await ModulesAction.getGroupData();
-        const treeData = tree(data.items);
+        const treeData = tree.tree(data.items);
         this.setState({
             list: treeData,
             pageMeta: data.pageMeta
