@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { Decorators } from 'kts-scaffold-framework/utils/doc';
+import { create } from 'kts-scaffold-framework/utils/form';
 import { connect } from 'src/redux';
 import ReduxState, { IEnv } from 'src/redux/ReduxState';
 import { Urls } from 'src/entry/constant';
@@ -31,11 +32,12 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 熟人用户名密码面板 */
+@create()
 @ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
     loadingUrls: state.system.loadingUrls,
     env: state.env
-}), true)
+}))
 export default class UIPanel extends UIBasic<IProps, ModulesState> {
 
     constructor(props: IProps) {

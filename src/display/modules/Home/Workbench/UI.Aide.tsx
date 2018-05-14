@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
+import { withRouter } from 'src/routes';
 import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import ReduxState, { } from 'src/redux/ReduxState';
@@ -18,6 +19,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 辅助功能 */
+@withRouter
 @ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
 }))

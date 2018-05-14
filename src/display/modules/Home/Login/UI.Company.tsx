@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
+import { create } from 'kts-scaffold-framework/utils/form';
 import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import { Card, Form, Button, Select } from 'antd';
@@ -32,11 +33,12 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 选中公司面板 */
+@create()
 @ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
     loadingUrls: state.system.loadingUrls,
     companyList: state.user.companyList || [],
-}), true)
+}))
 export default class UIPanel extends UIBasic<IProps, ModulesState> {
 
     constructor(props: IProps) {
