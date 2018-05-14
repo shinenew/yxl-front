@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ModulesBasic, IPropsBasic, ModulesRoot } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
-import ReduxState, { IAside } from 'src/redux/ReduxState';
+import ReduxState, { } from 'src/redux/ReduxState';
 import { Aside } from 'src/display/part';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
@@ -18,17 +18,14 @@ const css = require('./index.scss');
 
 /** Redux接口 */
 interface IReduxStatePart {
-    aside: IAside;
 }
 
 /** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
-
 }
 
 /** 绑定全局数据 */
 @connect((state: ReduxState): IReduxStatePart => ({
-    aside: state.aside
 }))
 export default class Workbench extends ModulesBasic<IProps, ModulesState> {
 
@@ -80,14 +77,7 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
                         </Content>
 
                         {/* 侧边栏 */}
-                        <Sider
-                            style={{ background: 'none' }}
-                            width={485}
-                            collapsed={this.props.aside.collapsed}
-                            collapsedWidth={0}
-                        >
-                            <Aside />
-                        </Sider>
+                        <Aside />
                     </Layout>
                 </Layout>
 
