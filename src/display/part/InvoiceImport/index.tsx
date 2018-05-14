@@ -4,16 +4,14 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
+import ModulesEvent from './Modules.Event';
 import UIComponents from './UI.Components';
-import ModulesRoute, { Switch } from './Modules.Route';
 
-// import UIComponents from './UI.Components';
-import UIForm from './TableList';
 const css = require('./index.scss');
 
 /** Redux接口 */
 interface IReduxStatePart {
-
+    
 }
 
 /** Props接口 */
@@ -21,13 +19,16 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 
 }
 
-/** 发票录入 */
+/** 绑定全局数据 */
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
-export default class InvoiceInput extends ModulesBasic<IProps, ModulesState> {
+export default class InvoiceImport extends ModulesBasic<IProps, ModulesState> {
 
-    public state: ModulesState = new ModulesState();
+    public static readonly Event = ModulesEvent;
+
+    public readonly state: ModulesState = new ModulesState();
+
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
@@ -36,9 +37,7 @@ export default class InvoiceInput extends ModulesBasic<IProps, ModulesState> {
         return (
             <ModulesRoot action={ModulesAction}>
                 <div className={css.modules}>
-                    <UIComponents/>
-                    <Switch>{ModulesRoute.getChildReact()}</Switch>
-                    <UIForm/>
+                    <UIComponents />
                 </div>
             </ModulesRoot>
         );
