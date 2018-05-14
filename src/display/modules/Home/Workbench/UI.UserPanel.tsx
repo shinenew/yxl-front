@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { Icon } from 'antd';
+import { Icon, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
@@ -38,14 +38,14 @@ export default class UIUserPanel extends UIBasic<IProps, ModulesState> {
     /** 用户类型名称 */
     private get nickNameName(): string {
 
-        const userTypeString: string = language.userTypeToString(this.props.userType);
+        const userTypeString: string = language.userTypeToString.get(this.props.userType);
         return userTypeString || '未知';
     }
 
     render() {
         return (
             <div className={css.userPanel} >
-                <img className={css.headPortrait} src={HeadPortrait} />
+                <Avatar  className={css.headPortrait} src={HeadPortrait} />
                 {
                     this.modulesState.collapsed ||
                     <p>

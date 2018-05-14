@@ -2,7 +2,7 @@ import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { Link } from 'react-router-dom';
 import { connect } from 'src/redux';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon, Badge } from 'antd';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
@@ -34,7 +34,7 @@ export default class UIFeatures extends UIBasic<IProps, ModulesState> {
                 theme="dark"
                 mode="inline"
                 selectedKeys={[ModulesAction.getMenuSelectedKeys(location.pathname)]}
-                defaultOpenKeys={this.modulesState.collapsed ? [] : ['sub1']}
+                // defaultOpenKeys={this.modulesState.collapsed ? [] : ['sub1']}
                 inlineCollapsed={this.modulesState.collapsed}
                 inlineIndent={15}
                 className={css.features}
@@ -46,27 +46,32 @@ export default class UIFeatures extends UIBasic<IProps, ModulesState> {
                         <span>
                             <Icon type="xiaoxi1" />
                             <span>收件箱</span>
+                            <Badge className={css.badge} status="error" />
                         </span>
                     }
                 >
                     <Menu.Item key="/workbench/platform/inBox/file">
                         <Link to="/workbench/platform/inBox/file">
-                            <span>文件</span>
+                            <span className={css.p15}>文件</span>
+                            <Badge className={css.badge} count={1} />
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="/workbench/platform/inBox/message">
                         <Link to="/workbench/platform/inBox/message">
-                            <span>消息</span>
+                            <span className={css.p15}>消息</span>
+                            <Badge className={css.badge} count={1} />
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="/workbench/platform/inBox/task">
                         <Link to="/workbench/platform/inBox/task">
-                            <span>任务</span>
+                            <span className={css.p15}>任务</span>
+                            <Badge className={css.badge} count={1} />
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="/workbench/platform/inBox/cooperation">
                         <Link to="/workbench/platform/inBox/cooperation">
-                            <span>协作</span>
+                            <span className={css.p15}>协作</span>
+                            <Badge className={css.badge} count={1} />
                         </Link>
                     </Menu.Item>
                 </Menu.SubMenu>
@@ -75,8 +80,8 @@ export default class UIFeatures extends UIBasic<IProps, ModulesState> {
                     <span>网络</span>
                 </Menu.Item>
                 <Menu.Item key="5">
-                    <Icon type="gongsi" />
-                    <span>公司信息</span>
+                    <Icon type="wendang" />
+                    <span>文档中心</span>
                 </Menu.Item>
             </Menu>
         );

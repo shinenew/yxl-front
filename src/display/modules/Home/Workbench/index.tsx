@@ -41,6 +41,7 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
     render() {
         return (
             <ModulesRoot action={ModulesAction}>
+
                 <Layout >
                     <Layout>
                         <Sider
@@ -52,6 +53,7 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
                             collapsedWidth={64}
                             style={{ paddingBottom: 180 }}
                         >
+
                             {/* 图标和收折按钮 */}
                             <UILog />
 
@@ -70,21 +72,25 @@ export default class Workbench extends ModulesBasic<IProps, ModulesState> {
 
                             {/* 用户面板 */}
                             <UIUserPanel />
+
                         </Sider>
 
                         <Content>
                             {ModulesRoute.getChildReact()}
                         </Content>
-                        
+
                         {/* 侧边栏 */}
                         <Sider
+                            style={{ background: 'none' }}
+                            width={485}
                             collapsed={this.props.aside.collapsed}
                             collapsedWidth={0}
                         >
-                            <Aside/>
+                            <Aside />
                         </Sider>
                     </Layout>
                 </Layout>
+
             </ModulesRoot>
         );
     }

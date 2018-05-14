@@ -36,6 +36,7 @@ export default class SystemManage extends ModulesBasic<IProps, ModulesState> {
         return (
             <ModulesRoot action={ModulesAction}>
                 <div className={css.modules}>
+                    <Button onClick={ModulesAction.onChing} >改变</Button>
                     <Button onClick={this.onClickHandler} >开启</Button>
                 </div>
             </ModulesRoot>

@@ -26,6 +26,7 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 绑定全局数据到props */
+@ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
     userInfo: state.user.userInfo,
 }))
@@ -38,7 +39,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     /** 用户类型名称 */
     private get nickNameName(): string {
         const {userInfo} = this.props;
-        const userTypeString: string = language.userTypeToString(userInfo.userType);
+        const userTypeString: string = language.userTypeToString.get(userInfo.userType);
         return userTypeString || '未知';
     }
     
