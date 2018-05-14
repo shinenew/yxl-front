@@ -62,7 +62,6 @@ export default class UIAppList extends UIBasic<IProps, ModulesState> {
 
     render() {
         const { location } = this.props;
-        debugger;
         return (
             <Menu
                 selectedKeys={[ModulesAction.getMenuSelectedKeys(location.pathname)]}
