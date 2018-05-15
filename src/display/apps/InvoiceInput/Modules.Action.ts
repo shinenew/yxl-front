@@ -5,14 +5,8 @@ class ModulesAction extends ActionBasic<ModulesState> {
     getGroupData = async () => {
         const invoiceRes = await invoiceInput.invoice(this, { pageNum: 1, pageSize: 10 });
         let rebornlist = invoiceRes.res;
-        // const setRebornlist = ()=>{
-        //     this.modulesState.list = rebornlist.items;
-        //     this.modulesState.pageMeta = rebornlist.pageMeta;
-        //     this.setModulesState(this.modulesState);
-        // };
-
+        
         if (invoiceRes.er) {
-            //setRebornlist();
             return null;
         }
         let uniqueArray = [];
@@ -26,7 +20,6 @@ class ModulesAction extends ActionBasic<ModulesState> {
         });
         uniqueArray = Array.from(new Set(uniqueArray));
         if (uniqueArray.length === 0) {
-            //setRebornlist();
             return rebornlist;
         }
 
@@ -41,11 +34,8 @@ class ModulesAction extends ActionBasic<ModulesState> {
                 };
             });
             rebornlist.items = rebornlist.items.concat(...reborngrouplist);
-            //setRebornlist();
-            //return rebornlist;
         }
         return rebornlist;
-        //setRebornlist();
     }
     clearFields = () => {
         this.modulesState.fields = null;
