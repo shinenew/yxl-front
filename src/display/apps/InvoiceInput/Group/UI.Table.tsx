@@ -10,8 +10,6 @@ import {
     Icon
 } from 'antd';
 
-// const css = require('./index.scss');
-
 /** Redux接口 */
 interface IReduxStatePart {
     
@@ -100,7 +98,13 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
         ];
         return (
             <Card title="发票列表" bordered={false}>
-                <Table columns={columns} dataSource={data} bordered={true} pagination={false}/>
+                <Table
+                  className={`kts-app-ant-table`}
+                  columns={columns}
+                  dataSource={data}
+                  bordered={true}
+                  pagination={false}
+                />
             </Card>
         );
     }
