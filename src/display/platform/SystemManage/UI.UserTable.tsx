@@ -19,7 +19,7 @@ interface IReduxStatePart {
 interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
-/** 绑定全局数据 */
+/** 绑定全局数据   */
 @ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
 
@@ -41,8 +41,6 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     }, {
         title: '用户状态',
         dataIndex: 'isActivated',
-        className: 'text-center',
-        // align: 'center',
         render: (text, record) => {
             return (
                 <div>
