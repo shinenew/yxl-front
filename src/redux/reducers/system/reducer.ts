@@ -1,29 +1,36 @@
 import { createReducer } from 'redux-act';
+import { Urls, MessageType } from 'src/entry/constant';
 import ActionTypes from './ActionTypes';
 import Node from './Node';
 
 const reducer = createReducer(
     {
-        [ActionTypes.addLoading as any]: (state: Node, url: string) => {
-            const loading = state.loading.slice();
-            loading.push(url);
+        [ActionTypes.addLoading as any]: (state: Node, url: Urls) => {
+            const loadingUrls = state.loadingUrls;
+            loadingUrls.set(url, url);
             return {
                 ...state,
-                loading: loading
+                loadingUrls: loadingUrls,
             };
         },
 
-        [ActionTypes.removeLoading as any]: (state: Node, url: string) => {
-            const loading = state.loading.slice();
-            for (let i = 0; i < loading.length; i++) {
-                if (loading[i] === url) {
-                    loading.splice(i, 1);
-                    break;
-                }
-            }
+        [ActionTypes.removeLoading as any]: (state: Node, url: Urls) => {
+            const loadingUrls = state.loadingUrls;
+            loadingUrls.delete(url);
             return {
                 ...state,
-                loading: loading
+                loadingUrls: loadingUrls,
+            };
+        },
+
+        [ActionTypes.updateUnread as any]: (state: Node, payload: Map<MessageType, number>) => {
+            const unread = state.unread;
+            payload.forEach((value: number, key: MessageType) => { 
+                unread.set(key, value);
+            });
+            return {
+                ...state,
+                unread:unread
             };
         },
     },

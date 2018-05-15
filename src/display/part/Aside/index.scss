@@ -1,40 +1,51 @@
 .aside{
-  height: 100%;
-  width: 100%;
-  top: 0px;
-  transition: right .5s;
-  position: relative;
 
-  :global(.kts-aside-title) {
-      height: 55px;
-      line-height: 35px;
-      background: #20a0e9;
-      position: absolute;
-      width: 100%;
-      color: #FFF;
-      padding: 10px 15px;
-  }
+    height: 100%;
+    top: 0px;
+    transition: right .5s;
+    position: relative;
+    padding: 20px 15px;
 
-  :global(.kts-aside-container) {
-      padding-top: 55px;
-      background: #FFF;
-      height: 100%;
+    :global(.kts-aside){
 
-      :global(.kts-aside-panel) {
-          height: 100%;
-          overflow-x: hidden;
-          overflow-y: auto;
-      }
-  }
+        border-left: 1px solid #dbdddf;
+        height: 100%;
+        position: relative;
+        box-shadow:2px 2px 5px #ddd;
 
-  :global(.kts-aside-close) {
-      position: absolute;
-      right: 15px;
-      top: 14px;
-      display: inline-block;
-      color: #fff;
-      :global(.anticon-close){
-          font-size: 24px;
-      }
-  }
+        :global(.kts-aside-title) {
+            font-size: 16px;
+            font-weight: bolder;
+            height: 40px;
+            line-height: 20px;
+            background: #404d64;
+            position: absolute;
+            width: 100%;
+            color: #f0f2f6;
+            padding: 10px 15px;
+        }
+
+        :global(.kts-aside-container) {
+            padding-top: 40px;
+            background: #FFF;
+            height: 100%;
+
+            :global(.kts-aside-panel) {
+                height: 100%;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+        }
+
+        :global(.kts-aside-close) {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            display: inline-block;
+            color: #b0b3b7;
+            :global(.anticon-close){
+                font-size: 16px;
+            }
+        }
+    }
 }

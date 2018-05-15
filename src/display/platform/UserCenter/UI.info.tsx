@@ -39,7 +39,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     /** 用户类型名称 */
     private get nickNameName(): string {
         const {userInfo} = this.props;
-        const userTypeString: string = language.userTypeToString(userInfo.userType);
+        const userTypeString: string = language.userTypeToString.get(userInfo.userType);
         return userTypeString || '未知';
     }
     

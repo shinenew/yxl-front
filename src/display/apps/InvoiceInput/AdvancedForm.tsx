@@ -2,7 +2,6 @@ import React from 'react';
 import moment from 'moment';
 import { FormComponentProps } from 'antd/lib/form';
 import { Form, Row, Col, DatePicker, InputNumber, Select, Input, Button } from 'antd';
-const css = require('./index.scss');
 const FormItem = Form.Item;
 const Option = Select.Option;
 interface UserFormProps extends FormComponentProps {
@@ -159,8 +158,8 @@ class Component extends React.Component<IProps, any> {
                             )}
                         </FormItem>
                     </Col>
-                    <Col span={24} className={`${css.mb10} ${css['text-right']}`}>
-                        <Button className={css.mr10} onClick={this.handleReset}>清空</Button>
+                    <Col span={24} className="mb10 text-right">
+                        <Button className="mr10" onClick={this.handleReset}>清空</Button>
                         <Button type="primary" htmlType="submit">筛选</Button>
                     </Col>
                 </Row>
