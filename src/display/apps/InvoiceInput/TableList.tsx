@@ -93,7 +93,8 @@ class UserForm extends React.Component<any, any> {
     }
     onOpenInvoiceImport = () => {
         const urlData = {
-            key4: Urls.logInvoice,
+            key4: Urls.logInvoice+'/MANUAL',
+            scankey4:Urls.logInvoice+'/SCANNER_GUN',
             qrtoken: Urls.getUploadToken,
             downloadurl: Urls.downloadTemplate,
             url: Urls.uploadFile,

@@ -21,10 +21,18 @@ enum Urls {
      * 发票组的所有发票列表
      */
     ZONE_INVOICELIST = '/zone/invoicelist',
-    /**
-     * 四要素录入接口
-     */
-    logInvoice = '/invoice/income/logging/add',
+
+    // POST /zone/invoice/biz-logging/single/{loggingType}
+    // MANUAL(1, "手工录入"),
+    // SCANNER_GUN(2, "扫描枪录入"),
+    // 发票录入-四要素
+    logInvoice = '/zone/invoice/biz-logging/single',
+
+    
+
+    //     POST /zone/invoice/biz-list/query
+    // 发票列表查询
+    group_invoice_list = '/zone/invoice/biz-list/query',
     /**
      * getUploadToken 批量上传 文件上传提前获取token
      */
@@ -131,31 +139,31 @@ enum Urls {
 
     /******************************************** 用户管理相关url 结束*******************************************/
 
-   /******************************************** 角色公司相关url 开始*******************************************/
+    /******************************************** 角色公司相关url 开始*******************************************/
     /**
      * 公司权限列表组
      */
-    SYSTEM_COMPANY_RULEGROUPS_LIST='/zone/rulegroup/info/query-company',
+    SYSTEM_COMPANY_RULEGROUPS_LIST = '/zone/rulegroup/info/query-company',
     /**
      * 角色的所有角色列表
      */
-    SYSTEM_ROLELIST='/zone/role/company/query',
+    SYSTEM_ROLELIST = '/zone/role/company/query',
     /**
      * 删除角色
      */
-    SYSTEM_ROLE_DELETE='/zone/role/info/delete',
+    SYSTEM_ROLE_DELETE = '/zone/role/info/delete',
     /**
      * 跟新角色
      */
-    SYSTEM_ROLE_UPDATE='/zone/role/info/update',
+    SYSTEM_ROLE_UPDATE = '/zone/role/info/update',
     /**
      * 新增角色
      */
-    SYSTEM_ROLE_CREATE='/zone/role/info/create',
+    SYSTEM_ROLE_CREATE = '/zone/role/info/create',
     /**
      * 获取公司资料
      */
-    SYSTEM_COMPANYLIST='/zone/company/info/get',
+    SYSTEM_COMPANYLIST = '/zone/company/info/get',
     /******************************************** 角色公司相关url 结束*******************************************/
 }
 
