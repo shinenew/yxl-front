@@ -19,4 +19,7 @@ export default interface INode {
 
     /** 服务端API地址头 */
     API_URI: string;
+
+    /** 服务端API地址头列表 */
+    DOMAIN_MAP: any;
 }
