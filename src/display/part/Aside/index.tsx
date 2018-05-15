@@ -4,7 +4,6 @@ import { connect } from 'src/redux';
 import ReduxState, { IAside } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import ModulesEvent from './Modules.Event';
 import { Icon, Layout } from 'antd';
 
 const { Sider } = Layout;
@@ -25,8 +24,6 @@ interface IProps extends IReduxStatePart, IPropsBasic {
     aside: state.aside,
 }))
 export default class Aside extends ModulesBasic<IProps, ModulesState> {
-
-    public static readonly Event = ModulesEvent;
 
     public readonly state: ModulesState = new ModulesState();
 
