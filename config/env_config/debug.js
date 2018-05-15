@@ -5,6 +5,7 @@ let evn = {
     PASSWORD: '123',//默认密码
     API_URI: undefined,//服务器API头
     DOMAIN: 'xltec.cc',//根域名
+    DOMAIN_MAP:undefined, //请求头列表
 };
 
 try {
