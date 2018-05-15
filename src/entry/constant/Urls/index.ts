@@ -37,6 +37,10 @@ enum Urls {
      * getUploadToken 批量上传 文件上传提前获取token
      */
     getUploadToken = '/invoice/income/image/logToken',
+    /**
+     * getInvoiceDetails 获取发票详情
+     */
+    getInvoiceDetails = '/invoice/income/detail/querySingleDetail',
 
     // 专票录入 Excel 模板文件下载
     downloadTemplate = '/invoice/income/logging/downloadTemplate',

@@ -1,5 +1,6 @@
 import invoice from './invoice';
 import group from './invoiceGroup';
+import querySingleDetail from './querySingleDetail';
 import groupInvoice from './groupInvoice';
 import groupInfo from './groupInfo';
 import groupSaveDetail from './groupSaveDetail';
@@ -9,5 +10,7 @@ export default {
     invoice,
     groupInvoice,
     groupInfo,
-    groupSaveDetail
+    groupSaveDetail,
+    /** 发票详情 */
+    querySingleDetail,
 };
