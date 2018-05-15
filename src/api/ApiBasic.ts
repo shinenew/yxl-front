@@ -6,7 +6,7 @@ import { NodeEnvType } from 'src/entry/constant';
 import { message } from 'antd';
 
 export default abstract class ApiBasic<O, D> {
-/*  */
+    /*  */
     constructor() {
         this.api = this.api.bind(this);
     }
@@ -15,14 +15,14 @@ export default abstract class ApiBasic<O, D> {
     public callAjax = async (request: Request, mock: boolean = false): Promise<any> => {
         const { user } = MyStore.instance.getState();
         request.options.Authorization = user.gToken || undefined;
-        return await this.call(request, this.domain, mock);
+        return await this.call(request, this.domain(request.uri), mock);
     }
 
     /** 向服务器发送请求(Global)(准备弃用) */
     public callGlobal = async (request: Request, mock: boolean = false): Promise<any> => {
         const { user } = MyStore.instance.getState();
         request.options.Authorization = user.gToken || undefined;
-        return await this.call(request, this.domain, mock);
+        return await this.call(request, this.domain(request.uri), mock);
     }
 
     /** 向服务器发送请求(Company)(准备弃用) */
@@ -40,7 +40,7 @@ export default abstract class ApiBasic<O, D> {
         const res = await Agent.instance.call(request, domain, mock);
 
         MyStore.instance.dispatch(reducers.system.ActionTypes.removeLoading, request.uri); // 删除loading
-        
+
         // 通信错误
         try {
             if (res.er) {
@@ -99,8 +99,13 @@ export default abstract class ApiBasic<O, D> {
     }
 
     /** 请求头（全局） */
-    private get domain(): string {
+    private domain(uri: string): string {
         const { env, config } = MyStore.instance.getState();
+
+        if (env.DOMAIN_MAP && env.DOMAIN_MAP[uri]) {
+            return env.DOMAIN_MAP[uri];
+        }
+
         switch (env.NODE_ENV) {
             case NodeEnvType.开发环境:
                 return env.API_URI || config.rootConfig.DEV_URI;
