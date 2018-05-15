@@ -15,14 +15,14 @@ export default abstract class ApiBasic<O, D> {
     public callAjax = async (request: Request, mock: boolean = false): Promise<any> => {
         const { user } = MyStore.instance.getState();
         request.options.Authorization = user.gToken || undefined;
-        return await this.call(request, this.domain(request.uri), mock);
+        return await this.call(request, this.domain, mock);
     }
 
     /** 向服务器发送请求(Global)(准备弃用) */
     public callGlobal = async (request: Request, mock: boolean = false): Promise<any> => {
         const { user } = MyStore.instance.getState();
         request.options.Authorization = user.gToken || undefined;
-        return await this.call(request, this.domain(request.uri), mock);
+        return await this.call(request, this.domain, mock);
     }
 
     /** 向服务器发送请求(Company)(准备弃用) */
@@ -36,8 +36,8 @@ export default abstract class ApiBasic<O, D> {
     public call = async (request: Request, domain: string, mock: boolean = false): Promise<any> => {
 
         MyStore.instance.dispatch(reducers.system.ActionTypes.addLoading, request.uri); // 添加loading
-
-        const res = await Agent.instance.call(request, domain, mock);
+        
+        const res = await Agent.instance.call(request, this.envDomain(request.uri) || domain, mock);
 
         MyStore.instance.dispatch(reducers.system.ActionTypes.removeLoading, request.uri); // 删除loading
 
@@ -98,14 +98,17 @@ export default abstract class ApiBasic<O, D> {
         }
     }
 
-    /** 请求头（全局） */
-    private domain(uri: string): string {
-        const { env, config } = MyStore.instance.getState();
-
+    /** 请求头（环境参数） */
+    private envDomain = (uri: string) => {
+        const { env } = MyStore.instance.getState();
         if (env.DOMAIN_MAP && env.DOMAIN_MAP[uri]) {
             return env.DOMAIN_MAP[uri];
         }
+    }
 
+    /** 请求头（全局） */
+    private get domain(): string {
+        const { env, config } = MyStore.instance.getState();
         switch (env.NODE_ENV) {
             case NodeEnvType.开发环境:
                 return env.API_URI || config.rootConfig.DEV_URI;
