@@ -4,7 +4,7 @@ const parentName: string = 'invoiceInput'; // 路由的跟节点；
 
 Route.addNode(
     parentName,
-    { nodeName: 'group', path: 'invoiceInput/group', component: require('./Group').default },
+    { nodeName: 'group', path: '*/invoiceInput/group/:id', component: require('./Group').default },
 );
 
 export default {
