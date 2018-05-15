@@ -18,6 +18,10 @@ enum Urls {
      */
     ZONE_GROUPLIST = '/zone/grouplist',
     /**
+     * 查询发票组合发票租明细
+     */
+    ZONE_GROUP_INFO = '/zone/invoice/biz-group/group-info',
+    /**
      * 发票组的所有发票列表
      */
     ZONE_INVOICELIST = '/zone/invoicelist',
