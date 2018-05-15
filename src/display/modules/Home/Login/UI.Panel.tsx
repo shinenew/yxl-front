@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
-import { Decorators } from 'kts-scaffold-framework/utils/doc';
 import { create } from 'kts-scaffold-framework/utils/form';
 import { connect } from 'src/redux';
 import ReduxState, { IEnv } from 'src/redux/ReduxState';
@@ -57,7 +56,7 @@ export default class UIPanel extends UIBasic<IProps, ModulesState> {
                     <Form.Item {...formItemLayout} label="用户名">
                         {getFieldDecorator('username', {
                             initialValue: env.USERNAME,
-                            rules: [Decorators.nickname()],
+                            rules: [],
                         })(
                             <Input placeholder="请输入用户名" />
                         )}

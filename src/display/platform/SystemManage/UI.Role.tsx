@@ -4,6 +4,7 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
+import UIRoleTable from './UI.RoleTable';
 
 // const css = require('./index.scss');
 
@@ -22,16 +23,17 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
-export default class UIComponents extends UIBasic<IProps, ModulesState> {
+export default class UIRole extends UIBasic<IProps, ModulesState> {
 
     constructor(props: IProps) {
         super(props, ModulesAction);
+        ModulesAction.getRolePrivilegeList();
     }
     
     render() {
         return (
             <div>
-                系统管理{this.modulesState.a}
+                <UIRoleTable/>
             </div>
         );
     }
