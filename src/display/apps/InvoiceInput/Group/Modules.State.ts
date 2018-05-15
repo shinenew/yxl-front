@@ -4,4 +4,5 @@ import ModulesStateBasic from 'kts-scaffold-framework/modules/ModulesStateBasic'
 export default class ModulesState extends ModulesStateBasic {
     public id: Array<any> = [];
     public invoiceList: Array<any> = [];
+    public groupId: string = '';
 }

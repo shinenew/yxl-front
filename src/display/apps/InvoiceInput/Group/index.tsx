@@ -5,6 +5,7 @@ import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 import UIForm from './UI.Form';
+import UIHeader from './UI.Header';
 
 const css = require('./index.scss');
 
@@ -30,10 +31,16 @@ export default class Group extends ModulesBasic<IProps, ModulesState> {
         super(props, ModulesAction);
     }
 
+    componentWillMount() {
+        ModulesAction.updateGroupId(this.props.match.params.id);
+        console.log(this.state.groupId);
+    }
+
     render() {
         return (
             <ModulesRoot action={ModulesAction}>
                 <div className={css.modules}>
+                    <UIHeader/>
                     <UIForm {...this.props}/>
                 </div>
             </ModulesRoot>

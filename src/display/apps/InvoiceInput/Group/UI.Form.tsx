@@ -12,7 +12,7 @@ import {
     Button,
     Row,
     Col,
-    Modal,
+    Modal
 } from 'antd';
 const FormItem  = Form.Item;
 const confirm = Modal.confirm;
@@ -43,15 +43,19 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     
     render() {
         const { form } = this.props;
-        const { getFieldDecorator} = form;
+        const { getFieldDecorator } = form;
 
         return (
-            <Form onSubmit={this.handleSubmit}>
+            <Form
+                className={css['group-form']}
+                onSubmit={this.handleSubmit}
+            >
                 <FormItem className={css['group-formitem']} label="匹配状态">
                     <this.GroupMatch isMatch={false} />
                 </FormItem>
                 <FormItem className={css['group-formitem']} label="发票租编号">
                     {getFieldDecorator('invoice', {
+                        initialValue: this.modulesState.groupId,
                         rules: [
                             {
                                 required: true, message: '请输入发票组编号!',

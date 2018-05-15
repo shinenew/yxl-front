@@ -10,7 +10,13 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     public invoiceDate = async (groupId: string, pageNum?: number, pageSize?: number) => {
         const res = await invoiceInput.groupInvoice(this, {groupId, pageNum, pageSize});
-        console.log(res);
+        this.modulesState.invoiceList = res.res.items;
+        this.setModulesState(this.modulesState);
+    }
+
+    public updateGroupId = (id: string): void => {
+        this.modulesState.groupId = id;
+        this.setModulesState(this.modulesState);
     }
 }
 

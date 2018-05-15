@@ -31,7 +31,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
         super(props, ModulesAction);
     }
 
-    componentWillUnmount () {
+    componentWillMount () {
       ModulesAction.invoiceDate('123');
     }
 
@@ -69,33 +69,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             ),
           }
         ];
-        const data = [{
-            key: '1',
-            invoiceCode: '123213123',
-            invoiceNumber: '123',
-            daishou: true,
-            yishou: true,
-          }, {
-            key: '2',
-            invoiceCode: '123213123123',
-            invoiceNumber: '123',
-            daishou: false,
-            yishou: false,
-          }, {
-            key: '3',
-            invoiceCode: '123213123123',
-            invoiceNumber: '123',
-            daishou: true,
-            yishou: true,
-          },
-          {
-            key: '4',
-            invoiceCode: '123213123123',
-            invoiceNumber: '123',
-            daishou: false,
-            yishou: false,
-          }
-        ];
+        const data = this.modulesState.invoiceList;
         return (
             <Card title="发票列表" bordered={false}>
                 <Table
