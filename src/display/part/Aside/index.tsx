@@ -4,9 +4,9 @@ import { connect } from 'src/redux';
 import ReduxState, { IAside } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import ModulesEvent from './Modules.Event';
-import { Icon } from 'antd';
+import { Icon, Layout } from 'antd';
 
+const { Sider } = Layout;
 const css = require('./index.scss');
 
 /** Redux接口 */
@@ -25,37 +25,47 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }))
 export default class Aside extends ModulesBasic<IProps, ModulesState> {
 
-    public static readonly Event = ModulesEvent;
-
     public readonly state: ModulesState = new ModulesState();
 
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
 
+    componentDidUpdate() {
+        ModulesAction.setIsShowComponent(this.props.aside.collapsed, this.state.isShowComponent);
+    }
+
     render() {
-        const { Components } = this.props.aside;
+        const { Components, collapsed, title } = this.props.aside;
         return (
             <ModulesRoot action={ModulesAction}>
-                <div className={css.aside} >
-                    <div className="kts-aside">
-                        <header className="kts-aside-title">
-                            <span>{this.props.aside.title}</span>
-                            <a onClick={ModulesAction.hide} className="kts-aside-close">
-                                <Icon type="close" />
-                            </a>
-                        </header>
-                        <div className="kts-aside-container">
-                            <div className="kts-aside-panel" >
-                                {
-                                    Components
-                                    && this.props.aside.collapsed === false
-                                    && Components
-                                }
+                <Sider
+                    style={{ background: 'none' }}
+                    width={485}
+                    collapsed={collapsed}
+                    collapsedWidth={0}
+                >
+                    <div className={css.aside} >
+                        <div className="kts-aside">
+                            <header className="kts-aside-title">
+                                <span>{title}</span>
+                                <a onClick={ModulesAction.hide} className="kts-aside-close">
+                                    <Icon type="close" />
+                                </a>
+                            </header>
+                            <div className="kts-aside-container">
+                                <div className="kts-aside-panel" >
+                                    {
+                                        !!Components
+                                        && this.state.isShowComponent
+                                        && this.props.aside.collapsed === false
+                                        && Components
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </Sider>
             </ModulesRoot>
         );
     }

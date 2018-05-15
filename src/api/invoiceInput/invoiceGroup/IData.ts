@@ -4,8 +4,8 @@
 export default interface IData {
     list: { 
         groupId?: string ,
-        matchCount:number,
-        invoiceCount:number,
-        groupName:string
+        matchCount: number,
+        invoiceCount: number,
+        groupName: string
     }[];
 }
