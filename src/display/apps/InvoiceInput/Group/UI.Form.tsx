@@ -11,8 +11,10 @@ import {
     Button,
     Row,
     Col,
+    Modal,
 } from 'antd';
 const FormItem  = Form.Item;
+const confirm = Modal.confirm;
 
 const css = require('./index.scss');
 
@@ -43,7 +45,9 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
 
         return (
             <Form onSubmit={this.handleSubmit}>
-                <FormItem className={css['group-formitem']} label="发票状态">收票中</FormItem>
+                <FormItem className={css['group-formitem']} label="匹配状态">
+                    <this.GroupMatch isMatch={false} />
+                </FormItem>
                 <FormItem className={css['group-formitem']} label="发票租编号">
                     {getFieldDecorator('invoice', {
                         rules: [
@@ -60,9 +64,8 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                 <FormItem>
                     <Row>
                         <Col span={24} style={{ textAlign: 'right' }}>
-                            <Button className={css['group-handler']} type="primary" htmlType="submit">提交</Button>
-                            <Button className={css['group-handler']} type="primary">保存</Button>
-                            <Button className={css['group-handler']} type="primary">关闭</Button>
+                            <Button className={css['group-handler']}>关闭</Button>
+                            <Button className={css['group-handler']} onClick={this.saveConfirm} type="primary" htmlType="submit">保存</Button>
                         </Col>
                     </Row>
                 </FormItem>
@@ -70,7 +73,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
         );
     }
 
-    private handleSubmit = e => {
+    private handleSubmit = (e):void => {
         const { form } = this.props;
         const {  validateFields } = form;
         e.preventDefault();
@@ -80,6 +83,22 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             } else {
                 console.log(values);
             }
+        });
+    }
+
+    private GroupMatch(props: any) {
+        const isMatch = props.isMatch;
+        if (isMatch) {
+            return <span className={css['group-formitem-match']}><span className={css['group-formitem-success']}/>匹配成功</span>;
+        } else {
+            return <span className={css['group-formitem-match']}><span className={css['group-formitem-error']}/>匹配失败</span>;
+        }
+    }
+
+    private saveConfirm = (): void => {
+        confirm({
+            title: '确认保存',
+            content: '即将保存发票分组详情和移除发票项',
         });
     }
 }

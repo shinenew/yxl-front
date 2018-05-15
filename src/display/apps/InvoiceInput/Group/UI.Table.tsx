@@ -33,6 +33,10 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
         super(props, ModulesAction);
     }
 
+    componentWillUnmount () {
+      ModulesAction.invoiceDate('123');
+    }
+
     render() {
         const columns = [{
             title: '发票代码',
@@ -48,25 +52,21 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             dataIndex: 'daishou',
             key: 'daishou',
             render: (text, record) => (
-                <span>
-                  {record.daishou ? <Icon type="check" /> : <Icon type="close" />}
-                </span>
+                <this.InvoiceSure sure={record.daishou}/>
             ),
           }, {
             title: '已收',
             dataIndex: 'yishou',
             key: 'yishou',
             render: (text, record) => (
-                <span>
-                  {record.yishou ? <Icon type="check" /> : <Icon type="close" />}
-                </span>
+              <this.InvoiceSure sure={record.daishou}/>
             ),
           }, {
             title: '操作',
             key: 'action',
             render: (text, record) => (
               <span>
-                <a href="javascript:;" onClick={() => this.deleteInvoice('123')}>移除</a>
+                <a href="javascript:;" onClick={() => ModulesAction.deleteInvoice('123')}>移除</a>
               </span>
             ),
           }
@@ -99,13 +99,14 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
           }
         ];
         return (
-            <Card title="发票" bordered={false}>
-                <Table columns={columns} dataSource={data}/>
+            <Card title="发票列表" bordered={false}>
+                <Table columns={columns} dataSource={data} bordered={true} pagination={false}/>
             </Card>
         );
     }
 
-    private deleteInvoice = (id: string): void => {
-      console.log(id);
+    private InvoiceSure = props => {
+      return (props.sure ? <span><Icon type="check" style={{color: `rgba(34,172,56,1)`}} /></span> :
+        <span><Icon type="close" style={{color: 'rgba(230,0,18,1)'}} /></span>);
     }
 }
