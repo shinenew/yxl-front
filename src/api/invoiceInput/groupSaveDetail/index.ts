@@ -6,21 +6,19 @@ import IData from './IData';
 import IOptions from './IOptions';
 
 /**
- * GroupInvoice
+ * GroupSaveDetail
  */
-class GroupInvoice extends ApiBasic<IOptions, IData> {
+class GroupSaveDetail extends ApiBasic<IOptions, IData> {
 
     /** 入口 */
     public async api(option: IOptions): Promise<Response<IData>> {
 
-        const req: Request = new Request(CallType.GET, Urls.ZONE_INVOICELIST, option);
+        const req: Request = new Request(CallType.POST, Urls.ZONE_SAVE_DETAIL, option);
 
-        const data: Response<IData> = await this.callAjax(req, true);
-
-        console.log(data);
+        let data: Response<IData> = await this.callAjax(req);
 
         return data;
     }
 }
 
-export default new GroupInvoice().run;
+export default new GroupSaveDetail().run;

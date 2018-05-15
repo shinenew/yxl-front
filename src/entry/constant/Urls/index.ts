@@ -22,6 +22,10 @@ enum Urls {
      */
     ZONE_GROUP_INFO = '/zone/invoice/biz-group/group-info',
     /**
+     * 保存发票组明细
+     */
+    ZONE_SAVE_DETAIL = '/zone/invoice/biz-group/save-detail',
+    /**
      * 发票组的所有发票列表
      */
     ZONE_INVOICELIST = '/zone/invoicelist',

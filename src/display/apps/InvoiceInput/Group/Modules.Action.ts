@@ -18,6 +18,16 @@ class ModulesAction extends ActionBasic<ModulesState> {
         this.modulesState.groupId = id;
         this.setModulesState(this.modulesState);
     }
+
+    public groupInfo = async (groupId: string) => {
+        const res = await invoiceInput.groupInfo(this, { groupId });
+        console.log(res);
+    }
+
+    public groupSaveDetail = async (options: any) => {
+        const res = await invoiceInput.groupSaveDetail(this, options);
+        console.log(res);
+    }
 }
 
 export default new ModulesAction();
