@@ -18,6 +18,14 @@ enum Urls {
      */
     ZONE_GROUPLIST = '/zone/grouplist',
     /**
+     * 查询发票组合发票租明细
+     */
+    ZONE_GROUP_INFO = '/zone/invoice/biz-group/group-info',
+    /**
+     * 保存发票组明细
+     */
+    ZONE_SAVE_DETAIL = '/zone/invoice/biz-group/save-detail',
+    /**
      * 发票组的所有发票列表
      */
     ZONE_INVOICELIST = '/zone/invoicelist',
@@ -58,6 +66,10 @@ enum Urls {
      * getInvoiceDetails 获取发票详情
      */
     getInvoiceDetails = '/invoice/income/detail/querySingleDetail',
+    /**
+     * 验证发票是否正确
+     */
+    realcheck = '/invoice/income/realcheck/query',
 
     //GET /zone/invoice/biz-logging/downloadTemplate
     //下载Excel模板 
