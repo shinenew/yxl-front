@@ -131,7 +131,7 @@ export default class ModulesState extends ModulesStateBasic {
     public Privilege: [{}];
 
     // 编辑权限列表的值
-    public redactPrivilege: any;
+    public redactPrivilege: [{}];
 
     // 修改角色时获取的值
     public redactValue: any;
