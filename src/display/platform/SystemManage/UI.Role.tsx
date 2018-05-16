@@ -27,7 +27,6 @@ export default class UIRole extends UIBasic<IProps, ModulesState> {
 
     constructor(props: IProps) {
         super(props, ModulesAction);
-        ModulesAction.getRolePrivilegeList();
     }
     
     render() {

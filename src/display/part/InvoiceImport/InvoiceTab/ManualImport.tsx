@@ -35,12 +35,15 @@ class Component extends BaseImport<IProps, any> {
 
                 invoiceImport.manualImport(this, data).then((response: any) => {
                     const err2 = response.err;
+                    const res = response.res;
                     this.setState({ loading: false });
                     if (err2) {
                         message.error(err2.status.description);
                         return null;
-                    }else{
-                        this.success();
+                    } else {
+                        if (res) {
+                            this.success();
+                        }
                     }
                 });
                 this.setState({ loading: true });

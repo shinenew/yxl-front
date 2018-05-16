@@ -11,6 +11,7 @@ interface IProps extends UserFormProps {
     fields: any;
     clearFields: () => void;
     onValuesChange: (values: Array<any>) => void;
+    onAddGroup: () => void;
 }
 class Component extends React.Component<IProps, any> {
     /**
@@ -34,6 +35,9 @@ class Component extends React.Component<IProps, any> {
         this.props.clearFields();
         this.props.form.resetFields();
     }
+    onAddGroup = () => {
+        this.props.onAddGroup();
+    }
     toggle = () => {
         const { expand } = this.state;
         this.setState({ expand: !expand });
@@ -56,21 +60,21 @@ class Component extends React.Component<IProps, any> {
         return (
             <Form onSubmit={this.handleSearch}>
                 <Row>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`发票代码`}>
                             {getFieldDecorator('invoiceCode')(
                                 <Input />
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`发票号码`}>
                             {getFieldDecorator('invoiceNumber')(
                                 <Input />
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`发票类型`}>
                             {getFieldDecorator('invoiceType')(
                                 <Select allowClear={true}>
@@ -84,14 +88,14 @@ class Component extends React.Component<IProps, any> {
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`销售方`}>
                             {getFieldDecorator('fuzzySupplierName')(
                                 <Input placeholder="支持模糊搜索" />
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem label="开票时间" {...formItemLayout}>
                             <Col span={11}>
                                 <FormItem>
@@ -114,7 +118,7 @@ class Component extends React.Component<IProps, any> {
                             </Col>
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem label="价税合计" {...formItemLayout} >
                             <Col span={11}>
                                 <FormItem>
@@ -138,7 +142,7 @@ class Component extends React.Component<IProps, any> {
                             </Col>
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`状态`}>
                             {getFieldDecorator('state')(
                                 <Select allowClear={true} >
@@ -148,7 +152,7 @@ class Component extends React.Component<IProps, any> {
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`录入用户`}>
                             {getFieldDecorator('userId')(
                                 <Select allowClear={true}>
@@ -159,6 +163,7 @@ class Component extends React.Component<IProps, any> {
                         </FormItem>
                     </Col>
                     <Col span={24} className="mb10 text-right">
+                        <Button type="primary" onClick={this.onAddGroup}>添加发票组</Button>
                         <Button className="mr10" onClick={this.handleReset}>清空</Button>
                         <Button type="primary" htmlType="submit">筛选</Button>
                     </Col>

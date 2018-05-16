@@ -5,6 +5,7 @@ import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 import { Table, Row, Col, Button, Icon, Form, Input } from 'antd';
+import moment from 'moment';
 import { create } from 'kts-scaffold-framework/utils/form';
 
 const FormItem = Form.Item;
@@ -33,19 +34,34 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
   constructor(props: IProps) {
     super(props, ModulesAction);
 
+    ModulesAction.findCompanyList();
+
+    const formatTime = (timeStr) => {
+      if (timeStr) {
+        const timestamp = timeStr / 1000;
+        const date = moment.unix(timestamp)
+          .format('YYYY-MM-DD HH:mm');
+        return date;
+      } else {
+        return '';
+      }
+    };
     columns = [
       {
         title: '公司名称',
         dataIndex: 'connectionName',
+        width: 500,
       },
       {
         title: '税号',
-        dataIndex: 'connectionTaxId'
+        dataIndex: 'connectionTaxId',
+        width: 500,
       },
       {
         title: '修改日期',
         dataIndex: 'updateTime',
-        // render: text => Lib.Util.Date.formatTime(text)
+        render: text => formatTime(text),
+        width: 500,
       },
 
       {
@@ -72,12 +88,11 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
         )
       }
     ];
-
   }
 
-  componentDidMount() {
-    ModulesAction.findCompanyList();
-  }
+  // componentDidMount() {
+  //   ModulesAction.findCompanyList();
+  // }
 
   /**
    * 清空筛选输入框
@@ -91,6 +106,9 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
   }
 
   render() {
+
+
+
     const { selectedRowKeys } = this.modulesState.companyState;
     const rowSelection = {
       selectedRowKeys,
