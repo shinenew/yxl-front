@@ -56,21 +56,21 @@ class Component extends React.Component<IProps, any> {
         return (
             <Form onSubmit={this.handleSearch}>
                 <Row>
-                    <Col span={8}>
+                    <Col xl={8} md={12} xs={12}>
                         <FormItem {...formItemLayout} label={`发票代码`}>
                             {getFieldDecorator('invoiceCode')(
                                 <Input />
                             )}
                         </FormItem>
                     </Col>
-                    <Col span={8}>
+                    <Col xl={8} md={12} xs={12}>
                         <FormItem {...formItemLayout} label={`发票号码`}>
                             {getFieldDecorator('invoiceNumber')(
                                 <Input />
                             )}
                         </FormItem>
                     </Col>
-                    <Col span={8}>
+                    <Col xl={8} md={12} xs={12}>
                         <FormItem {...formItemLayout} label={`发票类型`}>
                             {getFieldDecorator('invoiceType')(
                                 <Select allowClear={true}>
@@ -84,14 +84,14 @@ class Component extends React.Component<IProps, any> {
                             )}
                         </FormItem>
                     </Col>
-                    <Col span={8}>
+                    <Col xl={8} md={12} xs={12}>
                         <FormItem {...formItemLayout} label={`销售方`}>
                             {getFieldDecorator('fuzzySupplierName')(
                                 <Input placeholder="支持模糊搜索" />
                             )}
                         </FormItem>
                     </Col>
-                    <Col span={8} >
+                    <Col xl={8} md={12} xs={12}>
                         <FormItem label="开票时间" {...formItemLayout}>
                             <Col span={11}>
                                 <FormItem>
@@ -114,7 +114,7 @@ class Component extends React.Component<IProps, any> {
                             </Col>
                         </FormItem>
                     </Col>
-                    <Col span={8} >
+                    <Col xl={8} md={12} xs={12}>
                         <FormItem label="价税合计" {...formItemLayout} >
                             <Col span={11}>
                                 <FormItem>
@@ -138,7 +138,7 @@ class Component extends React.Component<IProps, any> {
                             </Col>
                         </FormItem>
                     </Col>
-                    <Col span={8} >
+                    <Col xl={8} md={12} xs={12}>
                         <FormItem {...formItemLayout} label={`状态`}>
                             {getFieldDecorator('state')(
                                 <Select allowClear={true} >
@@ -148,7 +148,7 @@ class Component extends React.Component<IProps, any> {
                             )}
                         </FormItem>
                     </Col>
-                    <Col span={8}>
+                    <Col xl={8} md={12} xs={12}>
                         <FormItem {...formItemLayout} label={`录入用户`}>
                             {getFieldDecorator('userId')(
                                 <Select allowClear={true}>

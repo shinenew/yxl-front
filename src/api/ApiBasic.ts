@@ -6,7 +6,7 @@ import { NodeEnvType } from 'src/entry/constant';
 import { message } from 'antd';
 
 export default abstract class ApiBasic<O, D> {
-/*  */
+    /*  */
     constructor() {
         this.api = this.api.bind(this);
     }
@@ -37,10 +37,10 @@ export default abstract class ApiBasic<O, D> {
 
         MyStore.instance.dispatch(reducers.system.ActionTypes.addLoading, request.uri); // 添加loading
 
-        const res = await Agent.instance.call(request, domain, mock);
+        const res = await Agent.instance.call(request, this.envDomain(request.uri) || domain, mock);
 
         MyStore.instance.dispatch(reducers.system.ActionTypes.removeLoading, request.uri); // 删除loading
-        
+
         // 通信错误
         try {
             if (res.er) {
@@ -95,6 +95,23 @@ export default abstract class ApiBasic<O, D> {
     private messageError(request: Request, text: string) {
         if (request.isMessage) {
             message.error(text);
+        }
+    }
+
+    /** 请求头（环境参数） */
+    private envDomain = (uri: string) => {
+        debugger;
+        const { env } = MyStore.instance.getState();
+        if (env.DOMAIN_MAP) {
+            if (env.DOMAIN_MAP[uri]) {
+                return env.DOMAIN_MAP[uri];
+            } else {
+                for (let key in env.DOMAIN_MAP) {
+                    if (key.substr(-1, 1) === '*' && uri.indexOf(key.slice(0, -1))===0) {
+                        return env.DOMAIN_MAP[key];
+                    }
+                }
+            }
         }
     }
 

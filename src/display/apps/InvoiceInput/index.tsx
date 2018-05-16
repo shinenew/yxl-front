@@ -8,7 +8,7 @@ import ModulesAction from './Modules.Action';
 import ModulesRoute, { Switch } from './Modules.Route';
 
 // import UIComponents from './UI.Components';
-import UIForm from './TableList';
+
 import MyStore from 'src/redux/MyStore';
 const css = require('./index.scss');
 
@@ -35,12 +35,14 @@ export default class InvoiceInput extends ModulesBasic<IProps, ModulesState> {
     componentWillUnmount(){
         MyStore.instance.dispatch(reducers.aside.ActionTypes.hide,null);
     }
+    componentDidUpdate(){
+       console.log();
+    }
     render() {
         return (
             <ModulesRoot action={ModulesAction}>
                 <div className={css.modules}>
                     <Switch>{ModulesRoute.getChildReact()}</Switch>
-                    <UIForm/>
                 </div>
             </ModulesRoot>
         );
