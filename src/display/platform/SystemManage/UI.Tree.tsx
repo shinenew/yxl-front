@@ -104,24 +104,6 @@ export default class UITree extends UIBasic<IProps, ModulesState> {
                         >
                             修改
                         </Button>
-                        {/* <Row type="flex" justify="center">
-                            <Col span={4}>
-                                <Button type="primary" onClick={ModulesAction.addDepUserModal.bind(this, 2)}>新增</Button>
-                            </Col>
-                            <Col span={4}>
-                                <Button type="danger" onClick={this.onDelete} disabled={this.modulesState.isDisabled} className="ml-10">删除</Button>
-                            </Col>
-                            <Col span={4}>
-                                <Button
-                                    type="primary"
-                                    onClick={ModulesAction.getDepartment.bind(this, this.modulesState.selectTreeCode)}
-                                    disabled={this.modulesState.isDisabled}
-                                    className="ml-10"
-                                >
-                                    修改
-                                </Button>
-                            </Col>
-                        </Row> */}
                     </Col>
                 </Row>
             </div>
