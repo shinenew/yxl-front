@@ -44,7 +44,7 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
         ModulesAction.userModalFn('edit', 'hide');
     }
 
-    /** 保存-编辑 */
+    /** 保存 */
     edit = (): void => {
         const { form } = this.props;
         // const { user } = MyStore.instance.getState();

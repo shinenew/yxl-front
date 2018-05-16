@@ -38,7 +38,7 @@ export default class UIDetail extends UIBasic<IProps, ModulesState> {
         }
     }
 
-    /** 隐藏详情弹框 */
+    /** 隐藏详情弹框  */
     hideModal = () => {
         ModulesAction.userModalFn('detail', 'hide');
     }
