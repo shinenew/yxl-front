@@ -3,21 +3,20 @@ import { CallType } from 'kts-scaffold-framework/utils/ajax';
 import { Urls } from 'src/entry/constant';
 import ApiBasic from 'src/api/ApiBasic';
 import IData from './IData';
-import IOptions from './IOptions';
 
-class Invoice extends ApiBasic<IOptions, IData> {
+class Invoice extends ApiBasic<Array<number>, Array<IData>> {
 
     /** 入口 */
-    public async api(option: IOptions): Promise<Response<IData>> {
+    public async api(option: Array<number>): Promise<Response<Array<IData>>> {
         
-        const req: Request = new Request(CallType.POST, Urls.ZONE_GROUPLIST, option);
+        const req: Request = new Request(CallType.POST, Urls.group_resume, option);
 
-        let data: Response<any> = await this.callGlobal(req,true);
+        let data: Response<any> = await this.callCompany(req,true);
         if (data.er) {
             return data;
         }
         
-        return new Response<IData>(null, {list: data.res.items});
+        return new Response<any>(null, data.res);
     }
 }
 
