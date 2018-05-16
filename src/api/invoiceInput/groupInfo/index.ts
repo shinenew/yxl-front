@@ -15,9 +15,12 @@ class GroupInfo extends ApiBasic<IOptions, IData> {
 
         const req: Request = new Request(CallType.POST, Urls.ZONE_GROUP_INFO, option);
 
-        let data: Response<IData> = await this.callAjax(req);
+        let data: Response<any> = await this.callCompany(req);
 
-        return data;
+        return new Response<IData>(null, {
+            detailInfoList: data.res.detailInfoList,
+            groupInfo: data.res.groupInfo
+        });
     }
 }
 

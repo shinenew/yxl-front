@@ -32,7 +32,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     }
 
     componentWillMount () {
-      ModulesAction.invoiceDate('123');
+      ModulesAction.groupInfo(this.props.match.params.id);
     }
 
     render() {
@@ -47,29 +47,29 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             key: 'number',
           }, {
             title: '代收',
-            dataIndex: 'daishou',
-            key: 'daishou',
+            dataIndex: 'waitState',
+            key: 'waitState',
             render: (text, record) => (
-                <this.InvoiceSure sure={record.daishou}/>
+                <this.InvoiceSure sure={record.waitState}/>
             ),
           }, {
             title: '已收',
-            dataIndex: 'yishou',
-            key: 'yishou',
+            dataIndex: 'receivedState',
+            key: 'receivedState',
             render: (text, record) => (
-              <this.InvoiceSure sure={record.daishou}/>
+              <this.InvoiceSure sure={record.receivedState}/>
             ),
           }, {
             title: '操作',
             key: 'action',
             render: (text, record) => (
               <span>
-                <a href="javascript:;" onClick={() => ModulesAction.deleteInvoice('123')}>移除</a>
+                <a href="javascript:;" onClick={() => ModulesAction.deleteDetailInfoList(record.invoiceCode)}>移除</a>
               </span>
             ),
           }
         ];
-        const data = this.modulesState.invoiceList;
+        const data = this.modulesState.detailInfoList;
         return (
             <Card title="发票列表" bordered={false}>
                 <Table

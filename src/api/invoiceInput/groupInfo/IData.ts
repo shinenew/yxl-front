@@ -5,5 +5,5 @@ export default interface IData {
     detailInfoList: {
 
     }[];
-    status: {};
+    groupInfo: {};
 }
