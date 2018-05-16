@@ -329,7 +329,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     getGroupInfoByCompanyId = async () => {
         let companyId: string = this.modulesState.user.companyId;
         let data: any = await system.getGroupInfo(this, { companyId: companyId });
-        this.modulesState.company.list = [];
+        // this.modulesState.company.list = [];
         if (data.res !== undefined || data.res !== '') {
             if (this.modulesState !== undefined) {
                 this.modulesState.groupInfo.name = data.res.name;
@@ -582,15 +582,19 @@ class ModulesAction extends ActionBasic<ModulesState> {
         let data = await role.getRolePrivilege(this, { paramCondition: this.modulesState.paramCondition });
         if (!data.er) {
             this.modulesState.selectData = data.res;
-            for (let i = 0; i < this.modulesState.selectData.length; i++) {
-                let rule = {
-                    value: this.modulesState.selectData[i].id.toString(),
-                    label: this.modulesState.selectData[i].name
-                };
-                this.modulesState.selectDatas.push(rule);
+            if (this.modulesState.selectData.length === this.modulesState.selectDatas.length) {
+                return;
+            } else {
+                this.modulesState.selectData.forEach(element => {
+                    let rule = {
+                        value:element.id.toString(),
+                        label:element.name
+                    };
+                    this.modulesState.selectDatas.push(rule);
+            });
             }
-            this.setModulesState(this.modulesState);
         }
+        this.setModulesState(this.modulesState);        
     }
     /**
      * 新增按钮的弹框
@@ -655,11 +659,10 @@ class ModulesAction extends ActionBasic<ModulesState> {
      */
     public redactvisible = async (value) => {
         this.modulesState.roleList = value;
-        this.modulesState.redactPrivilege = [];
+        this.modulesState.redactValue = value;
         let name = value.ruleGroups;
         let index = name.split(',');
         this.modulesState.redactPrivilege = index;
-        this.modulesState.redactValue = value;
         this.modulesState.visible = true;
         this.setModulesState(this.modulesState);
     }
