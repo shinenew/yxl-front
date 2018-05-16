@@ -4,8 +4,10 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import { DetailsType } from './Modules.Constant';
-import UIDetailsList from './UI.Details.list';
+// import { DetailsType } from './Modules.Constant';
+import UIDetailsPlaneTicketList from './UI.Details.PlaneTicket';
+import { InvoiceType } from 'src/entry/constant';
+import UiDetailsPlaneTicketList from './UI.Details.PlaneTicket';
 
 // const css = require('./index.scss');
 
@@ -16,7 +18,7 @@ interface IReduxStatePart {
 
 /** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
-    detailsType: DetailsType;
+    detailsType?: string;
 }
 
 /** 详情产品1 */
@@ -32,9 +34,10 @@ export default class UIDetailslist extends UIBasic<IProps, ModulesState> {
 
     render() {
         switch (this.props.detailsType) {
-            case DetailsType.类型1:
-                return <UIDetailsList />;
-
+            case InvoiceType.专票:
+                return <UIDetailsPlaneTicketList {...this.props} />;
+            case InvoiceType.机票:
+                return <UiDetailsPlaneTicketList {...this.props} />;
             default:
                 return <p>类型错误</p>;
         }
