@@ -56,14 +56,20 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                 <Row gutter={10}>
                     <span style={{ 'cursor': 'pointer' }} title="详情" onClick={() => this.showDetailModal(record)}>详情 &nbsp;|</span>
                     <span style={{ 'cursor': 'pointer' }} title="角色绑定" onClick={() => this.showRoleModal(record)}>角色绑定 &nbsp;|</span>
-                    {/* <span style={{ 'cursor': 'pointer' }} title="编辑" onClick={() => this.showEditModal(record)}>编辑 &nbsp;|</span> */}
                     {
+                        (record.isActivated || record.acceptStatus === 'ACCEPT_ING') ? (
+                            <span style={{ 'cursor': 'pointer' }} onClick={() => this.showEditModal(record)} >
+                                修改 |{''}
+                            </span>
+                        ) : ('')
+                    }
+                    {/* {
                         (record.isActivated === true ) ? (
                             <span style={{ 'cursor': 'pointer' }} title="修改" onClick={() => this.showEditModal(record)} >
                                 修改 |{''}
                             </span>
                         ) : ('')
-                    }
+                    } */}
                     {record.acceptStatus === 'ACCEPT_YES' &&
                         <Popconfirm title={record.isActivated ? '确认禁用？' : '确认激活？'} onConfirm={() => this.onDisOrEna(record)}>
                             <span style={{ 'cursor': 'pointer' }} title={record.isActivated ? '禁用' : '激活'} > {record.isActivated ? '禁用' : '激活'}</span>
