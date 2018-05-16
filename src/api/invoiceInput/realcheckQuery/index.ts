@@ -6,14 +6,13 @@ import IData from './IData';
 import IOptions from './IOptions';
 
 /**
- * QuerySingleDetail
+ * RealcheckQuery
  */
-class QuerySingleDetail extends ApiBasic<IOptions, IData> {
-
+class RealcheckQuery extends ApiBasic<IOptions, IData> {
     /** 入口 */
     public async api(option: IOptions): Promise<Response<IData>> {
-        option.incomeInvoiceBizId='537972639935758336';
-        const req: Request = new Request(CallType.POST, Urls.getInvoiceDetails, option);
+        option.incomeInvoiceBizId = '537972639935758336';
+        const req: Request = new Request(CallType.GET, Urls.realcheck, option);
 
         let data: Response<any> = await this.callCompany(req);
         if (data.er) {
@@ -24,4 +23,4 @@ class QuerySingleDetail extends ApiBasic<IOptions, IData> {
     }
 }
 
-export default new QuerySingleDetail().run;
+export default new RealcheckQuery().run;

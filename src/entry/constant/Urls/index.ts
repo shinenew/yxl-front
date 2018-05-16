@@ -61,6 +61,10 @@ enum Urls {
      * getInvoiceDetails 获取发票详情
      */
     getInvoiceDetails = '/invoice/income/detail/querySingleDetail',
+    /**
+     * 验证发票是否正确
+     */
+    realcheck = '/invoice/income/realcheck/query',
 
     //GET /zone/invoice/biz-logging/downloadTemplate
     //下载Excel模板 
