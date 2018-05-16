@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Card, Button ,message} from 'antd';
+import { Table, Card, Button, message, Alert } from 'antd';
 import AdvancedForm from './AdvancedForm';
 import ModulesAction from './Modules.Action';
 import { tree } from 'src/utils';
@@ -74,7 +74,9 @@ class UserForm extends React.Component<any, any> {
             fields: null,
             selectedRows: [],
             selectedRowKeys: [],
-            addModal: false
+            addModal: false,
+            message: null,
+            show: false
         };
     }
     clearFields = () => {
@@ -88,7 +90,7 @@ class UserForm extends React.Component<any, any> {
         });
     }
     onAddToGroup = () => {
-        if(this.state.selectedRows.length===0){
+        if (this.state.selectedRows.length === 0) {
             message.warn('没有勾选发票');
             return null;
         }
@@ -143,13 +145,13 @@ class UserForm extends React.Component<any, any> {
         });
     }
     onSwitchHandler = (values) => {
-        const {selectedRows}=this.state;
-        const data=selectedRows.map((item)=>{
+        const { selectedRows } = this.state;
+        const data = selectedRows.map((item) => {
             return {
-                invoiceGroupId:values.groupId,
-                invoiceCode:item.invoiceCode,
-                invoiceNumber:item.invoiceNumber,
-                invoiceLoggingId:item.loggingId
+                invoiceGroupId: values.groupId,
+                invoiceCode: item.invoiceCode,
+                invoiceNumber: item.invoiceNumber,
+                invoiceLoggingId: item.loggingId
             };
         });
         invoiceInput.MoveGroup(this, data).then((response: any) => {
@@ -160,19 +162,31 @@ class UserForm extends React.Component<any, any> {
                 return null;
             } else {
                 if (res) {
-                    let successCount=0;
-                    let failedCount=0;
-                    res.forEach((item)=>{
-                        if(item.success){
-                            successCount++;
-                        }else{
-                            failedCount++;
+                    const insert = res.map((item,index) => {
+                        if (!item.success) {
+                            return <div key={index}>发票代码:{item.invoiceCode},发票号码:{item.invoiceGroupNumber} 设置发票组失败</div>;
                         }
+                        return null;
                     });
-                    message.success(`${successCount}张成功,${failedCount}张失败`);
+                    this.setState({
+                        message: insert,
+                        show: true
+                    });
+
                 }
             }
         });
+    }
+    addAlert = () => {
+        return (
+            <Alert
+                message={this.state.message}
+                type="warning"
+                closable={true}
+                className="mb10"
+                onClose={() => { this.setState({ show: false }); }}
+            />
+        );
     }
     render() {
 
@@ -204,6 +218,9 @@ class UserForm extends React.Component<any, any> {
                         onAddToGroup={this.onAddToGroup}
                         getData={this.getData}
                     />
+                    {
+                        this.state.show && this.addAlert()
+                    }
                     <Table
                         loading={this.props.loading}
                         bordered={true}
