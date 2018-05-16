@@ -1,5 +1,5 @@
-const localhost = 'http://localhost:8888/';
-const head = 'https://config.kingxunlian.com/';
+const localhost = '//localhost:8888/';
+const head = '//config.kingxunlian.com/';
 const configName = process.argv[3]||'dev';
 
 /**获取配置文件地址*/
