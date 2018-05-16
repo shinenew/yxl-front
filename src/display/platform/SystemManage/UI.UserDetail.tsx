@@ -3,6 +3,7 @@ import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { connect, ReduxState } from 'src/redux';
 import ModulesAction from './Modules.Action';
 import ModulesState from './Modules.State';
+import moment from 'moment';
 import { Modal, Row, Col, Tag } from 'antd';
 
 /** 全局数据片段数据接口 */
@@ -24,6 +25,17 @@ export default class UIDetail extends UIBasic<IProps, ModulesState> {
     /** 构造函数 */
     constructor(props: IProps) {
         super(props, ModulesAction);
+    }
+
+    /** 时间戳转时间字符串 */
+    formatTime = (time) => {
+        if (time) {
+            const timestamp = time / 1000;
+            const date = moment.unix(timestamp).format('YYYY-MM-DD HH:mm');
+            return date;
+        } else {
+            return '';
+        }
     }
 
     /** 隐藏详情弹框 */
@@ -55,7 +67,7 @@ export default class UIDetail extends UIBasic<IProps, ModulesState> {
                         <Col span={12}><p><span style={{ fontSize: 16 }}>电话号码： </span> {this.modulesState.detail && this.modulesState.detail.phone} </p></Col>
                     </Row>
                     <Row >
-                        <Col span={12}> <p><span style={{ fontSize: 16 }}>最后登陆时间: </span>{this.modulesState.detail && this.modulesState.detail.lastLoginTime} </p></Col>
+                        <Col span={12}> <p><span style={{ fontSize: 16 }}>最后登陆时间: </span>{this.modulesState.detail && this.formatTime(this.modulesState.detail.lastLoginTime)} </p></Col>
                         <Col span={12}> <p><span style={{ fontSize: 16 }}>最后登陆IP: </span>{this.modulesState.detail && this.modulesState.detail.lastLoginIp} </p></Col>
                     </Row>
                     <Row >
