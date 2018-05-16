@@ -329,7 +329,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     getGroupInfoByCompanyId = async () => {
         let companyId: string = this.modulesState.user.companyId;
         let data: any = await system.getGroupInfo(this, { companyId: companyId });
-        this.modulesState.company.list = [];
+        // this.modulesState.company.list = [];
         if (data.res !== undefined || data.res !== '') {
             if (this.modulesState !== undefined) {
                 this.modulesState.groupInfo.name = data.res.name;
