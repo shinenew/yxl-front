@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
-import { connect, ReduxState} from 'src/redux';
+import { connect, ReduxState } from 'src/redux';
 import ModulesAction from './Modules.Action';
 import ModulesState from './Modules.State';
 import { Form, Input, Modal, Row, Col } from 'antd';
@@ -44,7 +44,7 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
         ModulesAction.userModalFn('edit', 'hide');
     }
 
-    /** 保存-编辑 */
+    /** 保存 */
     edit = (): void => {
         const { form } = this.props;
         // const { user } = MyStore.instance.getState();
@@ -92,7 +92,8 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
 
                             <Col span={10}>
                                 <FormItem {...formItemLayout} label="电子邮箱">
-                                    <Input disabled={true} />
+
+                                    <Input disabled={true} value={this.modulesState.detail && this.modulesState.detail.email} />
                                 </FormItem>
                             </Col>
                         </Row>

@@ -9,7 +9,7 @@ class Invoice extends ApiBasic<IOptions, any> {
     public async api(option: IOptions): Promise<Response<any>> {
         
         const req: Request = new Request(CallType.POST, option.url, option);
-
+        
         const data = await this.callCompany(req,true);
         return data;
     }

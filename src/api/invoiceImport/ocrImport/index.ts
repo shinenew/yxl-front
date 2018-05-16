@@ -3,6 +3,7 @@ import { CallType } from 'kts-scaffold-framework/utils/ajax';
 import ApiBasic from 'src/api/ApiBasic';
 import IOptions from './IOptions';
 import { MyStore } from 'src/redux';
+import { Urls } from 'src/entry/constant';
 
 class Invoice extends ApiBasic<IOptions, any> {
 
@@ -28,7 +29,7 @@ class Invoice extends ApiBasic<IOptions, any> {
 
 
         };
-        return await this.callCompany(new Request(CallType.POST,option.fixUrl,data2), true);
+        return await this.callCompany(new Request(CallType.POST,Urls.scanStart,data2), true);
     }
 }
 

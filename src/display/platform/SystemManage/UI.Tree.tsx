@@ -38,8 +38,8 @@ export default class UITree extends UIBasic<IProps, ModulesState> {
 
     /** 选择树节点 */
     onSelect = (selectedKeys, info) => {
-        console.log('selected', selectedKeys, info);
-        console.log(selectedKeys);
+        // console.log('selected', selectedKeys, info);
+        // console.log(selectedKeys);
         ModulesAction.departmentUser(selectedKeys);
     }
 
@@ -76,7 +76,7 @@ export default class UITree extends UIBasic<IProps, ModulesState> {
                     );
                 }
             }
-            
+
             return <TreeNode title={'(' + item.number + ')' + item.title} key={item.key} id={item.departmentId} />;
         });
     }
@@ -93,25 +93,17 @@ export default class UITree extends UIBasic<IProps, ModulesState> {
                             {this.renderTreeNodes(this.modulesState.treeData)}
                         </Tree>
                     </Col>
-                    <Col style={{ borderTop: '1px solid #cccccc', paddingTop: 15 }}>
-                        <Row type="flex" justify="center">
-                            <Col span={4}>
-                                <Button type="primary" onClick={ModulesAction.addDepUserModal.bind(this, 2)}>新增</Button>
-                            </Col>
-                            <Col span={4}>
-                                <Button type="danger" onClick={this.onDelete} disabled={this.modulesState.isDisabled} className="ml-10">删除</Button>
-                            </Col>
-                            <Col span={4}>
-                                <Button
-                                    type="primary"
-                                    onClick={ModulesAction.getDepartment.bind(this, this.modulesState.selectTreeCode)}
-                                    disabled={this.modulesState.isDisabled}
-                                    className="ml-10"
-                                >
-                                    修改
-                                </Button>
-                            </Col>
-                        </Row>
+                    <Col style={{ borderTop: '1px solid #cccccc', paddingTop: 15,textAlign:'center' }}>
+                        <Button type="primary" onClick={ModulesAction.addDepUserModal.bind(this, 2)} style={{marginRight:10}}>新增</Button>
+                        <Button type="danger" onClick={this.onDelete} disabled={this.modulesState.isDisabled} className="ml-10" style={{marginRight:10}}>删除</Button>
+                        <Button
+                            type="primary"
+                            onClick={ModulesAction.getDepartment.bind(this, this.modulesState.selectTreeCode)}
+                            disabled={this.modulesState.isDisabled}
+                            className="ml-10"
+                        >
+                            修改
+                        </Button>
                     </Col>
                 </Row>
             </div>

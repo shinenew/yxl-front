@@ -6,15 +6,22 @@ import IData from './IData';
 import IOptions from './IOptions';
 
 /**
- * 重新发送邀请
+ * GroupInfo
  */
-class UserSend extends ApiBasic<IOptions, IData> {
+class GroupInfo extends ApiBasic<IOptions, IData> {
 
+    /** 入口 */
     public async api(option: IOptions): Promise<Response<IData>> {
-        const req: Request = new Request(CallType.POST, Urls.USER_SEND, option);
+
+        const req: Request = new Request(CallType.POST, Urls.ZONE_GROUP_INFO, option);
+
         let data: Response<any> = await this.callCompany(req);
-        return data;
+
+        return new Response<IData>(null, {
+            detailInfoList: data.res.detailInfoList,
+            groupInfo: data.res.groupInfo
+        });
     }
 }
 
-export default new UserSend().run;
+export default new GroupInfo().run;
