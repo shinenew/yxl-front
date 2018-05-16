@@ -6,6 +6,8 @@ import { tree } from 'src/utils';
 import { MyStore, reducers } from 'src/redux';
 import { InvoiceImport } from 'src/display/part';
 import { Urls } from 'src/entry/constant';
+import { withRouter } from 'src/routes';
+@withRouter
 class UserForm extends React.Component<any, any> {
 
     private columns = [
@@ -44,9 +46,9 @@ class UserForm extends React.Component<any, any> {
         {
             title: '操作',
             dataIndex: 'operation',
-            render: () => {
+            render: (text, record) => {
                 return (
-                    <span>详情</span>
+                    <span onClick={() => { this.onDetail(record); }}>详情</span>
                 );
             }
         }
@@ -67,6 +69,11 @@ class UserForm extends React.Component<any, any> {
             fields: null
         });
     }
+    onDetail = (record) => {
+        if(record.groupName){
+            this.props.history.push(`invoiceInput/group/${record.groupId}`);
+        }
+    }
     handleFormChange = (changedFields) => {
         this.setState({
             fields: { ...this.state.fields, ...changedFields },
@@ -85,15 +92,15 @@ class UserForm extends React.Component<any, any> {
         this.getData();
     }
     onOpenInvoiceImport = () => {
-        const urlData={
-            key4:Urls.logInvoice,
-            qrtoken:Urls.getUploadToken,
-            downloadurl:Urls.downloadTemplate,
-            url:Urls.uploadFile,
-            scanerurl:Urls.third_ocr_token
+        const urlData = {
+            key4: Urls.logInvoice,
+            qrtoken: Urls.getUploadToken,
+            downloadurl: Urls.downloadTemplate,
+            url: Urls.uploadFile,
+            scanerurl: Urls.third_ocr_token
         };
         MyStore.instance.dispatch(reducers.aside.ActionTypes.show, {
-            Components: <InvoiceImport urlData={urlData}/>,
+            Components: <InvoiceImport urlData={urlData} />,
             title: '发票录入'
         });
     }
