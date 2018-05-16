@@ -11,7 +11,6 @@ import IOptions from './IOptions';
 class UserSend extends ApiBasic<IOptions, IData> {
 
     public async api(option: IOptions): Promise<Response<IData>> {
-        debugger;
         const req: Request = new Request(CallType.POST, Urls.USER_SEND, option);
         let data: Response<any> = await this.callCompany(req);
         return data;
