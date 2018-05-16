@@ -75,8 +75,10 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
     /** 构造函数 */
     constructor(props: IProps) {
         super(props, ModulesAction);
-        ModulesAction.getRoleList();   
-           
+        ModulesAction.getRolePrivilegeList();           
+    }
+    componentDidMount() {
+        ModulesAction.getRoleList();           
     }
      /**
       * 角色权限的处理
