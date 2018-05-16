@@ -5,35 +5,37 @@ class ModulesAction extends ActionBasic<ModulesState> {
     getGroupData = async () => {
         const invoiceRes = await invoiceInput.invoice(this, { pageNum: 1, pageSize: 10 });
         let rebornlist = invoiceRes.res;
-        
+
         if (invoiceRes.er) {
             return null;
         }
         let uniqueArray = [];
-        rebornlist.items = rebornlist.items.map((item, index) => {
-            uniqueArray.push(item.groupId);
+        rebornlist = rebornlist.map((item, index) => {
+            if (item.invoiceGroupId) {
+                uniqueArray.push(item.invoiceGroupId);
+            }
             return {
                 ...item,
-                id: item.invoiceCode,
-                pId: item.groupId
+                id: index,
+                pId: item.invoiceGroupId
             };
         });
         uniqueArray = Array.from(new Set(uniqueArray));
         if (uniqueArray.length === 0) {
             return rebornlist;
         }
-
-        const groupRes = await invoiceInput.group(this, { groupIds: uniqueArray });
+        const groupRes = await invoiceInput.group(this, uniqueArray);
         if (!groupRes.er) {
-            let reborngrouplist = groupRes.res.list.map((item, index) => {
+            let reborngrouplist = [];
+            reborngrouplist = groupRes.res && groupRes.res.map((item, index) => {
                 return {
                     ...item,
                     pId: null,
                     id: item.groupId,
-                    group:true
+                    group: true,
                 };
             });
-            rebornlist.items = rebornlist.items.concat(...reborngrouplist);
+            rebornlist = rebornlist.concat(...reborngrouplist);
         }
         return rebornlist;
     }
