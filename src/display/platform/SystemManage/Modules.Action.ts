@@ -32,14 +32,22 @@ class ModulesAction extends ActionBasic<ModulesState> {
      */
     public departmentUser = async (depId) => {
         const { user } = MyStore.instance.getState();
+        this.modulesState.isDepLoadding = true;
         if (depId.length > 0) {
             let companyId = user.userInfo.companyId;
             let departmentId = depId[0];
+            this.modulesState.departmentId = departmentId;
             let data = await departmentApi.departmentUser(this, { departmentId, companyId });
-            /** 设置选中的树节点 */
-            this.modulesState.selectTreeCode = depId[0];
-            this.modulesState.userlist = data.res;
-            this.modulesState.isDisabled = false;
+            if (!data.er) {
+                /** 设置选中的树节点 */
+                this.modulesState.selectTreeCode = depId[0];
+                this.modulesState.userlist = data.res;
+                for(let i = 0;i<this.modulesState.userlist.length;i++){
+                    this.modulesState.userlist[i].key =this.modulesState.userlist[i].userId;
+                }
+                this.modulesState.isDisabled = false;
+                this.modulesState.isDepLoadding = false;
+            }
         } else {
             this.modulesState.isDisabled = true;
         }
@@ -174,6 +182,9 @@ class ModulesAction extends ActionBasic<ModulesState> {
         let data = await departmentApi.setUserDep(this, { companyId, departmentId, userIds });
         if (!data.er) {
             this.modulesState.isSetDepModal = false;
+            this.departmentUser([this.modulesState.departmentId]);
+            this.modulesState.selectedDepRows = [];
+            this.modulesState.selectedDepRowKeys = [];
             this.setModulesState(this.modulesState);
             message.success('操作成功');
         }
@@ -205,6 +216,15 @@ class ModulesAction extends ActionBasic<ModulesState> {
             this.setModulesState(this.modulesState);
             message.success('保存成功');
         }
+    }
+
+    /** 刷新功能 */
+    public refreshDep = async (departmentId) => {
+        this.modulesState.selectedDepRows = [];
+        this.modulesState.selectedDepRowKeys = [];
+        this.modulesState.userlist = [];
+        this.departmentUser([this.modulesState.departmentId]);
+        this.setModulesState(this.modulesState);
     }
 
 
@@ -587,14 +607,14 @@ class ModulesAction extends ActionBasic<ModulesState> {
             } else {
                 this.modulesState.selectData.forEach(element => {
                     let rule = {
-                        value:element.id.toString(),
-                        label:element.name
+                        value: element.id.toString(),
+                        label: element.name
                     };
                     this.modulesState.selectDatas.push(rule);
-            });
+                });
             }
         }
-        this.setModulesState(this.modulesState);        
+        this.setModulesState(this.modulesState);
     }
     /**
      * 新增按钮的弹框
