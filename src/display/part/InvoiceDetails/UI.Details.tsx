@@ -5,7 +5,7 @@ import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 // import { DetailsType } from './Modules.Constant';
-import UIDetailsPlaneTicketList from './UI.Details.PlaneTicket';
+import UIDetailsSpecialTicketList from './UI.Details.SpecialTicket';
 import { InvoiceType } from 'src/entry/constant';
 import UiDetailsPlaneTicketList from './UI.Details.PlaneTicket';
 
@@ -35,7 +35,7 @@ export default class UIDetailslist extends UIBasic<IProps, ModulesState> {
     render() {
         switch (this.props.detailsType) {
             case InvoiceType.专票:
-                return <UIDetailsPlaneTicketList {...this.props} />;
+                return <UIDetailsSpecialTicketList {...this.props} />;
             case InvoiceType.机票:
                 return <UiDetailsPlaneTicketList {...this.props} />;
             default:

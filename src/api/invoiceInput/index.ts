@@ -2,10 +2,12 @@ import invoice from './invoice';
 import group from './invoiceGroup';
 import querySingleDetail from './querySingleDetail';
 import groupInvoice from './groupInvoice';
+import realcheckQuery from './realcheckQuery';
 export default {
     group,
     invoice,
     /** 发票详情 */
     querySingleDetail,
-    groupInvoice
+    groupInvoice,
+    realcheckQuery
 };
