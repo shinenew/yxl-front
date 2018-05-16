@@ -21,7 +21,7 @@ class UserForm extends React.Component<any, any> {
                     <span>
                         {
                             record.groupNumber ?
-                                <span>{record.groupNumber}({record.loggedCount}/{record.waitCount})</span>
+                                <span>{record.groupNumber}({record.matchCount}/{record.waitCount})</span>
                                 : <span>{text}</span>
                         }
                     </span>
