@@ -48,26 +48,29 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
     constructor(props: IProps) {
         super(props, ModulesAction);
         this.modulesState.userlist = null;
-        this.setState(this.modulesState);
+        this.setState(this.state);
     }
 
     render() {
+        let { selectedDepRowKeys } = this.modulesState;
         const rowSelection = {
             // 获取选中的行
             onChange: (selectedRowKeys, selectedRows) => {
                 console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
                 this.modulesState.selectedDepRows = [];
+                this.modulesState.selectedDepRowKeys = selectedRowKeys;
                 selectedRows.forEach(element => {
                     this.modulesState.selectedDepRows.push(element);
                     this.modulesState.userIds.push(element.userId);
                 });
                 this.setState(this.modulesState);
             },
+            selectedRowKeys: selectedDepRowKeys,
             getCheckboxProps: record => ({
                 // 禁用某一项
                 // disabled: record.name === '张三', 
                 // 选择框的name属性值
-                name: record.key,
+                // name: record.key,
             }),
             // type: 'radio'
         };
@@ -75,11 +78,11 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
             <div className={css.modules}>
                 <Row>
                     <Col style={{ textAlign: 'end', marginBottom: 10 }}>
-                        <Button onClick={ModulesAction.departmentQuery} type="primary" style={{marginRight:10}}>刷新</Button>
+                        <Button onClick={ModulesAction.refreshDep} type="primary" style={{ marginRight: 10 }}>刷新</Button>
                         <Button onClick={ModulesAction.openSetDepModal} disabled={this.modulesState.selectedDepRows.length === 0 ? true : false} type="primary">设置所在部门</Button>
                     </Col>
                     <Col>
-                        <Table rowSelection={rowSelection} columns={columns} dataSource={this.modulesState.userlist} />
+                        <Table rowSelection={rowSelection} columns={columns} loading={this.modulesState.isDepLoadding} dataSource={this.modulesState.userlist} />
                     </Col>
                 </Row>
             </div>

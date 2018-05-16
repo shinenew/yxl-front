@@ -36,9 +36,6 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             this.setState({ loading: false, visible: false });
         }, 4000);
     }
-    onChange = (value) => {
-        this.modulesState.selectData = value;
-    }
     render() {
         const { getFieldDecorator } = this.props.form;
         const FormItem = Form.Item;
@@ -55,13 +52,13 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                     visible={this.modulesState.addRoleVisible}
                     onOk={this.handleOk}
                     onCancel={ModulesAction.noAddVisible}
+                    destroyOnClose={true}
                 >
                     <Form>
                         <FormItem
                             label="角色名"
                         >
                             {getFieldDecorator('name', {
-                                // initialValue
                                  rules: [{ type: 'string', pattern: /^([-\u4e00-\u9fa5\w]{2,15})+$/, required: true, message: '请输入角色名(2-15位字符)', whitespace: true }]
                             })(
                                 <Input type="text" />

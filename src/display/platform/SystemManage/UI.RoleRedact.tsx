@@ -39,20 +39,14 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     }
     onChange = (value) => {
         this.props.form.setFieldsValue({
-            ruleGroups: value
+            ruleGroups: this.modulesState.redactPrivilege
         });
-      }
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
         const FormItem = Form.Item;
         const mode = (this.modulesState.mode === 'edit') ? false : true;
-        const tProps = {
-            treeData: this.modulesState.selectDatas,
-            onChange: this.onChange,         
-            treeCheckable: true,
-            treeNodeFilterProp: 'title',
-            searchPlaceholder: '请选择权限',
-        };
+
         return (
             <div>
                 <Modal
@@ -60,6 +54,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                     visible={this.modulesState.visible}
                     onOk={this.handleOk}
                     onCancel={ModulesAction.noRedactVisible}
+                    destroyOnClose={true}
                 >
                     <Form>
                         <FormItem
@@ -69,28 +64,34 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                                 initialValue: this.modulesState.redactValue && this.modulesState.redactValue.name,
                                 rules: [{ type: 'string', pattern: /^([-\u4e00-\u9fa5\w]{2,15})+$/, required: true, message: '请输入角色名(2-15位字符)', whitespace: true }]
                             })(
-                                <Input type="text" disabled={mode}/>
+                                <Input type="text" disabled={mode} />
                             )}
                         </FormItem>
                         <FormItem
                             label="描述"
                         >
                             {getFieldDecorator('description', {
-                                initialValue: this.modulesState.redactValue && this.modulesState.redactValue.description,                                
+                                initialValue: this.modulesState.redactValue && this.modulesState.redactValue.description,
                                 rules: [{ required: false, message: '请输入描述', whitespace: true }]
                             })(
-                                <Input type="text" disabled={mode}/>
+                                <Input type="text" disabled={mode} />
                             )}
                         </FormItem>
-                            
+
                         <FormItem
                             label="权限"
                         >
                             {getFieldDecorator('ruleGroups', {
-                                initialValue: this.modulesState.redactValue && this.modulesState.redactPrivilege,                                                               
-                                rules: [{ required: true, message: '请选择权限', type: 'array' }]
+                                rules: [{ required: true, message: '请选择权限', type: 'array' }],
+                                initialValue: this.modulesState && this.modulesState.redactPrivilege,
                             })(
-                                <TreeSelect {...tProps} disabled={mode}/>
+                                <TreeSelect
+                                    treeData={this.modulesState.selectDatas}
+                                    treeCheckable={true} 
+                                    treeNodeFilterProp="title"  
+                                    searchPlaceholder="请选择权限"
+                                    disabled={mode}
+                                />
                             )}
                         </FormItem>
                     </Form>
@@ -99,3 +100,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
         );
     }
 }
+
+
+
+

@@ -36,7 +36,7 @@ export default abstract class ApiBasic<O, D> {
     public call = async (request: Request, domain: string, mock: boolean = false): Promise<any> => {
 
         MyStore.instance.dispatch(reducers.system.ActionTypes.addLoading, request.uri); // 添加loading
-        
+
         const res = await Agent.instance.call(request, this.envDomain(request.uri) || domain, mock);
 
         MyStore.instance.dispatch(reducers.system.ActionTypes.removeLoading, request.uri); // 删除loading
@@ -100,9 +100,18 @@ export default abstract class ApiBasic<O, D> {
 
     /** 请求头（环境参数） */
     private envDomain = (uri: string) => {
+        debugger;
         const { env } = MyStore.instance.getState();
-        if (env.DOMAIN_MAP && env.DOMAIN_MAP[uri]) {
-            return env.DOMAIN_MAP[uri];
+        if (env.DOMAIN_MAP) {
+            if (env.DOMAIN_MAP[uri]) {
+                return env.DOMAIN_MAP[uri];
+            } else {
+                for (let key in env.DOMAIN_MAP) {
+                    if (key.substr(-1, 1) === '*' && uri.indexOf(key.slice(0, -1))===0) {
+                        return env.DOMAIN_MAP[key];
+                    }
+                }
+            }
         }
     }
 
