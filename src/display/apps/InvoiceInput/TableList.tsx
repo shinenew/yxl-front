@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Card, Button } from 'antd';
+import { Table, Card, Button ,message} from 'antd';
 import AdvancedForm from './AdvancedForm';
 import ModulesAction from './Modules.Action';
 import { tree } from 'src/utils';
@@ -8,7 +8,9 @@ import { InvoiceImport } from 'src/display/part';
 import { Urls } from 'src/entry/constant';
 import { withRouter } from 'src/routes';
 import CreatGroup from './UI.CreatGroup';
-import {formatTime,formatDate} from 'src/utils';
+import SwitchGroup from './UI.SwitchGroup';
+import { invoiceInput } from 'src/api';
+import { formatTime, formatDate } from 'src/utils';
 @withRouter
 class UserForm extends React.Component<any, any> {
 
@@ -67,8 +69,10 @@ class UserForm extends React.Component<any, any> {
             list: null,
             pageMeta: null,
             expand: false,
+            pageNum: 1,
+            pageSize: 10,
             fields: null,
-            selectedRows: null,
+            selectedRows: [],
             selectedRowKeys: [],
             addModal: false
         };
@@ -83,9 +87,23 @@ class UserForm extends React.Component<any, any> {
             addModal: true
         });
     }
+    onAddToGroup = () => {
+        if(this.state.selectedRows.length===0){
+            message.warn('没有勾选发票');
+            return null;
+        }
+        this.setState({
+            addToModal: true
+        });
+    }
     onCloseModal = () => {
         this.setState({
             addModal: false
+        });
+    }
+    onCloseSwitch = () => {
+        this.setState({
+            addToModal: false
         });
     }
     onDetail = (record) => {
@@ -124,6 +142,38 @@ class UserForm extends React.Component<any, any> {
             title: '发票录入'
         });
     }
+    onSwitchHandler = (values) => {
+        const {selectedRows}=this.state;
+        const data=selectedRows.map((item)=>{
+            return {
+                invoiceGroupId:values.groupId,
+                invoiceCode:item.invoiceCode,
+                invoiceNumber:item.invoiceNumber,
+                invoiceLoggingId:item.loggingId
+            };
+        });
+        invoiceInput.MoveGroup(this, data).then((response: any) => {
+            const err = response.err;
+            const res = response.res;
+            if (err) {
+                message.error(err.status.description);
+                return null;
+            } else {
+                if (res) {
+                    let successCount=0;
+                    let failedCount=0;
+                    res.forEach((item)=>{
+                        if(item.success){
+                            successCount++;
+                        }else{
+                            failedCount++;
+                        }
+                    });
+                    message.success(`${successCount}张成功,${failedCount}张失败`);
+                }
+            }
+        });
+    }
     render() {
 
         let columns = this.columns;
@@ -140,7 +190,7 @@ class UserForm extends React.Component<any, any> {
         const extraButtons = (
             <div>
                 <Button icon="sync" className="mr10" onClick={this.refreshInvoice} />
-                <Button className="mr10" type="primary">新增发票组</Button>
+                <Button className="mr10" type="primary" onClick={this.onAddGroup}>新增发票组</Button>
                 <Button className="mr10" type="primary" onClick={this.onOpenInvoiceImport}>发票录入</Button>
             </div>
         );
@@ -151,7 +201,8 @@ class UserForm extends React.Component<any, any> {
                         clearFields={this.clearFields}
                         fields={fields}
                         onValuesChange={this.handleFormChange}
-                        onAddGroup={this.onAddGroup}
+                        onAddToGroup={this.onAddToGroup}
+                        getData={this.getData}
                     />
                     <Table
                         loading={this.props.loading}
@@ -166,13 +217,19 @@ class UserForm extends React.Component<any, any> {
                         this.state.addModal &&
                         <CreatGroup onCloseModal={this.onCloseModal} />
                     }
+                    {
+                        this.state.addToModal &&
+                        <SwitchGroup onCloseModal={this.onCloseSwitch} onSwitchHandler={this.onSwitchHandler} />
+                    }
                 </Card>
             </div >
         );
     }
 
     getData = async () => {
-        const data = await ModulesAction.getGroupData();
+        let { fields, pageNum, pageSize } = this.state;
+        fields = { ...fields, pageNum, pageSize };
+        const data = await ModulesAction.getGroupData(fields);
         if (data) {
             const treeData = tree(data);
             this.setState({
