@@ -36,7 +36,29 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     }
 
     render() {
-        const columns = [{
+        const data = this.modulesState.detailInfoList;
+        const columns = this.tableColumn(this.modulesState.groupInfo.createType);
+        return (
+            <Card title="发票列表" bordered={false}>
+                <Table
+                  className={`kts-app-ant-table`}
+                  columns={columns}
+                  dataSource={data}
+                  bordered={true}
+                  pagination={false}
+                />
+            </Card>
+        );
+    }
+
+    private InvoiceSure = props => {
+      return (props.sure ? <span><Icon type="check" style={{color: `rgba(34,172,56,1)`}} /></span> :
+        <span><Icon type="close" style={{color: 'rgba(230,0,18,1)'}} /></span>);
+    }
+
+    private tableColumn = (createType: string): any => {
+      if (createType) {
+        return [{
             title: '发票代码',
             dataIndex: 'invoiceCode',
             key: 'name',
@@ -46,7 +68,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             dataIndex: 'invoiceNumber',
             key: 'number',
           }, {
-            title: '代收',
+            title: '应收',
             dataIndex: 'waitState',
             key: 'waitState',
             render: (text, record) => (
@@ -64,27 +86,31 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             key: 'action',
             render: (text, record) => (
               <span>
-                <a href="javascript:;" onClick={() => ModulesAction.deleteDetailInfoList(record.invoiceCode)}>移除</a>
+                <a href="javascript:;" onClick={() => ModulesAction.deleteDetailInfoList(record.invoiceCode, record.waitState)}>移除</a>
               </span>
             ),
           }
         ];
-        const data = this.modulesState.detailInfoList;
-        return (
-            <Card title="发票列表" bordered={false}>
-                <Table
-                  className={`kts-app-ant-table`}
-                  columns={columns}
-                  dataSource={data}
-                  bordered={true}
-                  pagination={false}
-                />
-            </Card>
-        );
-    }
-
-    private InvoiceSure = props => {
-      return (props.sure ? <span><Icon type="check" style={{color: `rgba(34,172,56,1)`}} /></span> :
-        <span><Icon type="close" style={{color: 'rgba(230,0,18,1)'}} /></span>);
+      } else {
+        return [{
+          title: '发票代码',
+          dataIndex: 'invoiceCode',
+          key: 'name',
+          render: text => <a href="javascript:;">{text}</a>,
+        }, {
+          title: '发票号码',
+          dataIndex: 'invoiceNumber',
+          key: 'number',
+        }, {
+          title: '操作',
+          key: 'action',
+          render: (text, record) => (
+            <span>
+              <a href="javascript:;" onClick={() => ModulesAction.deleteDetailInfoList(record.invoiceCode)}>移除</a>
+            </span>
+          ),
+        }
+      ];
+      }
     }
 }
