@@ -26,12 +26,18 @@ export default class ModulesState extends ModulesStateBasic {
     public departmentList: any;
     /** 单个部门数据 */
     public department: any;
+    /** 单个部门Id */
+    public departmentId: any;
+    /** 表格选中的key */
+    public selectedDepRowKeys: any;
     /** 选中的树节点 */
     public selectTreeCode: string = '';
     /** 是否禁用按钮 */
     public isDisabled: boolean = true;
     /** 是否弹出设置窗口 */
     public isSetDepModal: boolean = false;
+    /** 是否加载中 */
+    public isDepLoadding: boolean = false;
     /************************** 部门管理end ************************************/
 
     /************************** 关联公司及集团管理start ************************************/
@@ -131,7 +137,7 @@ export default class ModulesState extends ModulesStateBasic {
     public Privilege: [{}];
 
     // 编辑权限列表的值
-    public redactPrivilege: any;
+    public redactPrivilege: [{}];
 
     // 修改角色时获取的值
     public redactValue: any;
