@@ -34,11 +34,19 @@ class ModulesAction extends ActionBasic<ModulesState> {
         console.log(res);
     }
 
-    public deleteDetailInfoList = (invoiceCode: string) => {
+    public deleteDetailInfoList = (invoiceCode: string, waitState?: string) => {
         let detailInfoList = this.modulesState.detailInfoList;
-        const notInvoice = val => val.invoiceCode !== invoiceCode;
-        let filtered = detailInfoList.filter(notInvoice);
-        this.modulesState.detailInfoList = filtered;
+        if (waitState) {
+            detailInfoList.forEach((el, index) => {
+                if(el.invoiceCode === invoiceCode) {
+                    detailInfoList[index]['receivedState'] = 0;
+                }
+            });
+        } else {
+            const notInvoice = val => val.invoiceCode !== invoiceCode;
+            let filtered = detailInfoList.filter(notInvoice);
+            this.modulesState.detailInfoList = filtered;
+        }
         this.setModulesState(this.modulesState);
     }
 }
