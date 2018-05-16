@@ -23,6 +23,7 @@ class Component extends React.Component<UserFormProps, any> {
                     } else {
                         if(res){
                             message.success('操作成功');
+                            this.onCloseModal();
                         }
                     }
                 });

@@ -2,8 +2,8 @@ import { ActionBasic } from 'kts-scaffold-framework/modules';
 import ModulesState from './Modules.State';
 import { invoiceInput } from 'src/api';
 class ModulesAction extends ActionBasic<ModulesState> {
-    getGroupData = async () => {
-        const invoiceRes = await invoiceInput.invoice(this, { pageNum: 1, pageSize: 10 });
+    getGroupData = async (fields:any) => {
+        const invoiceRes = await invoiceInput.invoice(this, fields);
         let rebornlist = invoiceRes.res;
 
         if (invoiceRes.er) {

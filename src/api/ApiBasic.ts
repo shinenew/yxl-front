@@ -79,7 +79,7 @@ export default abstract class ApiBasic<O, D> {
      * 执行api
      * @param option api 入参
      */
-    public run = async (target: any, option: O, ): Promise<Response<D>> => {
+    public run = async (target: any, option: O): Promise<Response<D>> => {
         return await this.api(option);
     }
 
@@ -100,7 +100,6 @@ export default abstract class ApiBasic<O, D> {
 
     /** 请求头（环境参数） */
     private envDomain = (uri: string) => {
-        debugger;
         const { env } = MyStore.instance.getState();
         if (env.DOMAIN_MAP) {
             if (env.DOMAIN_MAP[uri]) {
