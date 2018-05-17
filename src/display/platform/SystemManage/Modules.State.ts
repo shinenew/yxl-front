@@ -11,7 +11,7 @@ export default class ModulesState extends ModulesStateBasic {
     public depModulesState = new ModulesStateDepartment();
     /************************** 部门管理end ************************************/
 
-    /** 用户管理 */
+    /** 用户管理  */
     public userModulesState = new ModulesStateUser();
     
     /************************** 集团资料start ************************************/
