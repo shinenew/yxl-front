@@ -27,13 +27,9 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 
 }))
 export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
-    /** 组建状态 */
-    public state: ModulesState = new ModulesState();
 
     constructor(props: IProps) {
         super(props, ModulesAction);
-        this.modulesState.depModulesState.editParent = false;
-        // this.setState(this.modulesState);
     }
 
     /** 关闭窗口 */

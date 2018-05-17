@@ -5,7 +5,6 @@ import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 import { Table, Row, Col, Button } from 'antd';
-import { create } from 'kts-scaffold-framework/utils/form';
 const css = require('./index.scss');
 
 var columns = [
@@ -35,21 +34,14 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 绑定全局数据到props */
-@create()
 @ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
 export default class UITable extends UIBasic<IProps, ModulesState> {
 
-    /** 组建状态 */
-    // public state: ModulesState = new ModulesState();
-
     constructor(props: IProps) {
         super(props, ModulesAction);
-        this.modulesState.depModulesState.userlist = null;
-        console.log(this.modulesState.depModulesState.selectedDepRowKeys);
-        // this.setState(this.state);
     }
 
     render() {

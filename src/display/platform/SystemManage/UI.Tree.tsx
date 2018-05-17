@@ -4,7 +4,6 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import { create } from 'kts-scaffold-framework/utils/form';
 const css = require('./index.scss');
 import { Row, Col, Tree, Button, Modal } from 'antd';
 const TreeNode = Tree.TreeNode;
@@ -20,15 +19,11 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 绑定全局数据到props */
-@create()
 @ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
 export default class UITree extends UIBasic<IProps, ModulesState> {
-
-    // /** 组建状态 */
-    // public state: ModulesState = new ModulesState();
 
     constructor(props: IProps) {
         super(props, ModulesAction);
