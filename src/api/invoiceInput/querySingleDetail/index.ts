@@ -19,7 +19,7 @@ class QuerySingleDetail extends ApiBasic<IOptions, IData> {
             return new Response<IData>(data.er);
         }
         
-        return new Response<IData>(null, {info: data.res});
+        return new Response<IData>(null, {invoiceDetail: data.res.invoiceDetail, realCheckTime: data.res.realCheckTime});
     }
 }
 

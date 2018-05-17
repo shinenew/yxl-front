@@ -69,7 +69,7 @@ enum Urls {
     /**
      * getInvoiceDetails 获取发票详情
      */
-    getInvoiceDetails = '/invoice/income/detail/querySingleDetail',
+    getInvoiceDetails = '/zone/invoice/biz-logging/get-detail',
     /**
      * 验证发票是否正确
      */

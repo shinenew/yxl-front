@@ -38,7 +38,6 @@ export default class InvoiceDetails extends ModulesBasic<IProps, ModulesState> {
     componentWillMount () {
         const loggingId = this.props.match.params.loggingId;
         ModulesAction.getInvoiceDetails(loggingId);
-        ModulesAction.checkReal(loggingId);
     }
     render() {
         return (
