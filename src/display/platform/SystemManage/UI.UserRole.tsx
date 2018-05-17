@@ -43,7 +43,7 @@ export default class UIDetail extends UIBasic<IProps, ModulesState> {
         const { form } = this.props;
         form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                let detail = this.modulesState.detail;
+                let detail = this.modulesState.userModulesState.detail;
                 ModulesAction.userRoleEdit(detail && detail.userId, detail && detail.companyId, values.roles);
                 ModulesAction.userModalFn('role', 'hide');
             }
@@ -52,17 +52,17 @@ export default class UIDetail extends UIBasic<IProps, ModulesState> {
 
     render() {
         // 生成多选列表
-        const data = this.modulesState.userCompanyRole && this.modulesState.userCompanyRole.map((item, index) => {
+        const data = this.modulesState.userModulesState.userCompanyRole && this.modulesState.userModulesState.userCompanyRole.map((item, index) => {
             return <Option key={index} value={item.roleId} title={item.description}>{item.name}</Option>;
         });
         // 当前选中角色
-        const curRole = this.modulesState.userCurrentRole && this.modulesState.userCurrentRole.map(item => item.roleId);
+        const curRole = this.modulesState.userModulesState.userCurrentRole && this.modulesState.userModulesState.userCurrentRole.map(item => item.roleId);
         const { getFieldDecorator } = this.props.form;
         return (
             <div>
                 <Modal
                     title="角色绑定页"
-                    visible={this.modulesState.roleVisible}
+                    visible={this.modulesState.userModulesState.roleVisible}
                     onOk={this.userRoleUpdate} // 点击确定回调
                     onCancel={this.hideModal} // 点击遮罩层或右上角叉或取消按钮的回调
                     // footer={null} // 隐藏底部确认和关闭按钮

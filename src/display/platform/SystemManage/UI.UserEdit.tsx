@@ -67,7 +67,7 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
             <div>
                 <Modal
                     title="编辑页"
-                    visible={this.modulesState.editVisible}
+                    visible={this.modulesState.userModulesState.editVisible}
                     onOk={this.edit} // 点击确定回调
                     onCancel={this.hideModal} // 点击遮罩层或右上角叉或取消按钮的回调
                     // footer={null} // 隐藏底部确认和关闭按钮
@@ -81,7 +81,7 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
                             <Col span={10}>
                                 <FormItem {...formItemLayout} label="用户姓名">
                                     {getFieldDecorator('nickName', {
-                                        initialValue: this.modulesState.detail && this.modulesState.detail.nickName,
+                                        initialValue: this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.nickName,
                                         rules: [{ required: true, message: '用户姓名不能为空' }],
 
                                     })(
@@ -93,7 +93,7 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
                             <Col span={10}>
                                 <FormItem {...formItemLayout} label="电子邮箱">
 
-                                    <Input disabled={true} value={this.modulesState.detail && this.modulesState.detail.email} />
+                                    <Input disabled={true} value={this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.email} />
                                 </FormItem>
                             </Col>
                         </Row>
@@ -101,7 +101,7 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
                             <Col span={10}>
                                 <FormItem {...formItemLayout} label="手机号">
                                     {getFieldDecorator('phone', {
-                                        initialValue: this.modulesState.detail && this.modulesState.detail.phone,
+                                        initialValue: this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.phone,
                                         // rules: [{ required: true, message: '手机号不能为空' }],
                                     })(
                                         <Input />
@@ -111,7 +111,7 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
                             <Col span={10}>
                                 <FormItem {...formItemLayout} label="所属部门">
                                     {getFieldDecorator('departmentName', {
-                                        initialValue: this.modulesState.detail && this.modulesState.detail.departmentName,
+                                        initialValue: this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.departmentName,
                                     })(
                                         <Input disabled={true} />
                                     )}
@@ -121,9 +121,9 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
                         <Row>
                             <Col span={10}>
                                 <FormItem {...formItemLayout} label="用户状态">
-                                    {this.modulesState.detail && this.modulesState.detail.acceptStatus === 'ACCEPT_ING' && <Input disabled={true} value="邀请中" />}
-                                    {this.modulesState.detail && this.modulesState.detail.acceptStatus === 'ACCEPT_NO' && <Input disabled={true} value="已拒绝" />}
-                                    {this.modulesState.detail && this.modulesState.detail.isActivated ? <Input disabled={true} value="已激活" /> : <Input disabled={true} value="已禁用" />}
+                                    {this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.acceptStatus === 'ACCEPT_ING' && <Input disabled={true} value="邀请中" />}
+                                    {this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.acceptStatus === 'ACCEPT_NO' && <Input disabled={true} value="已拒绝" />}
+                                    {this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.isActivated ? <Input disabled={true} value="已激活" /> : <Input disabled={true} value="已禁用" />}
                                 </FormItem>
                             </Col>
                         </Row>
@@ -131,7 +131,7 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
                             <Col span={10}>
                                 <FormItem {...formItemLayout} label="用户备注">
                                     {getFieldDecorator('description', {
-                                        initialValue: this.modulesState.detail && this.modulesState.detail.description,
+                                        initialValue: this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.description,
                                     })(
                                         <TextArea autosize={{ minRows: 2, maxRows: 6 }} placeholder="用户备注" />
                                     )}
@@ -140,14 +140,14 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
                         </Row>
                         <FormItem>
                             {getFieldDecorator('userId', {
-                                initialValue: this.modulesState.detail && this.modulesState.detail.userId,
+                                initialValue: this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.userId,
                             })(
                                 <input type="hidden" />
                             )}
                         </FormItem>
                         <FormItem>
                             {getFieldDecorator('companyId', {
-                                initialValue: this.modulesState.detail && this.modulesState.detail.companyId,
+                                initialValue: this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.companyId,
                             })(
                                 <input type="hidden" />
                             )}
