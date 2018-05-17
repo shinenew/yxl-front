@@ -7,6 +7,6 @@ export default interface IOptions {
     name: string;           // 集团名字
     description: string;    // 集团备注
     createTime: string;     // 创建时间
-    updateTime: string;     // 更新时间
+    updateTime: number;     // 更新时间
 
 }
