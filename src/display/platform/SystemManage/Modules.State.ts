@@ -18,7 +18,7 @@ export default class ModulesState extends ModulesStateBasic {
     public groupInfoModulesState = new ModulesStateGroupInfo();
     /************************** 集团资料end ************************************/
 
-    /************************** 关联公司及集团管理start ************************************/
+    /************************** 关联公start ************************************/
     user = MyStore.instance.getState().user.userInfo;
     url = MyStore.instance.getState().user.zoneUrl;
 
@@ -34,22 +34,12 @@ export default class ModulesState extends ModulesStateBasic {
         selectedRowKeys: [], // Check here to configure the default column
         selectedRows: [],   // 勾选内容
     };
-
-    /** 集团页面 相关变量 */
-    // groupInfo = {
-    //     name: '',  // 集团名字
-    //     description: '',  // 集团描述
-    //     disable: false,   // 集团页面是否编辑
-    //     orgId: '',   //集团ID
-    //     createTime: '',     // 创建时间
-    //     updateTime: '',    // 更新时间
-    // };
+     /************************** 关联公司end ************************************/
 
     /******************************** 角色 start ******************************************* */
     // 被选中的列表
     public selectedRows: any;
-    /************************** 关联公司及集团管理end ************************************/
-
+   
     /***********************************用户管理相关state 开始************************************/
 
     /** 当前页 */
