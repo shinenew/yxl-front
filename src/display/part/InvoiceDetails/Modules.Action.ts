@@ -13,21 +13,11 @@ class ModulesAction extends ActionBasic<ModulesState> {
         const res: any = await invoiceInput.querySingleDetail(this, {incomeInvoiceBizId: incomeInvoiceBizId});
         
         if (!res.er) {
-            this.modulesState.invoiceDetails = res.res.info;
+            console.log(res);
+            this.modulesState.invoiceDetails = res.res.invoiceDetail;
+            this.modulesState.lastRealCheckTime = res.res.realCheckTime;
             this.setModulesState(this.modulesState);
         }
-    }
-    /**
-     * 验证发票
-     * @param {string} incomeInvoiceBizId -发票id
-     */
-    public checkReal = async (incomeInvoiceBizId: string) => {
-        const res: any = await invoiceInput.realcheckQuery(this, {incomeInvoiceBizId: incomeInvoiceBizId});
-        if (!res.er) {
-            this.modulesState.lastRealCheckTime = res.res.info.realCheckTime;
-            this.setModulesState(this.modulesState);
-        }
-        
     }
     /**
      * 获取发票类型
