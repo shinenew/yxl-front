@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Card, Button, message, Alert,Popconfirm } from 'antd';
+import { Table, Card, Button, message, Alert, Popconfirm, Icon } from 'antd';
 import AdvancedForm from './AdvancedForm';
 import ModulesAction from './Modules.Action';
 import { tree } from 'src/utils';
@@ -11,6 +11,7 @@ import CreatGroup from './UI.CreatGroup';
 import SwitchGroup from './UI.SwitchGroup';
 import { invoiceInput } from 'src/api';
 import { formatTime, formatDate } from 'src/utils';
+import Template from 'src/display/components/InvoiceTemplate';
 @withRouter
 class UserForm extends React.Component<any, any> {
 
@@ -23,12 +24,25 @@ class UserForm extends React.Component<any, any> {
                     <span>
                         {
                             record.groupNumber ?
-                                <span>{record.groupNumber}({record.matchCount}/{record.waitCount})</span>
+                                <span>
+                                    <Icon type="folder" style={{ fontSize: 16, color: '#5CC4E9', marginRight: 21 }} />
+                                    {record.groupNumber}({record.matchCount}/{record.waitCount})
+                                </span>
                                 : <span>{text}</span>
                         }
                     </span>
                 );
 
+            }
+        },
+        {
+            title: '',
+            dataIndex: 'unusualState',
+            render: (text) => {
+                return (
+                    <span>{text==='UNUSUAL'&&<Icon type="warning" style={{color:'#EB6100'}}/>}
+                    </span>
+                );
             }
         },
         {
@@ -61,6 +75,10 @@ class UserForm extends React.Component<any, any> {
                     <div>
                         <span className="pd5 hand" onClick={() => { this.onDetail(record); }}>详情</span>
                         {
+                            !record.group&&
+                            <span className="pd5 hand" onClick={()=>{this.onShowTemplate(record);}}>票面信息</span>
+                        }
+                        {
                             record.group &&
                             <Popconfirm
                                 title="确认删除"
@@ -87,7 +105,9 @@ class UserForm extends React.Component<any, any> {
             selectedRowKeys: [],
             addModal: false,
             message: null,
-            show: false
+            show: false,
+            template:false,
+            templateData:null,
         };
     }
     onDelete = (record) => {
@@ -133,6 +153,29 @@ class UserForm extends React.Component<any, any> {
             addToModal: false
         });
     }
+    onShowTemplate=(record)=>{
+        invoiceInput.querySingleDetail(this, { incomeInvoiceBizId: record.loggingId }).then((response: any) => {
+            const err = response.err;
+            const res = response.res;
+            if (err) {
+                message.error(err.status.description);
+                return null;
+            } else {
+                if (res) {
+                    this.setState({
+                        template:true,
+                        templateData:res.body,
+                        templateType:record.invoiceType
+                    });
+                }
+            }
+        });
+    }
+    closeTemplate=()=>{
+        this.setState({
+            template:false
+        });
+    }
     onDetail = (record) => {
         if (record.groupNumber) {
             this.props.history.push(`invoiceInput/group/${record.groupId}`);
@@ -152,7 +195,7 @@ class UserForm extends React.Component<any, any> {
         });
     }
     refreshInvoice = () => {
-        console.log(2);
+        this.getData();
     }
     componentDidMount() {
         this.getData();
@@ -264,6 +307,11 @@ class UserForm extends React.Component<any, any> {
                     {
                         this.state.addToModal &&
                         <SwitchGroup onCloseModal={this.onCloseSwitch} onSwitchHandler={this.onSwitchHandler} />
+                    }
+                    {
+                        this.state.template &&
+                        Template({type:this.state.templateType,data:this.state.templateData,onClose:this.closeTemplate})
+                        
                     }
                 </Card>
             </div >

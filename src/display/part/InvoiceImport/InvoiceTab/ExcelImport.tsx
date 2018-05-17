@@ -3,6 +3,7 @@ import { Modal, message, Upload } from 'antd';
 import MyStore from 'src/redux/MyStore';
 const uploadImage =require('../upload.png');
 const downloadImage= require('../download.png');
+import { Urls } from 'src/entry/constant';
 const css=require('../index.scss');
 class Component extends React.Component<any, any>{
     constructor(props:any) {
@@ -54,7 +55,7 @@ class Component extends React.Component<any, any>{
                             if (info.file.response.body.allSuccess) {
                                 message.success('上传成功！');
                             } else {
-                                const downloadFilePath = info.file.response.body.downloadFilePath;
+                                let downloadFilePath =`//${MyStore.instance.getState().user.zoneUrl}${Urls.DOWNLOADFILE}/?filepath=${info.file.response.body.downloadFilePath}`;
                                 const errorCount = info.file.response.body.errorCount;
                                 const successCount = info.file.response.body.successCount;
                                 this.setState({

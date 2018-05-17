@@ -70,6 +70,10 @@ enum Urls {
      * getInvoiceDetails 获取发票详情
      */
     getInvoiceDetails = '/zone/invoice/biz-logging/get-detail',
+
+    // excel上传后错误文件下载地址
+    DOWNLOADFILE='/zone/invoice/biz-logging/downloadFile',
+  
     /**
      * 验证发票是否正确
      */

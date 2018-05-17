@@ -9,5 +9,4 @@ enum InvoiceType {
     卷票 = 'VAT_INVOICE_VOLUME',
     货票 = 'VAT_SPECIAL_INVOICE_TRANSPORTATION',
 }
-
 export default InvoiceType;
