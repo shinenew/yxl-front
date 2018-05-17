@@ -4,7 +4,6 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
-import { create } from 'kts-scaffold-framework/utils/form';
 const css = require('./index.scss');
 import { Row, Col, Tree, Button, Modal } from 'antd';
 const TreeNode = Tree.TreeNode;
@@ -20,15 +19,11 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 绑定全局数据到props */
-@create()
 @ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
 export default class UITree extends UIBasic<IProps, ModulesState> {
-
-    // /** 组建状态 */
-    // public state: ModulesState = new ModulesState();
 
     constructor(props: IProps) {
         super(props, ModulesAction);
@@ -53,14 +48,14 @@ export default class UITree extends UIBasic<IProps, ModulesState> {
         confirm({
             title: '你确定要删除此部门吗?',
             onOk: () => {
-                ModulesAction.deleteDep(this.modulesState.selectTreeCode);
+                ModulesAction.deleteDep(this.modulesState.depModulesState.selectTreeCode);
             },
         });
     }
 
     /** 修改 */
     onUpdate(departmentId: any) {
-        ModulesAction.getDepartment(this.modulesState.selectTreeCode);
+        ModulesAction.getDepartment(this.modulesState.depModulesState.selectTreeCode);
     }
 
     /** 构建树 */
@@ -90,16 +85,16 @@ export default class UITree extends UIBasic<IProps, ModulesState> {
                             onSelect={this.onSelect}
                             autoExpandParent={false}
                         >
-                            {this.renderTreeNodes(this.modulesState.treeData)}
+                            {this.renderTreeNodes(this.modulesState.depModulesState.treeData)}
                         </Tree>
                     </Col>
                     <Col style={{ borderTop: '1px solid #cccccc', paddingTop: 15,textAlign:'center' }}>
                         <Button type="primary" onClick={ModulesAction.addDepUserModal.bind(this, 2)} style={{marginRight:10}}>新增</Button>
-                        <Button type="danger" onClick={this.onDelete} disabled={this.modulesState.isDisabled} className="ml-10" style={{marginRight:10}}>删除</Button>
+                        <Button type="danger" onClick={this.onDelete} disabled={this.modulesState.depModulesState.isDisabled} className="ml-10" style={{marginRight:10}}>删除</Button>
                         <Button
                             type="primary"
-                            onClick={ModulesAction.getDepartment.bind(this, this.modulesState.selectTreeCode)}
-                            disabled={this.modulesState.isDisabled}
+                            onClick={ModulesAction.getDepartment.bind(this, this.modulesState.depModulesState.selectTreeCode)}
+                            disabled={this.modulesState.depModulesState.isDisabled}
                             className="ml-10"
                         >
                             修改

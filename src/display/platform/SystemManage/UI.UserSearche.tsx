@@ -84,7 +84,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
         // });
         const { getFieldDecorator } = this.props.form;
         return (
-            <div style={{ display: this.modulesState.searchState ? 'block' : 'none' }}>
+            <div style={{ display: this.modulesState.userModulesState.searchState ? 'block' : 'none' }}>
                 <Form>
                     <Row gutter={15}>
                         <Col span={5} >

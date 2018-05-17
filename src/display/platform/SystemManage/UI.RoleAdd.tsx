@@ -29,7 +29,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     handleOk = (e) => {
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                ModulesAction.saveRole(values);
+                ModulesAction.saveRole(values.name, values.description, values.ruleGroups);
             }
         });
         setTimeout(() => { 
@@ -40,7 +40,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
         const { getFieldDecorator } = this.props.form;
         const FormItem = Form.Item;
         const tProps = {
-            treeData: this.modulesState.selectDatas,
+            treeData: this.modulesState.ModulesStateRole.selectDatas,
             treeCheckable: true,
             treeNodeFilterProp: 'title',
             searchPlaceholder: '请选择权限'
@@ -49,7 +49,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             <div>
                 <Modal
                     title="新增角色"
-                    visible={this.modulesState.addRoleVisible}
+                    visible={this.modulesState.ModulesStateRole.addRoleVisible}
                     onOk={this.handleOk}
                     onCancel={ModulesAction.noAddVisible}
                     destroyOnClose={true}
