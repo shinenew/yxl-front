@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Card, Button, message, Alert } from 'antd';
+import { Table, Card, Button, message, Alert,Popconfirm } from 'antd';
 import AdvancedForm from './AdvancedForm';
 import ModulesAction from './Modules.Action';
 import { tree } from 'src/utils';
@@ -58,7 +58,18 @@ class UserForm extends React.Component<any, any> {
             dataIndex: 'operation',
             render: (text, record) => {
                 return (
-                    <span onClick={() => { this.onDetail(record); }}>详情</span>
+                    <div>
+                        <span className="pd5 hand" onClick={() => { this.onDetail(record); }}>详情</span>
+                        {
+                            record.group &&
+                            <Popconfirm
+                                title="确认删除"
+                                onConfirm={() => this.onDelete(record)}
+                            >
+                                <span className="pd5 hand">删除</span>
+                            </Popconfirm>
+                        }
+                    </div>
                 );
             }
         }
@@ -78,6 +89,20 @@ class UserForm extends React.Component<any, any> {
             message: null,
             show: false
         };
+    }
+    onDelete = (record) => {
+        invoiceInput.DeleteGroup(this, { invoiceGroupId: record.groupId }).then((response: any) => {
+            const err = response.err;
+            const res = response.res;
+            if (err) {
+                message.error(err.status.description);
+                return null;
+            } else {
+                if (res) {
+                    message.success('操作成功');
+                }
+            }
+        });
     }
     clearFields = () => {
         this.setState({
@@ -111,7 +136,7 @@ class UserForm extends React.Component<any, any> {
     onDetail = (record) => {
         if (record.groupNumber) {
             this.props.history.push(`invoiceInput/group/${record.groupId}`);
-        }else{
+        } else {
             this.props.history.push(`invoiceInput/invoiceDetail/${record.loggingId}`);
         }
     }
@@ -164,7 +189,7 @@ class UserForm extends React.Component<any, any> {
                 return null;
             } else {
                 if (res) {
-                    const insert = res.map((item,index) => {
+                    const insert = res.map((item, index) => {
                         if (!item.success) {
                             return <div key={index}>发票代码:{item.invoiceCode},发票号码:{item.invoiceGroupNumber} 设置发票组失败</div>;
                         }
