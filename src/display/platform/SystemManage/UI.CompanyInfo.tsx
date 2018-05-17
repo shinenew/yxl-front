@@ -34,6 +34,7 @@ export default class UICompany extends UIBasic<IProps, ModulesState> {
     }
 
     render() {
+        // 转换时间格式的方法
         const formatTime = (timeStr) => {
             if (timeStr) {
                 const timestamp = timeStr / 1000;
@@ -44,7 +45,7 @@ export default class UICompany extends UIBasic<IProps, ModulesState> {
                 return '';
             }
         };
-        const data = this.modulesState.companyInfoList;
+        const data = this.modulesState.ModulesStateRole.companyInfoList;
         const { getFieldDecorator } = this.props.form;
         const formLayout = 'horizontal';
         const FormItem = Form.Item;

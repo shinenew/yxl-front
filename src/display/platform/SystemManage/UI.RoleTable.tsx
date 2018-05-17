@@ -64,7 +64,7 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
                         {
                             (<span style={{ 'cursor': 'pointer' }} onClick={() => ModulesAction.redactvisible(record)} >修改 | </span>)}
                         {
-                            (<Popconfirm title="确认删除?" onConfirm={() => ModulesAction.deleteRole(record)}>
+                            (<Popconfirm title="确认删除?" onConfirm={() => ModulesAction.deleteRole(record.roleId)}>
                                 <span style={{ 'cursor': 'pointer' }}>删除</span>
                             </Popconfirm>)}
                     </span>
@@ -85,12 +85,12 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
       */
      Privilege( text: any ) {
         // const ruleItem = this.modulesState.selectData && this.modulesState.selectData.find(it => it.id === text );
-        if (this.modulesState.selectData == null) {
+        if (this.modulesState.ModulesStateRole.selectData == null) {
             return'';
         }
-        for (let i = 0;i < this.modulesState.selectData.length; i++ ) {
-                if (this.modulesState.selectData[i].id === parseInt( text , 10) ){
-                    return this.modulesState.selectData[i].name;
+        for (let i = 0;i < this.modulesState.ModulesStateRole.selectData.length; i++ ) {
+                if (this.modulesState.ModulesStateRole.selectData[i].id === parseInt( text , 10) ){
+                    return this.modulesState.ModulesStateRole.selectData[i].name;
 
             }
             
@@ -110,7 +110,7 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
                 <UIRoleAdd/>
                 <Table
                     columns={this.colums}
-                    dataSource={this.modulesState.list}
+                    dataSource={this.modulesState.ModulesStateRole.list}
                     rowKey="roleId"
                 />
             </div>);

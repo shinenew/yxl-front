@@ -2,6 +2,7 @@ import ModulesStateBasic from 'kts-scaffold-framework/modules/ModulesStateBasic'
 import { MyStore } from 'src/redux';
 import ModulesStateDepartment from './Modules.State.Department';
 import ModulesStateUser from './Modules.State.User';
+import ModulesStateRole from './Modules.State.Role';
 import ModulesStateGroupInfo from './Modules.State.GroupInfo';
 
 /** 模块状态 */
@@ -47,47 +48,48 @@ export default class ModulesState extends ModulesStateBasic {
     /******************************** 角色 start ******************************************* */
     // 被选中的列表
     public selectedRows: any;
+    /************************** 关联公司及集团管理end ************************************/
 
-    /** 列表数据 */
-    public list: any;
+    /***********************************用户管理相关state 开始************************************/
 
+    /** 当前页 */
+    currentPage: number;
+    /** 每页显示条数 */
+    pageSize: number;
+    /** 总条数 */
+    total: number;
+    /** 列表数组 */
+    data: any;
+    /** 详情 */
+    detail: Detail;
+    /** 筛选状态 */
+    searchState: boolean = false;
+    /** 筛选Icon样式 */
+    iconStyle: boolean = false;
+    /** 详情弹框状态 */
+    detailVisible: boolean = false;
+    /** 新增弹框状态 */
+    addVisible: boolean = false;
+    /** 编辑弹框状态 */
+    editVisible: boolean = false;
+    /** 角色弹框状态 */
+    roleVisible: boolean = false;
+    /** 用户所在公司角色数组 */
+    userCompanyRole: any;
+    /** 用户所在公司当前权限 */
+    userCurrentRole: any;
+    /** departmentIds */
+    departmentIds: any;
+    /** 用户列表数据加载状态 */
+    userDataLoding: boolean = true;
 
-    // 公司资料数据
-    public companyInfoList: any;
+    /***********************************用户管理相关state 结束************************************/
 
+    /******************************** 角色管理及公司资料 start ******************************************* */
 
-    // 下拉框得值
-    public selectValue: any;
+    public ModulesStateRole = new ModulesStateRole;
 
-    // 编辑弹框得状态
-    public visible: boolean = false;
-
-    // 新增弹框状态
-    public addRoleVisible: boolean = false;
-    public paramCondition: IParamCondition = {};
-
-    // 获取页面key得值
-    public key: any;
-
-    // 下拉框权限的值
-    public selectData: any;
-    public selectDatas = [];
-
-    // 列表权限的值
-    public Privilege: [{}];
-
-    // 编辑权限列表的值
-    public redactPrivilege: [{}];
-
-    // 修改角色时获取的值
-    public redactValue: any;
-
-    // 编辑保存时封装角色的值
-    public roleList: any;
-
-    /** 角色权限判断的值 */
-    mode: any = 'edit';
-    /******************************** 角色 end ******************************************* */
+    /******************************** 角色管理及公司资料 end ******************************************* */
 }
 
 // 集团页面 相关变量  接口
@@ -98,7 +100,29 @@ interface ICompany {
     geturl?: any;
 }
 
-interface IParamCondition {
-    id?: string;
-    name?: string;
+// interface IParamCondition {
+//     id?: string;
+//     name?: string;
+// }
+/**
+ * 用户详情interface
+ */
+interface Detail {
+    acceptStatus?: string;
+    companyId?: string;
+    credential?: string;
+    departmentId?: string;
+    departmentName?: string;
+    description?: string;
+    email?: string;
+    gUserId?: string;
+    isActivated?: boolean;
+    isDeleted?: boolean;
+    lastLoginIp?: string;
+    lastLoginTime?: number;
+    nickName?: string;
+    phone?: string;
+    userId?: string;
+    userType?: string;
 }
+

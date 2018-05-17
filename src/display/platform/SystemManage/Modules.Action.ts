@@ -629,7 +629,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     public getRoleList = async () => {
         let data = await role.getRoleList(this, {});
         if (!data.er) {
-            this.modulesState.list = data.res;
+            this.modulesState.ModulesStateRole.list = data.res;
             this.setModulesState(this.modulesState);
         }
     }
@@ -637,18 +637,18 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * 获取下拉框角色权限数据
      */
     public getRolePrivilegeList = async () => {
-        let data = await role.getRolePrivilege(this, { paramCondition: this.modulesState.paramCondition });
+        let data = await role.getRolePrivilege(this, {});
         if (!data.er) {
-            this.modulesState.selectData = data.res;
-            if (this.modulesState.selectData.length === this.modulesState.selectDatas.length) {
+            this.modulesState.ModulesStateRole.selectData = data.res;
+            if (this.modulesState.ModulesStateRole.selectData.length === this.modulesState.ModulesStateRole.selectDatas.length) {
                 return;
             } else {
-                this.modulesState.selectData.forEach(element => {
+                this.modulesState.ModulesStateRole.selectData.forEach(element => {
                     let rule = {
                         value: element.id.toString(),
                         label: element.name
                     };
-                    this.modulesState.selectDatas.push(rule);
+                    this.modulesState.ModulesStateRole.selectDatas.push(rule);
                 });
             }
         }
@@ -657,26 +657,26 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 新增按钮的弹框
      */
-    public addVisible = async (value) => {
-        this.modulesState.addRoleVisible = true;
+    public addVisible = async () => {
+        this.modulesState.ModulesStateRole.addRoleVisible = true;
         this.setModulesState(this.modulesState);
     }
     /**
      * 取消按钮的弹窗
      */
     public noAddVisible = async () => {
-        this.modulesState.addRoleVisible = false;
+        this.modulesState.ModulesStateRole.addRoleVisible = false;
         this.setModulesState(this.modulesState);
     }
     /**
      * 新增角色保存
      */
-    public saveRole = async (value) => {
+    public saveRole = async (name:string, description: string,value: [{}] ) => {
         const { user } = MyStore.instance.getState();
+        // 组装入参数据
         let companyId = user.userInfo.companyId;
-        let name = value.name;
-        let description = value.description;
-        let ruleGroups = value.ruleGroups.join(',');
+        let ruleGroups = value.join(',');
+
         let index = await role.saveRole(this, { companyId, name, description, ruleGroups });
         if (!index) {
             Modal.error({
@@ -689,16 +689,15 @@ class ModulesAction extends ActionBasic<ModulesState> {
             });
         }
         this.getRoleList();
-        this.modulesState.addRoleVisible = false;
+        this.modulesState.ModulesStateRole.addRoleVisible = false;
         this.setModulesState(this.modulesState);
     }
     /**
      * 删除角色
      */
-    public deleteRole = async (value) => {
+    public deleteRole = async (roleId:string) => {
         const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
-        let roleId = value.roleId;
         let data = await role.deleteRole(this, { companyId, roleId });
         if (data) {
             Modal.success({
@@ -715,29 +714,32 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 编辑的方法
      */
-    public redactvisible = async (value) => {
-        this.modulesState.roleList = value;
-        this.modulesState.redactValue = value;
+    public redactvisible = async (value:any) => {
+        this.modulesState.ModulesStateRole.roleList = value;
+        this.modulesState.ModulesStateRole.redactValue = value;
         let name = value.ruleGroups;
         let index = name.split(',');
-        this.modulesState.redactPrivilege = index;
-        this.modulesState.visible = true;
+        this.modulesState.ModulesStateRole.redactPrivilege = index;
+        this.modulesState.ModulesStateRole.visible = true;
         this.setModulesState(this.modulesState);
     }
     /**
      * 编辑保存的方法
      */
-    public redactSaveVisible = async (value) => {
+    public redactSaveVisible = async (value:{name: string,description: string, ruleGroups: string[]}) => {
+        debugger;
         const { user } = MyStore.instance.getState();
+        // 组装入参数据
         let companyId = user.userInfo.companyId;
         let name = value.name;
         let description = value.description;
         let ruleGroups = value.ruleGroups.join(',');
-        let roleId = this.modulesState.roleList.roleId;
+        let roleId = this.modulesState.ModulesStateRole.roleList.roleId;
         let createTime = new Date().getTime();
-        let rules = this.modulesState.roleList.rules;
+        let rules = this.modulesState.ModulesStateRole.roleList.rules;
+        
         let data = await role.updataRole(this, { companyId, name, description, ruleGroups, roleId, createTime, rules });
-        this.modulesState.visible = false;
+        this.modulesState.ModulesStateRole.visible = false;
         this.setModulesState(this.modulesState);
         if (!data) {
             Modal.error({
@@ -755,7 +757,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * 取消编辑的弹窗
      */
     public noRedactVisible = async () => {
-        this.modulesState.visible = false;
+        this.modulesState.ModulesStateRole.visible = false;
         this.setModulesState(this.modulesState);
     }
     /**
@@ -766,7 +768,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
         let companyId = user.userInfo.companyId;
         let data = await role.getCompanyInfoList(this, { companyId });
         if (!data.er) {
-            this.modulesState.companyInfoList = data.res;
+            this.modulesState.ModulesStateRole.companyInfoList = data.res;
             this.setModulesState(this.modulesState);
         }
     }
