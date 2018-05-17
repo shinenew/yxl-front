@@ -544,7 +544,15 @@ class ModulesAction extends ActionBasic<ModulesState> {
         // 接口调用
         let data = await system.userDisOrEna(this, param);
         if (!data.er) {
-            this.getUserList();
+            let list = this.modulesState.userModulesState.data;
+            for (let index = 0; index < list.length; index++) {
+                if (list[index].userId === record.userId) {
+                    list.splice(index,1);
+                    break;
+                }
+            }
+            this.modulesState.userModulesState.data =list;
+            this.setModulesState(this.modulesState);
             this.success('成功', '设置成功！');
         }
     }
@@ -736,7 +744,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 编辑的方法
      */
-    public redactvisible = async (value:{companyId: string,createTime: number, description: string, isPublic: number, name: string, pRoleId: any, roleId: string, ruleGroups: string, rules: string}) => {
+    public redactvisible = async (value: { companyId: string, createTime: number, description: string, isPublic: number, name: string, pRoleId: any, roleId: string, ruleGroups: string, rules: string }) => {
         this.modulesState.ModulesStateRole.roleList = value;
         this.modulesState.ModulesStateRole.redactValue = value;
         let name = value.ruleGroups;
