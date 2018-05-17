@@ -19,9 +19,6 @@ class DefaultTemplate extends React.Component<any, any> {
     handleRoleCancel = () => {
         this.props.onClose();
     }
-    onAllInvoice = () => {
-        //browserHistory.push(`/index/receiptManage/${this.props.data.invoiceId}`)
-    }
     render() {
         let pdfInvoiceView = this.state.value;
         return (

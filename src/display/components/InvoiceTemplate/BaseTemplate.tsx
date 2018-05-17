@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'antd';
-import { transformType, getCityName } from 'src/entry/constant/InvoiceType/EnumInvoiceType';
+import transformType, { getCityName } from 'src/entry/constant/InvoiceType/EnumInvoiceType';
 import { Field } from 'kts-scaffold-framework/utils/doc';
 import moment from 'moment';
 import { withRouter } from 'src/routes';
@@ -17,9 +17,6 @@ class BaseTemplate extends React.Component<any, any> {
     }
     handleRoleCancel = () => {
         this.props.onClose();
-    }
-    onAllInvoice = () => {
-        //browserHistory.push(`/index/receiptManage/${this.props.data.invoiceId}`)
     }
     template = () => {
         let pdfInvoiceView = this.state.value;

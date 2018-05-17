@@ -11,6 +11,7 @@ import CreatGroup from './UI.CreatGroup';
 import SwitchGroup from './UI.SwitchGroup';
 import { invoiceInput } from 'src/api';
 import { formatTime, formatDate } from 'src/utils';
+import Template from 'src/display/components/InvoiceTemplate';
 @withRouter
 class UserForm extends React.Component<any, any> {
 
@@ -75,7 +76,7 @@ class UserForm extends React.Component<any, any> {
                         <span className="pd5 hand" onClick={() => { this.onDetail(record); }}>详情</span>
                         {
                             !record.group&&
-                            <span className="pd5 hand" onClick={()=>{this.onInfo(record);}}>票面信息</span>
+                            <span className="pd5 hand" onClick={()=>{this.onShowTemplate(record);}}>票面信息</span>
                         }
                         {
                             record.group &&
@@ -104,7 +105,9 @@ class UserForm extends React.Component<any, any> {
             selectedRowKeys: [],
             addModal: false,
             message: null,
-            show: false
+            show: false,
+            template:false,
+            templateData:null,
         };
     }
     onDelete = (record) => {
@@ -150,8 +153,8 @@ class UserForm extends React.Component<any, any> {
             addToModal: false
         });
     }
-    onInfo=(record)=>{
-        invoiceInput.querySingleDetail(this, { incomeInvoiceBizId: this.props.data.invoiceId }).then((response: any) => {
+    onShowTemplate=(record)=>{
+        invoiceInput.querySingleDetail(this, { incomeInvoiceBizId: record.loggingId }).then((response: any) => {
             const err = response.err;
             const res = response.res;
             if (err) {
@@ -159,9 +162,18 @@ class UserForm extends React.Component<any, any> {
                 return null;
             } else {
                 if (res) {
-                    message.success('操作成功');
+                    this.setState({
+                        template:true,
+                        templateData:res.body,
+                        templateType:record.invoiceType
+                    });
                 }
             }
+        });
+    }
+    closeTemplate=()=>{
+        this.setState({
+            template:false
         });
     }
     onDetail = (record) => {
@@ -295,6 +307,11 @@ class UserForm extends React.Component<any, any> {
                     {
                         this.state.addToModal &&
                         <SwitchGroup onCloseModal={this.onCloseSwitch} onSwitchHandler={this.onSwitchHandler} />
+                    }
+                    {
+                        this.state.template &&
+                        Template({type:this.state.templateType,data:this.state.templateData,onClose:this.closeTemplate})
+                        
                     }
                 </Card>
             </div >
