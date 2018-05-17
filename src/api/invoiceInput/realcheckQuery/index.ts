@@ -15,7 +15,7 @@ class RealcheckQuery extends ApiBasic<IOptions, IData> {
 
         let data: Response<any> = await this.callCompany(req);
         if (data.er) {
-            return new Response<IData>(null);
+            return new Response<IData>(data.er);
         }
         return new Response<IData>(null, {info: data.res});
     }
