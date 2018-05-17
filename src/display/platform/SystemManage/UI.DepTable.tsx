@@ -49,7 +49,7 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
         super(props, ModulesAction);
         this.modulesState.depModulesState.userlist = null;
         console.log(this.modulesState.depModulesState.selectedDepRowKeys);
-        this.setState(this.state);
+        // this.setState(this.state);
     }
 
     render() {

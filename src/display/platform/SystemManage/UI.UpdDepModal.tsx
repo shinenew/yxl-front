@@ -33,7 +33,7 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
     constructor(props: IProps) {
         super(props, ModulesAction);
         this.modulesState.depModulesState.editParent = false;
-        this.setState(this.modulesState);
+        // this.setState(this.modulesState);
     }
 
     /** 关闭窗口 */
@@ -42,7 +42,6 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
     }
     /** 选择下拉树 */
     onSelect = (value) => {
-        console.log(value);
         this.modulesState.depModulesState.selectTreeVal = value;
     }
 
@@ -50,7 +49,6 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
     saveUser = () => {
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
                 ModulesAction.updDep(values);
             }
         });
@@ -71,7 +69,6 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
     /** 保存修改上级部门 */
     changeDep = () => {
         this.modulesState.depModulesState.editParent = false;
-        console.log(this.props.form.getFieldsValue(['parentDepartmentId']));
         let depId = this.props.form.getFieldsValue(['parentDepartmentId']);
         if (!depId) {
             message.warn('请选择上级部门');
@@ -80,7 +77,6 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
 
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
                 ModulesAction.updParentDep(values);
             }
         });
