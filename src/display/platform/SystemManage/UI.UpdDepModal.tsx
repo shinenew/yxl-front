@@ -32,7 +32,7 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
 
     constructor(props: IProps) {
         super(props, ModulesAction);
-        this.modulesState.editParent = false;
+        this.modulesState.depModulesState.editParent = false;
         this.setState(this.modulesState);
     }
 
@@ -43,7 +43,7 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
     /** 选择下拉树 */
     onSelect = (value) => {
         console.log(value);
-        this.modulesState.selectTreeVal = value;
+        this.modulesState.depModulesState.selectTreeVal = value;
     }
 
     /** 保存 */
@@ -58,19 +58,19 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
 
     /** 修改上级部门 */
     changeMode = () => {
-        this.modulesState.editParent = true;
+        this.modulesState.depModulesState.editParent = true;
         this.setState(this.modulesState);
     }
 
     /** 取消修改上级部门 */
     onFallback = () => {
-        this.modulesState.editParent = false;
+        this.modulesState.depModulesState.editParent = false;
         this.setState(this.modulesState);
     }
 
     /** 保存修改上级部门 */
     changeDep = () => {
-        this.modulesState.editParent = false;
+        this.modulesState.depModulesState.editParent = false;
         console.log(this.props.form.getFieldsValue(['parentDepartmentId']));
         let depId = this.props.form.getFieldsValue(['parentDepartmentId']);
         if (!depId) {
@@ -99,7 +99,7 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
             <div>
                 <Modal
                     title="修改部门"
-                    visible={this.modulesState.isUpdDepModal}
+                    visible={this.modulesState.depModulesState.isUpdDepModal}
                     onOk={this.saveUser}
                     onCancel={this.closeModal}
                     okText="保存"
@@ -109,13 +109,13 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
                 >
                     <Form.Item {...formItemLayout} style={{ display: 'none' }}>
                         {getFieldDecorator('departmentId', {
-                            initialValue: this.modulesState.department && this.modulesState.department.departmentId
+                            initialValue: this.modulesState.depModulesState.department && this.modulesState.depModulesState.department.departmentId
                         })(<input type="hidden" />)}
                     </Form.Item>
 
                     <Form.Item {...formItemLayout} style={{ display: 'none' }}>
                         {getFieldDecorator('createTime', {
-                            initialValue: this.modulesState.department && this.modulesState.department.createTime
+                            initialValue: this.modulesState.depModulesState.department && this.modulesState.depModulesState.department.createTime
                         })(<input type="hidden" />)}
                     </Form.Item>
                     <Form.Item {...formItemLayout} label="上级部门">
@@ -123,18 +123,18 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
                             rules: [
                                 { required: true, message: '请选择上级部门' },
                             ],
-                            initialValue: this.modulesState.department && this.modulesState.department.parentDepartmentId
+                            initialValue: this.modulesState.depModulesState.department && this.modulesState.depModulesState.department.parentDepartmentId
                         })(
                             <TreeSelect
                                 showSearch={false}
                                 // value={val}
                                 dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                                treeData={this.modulesState.treeData}
+                                treeData={this.modulesState.depModulesState.treeData}
                                 onSelect={this.onSelect}
                                 className={css.treeStyle}
                                 treeDataSimpleMode={true}
                                 placeholder={'请选择上级部门'}
-                                disabled={!this.modulesState.editParent}
+                                disabled={!this.modulesState.depModulesState.editParent}
                             />
                         )}
 
@@ -142,8 +142,8 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
                     <Form.Item {...formItemLayout}>
                         <Row>
                             <Col span={20} offset={5}>
-                                {!this.modulesState.editParent && <Button type="primary" onClick={this.changeMode}>修改</Button>}
-                                {this.modulesState.editParent && <span>
+                                {!this.modulesState.depModulesState.editParent && <Button type="primary" onClick={this.changeMode}>修改</Button>}
+                                {this.modulesState.depModulesState.editParent && <span>
                                     <Button type="primary" onClick={this.changeDep} style={{ marginRight: 10 }}>保存</Button>
                                     <Button type="default" onClick={this.onFallback} className="ml-10">取消</Button>
                                 </span>}
@@ -155,7 +155,7 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
                             rules: [
                                 { required: true, message: '请输入部门编码' },
                             ],
-                            initialValue: this.modulesState.department && this.modulesState.department.number
+                            initialValue: this.modulesState.depModulesState.department && this.modulesState.depModulesState.department.number
                         })(<Input size="large" placeholder="请输入部门编码" />)}
                     </Form.Item>
 
@@ -164,11 +164,11 @@ export default class UIUpdDepModal extends UIBasic<IProps, ModulesState> {
                             rules: [
                                 { required: true, message: '请输入部门名称' },
                             ],
-                            initialValue: this.modulesState.department && this.modulesState.department.name
+                            initialValue: this.modulesState.depModulesState.department && this.modulesState.depModulesState.department.name
                         })(<Input size="large" placeholder="请输入部门名称" />)}
                     </Form.Item>
                     <Form.Item {...formItemLayout} label="备注">
-                        {getFieldDecorator('description', { initialValue: this.modulesState.department && this.modulesState.department.description })
+                        {getFieldDecorator('description', { initialValue: this.modulesState.depModulesState.department && this.modulesState.depModulesState.department.description })
                             (<TextArea rows={4} maxLength={128} placeholder="最多输入128个字符" />)}
                     </Form.Item>
                 </Modal>

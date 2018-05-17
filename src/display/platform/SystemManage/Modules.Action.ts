@@ -20,7 +20,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
         if (!data.er) {
             /** 构建树 */
             this.buildTree(queryData);
-            this.modulesState.departmentList = data.res;
+            this.modulesState.depModulesState.departmentList = data.res;
         }
 
         this.setModulesState(this.modulesState);
@@ -30,26 +30,26 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * 根据部门查询人员 
      * @param 部门ID
      */
-    public departmentUser = async (depId) => {
+    public departmentUser = async (depId: string[]) => {
         const { user } = MyStore.instance.getState();
-        this.modulesState.isDepLoadding = true;
+        this.modulesState.depModulesState.isDepLoadding = true;
         if (depId.length > 0) {
             let companyId = user.userInfo.companyId;
             let departmentId = depId[0];
-            this.modulesState.departmentId = departmentId;
+            this.modulesState.depModulesState.departmentId = departmentId;
             let data = await departmentApi.departmentUser(this, { departmentId, companyId });
             if (!data.er) {
                 /** 设置选中的树节点 */
-                this.modulesState.selectTreeCode = depId[0];
-                this.modulesState.userlist = data.res;
-                for(let i = 0;i<this.modulesState.userlist.length;i++){
-                    this.modulesState.userlist[i].key =this.modulesState.userlist[i].userId;
+                this.modulesState.depModulesState.selectTreeCode = depId[0];
+                this.modulesState.depModulesState.userlist = data.res;
+                for (let i = 0; i < this.modulesState.depModulesState.userlist.length; i++) {
+                    this.modulesState.depModulesState.userlist[i].key = this.modulesState.depModulesState.userlist[i].userId;
                 }
-                this.modulesState.isDisabled = false;
-                this.modulesState.isDepLoadding = false;
+                this.modulesState.depModulesState.isDisabled = false;
+                this.modulesState.depModulesState.isDepLoadding = false;
             }
         } else {
-            this.modulesState.isDisabled = true;
+            this.modulesState.depModulesState.isDisabled = true;
         }
 
         this.setModulesState(this.modulesState);
@@ -57,24 +57,24 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /** 弹出新增窗口 */
     public addDepUserModal = async () => {
-        this.modulesState.isDepModal = true;
+        this.modulesState.depModulesState.isDepModal = true;
         this.setModulesState(this.modulesState);
     }
 
     /** 关闭新增窗口 */
     public closeDepUserModal = async () => {
-        this.modulesState.isDepModal = false;
+        this.modulesState.depModulesState.isDepModal = false;
         this.setModulesState(this.modulesState);
     }
 
     /** 关闭修改窗口 */
     public closeUpdDepUserModal = async () => {
-        this.modulesState.isUpdDepModal = false;
+        this.modulesState.depModulesState.isUpdDepModal = false;
         this.setModulesState(this.modulesState);
     }
 
     /** 保存部门 */
-    public saveDep = async (parentDepartmentId, depNumber, name, description?) => {
+    public saveDep = async (parentDepartmentId: string, depNumber: string, name: string, description?: any) => {
         const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
@@ -95,7 +95,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
             // 重新加载部门
             this.departmentQuery();
             /** 关闭窗口 */
-            this.modulesState.isDepModal = false;
+            this.modulesState.depModulesState.isDepModal = false;
             this.setModulesState(this.modulesState);
 
             message.success('保存成功');
@@ -119,22 +119,22 @@ class ModulesAction extends ActionBasic<ModulesState> {
     }
 
     /** 根据ID获取部门 */
-    public getDepartment = async (departmentId) => {
-        this.modulesState.isUpdDepModal = true;
+    public getDepartment = async (departmentId: string) => {
+        this.modulesState.depModulesState.isUpdDepModal = true;
 
 
         /** 修改的对象 */
-        this.modulesState.departmentList.forEach((element, index) => {
+        this.modulesState.depModulesState.departmentList.forEach((element, index) => {
             if (element.departmentId === departmentId) {
-                this.modulesState.department = element;
+                this.modulesState.depModulesState.department = element;
             }
         });
-        this.buildTree(this.modulesState.departmentList);
+        this.buildTree(this.modulesState.depModulesState.departmentList);
         this.setModulesState(this.modulesState);
     }
 
     /** 修改部门 */
-    public updDep = async (dep) => {
+    public updDep = async (dep:{parentDepartmentId: string,number: string,name: string, description:any,departmentId: string,createTime: number }) => {
         const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
@@ -155,7 +155,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
         if (!data.er) {
             // 重新加载部门
             this.departmentQuery();
-            this.modulesState.isUpdDepModal = false;
+            this.modulesState.depModulesState.isUpdDepModal = false;
             this.setModulesState(this.modulesState);
             message.success('保存成功');
         }
@@ -164,27 +164,27 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /** 打开设置窗口 */
     public openSetDepModal = async () => {
-        this.modulesState.isSetDepModal = true;
+        this.modulesState.depModulesState.isSetDepModal = true;
         this.setModulesState(this.modulesState);
     }
 
     /** 关闭设置窗口 */
     public closeSetDepModal = async () => {
-        this.modulesState.isSetDepModal = false;
+        this.modulesState.depModulesState.isSetDepModal = false;
         this.setModulesState(this.modulesState);
     }
 
     /** 设置员工部门 */
-    public setUserDep = async (departmentId) => {
+    public setUserDep = async (departmentId: string) => {
         const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
-        let userIds: string[] = this.modulesState.userIds;
+        let userIds: string[] = this.modulesState.depModulesState.userIds;
         let data = await departmentApi.setUserDep(this, { companyId, departmentId, userIds });
         if (!data.er) {
-            this.modulesState.isSetDepModal = false;
-            this.departmentUser([this.modulesState.departmentId]);
-            this.modulesState.selectedDepRows = [];
-            this.modulesState.selectedDepRowKeys = [];
+            this.modulesState.depModulesState.isSetDepModal = false;
+            this.departmentUser([this.modulesState.depModulesState.departmentId]);
+            this.modulesState.depModulesState.selectedDepRows = [];
+            this.modulesState.depModulesState.selectedDepRowKeys = [];
             this.setModulesState(this.modulesState);
             message.success('操作成功');
         }
@@ -192,7 +192,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
 
     /** 修改上级部门 */
-    public updParentDep = async (dep) => {
+    public updParentDep = async (dep:{parentDepartmentId: string,number: string,name: string, description:any,departmentId: string,createTime: number }) => {
         const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
@@ -212,24 +212,29 @@ class ModulesAction extends ActionBasic<ModulesState> {
         if (!data.er) {
             // 重新加载部门
             this.departmentQuery();
-            this.modulesState.isUpdDepModal = false;
+            this.modulesState.depModulesState.isUpdDepModal = false;
             this.setModulesState(this.modulesState);
             message.success('保存成功');
         }
     }
 
     /** 刷新功能 */
-    public refreshDep = async (departmentId) => {
-        this.modulesState.selectedDepRows = [];
-        this.modulesState.selectedDepRowKeys = [];
-        this.modulesState.userlist = [];
-        this.departmentUser([this.modulesState.departmentId]);
+    public refreshDep = async () => {
+        this.modulesState.depModulesState.selectedDepRows = [];
+        this.modulesState.depModulesState.selectedDepRowKeys = [];
+        this.modulesState.depModulesState.userlist = [];
+        this.departmentUser([this.modulesState.depModulesState.departmentId]);
+        this.setModulesState(this.modulesState);
+    }
+
+    /** 设置选中表格的key */
+    public setDepTableKey = async () => {
         this.setModulesState(this.modulesState);
     }
 
 
     /** 构建树 */
-    public buildTree = async (list) => {
+    public buildTree = async (list: any) => {
         let buildTreeParam = [];
         for (let i = 0; i < list.length; i++) {
             let treeObj = {
@@ -248,7 +253,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
             treeObj.pId = list[i].parentDepartmentId;
             buildTreeParam.push(treeObj);
         }
-        this.modulesState.treeData = tree(buildTreeParam);
+        this.modulesState.depModulesState.treeData = tree(buildTreeParam);
         this.setModulesState(this.modulesState);
     }
 

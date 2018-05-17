@@ -47,23 +47,29 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
 
     constructor(props: IProps) {
         super(props, ModulesAction);
-        this.modulesState.userlist = null;
+        this.modulesState.depModulesState.userlist = null;
+        console.log(this.modulesState.depModulesState.selectedDepRowKeys);
         this.setState(this.state);
     }
 
     render() {
-        let { selectedDepRowKeys } = this.modulesState;
+        let { selectedDepRowKeys } = this.modulesState.depModulesState;
         const rowSelection = {
             // 获取选中的行
             onChange: (selectedRowKeys, selectedRows) => {
                 console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-                this.modulesState.selectedDepRows = [];
-                this.modulesState.selectedDepRowKeys = selectedRowKeys;
+                console.log(selectedRowKeys);
+                this.modulesState.depModulesState.selectedDepRows = [];
+                this.modulesState.depModulesState.selectedDepRowKeys = [];
+                this.modulesState.depModulesState.selectedDepRowKeys = selectedRowKeys;
+                
                 selectedRows.forEach(element => {
-                    this.modulesState.selectedDepRows.push(element);
-                    this.modulesState.userIds.push(element.userId);
+                    this.modulesState.depModulesState.selectedDepRows.push(element);
+                    this.modulesState.depModulesState.userIds.push(element.userId);
                 });
-                this.setState(this.modulesState);
+                this.setState(this.modulesState.depModulesState.selectedDepRowKeys);
+                ModulesAction.setDepTableKey();
+                console.log(selectedDepRowKeys);
             },
             selectedRowKeys: selectedDepRowKeys,
             getCheckboxProps: record => ({
@@ -79,10 +85,10 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
                 <Row>
                     <Col style={{ textAlign: 'end', marginBottom: 10 }}>
                         <Button onClick={ModulesAction.refreshDep} type="primary" style={{ marginRight: 10 }}>刷新</Button>
-                        <Button onClick={ModulesAction.openSetDepModal} disabled={this.modulesState.selectedDepRows.length === 0 ? true : false} type="primary">设置所在部门</Button>
+                        <Button onClick={ModulesAction.openSetDepModal} disabled={this.modulesState.depModulesState.selectedDepRows.length === 0 ? true : false} type="primary">设置所在部门</Button>
                     </Col>
                     <Col>
-                        <Table rowSelection={rowSelection} columns={columns} loading={this.modulesState.isDepLoadding} dataSource={this.modulesState.userlist} />
+                        <Table rowSelection={rowSelection} columns={columns} loading={this.modulesState.depModulesState.isDepLoadding} dataSource={this.modulesState.depModulesState.userlist} />
                     </Col>
                 </Row>
             </div>

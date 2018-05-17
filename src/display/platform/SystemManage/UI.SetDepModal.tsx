@@ -40,7 +40,7 @@ export default class UISetDepModal extends UIBasic<IProps, ModulesState> {
     /** 选择下拉树 */
     onSelect = (value) => {
         console.log(value);
-        this.modulesState.selectTreeVal = value;
+        this.modulesState.depModulesState.selectTreeVal = value;
     }
 
     /** 保存 */
@@ -64,7 +64,7 @@ export default class UISetDepModal extends UIBasic<IProps, ModulesState> {
             <div>
                 <Modal
                     title="设置所在部门"
-                    visible={this.modulesState.isSetDepModal}
+                    visible={this.modulesState.depModulesState.isSetDepModal}
                     onOk={this.saveSet}
                     onCancel={this.closeModal}
                     okText="保存"
@@ -77,12 +77,12 @@ export default class UISetDepModal extends UIBasic<IProps, ModulesState> {
                             rules: [
                                 { required: true, message: '请选择上级部门' },
                             ],
-                            initialValue: this.modulesState.department && this.modulesState.department.parentDepartmentId
+                            initialValue: this.modulesState.depModulesState.department && this.modulesState.depModulesState.department.parentDepartmentId
                         })(
                             <TreeSelect
                                 showSearch={false}
                                 dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                                treeData={this.modulesState.treeData}
+                                treeData={this.modulesState.depModulesState.treeData}
                                 onSelect={this.onSelect}
                                 className={css.treeStyle}
                                 treeDataSimpleMode={true}

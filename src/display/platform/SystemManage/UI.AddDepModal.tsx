@@ -41,7 +41,7 @@ export default class UIAddDepModal extends UIBasic<IProps, ModulesState> {
     /** 选择下拉树 */
     onSelect = (value) => {
         console.log(value);
-        this.modulesState.selectTreeVal = value;
+        this.modulesState.depModulesState.selectTreeVal = value;
     }
 
     /** 保存 */
@@ -65,7 +65,7 @@ export default class UIAddDepModal extends UIBasic<IProps, ModulesState> {
             <div>
             <Modal
                 title="新增部门"
-                visible={this.modulesState.isDepModal}
+                visible={this.modulesState.depModulesState.isDepModal}
                 onOk={this.saveUser}
                 onCancel={this.closeModal}
                 okText="保存"
@@ -83,7 +83,7 @@ export default class UIAddDepModal extends UIBasic<IProps, ModulesState> {
                             showSearch={false}
                             // value={val}
                             dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                            treeData={this.modulesState.treeData}
+                            treeData={this.modulesState.depModulesState.treeData}
                             onSelect={this.onSelect}
                             className={css.treeStyle}
                             treeDataSimpleMode={true}
