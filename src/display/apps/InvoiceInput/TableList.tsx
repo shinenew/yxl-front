@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Card, Button, message, Alert,Popconfirm } from 'antd';
+import { Table, Card, Button, message, Alert, Popconfirm, Icon } from 'antd';
 import AdvancedForm from './AdvancedForm';
 import ModulesAction from './Modules.Action';
 import { tree } from 'src/utils';
@@ -23,12 +23,25 @@ class UserForm extends React.Component<any, any> {
                     <span>
                         {
                             record.groupNumber ?
-                                <span>{record.groupNumber}({record.matchCount}/{record.waitCount})</span>
+                                <span>
+                                    <Icon type="folder" style={{ fontSize: 16, color: '#5CC4E9', marginRight: 21 }} />
+                                    {record.groupNumber}({record.matchCount}/{record.waitCount})
+                                </span>
                                 : <span>{text}</span>
                         }
                     </span>
                 );
 
+            }
+        },
+        {
+            title: '',
+            dataIndex: 'unusualState',
+            render: (text) => {
+                return (
+                    <span>{text==='UNUSUAL'&&<Icon type="warning" style={{color:'#EB6100'}}/>}
+                    </span>
+                );
             }
         },
         {
@@ -152,7 +165,7 @@ class UserForm extends React.Component<any, any> {
         });
     }
     refreshInvoice = () => {
-        console.log(2);
+        this.getData();
     }
     componentDidMount() {
         this.getData();

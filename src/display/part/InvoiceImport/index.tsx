@@ -33,7 +33,6 @@ export default class InvoiceImport extends ModulesBasic<IProps, ModulesState> {
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
-
     render() {
         return (
             <ModulesRoot action={ModulesAction}>
