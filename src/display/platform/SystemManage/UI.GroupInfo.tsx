@@ -66,10 +66,10 @@ export default class TabUI extends UIBasic<IProps, ModulesState> {
               )}
             >
               {getFieldDecorator('name', {
-                initialValue: this.modulesState.groupInfo.name !== undefined ? this.modulesState.groupInfo.name : '',
+                initialValue: this.modulesState.groupInfoModulesState.name !== undefined ? this.modulesState.groupInfoModulesState.name : '',
                 rules: [{ type: 'string', pattern: /^\S.{1,25}\S$/, message: '请输入集团名称(3-25位字符,前后不能有空格)' }]
               })(
-                <Input className={this.modulesState.groupInfo.disable ? '' : css.groupInput} disabled={!this.modulesState.groupInfo.disable} />
+                <Input className={this.modulesState.groupInfoModulesState.disable ? '' : css.groupInput} disabled={!this.modulesState.groupInfoModulesState.disable} />
               )}
             </FormItem>
             <FormItem
@@ -81,28 +81,29 @@ export default class TabUI extends UIBasic<IProps, ModulesState> {
               )}
             >
               {getFieldDecorator('description', {
-                initialValue: this.modulesState.groupInfo.description !== undefined ? this.modulesState.groupInfo.description : ''
+                initialValue: this.modulesState.groupInfoModulesState.description !== undefined ? this.modulesState.groupInfoModulesState.description : ''
               })(
-                <TextArea className={this.modulesState.groupInfo.disable ? '' : css.groupInput} rows={5} disabled={!this.modulesState.groupInfo.disable} />
+                <TextArea className={this.modulesState.groupInfoModulesState.disable ? '' : css.groupInput} rows={5} disabled={!this.modulesState.groupInfoModulesState.disable} />
               )}
             </FormItem>
             <FormItem required={false}>
               {getFieldDecorator('orgId', {
-                initialValue: this.modulesState.groupInfo.orgId !== undefined ? this.modulesState.groupInfo.orgId : ''
+                initialValue: this.modulesState.groupInfoModulesState.orgId !== undefined ? this.modulesState.groupInfoModulesState.orgId : ''
               })(
                 <Input type="hidden" />
               )}
             </FormItem>
             <FormItem required={false}>
               {getFieldDecorator('createTime', {
-                initialValue: this.modulesState.groupInfo.createTime !== undefined ? this.modulesState.groupInfo.createTime : ''
+                initialValue: this.modulesState.groupInfoModulesState.createTime !== undefined ? this.modulesState.groupInfoModulesState.createTime : ''
               })(
                 <Input type="hidden" />
               )}
             </FormItem>
             <FormItem required={false}>
               {getFieldDecorator('updateTime', {
-                initialValue: this.modulesState.groupInfo.updateTime !== undefined ? this.modulesState.groupInfo.updateTime : ''
+                initialValue: this.modulesState.groupInfoModulesState
+                .updateTime !== undefined ? this.modulesState.groupInfoModulesState.updateTime : ''
               })(
                 <Input type="hidden" />
               )}
@@ -111,8 +112,8 @@ export default class TabUI extends UIBasic<IProps, ModulesState> {
         </Form>
           {<Row style={{ marginTop: 10 }} className={css.textCenter}>
             {
-              !this.modulesState.groupInfo.disable && <Button className="text-center" type="primary" onClick={() => ModulesAction.isEdit()} >修改</Button>}
-            {this.modulesState.groupInfo.disable && /*  */
+              !this.modulesState.groupInfoModulesState.disable && <Button className="text-center" type="primary" onClick={() => ModulesAction.isEdit()} >修改</Button>}
+            {this.modulesState.groupInfoModulesState.disable && /*  */
               <div>
                 <Button onClick={() => this.updateGroupInfo()} className="text-center" type="primary" htmlType="submit">保存</Button>
                 <Button style={{ marginLeft: 20 }} onClick={() => ModulesAction.isEdit()} className="text-center ml-10" type="default" >取消</Button>
