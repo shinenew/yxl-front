@@ -22,7 +22,7 @@
         "jsx-no-lambda": false,
         "jsx-no-multiline-js": false,
         "label-position": true,
-        "max-line-length": [ true, 220 ],
+        "max-line-length": [ false, 200 ],
         "jsx-curly-spacing":0,
         "member-ordering": [
             true,
@@ -75,6 +75,7 @@
             "parameter",
             "property-declaration"
         ],
+        "jsx-self-close":false,
         "typedef-whitespace": [
             true,
             {

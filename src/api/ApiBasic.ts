@@ -31,7 +31,11 @@ export default abstract class ApiBasic<O, D> {
         request.options.Authorization = user.cToken;
         return await this.call(request, `//${user.zoneUrl}`, mock);
     }
-
+    public callScaner=async (request: Request, mock: boolean = false): Promise<any> => {
+        const { user } = MyStore.instance.getState();
+        request.options.Authorization = user.cToken;
+        return await this.call(request, 'http://localhost:8088', mock);
+    }
     /** 向服务器发送请求 */
     public call = async (request: Request, domain: string, mock: boolean = false): Promise<any> => {
 

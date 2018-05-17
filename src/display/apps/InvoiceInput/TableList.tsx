@@ -74,6 +74,10 @@ class UserForm extends React.Component<any, any> {
                     <div>
                         <span className="pd5 hand" onClick={() => { this.onDetail(record); }}>详情</span>
                         {
+                            !record.group&&
+                            <span className="pd5 hand" onClick={()=>{this.onInfo(record);}}>票面信息</span>
+                        }
+                        {
                             record.group &&
                             <Popconfirm
                                 title="确认删除"
@@ -144,6 +148,20 @@ class UserForm extends React.Component<any, any> {
     onCloseSwitch = () => {
         this.setState({
             addToModal: false
+        });
+    }
+    onInfo=(record)=>{
+        invoiceInput.querySingleDetail(this, { incomeInvoiceBizId: this.props.data.invoiceId }).then((response: any) => {
+            const err = response.err;
+            const res = response.res;
+            if (err) {
+                message.error(err.status.description);
+                return null;
+            } else {
+                if (res) {
+                    message.success('操作成功');
+                }
+            }
         });
     }
     onDetail = (record) => {
