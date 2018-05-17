@@ -1,6 +1,7 @@
 import ModulesStateBasic from 'kts-scaffold-framework/modules/ModulesStateBasic';
 import { MyStore } from 'src/redux';
 import ModulesStateDepartment from './Modules.State.Department';
+import ModulesStateUser from './Modules.State.User';
 import ModulesStateRole from './Modules.State.Role';
 import ModulesStateGroupInfo from './Modules.State.GroupInfo';
 
@@ -10,6 +11,9 @@ export default class ModulesState extends ModulesStateBasic {
     public depModulesState = new ModulesStateDepartment();
     /************************** 部门管理end ************************************/
 
+    /** 用户管理 */
+    public userModulesState = new ModulesStateUser();
+    
     /************************** 集团资料start ************************************/
     public groupInfoModulesState = new ModulesStateGroupInfo();
     /************************** 集团资料end ************************************/
@@ -41,6 +45,9 @@ export default class ModulesState extends ModulesStateBasic {
     //     updateTime: '',    // 更新时间
     // };
 
+    /******************************** 角色 start ******************************************* */
+    // 被选中的列表
+    public selectedRows: any;
     /************************** 关联公司及集团管理end ************************************/
 
     /***********************************用户管理相关state 开始************************************/

@@ -49,7 +49,7 @@ export default class UIDetail extends UIBasic<IProps, ModulesState> {
             <div>
                 <Modal
                     title="详情页"
-                    visible={this.modulesState.detailVisible}
+                    visible={this.modulesState.userModulesState.detailVisible}
                     onOk={this.hideModal} // 点击确定回调
                     onCancel={this.hideModal} // 点击遮罩层或右上角叉或取消按钮的回调
                     footer={null} // 隐藏底部确认和关闭按钮
@@ -59,30 +59,30 @@ export default class UIDetail extends UIBasic<IProps, ModulesState> {
                     width={1000}
                 >
                     <Row >
-                        <Col span={12}><p><span style={{ fontSize: 16 }}>用户姓名：</span>{this.modulesState.detail && this.modulesState.detail.nickName} </p></Col>
-                        <Col span={12}><p><span style={{ fontSize: 16 }}>电子邮箱：</span>{this.modulesState.detail && this.modulesState.detail.email}  </p></Col>
+                        <Col span={12}><p><span style={{ fontSize: 16 }}>用户姓名：</span>{this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.nickName} </p></Col>
+                        <Col span={12}><p><span style={{ fontSize: 16 }}>电子邮箱：</span>{this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.email}  </p></Col>
                     </Row>
                     <Row >
-                        <Col span={12}> <p><span style={{ fontSize: 16 }}>所属部门：</span>{this.modulesState.detail && this.modulesState.detail.departmentName} </p></Col>
-                        <Col span={12}><p><span style={{ fontSize: 16 }}>电话号码： </span> {this.modulesState.detail && this.modulesState.detail.phone} </p></Col>
+                        <Col span={12}> <p><span style={{ fontSize: 16 }}>所属部门：</span>{this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.departmentName} </p></Col>
+                        <Col span={12}><p><span style={{ fontSize: 16 }}>电话号码： </span> {this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.phone} </p></Col>
                     </Row>
                     <Row >
-                        <Col span={12}> <p><span style={{ fontSize: 16 }}>最后登陆时间: </span>{this.modulesState.detail && this.formatTime(this.modulesState.detail.lastLoginTime)} </p></Col>
-                        <Col span={12}> <p><span style={{ fontSize: 16 }}>最后登陆IP: </span>{this.modulesState.detail && this.modulesState.detail.lastLoginIp} </p></Col>
+                        <Col span={12}> <p><span style={{ fontSize: 16 }}>最后登陆时间: </span>{this.modulesState.userModulesState.detail && this.formatTime(this.modulesState.userModulesState.detail.lastLoginTime)} </p></Col>
+                        <Col span={12}> <p><span style={{ fontSize: 16 }}>最后登陆IP: </span>{this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.lastLoginIp} </p></Col>
                     </Row>
                     <Row >
                         <Col span={12}><p><span style={{ fontSize: 16 }}>用户状态: </span> {
-                            this.modulesState.detail && this.modulesState.detail.acceptStatus === 'ACCEPT_ING' && <Tag>邀请中</Tag>
+                            this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.acceptStatus === 'ACCEPT_ING' && <Tag>邀请中</Tag>
                         }
                             {
-                                this.modulesState.detail && this.modulesState.detail.acceptStatus === 'ACCEPT_NO' && <Tag>已拒绝</Tag>
+                                this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.acceptStatus === 'ACCEPT_NO' && <Tag>已拒绝</Tag>
                             }
                             {
-                                <Tag>{this.modulesState.detail && this.modulesState.detail.isActivated ? '已激活' : '已禁用'}</Tag>
+                                <Tag>{this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.isActivated ? '已激活' : '已禁用'}</Tag>
                             } </p></Col>
                     </Row>
                     <Row>
-                        <Col span={24}><p><span style={{ fontSize: 16 }}>用户备注: </span> {this.modulesState.detail && this.modulesState.detail.description} </p></Col>
+                        <Col span={24}><p><span style={{ fontSize: 16 }}>用户备注: </span> {this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.description} </p></Col>
                     </Row>
                 </Modal>
             </div>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
-import { connect, ReduxState, MyStore } from 'src/redux';
+import { connect, ReduxState } from 'src/redux';
 import ModulesAction from './Modules.Action';
 import ModulesState from './Modules.State';
 import { Form, Input, Modal, Row, Col } from 'antd';
@@ -47,18 +47,14 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
     /** 新增 */
     save = (): void => {
         const { form } = this.props;
-
-        const { user } = MyStore.instance.getState();
-        const companyId = user.userInfo.companyId;
         form.validateFields(async (er: any, values: any) => {
             if (er) {
                 return;
             }
             // 隐藏addOrEdit弹框
             ModulesAction.userModalFn('add', 'hide');
-            ModulesAction.userAdd(companyId, values);
+            ModulesAction.userAdd(values);
         });
-
     }
 
     render() {
@@ -68,7 +64,7 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
             <div>
                 <Modal
                     title="新增页"
-                    visible={this.modulesState.addVisible}
+                    visible={this.modulesState.userModulesState.addVisible}
                     onOk={this.save} // 点击确定回调
                     onCancel={this.hideModal} // 点击遮罩层或右上角叉或取消按钮的回调
                     // footer={null} // 隐藏底部确认和关闭按钮
@@ -121,7 +117,7 @@ export default class UIAdd extends UIBasic<IProps, ModulesState> {
                             <Col span={4}><Input type="hidden" /></Col>
                         </Row>
                         <FormItem>
-                            {getFieldDecorator('userId', { initialValue: this.modulesState.detail && this.modulesState.detail.userId, })(<input type="hidden" />)}
+                            {getFieldDecorator('userId', { initialValue: this.modulesState.userModulesState.detail && this.modulesState.userModulesState.detail.userId, })(<input type="hidden" />)}
                         </FormItem>
                     </Form>
                 </Modal>

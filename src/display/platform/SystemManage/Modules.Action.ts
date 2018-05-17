@@ -134,7 +134,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     }
 
     /** 修改部门 */
-    public updDep = async (dep:{parentDepartmentId: string,number: string,name: string, description:any,departmentId: string,createTime: number }) => {
+    public updDep = async (dep: { parentDepartmentId: string, number: string, name: string, description: any, departmentId: string, createTime: number }) => {
         const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
@@ -192,7 +192,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
 
     /** 修改上级部门 */
-    public updParentDep = async (dep:{parentDepartmentId: string,number: string,name: string, description:any,departmentId: string,createTime: number }) => {
+    public updParentDep = async (dep: { parentDepartmentId: string, number: string, name: string, description: any, departmentId: string, createTime: number }) => {
         const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
@@ -304,8 +304,13 @@ class ModulesAction extends ActionBasic<ModulesState> {
         this.setModulesState(this.modulesState);
     }
 
-    /** 公司信息 禁用\启用 */
-    public onUpdate = async (record: any) => {
+    /**
+     * 公司信息 禁用\启用
+     * 
+     * @param connectionState  公司状态
+     * @param connectionId  公司Id
+     */
+    public onUpdate = async (record: { connectionState: number, connectionId: string }) => {
         if (record.connectionState === 1) {
             // 启用转禁用
             let connectionId: Array<string> = [];
@@ -326,8 +331,11 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /**
      * 查询公司
+     * 
+     * @param connectionName  公司名字
+     * @param connectionTaxId  公司税号
      */
-    public selectCompany = async (connectionName: any, connectionTaxId: any) => {
+    public selectCompany = async (connectionName: string, connectionTaxId: string) => {
         let data: any = await system.findCompanyList(this, { connectionName: connectionName, connectionTaxId: connectionTaxId, companyId: this.modulesState.user.companyId });
         this.modulesState.company.list = data.res;
         this.setModulesState(this.modulesState);
@@ -339,7 +347,12 @@ class ModulesAction extends ActionBasic<ModulesState> {
         this.setModulesState(this.modulesState);
     }
 
-    /** 勾选关联公司 */
+    /**
+     * 勾选关联公司
+     * 
+     * @param selectedRowKeys  选中数据的key
+     * @param selectedRows  选中数据
+     */
     onSelectChange = (selectedRowKeys, selectedRows) => {
         this.modulesState.companyState.selectedRowKeys = selectedRowKeys;
         this.modulesState.companyState.selectedRows = selectedRows;
@@ -373,8 +386,16 @@ class ModulesAction extends ActionBasic<ModulesState> {
         this.setModulesState(this.modulesState);
     }
 
-    /** 更新集团公司信息 */
-    updateGroupInfo = async (org: any) => {
+    /**
+     * 更新集团公司信息
+     * 
+     * @param orgId  集团Id
+     * @param name 集团名字
+     * @param description 集团备注
+     * @param createTime 创建时间
+     * @param updateTime 更新时间
+     */
+    updateGroupInfo = async (org: { orgId: string, name: string, description: string, createTime: string, updateTime: number }) => {
         org.updateTime = new Date().getTime();
         await system.updateGroupInfo(this, org);
         this.modulesState.groupInfoModulesState.disable = !this.modulesState.groupInfoModulesState.disable;
@@ -387,26 +408,25 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /**
      * 获取用户列表
-     * @param PageNumber 
-     * @param pageSize
      * @param nickName
      * @param email
      * @param isActivated
      * @param acceptStatus
      */
-    public getUserList = async (values?: any) => {
-        let data = await system.userList(this, {
-            nickName: values && values.nickName,
-            email: values && values.email,
-            isActivated: values && values.isActivated,
-            acceptStatus: values && values.acceptStatus
-        });
+    public getUserList = async (screen?: { nickName: string, email: string, isActivated: boolean, acceptStatus: string }) => {
+        // 封装接口参数
+        let param = {
+            nickName: screen && screen.nickName,
+            email: screen && screen.email,
+            isActivated: screen && screen.isActivated,
+            acceptStatus: screen && screen.acceptStatus
+        };
+        // 接口调用
+        let data = await system.userList(this, param);
         if (!data.er && data.res) {
-            this.modulesState.total = data.res.pageMeta.total;
-            this.modulesState.currentPage = data.res.pageMeta.pageNum;
-            this.modulesState.pageSize = data.res.pageMeta.pageSize;
-            this.modulesState.data = data.res.items;
-            this.modulesState.userDataLoding = false;
+            this.modulesState.userModulesState.total = data.res.pageMeta.total;
+            this.modulesState.userModulesState.data = data.res.items;
+            this.modulesState.userModulesState.userDataLoding = false;
             this.setModulesState(this.modulesState);
         }
     }
@@ -415,10 +435,11 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * 查询公司角色信息
      * @param companyId 公司ID
      */
-    public getUserCompanyRole = async (companyId) => {
-        let data = await system.userCompanyRole(this, { companyId: companyId });
+    public getUserCompanyRole = async (companyId: string) => {
+        // 调用接口
+        let data = await system.userCompanyRole(this, { companyId });
         if (!data.er) {
-            this.modulesState.userCompanyRole = data.res;
+            this.modulesState.userModulesState.userCompanyRole = data.res;
             this.setModulesState(this.modulesState);
         }
     }
@@ -428,19 +449,30 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * @param userId 用户ID
      */
 
-    public getUserCurrentRole = async (userId) => {
-        let data = await system.userCurrentRole(this, { userId: userId });
+    public getUserCurrentRole = async (userId: string) => {
+        // 调用接口
+        let data = await system.userCurrentRole(this, { userId });
         if (!data.er) {
-            this.modulesState.userCurrentRole = data.res;
+            this.modulesState.userModulesState.userCurrentRole = data.res;
             this.setModulesState(this.modulesState);
         }
     }
 
     /**
      * 编辑用户角色
+     * @param userId 用户ID
+     * @param companyId 公司ID
+     * @param roles 角色数组
      */
-    public userRoleEdit = async (userId, companyId, roles) => {
-        let data = await system.userRoleUpdate(this, { userId: userId, companyId: companyId, roles: roles });
+    public userRoleEdit = async (userId: string, companyId: string, roles: string[]) => {
+        // 封装接口参数
+        let param = {
+            userId: userId,
+            companyId: companyId,
+            roles: roles
+        };
+        // 接口调用
+        let data = await system.userRoleUpdate(this, param);
         if (!data.er) {
             this.success('成功', '修改成功！');
         }
@@ -450,61 +482,79 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * 编辑用户
      * @param values
      */
-    public userEdit = async (values) => {
-        let data = await system.userEdit(this, {
-            userId: values.userId,
-            companyId: values.companyId,
-            nickName: values.nickName,
-            phone: values.phone,
-            description: values.description
-        });
+    public userEdit = async (record: { userId: string, companyId: string, nickName: string, phone: string, description: string }) => {
+        // 封装接口参数
+        let param = {
+            userId: record.userId,
+            companyId: record.companyId,
+            nickName: record.nickName,
+            phone: record.phone,
+            description: record.description
+        };
+        // 接口调用
+        let data = await system.userEdit(this, param);
         if (!data.er) {
-            this.getUserList();
+            let list = this.modulesState.userModulesState.data;
+            for (let index = 0; index < list.length; index++) {
+                if (list[index].userId === record.userId) {
+                    list[index].nickName = record.nickName;
+                    list[index].phone = record.phone;
+                    list[index].description = record.description;
+                    break;
+                }
+            }
             this.setModulesState(this.modulesState);
             this.success('成功', '修改成功！');
         }
     }
 
     /** 新增用户 */
-    public userAdd = async (companyId, values) => {
-        let data = await system.userAdd(this, {
-            companyId: companyId,
-            nickName: values.nickName,
-            email: values.email,
-            phone: values.phone,
-            description: values.description
-        });
+    public userAdd = async (record: { nickName: string, email: string, phone: string, description: string }) => {
+        const { user } = MyStore.instance.getState();
+        // 封装接口参数
+        let param = {
+            companyId: user.userInfo.companyId,
+            nickName: record.nickName,
+            email: record.email,
+            phone: record.phone,
+            description: record.description
+        };
+        // 接口调用
+        let data = await system.userAdd(this, param);
         if (!data.er) {
-            // 在数组最前面添加一条数据
-            // this.modulesState.data.splice(0, 0, data.res);
-            // this.modulesState.data.push(data.res);
             this.getUserList();
-            // this.setModulesState(this.modulesState);
             this.success('成功', '新增成功！');
         }
     }
 
     /** 
      * 用户禁用或启用
-     * @param record
+     * @param companyId 公司ID
+     * @param userId 用户ID
+     * @param status 禁用或启用
      */
-    public userDisOrEna = async (record, status: boolean) => {
-        let data = await system.userDisOrEna(this, {
-            companyId: record.companyId, userId: record.userId, status: status
-        });
+    public userDisOrEna = async (record: { companyId: string, userId: string }, status: boolean) => {
+        // 封装接口参数
+        let param = {
+            companyId: record.companyId,
+            userId: record.userId,
+            status: status
+        };
+        // 接口调用
+        let data = await system.userDisOrEna(this, param);
         if (!data.er) {
             this.getUserList();
-            this.setModulesState(this.modulesState);
             this.success('成功', '设置成功！');
         }
     }
 
     /** 
      * 重新发送
-     * @param record
+     * @param userId 用户ID
      */
-    public userSend = async (record) => {
-        let data = await system.userSend(this, { userId: record.userId });
+    public userSend = async (userId: string) => {
+        // 调用接口
+        let data = await system.userSend(this, { userId });
         if (!data.er) {
             this.success('成功', '发送成功！');
         }
@@ -517,7 +567,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     public userDetail = async (userId: string) => {
         let data = await system.userDetail(this, { userId });
         if (!data.er) {
-            this.modulesState.detail = data.res;
+            this.modulesState.userModulesState.detail = data.res;
             this.setModulesState(this.modulesState);
         }
     }
@@ -528,43 +578,43 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * @param type 例如：show、hide
      * @param record 操作数据 一般像edit detail才会用到此字段
      */
-    public userModalFn = (flag, type, record?: any) => {
+    public userModalFn = (flag: string, type: string, record?: any) => {
         // 详情弹框
         if (flag === 'detail') {
             if (type === 'show') {
-                this.modulesState.detailVisible = true;
-                this.modulesState.detail = record;
+                this.modulesState.userModulesState.detailVisible = true;
+                this.modulesState.userModulesState.detail = record;
             } else {
-                this.modulesState.detailVisible = false;
-                this.modulesState.detail = {};
+                this.modulesState.userModulesState.detailVisible = false;
+                this.modulesState.userModulesState.detail = {};
             }
         }
         // 新增弹框
         if (flag === 'add') {
             if (type === 'show') {
-                this.modulesState.addVisible = true;
+                this.modulesState.userModulesState.addVisible = true;
             } else {
-                this.modulesState.addVisible = false;
+                this.modulesState.userModulesState.addVisible = false;
             }
         }
         // 编辑弹框
         if (flag === 'edit') {
             if (type === 'show') {
-                this.modulesState.detail = record;
-                this.modulesState.editVisible = true;
+                this.modulesState.userModulesState.detail = record;
+                this.modulesState.userModulesState.editVisible = true;
             } else {
-                this.modulesState.detail = {};
-                this.modulesState.editVisible = false;
+                this.modulesState.userModulesState.detail = {};
+                this.modulesState.userModulesState.editVisible = false;
             }
         }
         // 绑定角色弹框
         if (flag === 'role') {
             if (type === 'show') {
-                this.modulesState.detail = record;
-                this.modulesState.roleVisible = true;
+                this.modulesState.userModulesState.detail = record;
+                this.modulesState.userModulesState.roleVisible = true;
             } else {
-                this.modulesState.detail = {};
-                this.modulesState.roleVisible = false;
+                this.modulesState.userModulesState.detail = {};
+                this.modulesState.userModulesState.roleVisible = false;
             }
         }
         this.setModulesState(this.modulesState);
@@ -573,13 +623,17 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /** 改变icon样式和显示筛选主键 */
     public userSearchIcon = () => {
         // 改变图标样式
-        this.modulesState.iconStyle = this.modulesState.iconStyle ? false : true;
+        this.modulesState.userModulesState.iconStyle = this.modulesState.userModulesState.iconStyle ? false : true;
         // 显示筛选组件
-        this.modulesState.searchState = this.modulesState.searchState ? false : true;
+        this.modulesState.userModulesState.searchState = this.modulesState.userModulesState.searchState ? false : true;
         this.setModulesState(this.modulesState);
     }
 
-    /** 操作提示框 */
+    /** 
+     * 操作提示框
+     * @param title 标题
+     * @param content 提示内容
+     */
     public success(title: string, content: string) {
         Modal.success({
             title: title,
@@ -638,7 +692,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 新增角色保存
      */
-    public saveRole = async (name:string, description: string,value: [{}] ) => {
+    public saveRole = async (name: string, description: string, value: [{}]) => {
         const { user } = MyStore.instance.getState();
         // 组装入参数据
         let companyId = user.userInfo.companyId;
@@ -662,7 +716,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 删除角色
      */
-    public deleteRole = async (roleId:string) => {
+    public deleteRole = async (roleId: string) => {
         const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
         let data = await role.deleteRole(this, { companyId, roleId });
@@ -681,7 +735,11 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 编辑的方法
      */
+<<<<<<< HEAD
     public redactvisible = async (value:{companyId: string,createTime: number, description: string, isPublic: number, name: string, pRoleId: any, roleId: string, ruleGroups: string, rules: string}) => {
+=======
+    public redactvisible = async (value: any) => {
+>>>>>>> 5cc259ffc545543600475387d86f1a059e1a6c97
         this.modulesState.ModulesStateRole.roleList = value;
         this.modulesState.ModulesStateRole.redactValue = value;
         let name = value.ruleGroups;
@@ -693,7 +751,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 编辑保存的方法
      */
-    public redactSaveVisible = async (value:{name: string,description: string, ruleGroups: string[]}) => {
+    public redactSaveVisible = async (value: { name: string, description: string, ruleGroups: string[] }) => {
         debugger;
         const { user } = MyStore.instance.getState();
         // 组装入参数据
@@ -704,7 +762,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
         let roleId = this.modulesState.ModulesStateRole.roleList.roleId;
         let createTime = new Date().getTime();
         let rules = this.modulesState.ModulesStateRole.roleList.rules;
-        
+
         let data = await role.updataRole(this, { companyId, name, description, ruleGroups, roleId, createTime, rules });
         this.modulesState.ModulesStateRole.visible = false;
         this.setModulesState(this.modulesState);
