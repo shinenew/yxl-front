@@ -33,6 +33,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
+
     handleCancel = () => {
         this.props.onClose();
     }
@@ -42,7 +43,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
         return (
             <div>
                 <div style={{padding:15}}>
-                    <Tabs defaultActiveKey="1" onChange={ModulesAction.onTabChange} animated={false}>
+                    <Tabs defaultActiveKey={tabkey} onChange={ModulesAction.onTabChange} animated={false}>
                         <TabPane tab="扫描录入" key="1">
                             {tabkey === '1' &&
                                 <ScanImport

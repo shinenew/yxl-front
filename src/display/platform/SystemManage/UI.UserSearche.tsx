@@ -63,7 +63,6 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     /** 筛选 */
     onSearch = () => {
         const { form } = this.props;
-        debugger;
         form.validateFields(async (er: any, values: any) => {
             if (er) {
                 return;

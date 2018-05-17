@@ -4,6 +4,8 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
+import { history } from 'src/routes';
+import { Button } from 'antd';
 const css = require('./index.scss');
 
 /** Redux接口 */
@@ -31,8 +33,8 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     render() {
         return (
             <div className={css['group-header']}>
-                <a>发票录入></a>
                 <h1>发票组详情</h1>
+                <Button className={css['group-header-return']} onClick={() => history.goBack()}>返回</Button>
             </div>
         );
     }

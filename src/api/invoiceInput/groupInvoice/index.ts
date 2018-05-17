@@ -15,7 +15,9 @@ class GroupInvoice extends ApiBasic<IOptions, IData> {
 
         const req: Request = new Request(CallType.GET, Urls.ZONE_INVOICELIST, option);
 
-        const data: Response<IData> = await this.callGlobal(req,true);
+        const data: Response<IData> = await this.callAjax(req, true);
+
+        console.log(data);
 
         return data;
     }

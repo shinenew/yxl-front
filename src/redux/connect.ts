@@ -7,15 +7,8 @@ import { ReduxState } from 'src/redux';
  * @param isForm 是否关联 Form
  */
 function connectIndex(reduxStatePart: (state: ReduxState) => any) {
-    const s2p = (state: any) => {
-        return {
-            ...
-            reduxStatePart(state)
-        };
-    };
-    return (dom): any => {
-        return connect(s2p)(dom);
-    };
+    const s2p = (state: any) => ({...reduxStatePart(state)});
+    return (dom): any => (connect(s2p)(dom));
 }
 
 export default connectIndex;

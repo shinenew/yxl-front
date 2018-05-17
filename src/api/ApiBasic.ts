@@ -40,7 +40,7 @@ export default abstract class ApiBasic<O, D> {
         const res = await Agent.instance.call(request, this.envDomain(request.uri) || domain, mock);
 
         MyStore.instance.dispatch(reducers.system.ActionTypes.removeLoading, request.uri); // 删除loading
-
+        
         // 通信错误
         try {
             if (res.er) {
@@ -59,7 +59,7 @@ export default abstract class ApiBasic<O, D> {
                 if (res.res.body.status && res.res.body.status.description) {
                     if (res.res.body.status.returnCode === '02001') {
                         MyStore.instance.dispatch(reducers.user.ActionTypes.fnSetUserInfo, { token: null });
-                        history.push('/');
+                        history.push('/login');
                     }
                     this.messageError(request, res.res.body.status.description);
                 } else {
@@ -79,7 +79,7 @@ export default abstract class ApiBasic<O, D> {
      * 执行api
      * @param option api 入参
      */
-    public run = async (target: any, option: O, ): Promise<Response<D>> => {
+    public run = async (target: any, option: O): Promise<Response<D>> => {
         return await this.api(option);
     }
 
@@ -100,7 +100,6 @@ export default abstract class ApiBasic<O, D> {
 
     /** 请求头（环境参数） */
     private envDomain = (uri: string) => {
-        debugger;
         const { env } = MyStore.instance.getState();
         if (env.DOMAIN_MAP) {
             if (env.DOMAIN_MAP[uri]) {
