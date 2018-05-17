@@ -79,7 +79,7 @@ export default abstract class ApiBasic<O, D> {
      * 执行api
      * @param option api 入参
      */
-    public run = async (target: any, option: O, ): Promise<Response<D>> => {
+    public run = async (target: any, option: O): Promise<Response<D>> => {
         return await this.api(option);
     }
 

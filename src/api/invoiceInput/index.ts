@@ -2,9 +2,12 @@ import invoice from './invoice';
 import group from './invoiceGroup';
 import querySingleDetail from './querySingleDetail';
 import groupInvoice from './groupInvoice';
+import realcheckQuery from './realcheckQuery';
 import groupInfo from './groupInfo';
 import groupSaveDetail from './groupSaveDetail';
 import CreatGroup from './createGroup';
+import GetGroupList from './getGroupList';
+import MoveGroup from './moveGroup';
 export default {
     group,
     invoice,
@@ -13,5 +16,8 @@ export default {
     groupSaveDetail,
     /** 发票详情 */
     querySingleDetail,
-    CreatGroup
+    CreatGroup,
+    GetGroupList,
+    MoveGroup,
+    realcheckQuery
 };

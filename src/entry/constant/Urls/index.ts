@@ -49,9 +49,14 @@ enum Urls {
     // POST /zone/invoice/biz-group/group-move
     // 移动发票到指定发票组
     GROUP_MOVE='/zone/invoice/biz-group/group-move',
+
     //POST /zone/invoice/biz-group/create-group
     //创建发票组
     CREATE_GROUP='/zone/invoice/biz-group/create-group',
+    
+    //GET /zone/invoice/biz-group/group-list
+    //根据公司信息查询发票列表
+    GROUP_GET_GROUP_LIST='/zone/invoice/biz-group/group-list',
     /**
      * POST /zone/invoice/biz-logging/img-token
      *   发票录入-获取影像文件录入的token
@@ -61,6 +66,10 @@ enum Urls {
      * getInvoiceDetails 获取发票详情
      */
     getInvoiceDetails = '/invoice/income/detail/querySingleDetail',
+    /**
+     * 验证发票是否正确
+     */
+    realcheck = '/invoice/income/realcheck/query',
 
     //GET /zone/invoice/biz-logging/downloadTemplate
     //下载Excel模板 

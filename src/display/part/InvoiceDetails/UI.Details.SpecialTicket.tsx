@@ -6,8 +6,6 @@ import ModulesAction from './Modules.Action';
 import UIDetailsBasis, { IProps as IUIDetailsBasisProps } from './UI.Details.Basis';
 import { Field } from 'kts-scaffold-framework/utils/doc';
 
-// const css = require('./index.scss');
-
 /** Redux接口 */
 interface IReduxStatePart {
     
@@ -15,7 +13,6 @@ interface IReduxStatePart {
 
 /** Props接口 */
 interface IProps extends IUIDetailsBasisProps, IReduxStatePart {
-    // data?: any;
 }
 
 /** 详情产品1 */
@@ -116,8 +113,10 @@ export default class UIDetailslist extends UIDetailsBasis<IProps, ModulesState> 
                                     <div className="check-box">
                                         <div 
                                             className="tst-item-check-box ui-checkbox" 
-                                            // onClick={this.toggle} 
-                                            // onChange={()=>{this.onSelectedChanged()}}
+                                            onClick={ModulesAction.toggle} 
+                                            onChange={() => {
+                                                ModulesAction.onSelectedChanged();
+                                            }}
                                         >
                                             <i className="ui-icon ui-icon-checkboxOn "/>
                                         </div>
@@ -152,8 +151,10 @@ export default class UIDetailslist extends UIDetailsBasis<IProps, ModulesState> 
                                             <div className="check-box">
                                             <div 
                                                 className="tst-item-check-box ui-checkbox" 
-                                                // onClick={this.toggle}  
-                                                // onChange={() => { this.onSelectedChanged() }}
+                                                onClick={ModulesAction.toggle}  
+                                                onChange={() => { 
+                                                    ModulesAction.onSelectedChanged(); 
+                                                }}
                                             > 
                                             <i className="ui-icon ui-icon-checkboxOn "/>
                                             </div>
