@@ -4,7 +4,7 @@ import ModulesState from './Modules.State';
 class ModulesAction extends ActionBasic<ModulesState> {
     onTabChange = e => {
         this.modulesState.tabkey = e;
-        // this.setModulesState();
+        this.setModulesState();
     }
 }
 
