@@ -12,15 +12,14 @@ class QuerySingleDetail extends ApiBasic<IOptions, IData> {
 
     /** 入口 */
     public async api(option: IOptions): Promise<Response<IData>> {
-        option.incomeInvoiceBizId='522796570563837952';
         const req: Request = new Request(CallType.POST, Urls.getInvoiceDetails, option);
 
         let data: Response<any> = await this.callCompany(req);
         if (data.er) {
-            return new Response<IData>(null);
+            return new Response<IData>(data.er);
         }
         
-        return new Response<IData>(null, {info: data.res});
+        return new Response<IData>(null, {invoiceDetail: data.res.invoiceDetail, realCheckTime: data.res.realCheckTime});
     }
 }
 

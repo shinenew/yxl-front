@@ -32,44 +32,12 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     }
 
     componentWillMount () {
-      ModulesAction.invoiceDate('123');
+      ModulesAction.groupInfo(this.props.match.params.id);
     }
 
     render() {
-        const columns = [{
-            title: '发票代码',
-            dataIndex: 'invoiceCode',
-            key: 'name',
-            render: text => <a href="javascript:;">{text}</a>,
-          }, {
-            title: '发票号码',
-            dataIndex: 'invoiceNumber',
-            key: 'number',
-          }, {
-            title: '代收',
-            dataIndex: 'daishou',
-            key: 'daishou',
-            render: (text, record) => (
-                <this.InvoiceSure sure={record.daishou}/>
-            ),
-          }, {
-            title: '已收',
-            dataIndex: 'yishou',
-            key: 'yishou',
-            render: (text, record) => (
-              <this.InvoiceSure sure={record.daishou}/>
-            ),
-          }, {
-            title: '操作',
-            key: 'action',
-            render: (text, record) => (
-              <span>
-                <a href="javascript:;" onClick={() => ModulesAction.deleteInvoice('123')}>移除</a>
-              </span>
-            ),
-          }
-        ];
-        const data = this.modulesState.invoiceList;
+        const data = this.modulesState.detailInfoList;
+        const columns = this.tableColumn(this.modulesState.groupInfo.createType);
         return (
             <Card title="发票列表" bordered={false}>
                 <Table
@@ -86,5 +54,63 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     private InvoiceSure = props => {
       return (props.sure ? <span><Icon type="check" style={{color: `rgba(34,172,56,1)`}} /></span> :
         <span><Icon type="close" style={{color: 'rgba(230,0,18,1)'}} /></span>);
+    }
+
+    private tableColumn = (createType: string): any => {
+      if (createType) {
+        return [{
+            title: '发票代码',
+            dataIndex: 'invoiceCode',
+            key: 'name',
+            render: text => <a href="javascript:;">{text}</a>,
+          }, {
+            title: '发票号码',
+            dataIndex: 'invoiceNumber',
+            key: 'number',
+          }, {
+            title: '应收',
+            dataIndex: 'waitState',
+            key: 'waitState',
+            render: (text, record) => (
+                <this.InvoiceSure sure={record.waitState}/>
+            ),
+          }, {
+            title: '已收',
+            dataIndex: 'receivedState',
+            key: 'receivedState',
+            render: (text, record) => (
+              <this.InvoiceSure sure={record.receivedState}/>
+            ),
+          }, {
+            title: '操作',
+            key: 'action',
+            render: (text, record) => (
+              <span>
+                <a href="javascript:;" onClick={() => ModulesAction.deleteDetailInfoList(record.invoiceCode, record.waitState)}>移除</a>
+              </span>
+            ),
+          }
+        ];
+      } else {
+        return [{
+          title: '发票代码',
+          dataIndex: 'invoiceCode',
+          key: 'name',
+          render: text => <a href="javascript:;">{text}</a>,
+        }, {
+          title: '发票号码',
+          dataIndex: 'invoiceNumber',
+          key: 'number',
+        }, {
+          title: '操作',
+          key: 'action',
+          render: (text, record) => (
+            <span>
+              <a href="javascript:;" onClick={() => ModulesAction.deleteDetailInfoList(record.invoiceCode)}>移除</a>
+            </span>
+          ),
+        }
+      ];
+      }
     }
 }

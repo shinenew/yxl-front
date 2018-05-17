@@ -3,7 +3,7 @@ import React from 'react';
 import { invoiceImport } from 'src/api';
 import { JSString } from 'kts-scaffold-framework/utils/kit';
 class Component extends React.Component<any, any>{
-    private upload:any;
+    private upload: any;
     constructor(props: any) {
         super(props);
         this.state = {
@@ -29,14 +29,16 @@ class Component extends React.Component<any, any>{
                 message.error(err.status.description);
                 return;
             }
-            this.setState({
-                keyPrefix: res.keyPrefix,
-                token: res.token,
-                uploadUrl: res.uploadUrl
-            });
+            if (res) {
+                this.setState({
+                    keyPrefix: res.keyPrefix,
+                    token: res.token,
+                    uploadUrl: res.uploadUrl
+                });
+            }
         });
     }
-    callback=()=>{
+    callback = () => {
         if (this.props.fnForceUpdate) {
             this.props.fnForceUpdate();
         }
@@ -57,7 +59,7 @@ class Component extends React.Component<any, any>{
                     message.success(
                         `${info.file.name} 文件上传成功`
                     );
-                    window.setTimeout(() => { this.callback();}, 2000);
+                    window.setTimeout(() => { this.callback(); }, 2000);
                 } else if (status === 'error') {
                     message.error(`${info.file.name} 文件上传失败.`);
                 }

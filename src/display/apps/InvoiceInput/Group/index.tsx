@@ -33,7 +33,6 @@ export default class Group extends ModulesBasic<IProps, ModulesState> {
 
     componentWillMount() {
         ModulesAction.updateGroupId(this.props.match.params.id);
-        console.log(this.state.groupId);
     }
 
     render() {
