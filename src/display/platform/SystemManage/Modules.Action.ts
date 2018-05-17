@@ -74,7 +74,8 @@ class ModulesAction extends ActionBasic<ModulesState> {
     }
 
     /** 保存部门 */
-    public saveDep = async (parentDepartmentId: string, depNumber: string, name: string, description?: any) => {
+    public saveDep = async (parentDepartmentId: string, depNumber: string, name: string,
+        description?: string) => {
         const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
@@ -104,7 +105,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     }
 
     /** 删除部门 */
-    public deleteDep = async (depId) => {
+    public deleteDep = async (depId: string) => {
         const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
         let departmentId = depId;
@@ -134,7 +135,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     }
 
     /** 修改部门 */
-    public updDep = async (dep: { parentDepartmentId: string, number: string, name: string, description: any, departmentId: string, createTime: number }) => {
+    public updDep = async (dep: { parentDepartmentId: string, number: string, name: string, description: string, departmentId: string, createTime: number }) => {
         const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
@@ -192,7 +193,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
 
     /** 修改上级部门 */
-    public updParentDep = async (dep: { parentDepartmentId: string, number: string, name: string, description: any, departmentId: string, createTime: number }) => {
+    public updParentDep = async (dep: { parentDepartmentId: string, number: string, name: string, description: string, departmentId: string, createTime: number }) => {
         const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
@@ -234,7 +235,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
 
     /** 构建树 */
-    public buildTree = async (list: any) => {
+    public buildTree = async (list: {number:string,name:string,departmentId:string,parentDepartmentId:string}[]) => {
         let buildTreeParam = [];
         for (let i = 0; i < list.length; i++) {
             let treeObj = {

@@ -47,6 +47,7 @@ export default class TabUI extends UIBasic<IProps, ModulesState> {
   }
 
   render() {
+    console.log(this.modulesState);
     const { getFieldDecorator } = this.props.form;
     const formLayout: string = 'horizontal';
     const formItemLayout = formLayout === 'horizontal' ? {
