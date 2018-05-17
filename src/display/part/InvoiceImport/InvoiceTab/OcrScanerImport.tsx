@@ -1,4 +1,4 @@
-import { Icon, message, Button,Form } from 'antd';
+import { Icon, message, Button, Form } from 'antd';
 import React from 'react';
 import { invoiceImport } from 'src/api';
 import BaseImport, { IProps, create } from './BaseImport';
@@ -14,7 +14,6 @@ class Component extends BaseImport<IProps, any> {
             loop: null,
             fileList: null,
             url: this.props.url && this.props.url.scanerurl,
-            fixUrl: this.props.url && this.props.url.fixUrl,
             message: null,
             params: this.props.url && this.props.url.scanerParams
         };
@@ -24,26 +23,28 @@ class Component extends BaseImport<IProps, any> {
         this.setState({
             message: ''
         });
-        const url = this.state.url;
+        const { url } = this.state;
         let data = {
             ...this.state.params,
-            url
+            url,
         };
-        invoiceImport.manualImport(this, data).then((response: any) => {
+        invoiceImport.ocrImport(this, data).then((response: any) => {
             const err = response.err;
             const res = response.res;
             if (err) {
                 message.error(err.body.message);
                 return;
             }
-            if (res.ok) {
-                this.setState({
-                    message: res.body.message 
-                });
-            } else {
-                this.setState({
-                    message: res.message
-                });
+            if (res) {
+                if (res.ok) {
+                    this.setState({
+                        message: res.body.message
+                    });
+                } else {
+                    this.setState({
+                        message: res.message
+                    });
+                }
             }
         });
     }

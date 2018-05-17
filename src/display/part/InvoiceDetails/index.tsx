@@ -35,8 +35,9 @@ export default class InvoiceDetails extends ModulesBasic<IProps, ModulesState> {
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
-    componentWillMount() {
-        ModulesAction.getInvoiceDetails('525155675739783168');
+    componentWillMount () {
+        const loggingId = this.props.match.params.loggingId;
+        ModulesAction.getInvoiceDetails(loggingId);
     }
     render() {
         return (
@@ -46,15 +47,15 @@ export default class InvoiceDetails extends ModulesBasic<IProps, ModulesState> {
                 {
                     this.state.invoiceDetails&&<div className="invoice-details">
                         <div className="title">
-                            {this.state.invoiceDetails.cancellationMark==='Y'&&<img alt="" style={{'position':'absolute',left:20}} src="./img/zuofei.png"width="200"/>}
-                            {this.state.invoiceDetails.amount<0&&<img alt="" style={{'position':'absolute',left:20}} src="./img/negative.png" width="200"/>}
+                                {this.state.invoiceDetails.cancellationMark==='Y'&&<img alt="" style={{'position':'absolute',left:20}} src={require('./img/zuofei.png')} width="200"/>}
+                            {this.state.invoiceDetails.amount<0&&<img alt="" style={{'position':'absolute',left:20}} src={require('./img/negative.png')} width="200"/>}
                             <span className="ng-binding">                           
                             {ModulesAction.getCityName(this.state.invoiceDetails.invoiceCode)}
                             {ModulesAction.getTransformType(this.state.invoiceDetails.invoiceType)}
                             </span>
                             <span className="sub-title"><span >查验数据更新时间</span>: <span >{this.state.lastRealCheckTime&&Field.formatTime(this.state.lastRealCheckTime)}</span></span>
                         </div>
-                           <Details detailsType={'VAT_SPECIAL_INVOICE_MOTORVEHICLE'}/>
+                           <Details detailsType={'VAT_SPECIAL_INVOICE'}/>
                            
                             <div className="user-info section last">
                                 <div className="left-col">

@@ -15,7 +15,7 @@ class Component extends BaseImport<IProps, any> {
             loading: false,
             showCheck: false,
             tip: '开具金额(不含税)',
-            url: this.props.url && this.props.url.key4
+            url: this.props.url && this.props.url.scankey4
         };
         this.focusTextInput = this.focusTextInput.bind(this);
     }

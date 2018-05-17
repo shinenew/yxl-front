@@ -5,14 +5,14 @@ import ApiBasic from 'src/api/ApiBasic';
 import IData from './IData';
 import IOptions from './IOptions';
 
-class Invoice extends ApiBasic<IOptions, IData> {
+class Invoice extends ApiBasic<IOptions, Array<IData>> {
 
     /** 入口 */
-    public async api(option: IOptions): Promise<Response<IData>> {
+    public async api(option: IOptions): Promise<Response<Array<IData>>> {
         
-        const req: Request = new Request(CallType.POST, Urls.ZONE_INVOICELIST, option);
+        const req: Request = new Request(CallType.POST, Urls.group_invoice_list, option);
 
-        const data = await this.callGlobal(req,true);
+        const data = await this.callCompany(req);
         return data;
     }
 }
