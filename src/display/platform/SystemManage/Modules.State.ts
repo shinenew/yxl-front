@@ -1,11 +1,8 @@
 import ModulesStateBasic from 'kts-scaffold-framework/modules/ModulesStateBasic';
 import { MyStore } from 'src/redux';
 import ModulesStateDepartment from './Modules.State.Department';
-<<<<<<< HEAD
 import ModulesStateRole from './Modules.State.Role';
-=======
 import ModulesStateGroupInfo from './Modules.State.GroupInfo';
->>>>>>> 31cdf61bdb6d88eefa73fa8ab2d357d5cd791fc0
 
 /** 模块状态 */
 export default class ModulesState extends ModulesStateBasic {
