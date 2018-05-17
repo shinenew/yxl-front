@@ -111,6 +111,8 @@ class UserForm extends React.Component<any, any> {
     onDetail = (record) => {
         if (record.groupNumber) {
             this.props.history.push(`invoiceInput/group/${record.groupId}`);
+        }else{
+            this.props.history.push(`invoiceInput/invoiceDetail/${record.loggingId}`);
         }
     }
     handleFormChange = (changedFields) => {
