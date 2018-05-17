@@ -304,8 +304,13 @@ class ModulesAction extends ActionBasic<ModulesState> {
         this.setModulesState(this.modulesState);
     }
 
-    /** 公司信息 禁用\启用 */
-    public onUpdate = async (record: any) => {
+    /**
+     * 公司信息 禁用\启用
+     * 
+     * @param connectionState  公司状态
+     * @param connectionId  公司Id
+     */
+    public onUpdate = async (record: { connectionState: number, connectionId: string }) => {
         if (record.connectionState === 1) {
             // 启用转禁用
             let connectionId: Array<string> = [];
@@ -326,8 +331,11 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /**
      * 查询公司
+     * 
+     * @param connectionName  公司名字
+     * @param connectionTaxId  公司税号
      */
-    public selectCompany = async (connectionName: any, connectionTaxId: any) => {
+    public selectCompany = async (connectionName: string, connectionTaxId: string) => {
         let data: any = await system.findCompanyList(this, { connectionName: connectionName, connectionTaxId: connectionTaxId, companyId: this.modulesState.user.companyId });
         this.modulesState.company.list = data.res;
         this.setModulesState(this.modulesState);
@@ -339,7 +347,12 @@ class ModulesAction extends ActionBasic<ModulesState> {
         this.setModulesState(this.modulesState);
     }
 
-    /** 勾选关联公司 */
+    /**
+     * 勾选关联公司
+     * 
+     * @param selectedRowKeys  选中数据的key
+     * @param selectedRows  选中数据
+     */
     onSelectChange = (selectedRowKeys, selectedRows) => {
         this.modulesState.companyState.selectedRowKeys = selectedRowKeys;
         this.modulesState.companyState.selectedRows = selectedRows;
@@ -373,8 +386,16 @@ class ModulesAction extends ActionBasic<ModulesState> {
         this.setModulesState(this.modulesState);
     }
 
-    /** 更新集团公司信息 */
-    updateGroupInfo = async (org: any) => {
+    /**
+     * 更新集团公司信息
+     * 
+     * @param orgId  集团Id
+     * @param name 集团名字
+     * @param description 集团备注
+     * @param createTime 创建时间
+     * @param updateTime 更新时间
+     */
+    updateGroupInfo = async (org: { orgId: string, name: string, description: string, createTime: string, updateTime: number }) => {
         org.updateTime = new Date().getTime();
         await system.updateGroupInfo(this, org);
         this.modulesState.groupInfoModulesState.disable = !this.modulesState.groupInfoModulesState.disable;
@@ -671,7 +692,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 新增角色保存
      */
-    public saveRole = async (name:string, description: string,value: [{}] ) => {
+    public saveRole = async (name: string, description: string, value: [{}]) => {
         const { user } = MyStore.instance.getState();
         // 组装入参数据
         let companyId = user.userInfo.companyId;
@@ -695,7 +716,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 删除角色
      */
-    public deleteRole = async (roleId:string) => {
+    public deleteRole = async (roleId: string) => {
         const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
         let data = await role.deleteRole(this, { companyId, roleId });
@@ -714,7 +735,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 编辑的方法
      */
-    public redactvisible = async (value:any) => {
+    public redactvisible = async (value: any) => {
         this.modulesState.ModulesStateRole.roleList = value;
         this.modulesState.ModulesStateRole.redactValue = value;
         let name = value.ruleGroups;
@@ -726,7 +747,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 编辑保存的方法
      */
-    public redactSaveVisible = async (value:{name: string,description: string, ruleGroups: string[]}) => {
+    public redactSaveVisible = async (value: { name: string, description: string, ruleGroups: string[] }) => {
         debugger;
         const { user } = MyStore.instance.getState();
         // 组装入参数据
@@ -737,7 +758,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
         let roleId = this.modulesState.ModulesStateRole.roleList.roleId;
         let createTime = new Date().getTime();
         let rules = this.modulesState.ModulesStateRole.roleList.rules;
-        
+
         let data = await role.updataRole(this, { companyId, name, description, ruleGroups, roleId, createTime, rules });
         this.modulesState.ModulesStateRole.visible = false;
         this.setModulesState(this.modulesState);
