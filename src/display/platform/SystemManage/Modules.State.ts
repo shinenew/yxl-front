@@ -1,6 +1,7 @@
 import ModulesStateBasic from 'kts-scaffold-framework/modules/ModulesStateBasic';
 import { MyStore } from 'src/redux';
 import ModulesStateDepartment from './Modules.State.Department';
+import ModulesStateRole from './Modules.State.Role';
 
 /** 模块状态 */
 export default class ModulesState extends ModulesStateBasic {
@@ -72,50 +73,11 @@ export default class ModulesState extends ModulesStateBasic {
 
     /***********************************用户管理相关state 结束************************************/
 
-    /******************************** 角色 start ******************************************* */
-    // 被选中的列表
-    public selectedRows: any;
+    /******************************** 角色管理及公司资料 start ******************************************* */
 
-    /** 列表数据 */
-    public list: any;
+    public ModulesStateRole = new ModulesStateRole;
 
-
-    // 公司资料数据
-    public companyInfoList: any;
-
-
-    // 下拉框得值
-    public selectValue: any;
-
-    // 编辑弹框得状态
-    public visible: boolean = false;
-
-    // 新增弹框状态
-    public addRoleVisible: boolean = false;
-    public paramCondition: IParamCondition = {};
-
-    // 获取页面key得值
-    public key: any;
-
-    // 下拉框权限的值
-    public selectData: any;
-    public selectDatas = [];
-
-    // 列表权限的值
-    public Privilege: [{}];
-
-    // 编辑权限列表的值
-    public redactPrivilege: [{}];
-
-    // 修改角色时获取的值
-    public redactValue: any;
-
-    // 编辑保存时封装角色的值
-    public roleList: any;
-
-    /** 角色权限判断的值 */
-    mode: any = 'edit';
-    /******************************** 角色 end ******************************************* */
+    /******************************** 角色管理及公司资料 end ******************************************* */
 }
 
 // 集团页面 相关变量  接口
@@ -148,7 +110,3 @@ interface Detail {
     userType?: string;
 }
 
-interface IParamCondition {
-    id?: string;
-    name?: string;
-}

@@ -39,19 +39,19 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     }
     onChange = (value) => {
         this.props.form.setFieldsValue({
-            ruleGroups: this.modulesState.redactPrivilege
+            ruleGroups: this.modulesState.ModulesStateRole.redactPrivilege
         });
     }
     render() {
         const { getFieldDecorator } = this.props.form;
         const FormItem = Form.Item;
-        const mode = (this.modulesState.mode === 'edit') ? false : true;
+        const mode = (this.modulesState.ModulesStateRole.mode === 'edit') ? false : true;
 
         return (
             <div>
                 <Modal
-                    title={this.modulesState.mode === 'edit' ? '编辑角色' : '查看角色'}
-                    visible={this.modulesState.visible}
+                    title={this.modulesState.ModulesStateRole.mode === 'edit' ? '编辑角色' : '查看角色'}
+                    visible={this.modulesState.ModulesStateRole.visible}
                     onOk={this.handleOk}
                     onCancel={ModulesAction.noRedactVisible}
                     destroyOnClose={true}
@@ -61,7 +61,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                             label="角色名"
                         >
                             {getFieldDecorator('name', {
-                                initialValue: this.modulesState.redactValue && this.modulesState.redactValue.name,
+                                initialValue: this.modulesState.ModulesStateRole.redactValue && this.modulesState.ModulesStateRole.redactValue.name,
                                 rules: [{ type: 'string', pattern: /^([-\u4e00-\u9fa5\w]{2,15})+$/, required: true, message: '请输入角色名(2-15位字符)', whitespace: true }]
                             })(
                                 <Input type="text" disabled={mode} />
@@ -71,7 +71,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                             label="描述"
                         >
                             {getFieldDecorator('description', {
-                                initialValue: this.modulesState.redactValue && this.modulesState.redactValue.description,
+                                initialValue: this.modulesState.ModulesStateRole.redactValue && this.modulesState.ModulesStateRole.redactValue.description,
                                 rules: [{ required: false, message: '请输入描述', whitespace: true }]
                             })(
                                 <Input type="text" disabled={mode} />
@@ -83,10 +83,10 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                         >
                             {getFieldDecorator('ruleGroups', {
                                 rules: [{ required: true, message: '请选择权限', type: 'array' }],
-                                initialValue: this.modulesState && this.modulesState.redactPrivilege,
+                                initialValue: this.modulesState && this.modulesState.ModulesStateRole.redactPrivilege,
                             })(
                                 <TreeSelect
-                                    treeData={this.modulesState.selectDatas}
+                                    treeData={this.modulesState.ModulesStateRole.selectDatas}
                                     treeCheckable={true} 
                                     treeNodeFilterProp="title"  
                                     searchPlaceholder="请选择权限"
