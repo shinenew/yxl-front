@@ -109,7 +109,7 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
 
 
 
-    const { selectedRowKeys } = this.modulesState.companyState;
+    const { selectedRowKeys } = this.modulesState.connectComapnyModulesState.companyState;
     const rowSelection = {
       selectedRowKeys,
       onChange: ModulesAction.onSelectChange
@@ -133,13 +133,13 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
                 批量启用
                     </Button>
               <Button style={{ marginLeft: 10 }} className="ml-10 mb-10" onClick={ModulesAction.toggle}>
-                筛选 <Icon type={this.modulesState.company.companyExpand ? 'up' : 'down'} />
+                筛选 <Icon type={this.modulesState.connectComapnyModulesState.companyExpand ? 'up' : 'down'} />
               </Button>
             </div>
 
           </Col>
         </Row>
-        <div style={{ display: this.modulesState.company.companyExpand ? 'block' : 'none' }}>
+        <div style={{ display: this.modulesState.connectComapnyModulesState.companyExpand ? 'block' : 'none' }}>
           <Form >
             <Row style={{ marginTop: 20, marginBottom: -45 }}>
               <Col span={8} >
@@ -164,7 +164,7 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
               <Col span={8}>
                 <div >
                   <div className={css.pullRight}>
-                    <a target="_blank" href={this.modulesState.company.geturl}>
+                    <a target="_blank" href={this.modulesState.connectComapnyModulesState.geturl}>
                       <Button className="mr-10">导出</Button>
                     </a>
                     <Button style={{ marginLeft: 10 }} className="mr-10" onClick={this.handleReset}>清空</Button>
@@ -175,7 +175,7 @@ export default class UITable extends UIBasic<IProps, ModulesState> {
             </Row>
           </Form>
         </div>
-        <Table style={{ marginTop: 10 }} pagination={{ pageSize: 10 }} rowSelection={rowSelection} columns={columns} dataSource={this.modulesState.company.list} rowKey="connectionId" />
+        <Table style={{ marginTop: 10 }} pagination={{ pageSize: 10 }} rowSelection={rowSelection} columns={columns} dataSource={this.modulesState.connectComapnyModulesState.list} rowKey="connectionId" />
         {/* rowKey="connectionId" */}
       </div >
     );

@@ -1,7 +1,7 @@
 import ModulesStateBasic from 'kts-scaffold-framework/modules/ModulesStateBasic';
 
 /** 集团资料模块状态 */
-export default class ModulesStateDepartment extends ModulesStateBasic {
+export default class ModulesStateGroupInfo extends ModulesStateBasic {
     /** 集团名字 */
     name: string;
     /** 集团描述 */

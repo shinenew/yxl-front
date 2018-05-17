@@ -263,44 +263,44 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /** 关联公司 页面 是否显示 搜索条件框 */
     toggle = () => {
-        this.modulesState.company.companyExpand = !this.modulesState.company.companyExpand;
+        this.modulesState.connectComapnyModulesState.companyExpand = !this.modulesState.connectComapnyModulesState.companyExpand;
         this.setModulesState(this.modulesState);
     }
 
     /** 批量禁用 */
     ban = async () => {
-        let select: any = this.modulesState.companyState.selectedRows;
+        let select: any = this.modulesState.connectComapnyModulesState.companyState.selectedRows;
         let connectionId: Array<string> = [];
         select.forEach(element => {
             connectionId.push(element.connectionId);
         });
         await system.companyDisable(this, { list: connectionId });
-        this.modulesState.companyState.selectedRowKeys = [];
-        this.modulesState.companyState.selectedRows = [];
+        this.modulesState.connectComapnyModulesState.companyState.selectedRowKeys = [];
+        this.modulesState.connectComapnyModulesState.companyState.selectedRows = [];
         let data: any = await system.findCompanyList(this, {});
-        this.modulesState.company.list = data.res;
+        this.modulesState.connectComapnyModulesState.list = data.res;
         this.setModulesState(this.modulesState);
     }
 
     /** 批量启用 */
     active = async () => {
-        let select: any = this.modulesState.companyState.selectedRows;
+        let select: any = this.modulesState.connectComapnyModulesState.companyState.selectedRows;
         let connectionId: Array<string> = [];
         select.forEach(element => {
             connectionId.push(element.connectionId);
         });
         await system.companyEnable(this, { list: connectionId });
-        this.modulesState.companyState.selectedRowKeys = [];
-        this.modulesState.companyState.selectedRows = [];
+        this.modulesState.connectComapnyModulesState.companyState.selectedRowKeys = [];
+        this.modulesState.connectComapnyModulesState.companyState.selectedRows = [];
         let data: any = await system.findCompanyList(this, {});
-        this.modulesState.company.list = data.res;
+        this.modulesState.connectComapnyModulesState.list = data.res;
         this.setModulesState(this.modulesState);
     }
 
     /** 查询公司列表 */
     public findCompanyList = async () => {
-        let data = await system.findCompanyList(this, { companyId: this.modulesState.user.companyId });
-        this.modulesState.company.list = data.res;
+        let data = await system.findCompanyList(this, { companyId: this.modulesState.connectComapnyModulesState.user.companyId });
+        this.modulesState.connectComapnyModulesState.list = data.res;
         this.setModulesState(this.modulesState);
     }
 
@@ -325,7 +325,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
             await system.companyEnable(this, { list: connectionId });
         }
         let data: any = await system.findCompanyList(this, {});
-        this.modulesState.company.list = data.res;
+        this.modulesState.connectComapnyModulesState.list = data.res;
         this.setModulesState(this.modulesState);
     }
 
@@ -336,14 +336,14 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * @param connectionTaxId  公司税号
      */
     public selectCompany = async (connectionName: string, connectionTaxId: string) => {
-        let data: any = await system.findCompanyList(this, { connectionName: connectionName, connectionTaxId: connectionTaxId, companyId: this.modulesState.user.companyId });
-        this.modulesState.company.list = data.res;
+        let data: any = await system.findCompanyList(this, { connectionName: connectionName, connectionTaxId: connectionTaxId, companyId: this.modulesState.connectComapnyModulesState.user.companyId });
+        this.modulesState.connectComapnyModulesState.list = data.res;
         this.setModulesState(this.modulesState);
     }
 
     /** 保存当前选择的选项卡key */
     setActivatedTab = (key) => {
-        this.modulesState.company.activatedTab = key;
+        this.modulesState.connectComapnyModulesState.activatedTab = key;
         this.setModulesState(this.modulesState);
     }
 
@@ -354,8 +354,8 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * @param selectedRows  选中数据
      */
     onSelectChange = (selectedRowKeys, selectedRows) => {
-        this.modulesState.companyState.selectedRowKeys = selectedRowKeys;
-        this.modulesState.companyState.selectedRows = selectedRows;
+        this.modulesState.connectComapnyModulesState.companyState.selectedRowKeys = selectedRowKeys;
+        this.modulesState.connectComapnyModulesState.companyState.selectedRows = selectedRows;
         this.setModulesState(this.modulesState);
     }
 
@@ -365,7 +365,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /** 获取当前公司的集团信息 */
     getGroupInfoByCompanyId = async () => {
-        let companyId: string = this.modulesState.user.companyId;
+        let companyId: string = this.modulesState.connectComapnyModulesState.user.companyId;
         let data: any = await system.getGroupInfo(this, { companyId: companyId });
         // this.modulesState.company.list = [];
         if (data.res !== undefined || data.res !== '') {
@@ -735,7 +735,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 编辑的方法
      */
-    public redactvisible = async (value: any) => {
+    public redactvisible = async (value:{companyId: string,createTime: number, description: string, isPublic: number, name: string, pRoleId: any, roleId: string, ruleGroups: string, rules: string}) => {
         this.modulesState.ModulesStateRole.roleList = value;
         this.modulesState.ModulesStateRole.redactValue = value;
         let name = value.ruleGroups;

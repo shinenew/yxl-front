@@ -1,6 +1,6 @@
 import ModulesStateBasic from 'kts-scaffold-framework/modules/ModulesStateBasic';
 
-/** 用户管理模块状态 */
+/** 用户管理模块状态  */
 export default class ModulesStateUser extends ModulesStateBasic{
     /** 当前页 */
     currentPage: number;

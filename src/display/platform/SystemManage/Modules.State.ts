@@ -1,9 +1,9 @@
 import ModulesStateBasic from 'kts-scaffold-framework/modules/ModulesStateBasic';
-import { MyStore } from 'src/redux';
 import ModulesStateDepartment from './Modules.State.Department';
 import ModulesStateUser from './Modules.State.User';
 import ModulesStateRole from './Modules.State.Role';
 import ModulesStateGroupInfo from './Modules.State.GroupInfo';
+import ModulesStateConnectComapny from './Modules.State.ConnectComapny';
 
 /** 模块状态 */
 export default class ModulesState extends ModulesStateBasic {
@@ -11,104 +11,20 @@ export default class ModulesState extends ModulesStateBasic {
     public depModulesState = new ModulesStateDepartment();
     /************************** 部门管理end ************************************/
 
-    /** 用户管理 */
+    /***********************************用户管理相关state 开始*******************/
     public userModulesState = new ModulesStateUser();
-    
+    /***********************************用户管理相关end 结束*******************/
+
     /************************** 集团资料start ************************************/
     public groupInfoModulesState = new ModulesStateGroupInfo();
     /************************** 集团资料end ************************************/
 
-    /************************** 关联公start ************************************/
-    user = MyStore.instance.getState().user.userInfo;
-    url = MyStore.instance.getState().user.zoneUrl;
-
-    company: ICompany = {
-        list: [],
-        companyExpand: false,
-        activatedTab: '',
-        geturl: '//' + this.url + '/zone/company/connection/export?'
-    };
-
-    /** 公司列表选择  */
-    companyState = {
-        selectedRowKeys: [], // Check here to configure the default column
-        selectedRows: [],   // 勾选内容
-    };
-     /************************** 关联公司end ************************************/
-
-    /******************************** 角色 start ******************************************* */
-    // 被选中的列表
-    public selectedRows: any;
-   
-    /***********************************用户管理相关state 开始************************************/
-
-    /** 当前页 */
-    currentPage: number;
-    /** 每页显示条数 */
-    pageSize: number;
-    /** 总条数 */
-    total: number;
-    /** 列表数组 */
-    data: any;
-    /** 详情 */
-    detail: Detail;
-    /** 筛选状态 */
-    searchState: boolean = false;
-    /** 筛选Icon样式 */
-    iconStyle: boolean = false;
-    /** 详情弹框状态 */
-    detailVisible: boolean = false;
-    /** 新增弹框状态 */
-    addVisible: boolean = false;
-    /** 编辑弹框状态 */
-    editVisible: boolean = false;
-    /** 角色弹框状态 */
-    roleVisible: boolean = false;
-    /** 用户所在公司角色数组 */
-    userCompanyRole: any;
-    /** 用户所在公司当前权限 */
-    userCurrentRole: any;
-    /** departmentIds */
-    departmentIds: any;
-    /** 用户列表数据加载状态 */
-    userDataLoding: boolean = true;
-
-    /***********************************用户管理相关state 结束************************************/
+    /************************** 关联公司start ************************************/
+    public connectComapnyModulesState = new ModulesStateConnectComapny();
+    /************************** 关联公司end ************************************/
 
     /******************************** 角色管理及公司资料 start ******************************************* */
-
     public ModulesStateRole = new ModulesStateRole;
-
     /******************************** 角色管理及公司资料 end ******************************************* */
-}
-
-// 集团页面 相关变量  接口
-interface ICompany {
-    list?: any;
-    companyExpand?: boolean;
-    activatedTab?: any;
-    geturl?: any;
-}
-
-/**
- * 用户详情interface
- */
-interface Detail {
-    acceptStatus?: string;
-    companyId?: string;
-    credential?: string;
-    departmentId?: string;
-    departmentName?: string;
-    description?: string;
-    email?: string;
-    gUserId?: string;
-    isActivated?: boolean;
-    isDeleted?: boolean;
-    lastLoginIp?: string;
-    lastLoginTime?: number;
-    nickName?: string;
-    phone?: string;
-    userId?: string;
-    userType?: string;
 }
 
