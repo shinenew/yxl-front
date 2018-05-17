@@ -30,6 +30,24 @@ const transformTypeString = (type:TransformType): string => {
             return '增值税普通发票';
     }
 };
+const transformTypeStringShort = (type:TransformType): string => {
+    switch (type) {
+        case TransformType.增值税专用发票:
+            return '专票';
+        case TransformType.增值税普通发票INVOICE:
+            return '普票';
+        case TransformType.增值税普通发票卷票:
+            return '卷票';
+        case TransformType.增值税电子普通发票:
+            return '电票';
+        case TransformType.机动车销售统一发票:
+            return '机票';
+        case TransformType.货运运输业增值税专用发票:
+            return '货票';
+        default:
+            return '增值税普通发票';
+    }
+};
 
 export default {
     /** 用户类型中文 */
@@ -43,4 +61,5 @@ export {
 
     /**  */
     transformTypeString,
+    transformTypeStringShort
 };
