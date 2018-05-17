@@ -681,7 +681,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 编辑的方法
      */
-    public redactvisible = async (value:any) => {
+    public redactvisible = async (value:{companyId: string,createTime: number, description: string, isPublic: number, name: string, pRoleId: any, roleId: string, ruleGroups: string, rules: string}) => {
         this.modulesState.ModulesStateRole.roleList = value;
         this.modulesState.ModulesStateRole.redactValue = value;
         let name = value.ruleGroups;
