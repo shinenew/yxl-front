@@ -11,14 +11,12 @@ import IOptions from './IOptions';
 class RealcheckQuery extends ApiBasic<IOptions, IData> {
     /** 入口 */
     public async api(option: IOptions): Promise<Response<IData>> {
-        option.incomeInvoiceBizId = '537972639935758336';
         const req: Request = new Request(CallType.GET, Urls.realcheck, option);
 
         let data: Response<any> = await this.callCompany(req);
         if (data.er) {
             return new Response<IData>(null);
         }
-        
         return new Response<IData>(null, {info: data.res});
     }
 }
