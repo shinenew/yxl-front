@@ -100,10 +100,6 @@ interface ICompany {
     geturl?: any;
 }
 
-// interface IParamCondition {
-//     id?: string;
-//     name?: string;
-// }
 /**
  * 用户详情interface
  */

@@ -443,7 +443,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * @param companyId 公司ID
      * @param roles 角色数组
      */
-    public userRoleEdit = async (userId: string, companyId: string, roles: any) => {
+    public userRoleEdit = async (userId: string, companyId: string, roles: string[]) => {
         // 封装接口参数
         let param = {
             userId: userId,
