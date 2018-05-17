@@ -33,6 +33,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
+
     handleCancel = () => {
         this.props.onClose();
     }

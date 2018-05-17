@@ -35,9 +35,9 @@ export default class InvoiceDetails extends ModulesBasic<IProps, ModulesState> {
     constructor(props: IProps) {
         super(props, ModulesAction);
     }
-    componentWillMount() {
-        ModulesAction.getInvoiceDetails('525155675739783168');
-        ModulesAction.checkReal('525155675739783168');
+    componentWillMount () {
+        const loggingId = this.props.match.params.loggingId;
+        ModulesAction.getInvoiceDetails(loggingId);
     }
     render() {
         return (
