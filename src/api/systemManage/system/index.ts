@@ -14,12 +14,16 @@ import userCurrentRole from './user/userCurrentRole';
 import userRoleUpdate from './user/userRoleUpdate';
 
 export default {
+    /** 获取集团公司列表 */
     findCompanyList,
+    /** 集团公司禁用 */
     companyDisable,
+    /** 获取集团资料 */
     getGroupInfo,
+    /** 修改集团资料 */
     updateGroupInfo,
+    /** 集团公司启用 */
     companyEnable,
-
     /** 用户列表 */
     userList,
     /** 用户详情 */

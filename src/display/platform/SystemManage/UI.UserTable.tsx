@@ -98,7 +98,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
 
     /** 重新邀请 */
     onSendInvite = (record) => {
-        ModulesAction.userSend(record);
+        ModulesAction.userSend(record.userId);
     }
 
     /** 禁用或激活用户 */
@@ -146,7 +146,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                     <Row>
                         <Col span={24} className={css.text_right}>
                             <Button className={css.mr_10} type="primary" onClick={() => this.showUserAdd()}>新增 <Icon type="plus-circle" /></Button>
-                            <Button onClick={() => this.onChangIcon()}>筛选 <Icon type={this.modulesState.iconStyle ? 'up' : 'down'} /></Button>
+                            <Button onClick={() => this.onChangIcon()}>筛选 <Icon type={this.modulesState.userModulesState.iconStyle ? 'up' : 'down'} /></Button>
                         </Col>
                     </Row>
                 </div>
@@ -155,9 +155,9 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                     <Table
                         rowKey={record => record.userId}
                         columns={this.columns}
-                        loading={this.modulesState.userDataLoding}
-                        dataSource={this.modulesState.data}
-                        pagination={{ pageSize: 10, showTotal: () => <span className={css.page_total}>用户总数：<span className={css.number}>{this.modulesState.total}</span> </span> }}
+                        loading={this.modulesState.userModulesState.userDataLoding}
+                        dataSource={this.modulesState.userModulesState.data}
+                        pagination={{ pageSize: 10, showTotal: () => <span className={css.page_total}>用户总数：<span className={css.number}>{this.modulesState.userModulesState.total}</span> </span> }}
                     />
                 </div>
                 <UIRole />
