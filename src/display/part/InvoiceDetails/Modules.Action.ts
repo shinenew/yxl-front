@@ -2,6 +2,7 @@ import { ActionBasic } from 'kts-scaffold-framework/modules';
 import ModulesState from './Modules.State';
 import { invoiceInput } from 'src/api';
 import { transformTypeString } from 'src/entry/Language';
+import { history } from 'src/routes';
 
 class ModulesAction extends ActionBasic<ModulesState> {
     /**
@@ -10,8 +11,11 @@ class ModulesAction extends ActionBasic<ModulesState> {
      */
     public getInvoiceDetails = async (incomeInvoiceBizId: string) => {
         const res: any = await invoiceInput.querySingleDetail(this, {incomeInvoiceBizId: incomeInvoiceBizId});
-        this.modulesState.invoiceDetails = res.res.info;
-        this.setModulesState(this.modulesState);
+        
+        if (!res.er) {
+            this.modulesState.invoiceDetails = res.res.info;
+            this.setModulesState(this.modulesState);
+        }
     }
     /**
      * 验证发票
@@ -19,8 +23,11 @@ class ModulesAction extends ActionBasic<ModulesState> {
      */
     public checkReal = async (incomeInvoiceBizId: string) => {
         const res: any = await invoiceInput.realcheckQuery(this, {incomeInvoiceBizId: incomeInvoiceBizId});
-        this.modulesState.lastRealCheckTime = res.res.info.realCheckTime;
-        this.setModulesState(this.modulesState);
+        if (!res.er) {
+            this.modulesState.lastRealCheckTime = res.res.info.realCheckTime;
+            this.setModulesState(this.modulesState);
+        }
+        
     }
     /**
      * 获取发票类型
@@ -95,7 +102,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
      * 返回
      */
     public onBack = () => {
-        console.log('back');
+        history.goBack();
     }
     /**
      * toggle

@@ -8,7 +8,7 @@ Route.addNode(
     parentName,
     { nodeName: 'list',exact:true, path: '*/invoiceInput', component: UIForm },
     { nodeName: 'group',exact:true, path: '*/group/:id', component: require('./Group').default },
-    { nodeName: 'invoiceDetail', path: 'invoiceInput/invoiceDetail', title: '发票详情' , component: InvoiceDetails},
+    { nodeName: 'invoiceDetail', path: '*/invoiceInput/invoiceDetail/:loggingId', title: '发票详情' , component: InvoiceDetails},
 );
 
 export default {

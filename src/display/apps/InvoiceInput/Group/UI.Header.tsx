@@ -33,8 +33,8 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     render() {
         return (
             <div className={css['group-header']}>
-                <Button className={css['group-header-return']} onClick={() => history.goBack()}>返回</Button>
                 <h1>发票组详情</h1>
+                <Button className={css['group-header-return']} onClick={() => history.goBack()}>返回</Button>
             </div>
         );
     }

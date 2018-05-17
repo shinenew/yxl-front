@@ -50,6 +50,10 @@ enum Urls {
     // 移动发票到指定发票组
     GROUP_MOVE='/zone/invoice/biz-group/group-move',
 
+    //POST /zone/invoice/biz-group/group-delete
+    //删除发票组
+    GROUP_DELETE='/zone/invoice/biz-group/group-delete',
+    
     //POST /zone/invoice/biz-group/create-group
     //创建发票组
     CREATE_GROUP='/zone/invoice/biz-group/create-group',
