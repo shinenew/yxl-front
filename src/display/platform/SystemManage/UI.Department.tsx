@@ -1,7 +1,7 @@
 import './index.scss';
 
 import * as React from 'react';
-import { ModulesBasic, IPropsBasic, ModulesRoot } from 'kts-scaffold-framework/modules';
+import { UIBasic, IPropsBasic } from 'kts-scaffold-framework/modules';
 import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
@@ -27,12 +27,11 @@ interface IProps extends IReduxStatePart, IPropsBasic {
 }
 
 /** 绑定全局数据   */
+@ModulesAction.uiconnect
 @connect((state: ReduxState): IReduxStatePart => ({
 
 }))
-export default class User extends ModulesBasic<IProps, ModulesState> {
-
-    public state: ModulesState = new ModulesState();
+export default class UIDepartment extends UIBasic<IProps, ModulesState> {
 
     constructor(props: IProps) {
         super(props, ModulesAction);
@@ -40,21 +39,19 @@ export default class User extends ModulesBasic<IProps, ModulesState> {
 
     render() {
         return (
-            <ModulesRoot action={ModulesAction}>
-                <div className={css.modules}>
-                    <Row>
-                        <Col span={8} style={{ borderRight: '1px solid #cccccc' }} className={css.colPadding}>
-                            <UITree />
-                        </Col>
-                        <Col span={16} className={css.colPadding}>
-                            <UIDepTable />
-                        </Col>
-                    </Row>
-                    <UIAddDepModal />
-                    <UIUpdDepModal />
-                    <UISetDepModal />
-                </div>
-            </ModulesRoot>
+            <div className={css.modules}>
+                <Row>
+                    <Col span={8} style={{ borderRight: '1px solid #cccccc' }} className={css.colPadding}>
+                        <UITree />
+                    </Col>
+                    <Col span={16} className={css.colPadding}>
+                        <UIDepTable />
+                    </Col>
+                </Row>
+                <UIAddDepModal />
+                <UIUpdDepModal />
+                <UISetDepModal />
+            </div>
         );
     }
 }
