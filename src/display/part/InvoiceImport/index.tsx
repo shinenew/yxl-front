@@ -12,7 +12,7 @@ const css = require('./index.scss');
 
 /** Redux接口 */
 interface IReduxStatePart {
-    
+
 }
 
 /** Props接口 */
