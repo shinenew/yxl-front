@@ -18,33 +18,84 @@ enum Urls {
      */
     ZONE_GROUPLIST = '/zone/grouplist',
     /**
+     * 查询发票组合发票租明细
+     */
+    ZONE_GROUP_INFO = '/zone/invoice/biz-group/group-info',
+    /**
+     * 保存发票组明细
+     */
+    ZONE_SAVE_DETAIL = '/zone/invoice/biz-group/save-detail',
+    /**
      * 发票组的所有发票列表
      */
     ZONE_INVOICELIST = '/zone/invoicelist',
+
+    // POST /zone/invoice/biz-logging/single/{loggingType}
+    // MANUAL(1, "手工录入"),
+    // SCANNER_GUN(2, "扫描枪录入"),
+    // 发票录入-四要素
+    logInvoiceMANUAL = '/zone/invoice/biz-logging/single/MANUAL',
+
+    logInvoiceSCANNER_GUN = '/zone/invoice/biz-logging/single/SCANNER_GUN',
+
+    //     POST /zone/invoice/biz-list/query
+    // 发票列表查询
+    group_invoice_list = '/zone/invoice/biz-list/query',
+
+    //POST /zone/invoice/biz-group/group-resume
+    //查询发票组概要信息列表
+    group_resume = '/zone/invoice/biz-group/group-resume',
+
+    // POST /zone/invoice/biz-group/group-move
+    // 移动发票到指定发票组
+    GROUP_MOVE='/zone/invoice/biz-group/group-move',
+
+    //POST /zone/invoice/biz-group/group-delete
+    //删除发票组
+    GROUP_DELETE='/zone/invoice/biz-group/group-delete',
+    
+    //POST /zone/invoice/biz-group/create-group
+    //创建发票组
+    CREATE_GROUP='/zone/invoice/biz-group/create-group',
+    
+    //GET /zone/invoice/biz-group/group-list
+    //根据公司信息查询发票列表
+    GROUP_GET_GROUP_LIST='/zone/invoice/biz-group/group-list',
     /**
-     * 四要素录入接口
+     * POST /zone/invoice/biz-logging/img-token
+     *   发票录入-获取影像文件录入的token
      */
-    logInvoice = '/invoice/income/logging/add',
-    /**
-     * getUploadToken 批量上传 文件上传提前获取token
-     */
-    getUploadToken = '/invoice/income/image/logToken',
+    group_getUploadToken = '/zone/invoice/biz-logging/img-token',
     /**
      * getInvoiceDetails 获取发票详情
      */
-    getInvoiceDetails = '/invoice/income/detail/querySingleDetail',
+    getInvoiceDetails = '/zone/invoice/biz-logging/get-detail',
+    /**
+     * 验证发票是否正确
+     */
+    realcheck = '/invoice/income/realcheck/query',
 
-    // 专票录入 Excel 模板文件下载
-    downloadTemplate = '/invoice/income/logging/downloadTemplate',
+    //GET /zone/invoice/biz-logging/downloadTemplate
+    //下载Excel模板 
+    group_downloadTemplate = '/zone/invoice/biz-logging/downloadTemplate',
 
-    // 专票录入 Excel 模板文件上传
-    uploadFile = '/invoice/income/logging/updateFile',
+    // POST /zone/invoice/biz-logging/upload-file
+    // 发票录入-Excel
+    group_uploadFile = '/zone/invoice/biz-logging/upload-file',
+
+    //POST /zone/invoice/biz-logging/ocr-token
+    //发票录入-获取扫描仪录入的token
+    group_ocrtoken = '/zone/invoice/biz-logging/ocr-token',
+
     //第三方ocr_token
     third_ocr_token = '/global/invoice/third-realcheck/ocr-token',
+
     //启动扫描仪
     scanStart = 'http://localhost:8088',
+
     //zone/caf/invoice-logging/ocr-token 发票组ocr
     caf_ocr_token = '/zone/caf/invoice-logging/ocr-token',
+
     ///invoice/income/logging/createLoggingOcrToken 发票ocr
     createLoggingOcrToken = '/invoice/income/logging/createLoggingOcrToken',
 
@@ -135,31 +186,31 @@ enum Urls {
 
     /******************************************** 用户管理相关url 结束*******************************************/
 
-   /******************************************** 角色公司相关url 开始*******************************************/
+    /******************************************** 角色公司相关url 开始*******************************************/
     /**
      * 公司权限列表组
      */
-    SYSTEM_COMPANY_RULEGROUPS_LIST='/zone/rulegroup/info/query-company',
+    SYSTEM_COMPANY_RULEGROUPS_LIST = '/zone/rulegroup/info/query-company',
     /**
      * 角色的所有角色列表
      */
-    SYSTEM_ROLELIST='/zone/role/company/query',
+    SYSTEM_ROLELIST = '/zone/role/company/query',
     /**
      * 删除角色
      */
-    SYSTEM_ROLE_DELETE='/zone/role/info/delete',
+    SYSTEM_ROLE_DELETE = '/zone/role/info/delete',
     /**
      * 跟新角色
      */
-    SYSTEM_ROLE_UPDATE='/zone/role/info/update',
+    SYSTEM_ROLE_UPDATE = '/zone/role/info/update',
     /**
      * 新增角色
      */
-    SYSTEM_ROLE_CREATE='/zone/role/info/create',
+    SYSTEM_ROLE_CREATE = '/zone/role/info/create',
     /**
      * 获取公司资料
      */
-    SYSTEM_COMPANYLIST='/zone/company/info/get',
+    SYSTEM_COMPANYLIST = '/zone/company/info/get',
     /******************************************** 角色公司相关url 结束*******************************************/
 }
 

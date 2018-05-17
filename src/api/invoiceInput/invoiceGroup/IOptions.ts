@@ -3,5 +3,5 @@
  */
 export default interface IOptions {
 
-    groupIds:Array<string>;
+    
 }

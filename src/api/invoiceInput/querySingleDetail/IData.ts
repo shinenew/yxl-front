@@ -2,7 +2,8 @@
  * 出参数据数据接口
  */
 export default interface IData {
-    info: IInvoiceDetails;
+    invoiceDetail: IInvoiceDetails;
+    realCheckTime: string;
 }
 interface IInvoiceDetails{
     acceptTaxName: string;

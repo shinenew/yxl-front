@@ -36,7 +36,7 @@ export default class Aside extends ModulesBasic<IProps, ModulesState> {
     }
 
     render() {
-        const { Components, collapsed, title } = this.props.aside;
+        const { collapsed, title } = this.props.aside;
         return (
             <ModulesRoot action={ModulesAction}>
                 <Sider
@@ -56,10 +56,7 @@ export default class Aside extends ModulesBasic<IProps, ModulesState> {
                             <div className="kts-aside-container">
                                 <div className="kts-aside-panel" >
                                     {
-                                        !!Components
-                                        && this.state.isShowComponent
-                                        && this.props.aside.collapsed === false
-                                        && Components
+                                        this.renderComponents()
                                     }
                                 </div>
                             </div>
@@ -68,5 +65,23 @@ export default class Aside extends ModulesBasic<IProps, ModulesState> {
                 </Sider>
             </ModulesRoot>
         );
+    }
+
+    /** 渲染专家 */
+    private renderComponents(): JSX.Element {
+        const { Components } = this.props.aside;
+        if (!Components) {
+            return null;
+        }
+
+        if (!this.state.isShowComponent) {
+            return null;
+        }
+
+        if (this.props.aside.collapsed) {
+            return null;
+        }
+
+        return Components;
     }
 }

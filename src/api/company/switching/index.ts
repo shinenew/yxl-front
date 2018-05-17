@@ -25,11 +25,12 @@ class Switching extends ApiBasic<IOptions, undefined> {
         }
 
         // 获取公司已安装应用列表
-        data = await this.callCompany(new Request(CallType.GET, Urls.APP_INSTANCE_QUERY, option));
-        if (data.er) {
-            return data;
-        }
-        user.appList = data.res;
+        // data = await this.callCompany(new Request(CallType.GET, Urls.APP_INSTANCE_QUERY, option));
+        // if (data.er) {
+        //     return data;
+        // }
+        // user.appList = data.res;
+        user.appList = [];
 
         // 获取用户信息
         data = await this.companyUserInfo(option, user);

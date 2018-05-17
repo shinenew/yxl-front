@@ -2,6 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import { FormComponentProps } from 'antd/lib/form';
 import { Form, Row, Col, DatePicker, InputNumber, Select, Input, Button } from 'antd';
+import { TransformType } from 'src/entry/constant';
+import {transformTypeStringShort} from 'src/entry/Language';
 const FormItem = Form.Item;
 const Option = Select.Option;
 interface UserFormProps extends FormComponentProps {
@@ -11,6 +13,8 @@ interface IProps extends UserFormProps {
     fields: any;
     clearFields: () => void;
     onValuesChange: (values: Array<any>) => void;
+    onAddToGroup: () => void;
+    getData: () => void;
 }
 class Component extends React.Component<IProps, any> {
     /**
@@ -34,6 +38,9 @@ class Component extends React.Component<IProps, any> {
         this.props.clearFields();
         this.props.form.resetFields();
     }
+    onAddToGroup = () => {
+        this.props.onAddToGroup();
+    }
     toggle = () => {
         const { expand } = this.state;
         this.setState({ expand: !expand });
@@ -41,10 +48,10 @@ class Component extends React.Component<IProps, any> {
     handleSearch = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-            let data = {
-                ...values,
-            };
-            console.log(data);
+            if (!err) {
+                this.props.getData();
+            }
+
         });
     }
     render() {
@@ -56,42 +63,42 @@ class Component extends React.Component<IProps, any> {
         return (
             <Form onSubmit={this.handleSearch}>
                 <Row>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`发票代码`}>
                             {getFieldDecorator('invoiceCode')(
                                 <Input />
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`发票号码`}>
                             {getFieldDecorator('invoiceNumber')(
                                 <Input />
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`发票类型`}>
                             {getFieldDecorator('invoiceType')(
                                 <Select allowClear={true}>
-                                    <Option value="VAT_SPECIAL_INVOICE">专票</Option>
-                                    <Option value="VAT_INVOICE">普票</Option>
-                                    <Option value="VAT_SPECIAL_INVOICE_MOTORVEHICLE">机票</Option>
-                                    <Option value="VAT_INVOICE_ELECTRONIC">电票</Option>
-                                    <Option value="VAT_INVOICE_VOLUME">卷票</Option>
-                                    <Option value="VAT_SPECIAL_INVOICE_TRANSPORTATION">货票</Option>
+                                    <Option value={TransformType.增值税专用发票}>{transformTypeStringShort(TransformType.增值税专用发票)}</Option>
+                                    <Option value={TransformType.增值税普通发票INVOICE}>{transformTypeStringShort(TransformType.增值税普通发票INVOICE)}</Option>
+                                    <Option value={TransformType.机动车销售统一发票}>{transformTypeStringShort(TransformType.机动车销售统一发票)}</Option>
+                                    <Option value={TransformType.增值税电子普通发票}>{transformTypeStringShort(TransformType.增值税电子普通发票)}</Option>
+                                    <Option value={TransformType.增值税普通发票卷票}>{transformTypeStringShort(TransformType.增值税普通发票卷票)}</Option>
+                                    <Option value={TransformType.货运运输业增值税专用发票}>{transformTypeStringShort(TransformType.货运运输业增值税专用发票)}</Option>
                                 </Select>
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`销售方`}>
                             {getFieldDecorator('fuzzySupplierName')(
                                 <Input placeholder="支持模糊搜索" />
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem label="开票时间" {...formItemLayout}>
                             <Col span={11}>
                                 <FormItem>
@@ -114,7 +121,7 @@ class Component extends React.Component<IProps, any> {
                             </Col>
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem label="价税合计" {...formItemLayout} >
                             <Col span={11}>
                                 <FormItem>
@@ -138,17 +145,17 @@ class Component extends React.Component<IProps, any> {
                             </Col>
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`状态`}>
-                            {getFieldDecorator('state')(
+                            {getFieldDecorator('unusualState')(
                                 <Select allowClear={true} >
-                                    <Option value="FAILED">正常</Option>
-                                    <Option value="PASS">异常</Option>
+                                    <Option value={1}>正常</Option>
+                                    <Option value={2}>异常</Option>
                                 </Select>
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} md={12} xs={12}>
+                    <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`录入用户`}>
                             {getFieldDecorator('userId')(
                                 <Select allowClear={true}>
@@ -158,9 +165,10 @@ class Component extends React.Component<IProps, any> {
                             )}
                         </FormItem>
                     </Col>
-                    <Col span={24} className="mb10 text-right">
-                        <Button className="mr10" onClick={this.handleReset}>清空</Button>
-                        <Button type="primary" htmlType="submit">筛选</Button>
+                    <Col span={24} className="mb10 ">
+                        <Button type="primary" onClick={this.onAddToGroup}>添加到发票组</Button>
+                        <Button className="mr10 pull-right" onClick={this.handleReset}>清空</Button>
+                        <Button type="primary" className="mr10 pull-right" htmlType="submit">筛选</Button>
                     </Col>
                 </Row>
             </Form>
@@ -185,8 +193,8 @@ const WrappedAdvancedSearchForm = Form.create({
             invoiceType:
                 Form.createFormField({ value: props.fields && props.fields.invoiceType })
             ,
-            state:
-                Form.createFormField({ value: props.fields && props.fields.state })
+            unusualState:
+                Form.createFormField({ value: props.fields && props.fields.unusualState })
             ,
             minInvoiceDate:
                 Form.createFormField({ value: props.fields && (props.fields.minInvoiceDate && moment(props.fields.minInvoiceDate)) })

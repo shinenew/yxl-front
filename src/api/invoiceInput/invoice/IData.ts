@@ -1,12 +1,10 @@
 /** 
  * 出参数据数据接口
  */
-import { IInvoiceData, IPageMeta} from 'src/dataModel';
-export default interface IData {
-    items: IItems[];
-    pageMeta: IPageMeta;
-}
-
-interface IItems extends IInvoiceData {
-    state?: string;
+import { IInvoiceData} from 'src/dataModel';
+export default interface IData extends IInvoiceData{
+    unusualState?: number;//异常状态,1:正常，2：异常
+    pId?:number;
+    group?:boolean;
+    id?:number;
 }
