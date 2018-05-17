@@ -74,7 +74,8 @@ class ModulesAction extends ActionBasic<ModulesState> {
     }
 
     /** 保存部门 */
-    public saveDep = async (parentDepartmentId: string, depNumber: string, name: string, description?: any) => {
+    public saveDep = async (parentDepartmentId: string, depNumber: string, name: string,
+        description?: string) => {
         const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
@@ -104,7 +105,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     }
 
     /** 删除部门 */
-    public deleteDep = async (depId) => {
+    public deleteDep = async (depId: string) => {
         const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
         let departmentId = depId;
@@ -134,7 +135,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     }
 
     /** 修改部门 */
-    public updDep = async (dep:{parentDepartmentId: string,number: string,name: string, description:any,departmentId: string,createTime: number }) => {
+    public updDep = async (dep: { parentDepartmentId: string, number: string, name: string, description: string, departmentId: string, createTime: number }) => {
         const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
@@ -192,7 +193,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
 
     /** 修改上级部门 */
-    public updParentDep = async (dep:{parentDepartmentId: string,number: string,name: string, description:any,departmentId: string,createTime: number }) => {
+    public updParentDep = async (dep: { parentDepartmentId: string, number: string, name: string, description: string, departmentId: string, createTime: number }) => {
         const { user } = MyStore.instance.getState();
         /** 组装数据 */
         let department = {
@@ -234,7 +235,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
 
     /** 构建树 */
-    public buildTree = async (list: any) => {
+    public buildTree = async (list: {number:string,name:string,departmentId:string,parentDepartmentId:string}[]) => {
         let buildTreeParam = [];
         for (let i = 0; i < list.length; i++) {
             let treeObj = {
@@ -638,7 +639,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 新增角色保存
      */
-    public saveRole = async (name:string, description: string,value: [{}] ) => {
+    public saveRole = async (name: string, description: string, value: [{}]) => {
         const { user } = MyStore.instance.getState();
         // 组装入参数据
         let companyId = user.userInfo.companyId;
@@ -662,7 +663,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 删除角色
      */
-    public deleteRole = async (roleId:string) => {
+    public deleteRole = async (roleId: string) => {
         const { user } = MyStore.instance.getState();
         let companyId = user.userInfo.companyId;
         let data = await role.deleteRole(this, { companyId, roleId });
@@ -681,7 +682,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 编辑的方法
      */
-    public redactvisible = async (value:any) => {
+    public redactvisible = async (value: any) => {
         this.modulesState.ModulesStateRole.roleList = value;
         this.modulesState.ModulesStateRole.redactValue = value;
         let name = value.ruleGroups;
@@ -693,7 +694,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     /**
      * 编辑保存的方法
      */
-    public redactSaveVisible = async (value:{name: string,description: string, ruleGroups: string[]}) => {
+    public redactSaveVisible = async (value: { name: string, description: string, ruleGroups: string[] }) => {
         debugger;
         const { user } = MyStore.instance.getState();
         // 组装入参数据
@@ -704,7 +705,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
         let roleId = this.modulesState.ModulesStateRole.roleList.roleId;
         let createTime = new Date().getTime();
         let rules = this.modulesState.ModulesStateRole.roleList.rules;
-        
+
         let data = await role.updataRole(this, { companyId, name, description, ruleGroups, roleId, createTime, rules });
         this.modulesState.ModulesStateRole.visible = false;
         this.setModulesState(this.modulesState);
