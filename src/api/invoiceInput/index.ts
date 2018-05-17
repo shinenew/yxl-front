@@ -8,6 +8,7 @@ import groupSaveDetail from './groupSaveDetail';
 import CreatGroup from './createGroup';
 import GetGroupList from './getGroupList';
 import MoveGroup from './moveGroup';
+import DeleteGroup from './deleteGroup';
 export default {
     group,
     invoice,
@@ -19,5 +20,6 @@ export default {
     CreatGroup,
     GetGroupList,
     MoveGroup,
-    realcheckQuery
+    realcheckQuery,
+    DeleteGroup
 };
