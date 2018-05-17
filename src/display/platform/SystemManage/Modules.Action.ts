@@ -547,7 +547,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
             let list = this.modulesState.userModulesState.data;
             for (let index = 0; index < list.length; index++) {
                 if (list[index].userId === record.userId) {
-                    list.splice(index,1);
+                    list[index].isActivated = !status;
                     break;
                 }
             }
