@@ -357,11 +357,11 @@ class ModulesAction extends ActionBasic<ModulesState> {
         // this.modulesState.company.list = [];
         if (data.res !== undefined || data.res !== '') {
             if (this.modulesState !== undefined) {
-                this.modulesState.groupInfo.name = data.res.name;
-                this.modulesState.groupInfo.description = data.res.description;
-                this.modulesState.groupInfo.orgId = data.res.orgId;
-                this.modulesState.groupInfo.createTime = data.res.createTime;
-                this.modulesState.groupInfo.updateTime = data.res.updateTime;
+                this.modulesState.groupInfoModulesState.name = data.res.name;
+                this.modulesState.groupInfoModulesState.description = data.res.description;
+                this.modulesState.groupInfoModulesState.orgId = data.res.orgId;
+                this.modulesState.groupInfoModulesState.createTime = data.res.createTime;
+                this.modulesState.groupInfoModulesState.updateTime = data.res.updateTime;
             }
         }
         this.setModulesState(this.modulesState);
@@ -369,7 +369,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
 
     /** 集团公司信息是否修改 */
     isEdit = async () => {
-        this.modulesState.groupInfo.disable = !this.modulesState.groupInfo.disable;
+        this.modulesState.groupInfoModulesState.disable = !this.modulesState.groupInfoModulesState.disable;
         this.setModulesState(this.modulesState);
     }
 
@@ -377,7 +377,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
     updateGroupInfo = async (org: any) => {
         org.updateTime = new Date().getTime();
         await system.updateGroupInfo(this, org);
-        this.modulesState.groupInfo.disable = !this.modulesState.groupInfo.disable;
+        this.modulesState.groupInfoModulesState.disable = !this.modulesState.groupInfoModulesState.disable;
         this.setModulesState(this.modulesState);
     }
 
