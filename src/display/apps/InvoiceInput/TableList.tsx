@@ -20,12 +20,14 @@ class UserForm extends React.Component<any, any> {
         {
             title: '',
             dataIndex: 'loggingId',
+            className: 'text-center',
             render: (text, record) => {
                 return (
-                    <div>
+                    <div >
                         {
                             record.recordType === 2 &&
-                            <Icon type="folder" style={{ fontSize: 16, color: '#5CC4E9', marginRight: 21 }} />
+                            <Icon type="folder" style={{ fontSize: 16, color: '#5CC4E9'}} />
+                            
                         }
                         {
                             record.recordType === 1 &&
@@ -89,7 +91,13 @@ class UserForm extends React.Component<any, any> {
         {
             title: '录入日期',
             dataIndex: 'loggingTime',
-            render: (text) => formatTime(text)
+            render: (text, record) => {
+                return (
+                    <div>
+                        {record.recordType === 1 && formatTime(text)}
+                    </div>
+                );
+            }
         },
         {
             title: '操作',
@@ -361,12 +369,15 @@ class UserForm extends React.Component<any, any> {
                     }
                     <Table
                         className="ui-list"
+                        style={{borderColor:'#E9EAEB'}}
                         loading={this.props.loading}
                         bordered={true}
                         dataSource={dataSource}
                         columns={columns}
                         rowClassName={(record, index) => {
-                            return 'ui-item doc-item';
+                            return (
+                                record.recordType === 2 ? 'groupItem' : 'ui-item doc-item'
+                            );
                         }}
                         rowKey="id"
                         rowSelection={rowSelection}
