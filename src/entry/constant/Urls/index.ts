@@ -61,6 +61,11 @@ enum Urls {
     //GET /zone/invoice/biz-group/group-list
     //根据公司信息查询发票列表
     GROUP_GET_GROUP_LIST='/zone/invoice/biz-group/group-list',
+
+    //POST /zone/invoice/biz-image/query
+    //发票影像文件查询
+    BIZ_IMAGE_QUERY='/zone/invoice/biz-image/query',
+
     /**
      * POST /zone/invoice/biz-logging/img-token
      *   发票录入-获取影像文件录入的token

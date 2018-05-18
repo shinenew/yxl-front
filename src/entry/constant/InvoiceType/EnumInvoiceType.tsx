@@ -5,8 +5,8 @@
  * 发票类型枚举
  */
 import React from 'react';
-import { Tag,Tooltip } from 'antd';
-export function transformType(str:string) {
+import { Tag, Tooltip } from 'antd';
+export function transformType(str: string) {
     if (str) {
         str = str.toUpperCase();
         switch (str) {
@@ -32,8 +32,38 @@ export function transformType(str:string) {
     }
     return '';
 }
+/**
+ * 发票类型缩写
+ * @param str 发票数据
+ */
+export function typeDesc (str: any) {
+    if (str.invoiceType) {
+        str.invoiceType = str.invoiceType.toUpperCase();
+        switch (str.invoiceType) {
+            case 'VAT_SPECIAL_INVOICE_MOTORVEHICLE':
+                return '机';
+            case 'UNKOWN_INVOICE_TYPE':
+                return '未';
+            case 'VAT_SPECIAL_INVOICE':
+                return '专';
+            case 'VAT_INVOICE':
+                return '普';
+            case 'VAT_INVOICE_ELECTRONIC':
+                return '电';
+            case 'VAT_INVOICE_VOLUME':
+                return '卷';
+            case 'VAT_INVOICE_TOLL':
+                return '通';
+            case 'VAT_SPECIAL_INVOICE_TRANSPORTATION':
+                return '货';
+            default:
+                return '普';
+        }
+    }
+    return null;
+}
 //获取发票城市
-export function getCityName(invoice:string) {
+export function getCityName(invoice: string) {
     let citys = [{ 'code': '1100', 'name': '北京', }, { 'code': '1200', 'name': '天津', }, { 'code': '1300', 'name': '河北', }, { 'code': '1400', 'name': '山西', }, { 'code': '1500', 'name': '内蒙古', }, { 'code': '2100', 'name': '辽宁', }, { 'code': '2102', 'name': '大连', }, { 'code': '2200', 'name': '吉林', }, { 'code': '2300', 'name': '黑龙江', }, { 'code': '3100', 'name': '上海', }, { 'code': '3200', 'name': '江苏', }, { 'code': '3300', 'name': '浙江', }, { 'code': '3302', 'name': '宁波', }, { 'code': '3400', 'name': '安徽', }, { 'code': '3500', 'name': '福建', }, { 'code': '3502', 'name': '厦门', }, { 'code': '3600', 'name': '江西', }, { 'code': '3700', 'name': '山东', }, { 'code': '3702', 'name': '青岛', }, { 'code': '4100', 'name': '河南', }, { 'code': '4200', 'name': '湖北', }, { 'code': '4300', 'name': '湖南', }, { 'code': '4400', 'name': '广东', }, { 'code': '4403', 'name': '深圳', }, { 'code': '4500', 'name': '广西', }, { 'code': '4600', 'name': '海南', }, { 'code': '5000', 'name': '重庆', }, { 'code': '5100', 'name': '四川', }, { 'code': '5200', 'name': '贵州', }, { 'code': '5300', 'name': '云南', }, { 'code': '5400', 'name': '西藏', }, { 'code': '6100', 'name': '陕西', }, { 'code': '6200', 'name': '甘肃', }, { 'code': '6300', 'name': '青海', }, { 'code': '6400', 'name': '宁夏', }, { 'code': '6500', 'name': '新疆', }];
     let cityCode = null;
     let name;
@@ -55,7 +85,7 @@ export function getCityName(invoice:string) {
     return name;
 }
 // 验真状态
-export function transformReal(record:any) {
+export function transformReal(record: any) {
     if (record) {
         switch (record.realCheckState) {
             case 'UNCHECK':
@@ -77,7 +107,7 @@ export function transformReal(record:any) {
  * 
  * @param {*合规状态} str 
  */
-export function transformStandard(str:string) {
+export function transformStandard(str: string) {
     if (str) {
         str = str.toUpperCase();
         switch (str) {
@@ -95,7 +125,7 @@ export function transformStandard(str:string) {
     return '';
 }
 // 重复录票状态
-export function transformDuplicate(str:string) {
+export function transformDuplicate(str: string) {
     if (str) {
         str = str.toUpperCase();
         switch (str) {
@@ -112,7 +142,7 @@ export function transformDuplicate(str:string) {
     return '';
 }
 // 财务状态
-export function transformFinance(str:string) {
+export function transformFinance(str: string) {
     if (str) {
         str = str.toUpperCase();
         switch (str) {
@@ -130,7 +160,7 @@ export function transformFinance(str:string) {
     return '';
 }
 //状态对应的样式颜色
-export function transformColor(str:string) {
+export function transformColor(str: string) {
     if (str) {
         str = str.toUpperCase();
         switch (str) {
@@ -149,7 +179,7 @@ export function transformColor(str:string) {
     return '';
 }
 // 是否识别状态
-export function transformdecodeQRState(str:string) {
+export function transformdecodeQRState(str: string) {
     if (str) {
         str = str.toUpperCase();
         switch (str) {
@@ -164,7 +194,7 @@ export function transformdecodeQRState(str:string) {
     return '';
 }
 //发票状态
-export function transformInvoiceStatus(str:string) {
+export function transformInvoiceStatus(str: string) {
     if (str) {
         str = str.toUpperCase();
         switch (str) {
@@ -186,7 +216,7 @@ export function transformInvoiceStatus(str:string) {
 
 }
 //LoggedStateEnum 是否录入枚举
-export function transformLoggedStateEnum(str:string) {
+export function transformLoggedStateEnum(str: string) {
     if (str) {
         str = str.toUpperCase();
         switch (str) {
@@ -201,7 +231,7 @@ export function transformLoggedStateEnum(str:string) {
     return '';
 }
 //MatchStateEnum 匹配枚举
-export function transformMatchStateEnum(str:string) {
+export function transformMatchStateEnum(str: string) {
     str = str.toUpperCase();
     switch (str) {
         case 'UNMATCH':
@@ -214,7 +244,7 @@ export function transformMatchStateEnum(str:string) {
 }
 
 //InvoiceAuthStateEnum 认证枚举
-export function transformInvoiceAuthStateEnum(str:string) {
+export function transformInvoiceAuthStateEnum(str: string) {
     str = str.toUpperCase();
     switch (str) {
         case 'UNCHECK':
@@ -230,7 +260,7 @@ export function transformInvoiceAuthStateEnum(str:string) {
     }
 }
 //InvoiceDraftStateEnum 勾选枚举
-export function transformInvoiceDraftStateEnum(str:string) {
+export function transformInvoiceDraftStateEnum(str: string) {
     str = str.toUpperCase();
     switch (str) {
         case 'DRAFT_UNCOMMIT':

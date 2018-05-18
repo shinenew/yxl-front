@@ -9,6 +9,7 @@ import CreatGroup from './createGroup';
 import GetGroupList from './getGroupList';
 import MoveGroup from './moveGroup';
 import DeleteGroup from './deleteGroup';
+import ImgQuery from './imgQuery';
 export default {
     group,
     invoice,
@@ -21,5 +22,6 @@ export default {
     GetGroupList,
     MoveGroup,
     realcheckQuery,
-    DeleteGroup
+    DeleteGroup,
+    ImgQuery,
 };

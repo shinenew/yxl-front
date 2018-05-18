@@ -18,5 +18,6 @@ export default interface IInvoiceData {
     amountWithoutTax?: number;
     //税额
     tax?: number;
+    //发票组id
     invoiceGroupId?: string;
 }
