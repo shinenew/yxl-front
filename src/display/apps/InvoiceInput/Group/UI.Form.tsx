@@ -56,9 +56,6 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                         isMatch={this.modulesState.groupInfo.matchState}
                         createType={this.modulesState.groupInfo.createType}
                     />
-                    {/* <FormItem className={css['group-formitem']} label="匹配状态">
-                        <this.GroupMatch isMatch={this.modulesState.groupInfo.matchState} />
-                    </FormItem> */}
                     <FormItem className={css['group-formitem']} label="发票租编号">
                         {getFieldDecorator('invoice', {
                             initialValue: this.modulesState.groupId,
@@ -67,7 +64,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                                     required: true, message: '请输入发票组编号!',
                             }],
                         })(
-                            <Input placeholder="请输入发票组编号" />
+                            <Input disabled={true} placeholder="请输入发票组编号" />
                         )}
                     </FormItem>
                 </div>
@@ -143,7 +140,6 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                 history.goBack();
             },
             onCancel() {
-                console.log('我要返回');
                 history.goBack();
             }
         });

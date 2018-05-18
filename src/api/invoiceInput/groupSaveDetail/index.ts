@@ -16,7 +16,7 @@ class GroupSaveDetail extends ApiBasic<IOptions, IData> {
         const req: Request = new Request(CallType.POST, Urls.ZONE_SAVE_DETAIL, option);
 
         let data: Response<IData> = await this.callCompany(req);
-
+        
         return data;
     }
 }

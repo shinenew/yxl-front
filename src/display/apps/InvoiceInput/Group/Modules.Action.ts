@@ -1,6 +1,7 @@
 import { ActionBasic } from 'kts-scaffold-framework/modules';
 import ModulesState from './Modules.State';
 import { invoiceInput } from 'src/api';
+import { message } from 'antd';
  
 class ModulesAction extends ActionBasic<ModulesState> {
 
@@ -31,7 +32,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
             groupInfo,
             detailInfoList
         });
-        console.log(res);
+        message.success(res.res.description);
     }
 
     public deleteDetailInfoList = (invoiceCode: string, waitState?: string) => {
