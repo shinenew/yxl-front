@@ -3,19 +3,28 @@ import { Modal, Col } from 'antd';
 import BaseTemplate from './BaseTemplate';
 import { getCityName } from 'src/entry/constant/InvoiceType/EnumInvoiceType';
 import { Field } from 'kts-scaffold-framework/utils/doc';
-import { withRouter } from 'src/routes';
 import { formatTime } from 'src/utils/FormatTime';
-@withRouter
+declare module 'react' {
+    interface TdHTMLAttributes<T> {
+        width?: any;
+        height?: any;
+    }
+    interface TableHTMLAttributes<T> {
+        width?: any;
+        height?: any;
+    }
+}
 class CarTemplate extends BaseTemplate {
+
     constructor(props: any) {
         super(props);
     }
     handleCancel = () => {
-        debugger;
         super.handleRoleCancel();
     }
-    
+
     render() {
+
         const { data } = this.props;
         return (
             <Modal
@@ -50,64 +59,71 @@ class CarTemplate extends BaseTemplate {
                         </div>
                     </div>
                     <table
-
+                        style={{
+                            width: 860,
+                            height: 540
+                        }}
                         cellPadding="0"
                         cellSpacing="0"
                     >
                         <tbody>
                             <tr>
-                                <td className="title">
-                                    {data.cancellationMark === 'Y' && <img alt="" style={{ 'position': 'absolute', left: '43%', top: '20' }} src="/img/zuofei.png" width="200" />}
+                                <td style={{ width: 110, height: 95 }} className="title">
                                     <div>机打代码</div>
                                     <div>机打号码</div>
                                     <div>机器编号</div>
                                 </td>
-                                <td className="wrapper">
+                                <td style={{ width: 750 }} className="wrapper">
                                     <table
 
+                                        style={{
+                                            width: '100%',
+                                            height: 95
+                                        }}
                                         cellPadding="0"
                                         cellSpacing="0"
                                     >
                                         <tbody>
                                             <tr>
-                                                <td >
+                                                <td style={{ width: 255 }} >
                                                     {data.invoiceCode} <br />
                                                     {data.invoiceNumber} <br />
                                                     {data.machineCode}
                                                 </td>
                                                 <td
-
+                                                    style={{ width: 32 }}
                                                     className="title"
                                                 >
                                                     税控码
                                                 </td>
-                                                <td >&nbsp;</td>
+                                                <td style={{ width: 463 }}>&nbsp;</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </td>
                             </tr>
                             <tr>
-                                <td className="title">
+                                <td style={{ height: 55 }} className="title">
                                     购货单位
                                 </td>
                                 <td className="wrapper">
                                     <table
+                                        style={{ width: '100%', height: 55 }}
                                         cellPadding="0"
                                         cellSpacing="0"
                                     >
                                         <tbody>
                                             <tr>
-                                                <td >
+                                                <td style={{ width: 268 }}>
                                                     {data.buyerName}
                                                 </td>
                                                 <td
-
+                                                    style={{ width: 180 }}
                                                     className="title"
                                                 >
                                                     身份证号码 / 组织机构代码
                                                 </td>
-                                                <td >
+                                                <td style={{ width: 220 }}>
                                                     {data.buyerIDNum || data.buyerIdNum}
                                                 </td>
                                             </tr>
@@ -116,28 +132,33 @@ class CarTemplate extends BaseTemplate {
                                 </td>
                             </tr>
                             <tr>
-                                <td className="title">
+                                <td style={{ height: 40 }} className="title">
                                     车辆类型
                                 </td>
                                 <td className="wrapper">
                                     <table
+                                        style={{
+                                            width: '100%',
+                                            height: 40
+                                        }}
                                         cellPadding="0"
                                         cellSpacing="0"
                                     >
                                         <tbody>
                                             <tr>
-                                                <td >
+                                                <td style={{ width: 200 }}>
                                                     {data.vehicleType}
                                                 </td>
                                                 <td
                                                     className="title"
-
+                                                    style={{ width: 100 }}
                                                 >
                                                     厂牌型号
                                                 </td>
                                                 <td>{data.factoryModel}</td>
                                                 <td
                                                     className="title"
+                                                    style={{ width: 50 }}
                                                 >
                                                     产地
                                                 </td>
@@ -148,22 +169,24 @@ class CarTemplate extends BaseTemplate {
                                 </td>
                             </tr>
                             <tr>
-                                <td className="title">
+                                <td height="40" className="title">
                                     合格证号
                                 </td>
                                 <td className="wrapper">
                                     <table
+                                        width="100%"
+                                        height="40"
                                         cellPadding="0"
                                         cellSpacing="0"
                                     >
                                         <tbody>
                                             <tr>
-                                                <td >
+                                                <td width="200">
                                                     {data.certificate}
                                                 </td>
                                                 <td
                                                     className="title"
-
+                                                    width="100"
                                                 >
                                                     进口证明书号
                                                 </td>
@@ -172,6 +195,7 @@ class CarTemplate extends BaseTemplate {
                                                 </td>
                                                 <td
                                                     className="title"
+                                                    width="80"
                                                 >
                                                     商检单号
                                                 </td>
@@ -182,21 +206,24 @@ class CarTemplate extends BaseTemplate {
                                 </td>
                             </tr>
                             <tr>
-                                <td className="title">
+                                <td height="40" className="title">
                                     发动机号码
                                 </td>
                                 <td className="wrapper">
                                     <table
+                                        width="100%"
+                                        height="40"
                                         cellPadding="0"
                                         cellSpacing="0"
                                     >
                                         <tbody>
                                             <tr>
-                                                <td>
+                                                <td width="200">
                                                     {data.engineNo}
                                                 </td>
                                                 <td
                                                     className="title"
+                                                    width="200"
                                                 >
                                                     车辆识别号 / 车架号码
                                                 </td>
@@ -207,11 +234,13 @@ class CarTemplate extends BaseTemplate {
                                 </td>
                             </tr>
                             <tr>
-                                <td className="title">
+                                <td height="40" className="title">
                                     价税合计
                                 </td>
                                 <td className="wrapper">
                                     <table
+                                        width="100%"
+                                        height="40"
                                         cellPadding="0"
                                         cellSpacing="0"
                                     >
@@ -221,8 +250,8 @@ class CarTemplate extends BaseTemplate {
                                                     style={{
                                                         borderRight: 'none'
                                                     }}
+                                                    width="500"
                                                 >
-                                                    <img style={{ width: 12, height: 12 }} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAHTSURBVDjLhdM7T9NRGAbwX4FSCOgi8A0wTAgFo+KomzHyDYiEyRAxQbwtJg2IgA7MihJXNTEI4uKkIWgk0TgoTmLlYgcT+jcRVFoHLv23cnmmc973ed7rORFhlGrU6oRa+5H22QtPvPM7R4mETvXOO63YrFkp1Khz0Joxwz4oQNRZSYsGNKvcCBNR6bAhS75qU5JP7xF4Jh7KmMvc5Lm07rCkXdqoKjuh2gNpbZvXBnPGd6FDjUlf1K+Xc883cXuh2YI7orRI6c+rObLtmUFLjhRpFfEoROnUrQyU63EuJHioxBneeqUyZL4qcF1MTELgUsizz5Rplt3Nq7Vcn2UJvZYlNnJt4r4fZN0oaK9Mv1UresUKPAPWiraZR1YGERnZ/50lAtUF8a/pdEuxLmtuWs3bRpoZL1WEjJcFEmLK9AlcLGj6dbFaJ01a3Bprkym3rfhr2h+/vNkS1OvymONSeW0X7bi4Ad8dpdSopIY9n0aTeSOiEJc05sCu9CoT5nJhOwRGdpFUGZXWnjNEXfHTU4e2/UCNJgR61svJSTrMm9encWvIERXi+i1Iat+khyfS4IJT+OiTlIgadepkjRv2frutE9NiyIy0jIy0GYOOKQ1T/gGrKIJmZtDkEAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNS0xMC0wOFQyMzozMDo1OSswODowMPoOoTwAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTUtMTAtMDhUMjM6MzA6NTkrMDg6MDCLUxmAAAAATnRFWHRzb2Z0d2FyZQBJbWFnZU1hZ2ljayA2LjguOC0xMCBRMTYgeDg2XzY0IDIwMTUtMDctMTkgaHR0cDovL3d3dy5pbWFnZW1hZ2ljay5vcmcFDJw1AAAAGHRFWHRUaHVtYjo6RG9jdW1lbnQ6OlBhZ2VzADGn/7svAAAAGHRFWHRUaHVtYjo6SW1hZ2U6OkhlaWdodAA0NDVtXFhQAAAAF3RFWHRUaHVtYjo6SW1hZ2U6OldpZHRoADQ0Nf6tCA0AAAAZdEVYdFRodW1iOjpNaW1ldHlwZQBpbWFnZS9wbmc/slZOAAAAF3RFWHRUaHVtYjo6TVRpbWUAMTQ0NDMxODI1OSWTlnIAAAATdEVYdFRodW1iOjpTaXplADEzLjRLQkKbmy9AAAAAWnRFWHRUaHVtYjo6VVJJAGZpbGU6Ly8vaG9tZS93d3dyb290L3d3dy5lYXN5aWNvbi5uZXQvY2RuLWltZy5lYXN5aWNvbi5jbi9zcmMvMTE5NDUvMTE5NDUzMi5wbme1f+WMAAAAAElFTkSuQmCC" alt="ⓧ" />
                                                     {Field.toStringChinese(
                                                         data.amount
                                                     )}
@@ -243,21 +272,24 @@ class CarTemplate extends BaseTemplate {
                                 </td>
                             </tr>
                             <tr>
-                                <td className="title">
+                                <td height="40" className="title">
                                     单位名称
                                 </td>
                                 <td className="wrapper">
                                     <table
+                                        width="100%"
+                                        height="40"
                                         cellPadding="0"
                                         cellSpacing="0"
                                     >
                                         <tbody>
                                             <tr>
-                                                <td >
+                                                <td width="450">
                                                     {data.supplierName}
                                                 </td>
                                                 <td
                                                     className="title"
+                                                    width="60"
                                                 >
                                                     电话
                                                 </td>
@@ -268,21 +300,24 @@ class CarTemplate extends BaseTemplate {
                                 </td>
                             </tr>
                             <tr>
-                                <td className="title">
+                                <td height="40" className="title">
                                     纳税人识别号
                                 </td>
                                 <td className="wrapper">
                                     <table
+                                        width="100%"
+                                        height="40"
                                         cellPadding="0"
                                         cellSpacing="0"
                                     >
                                         <tbody>
                                             <tr>
-                                                <td>
+                                                <td width="450">
                                                     {data.supplierTaxId}
                                                 </td>
                                                 <td
                                                     className="title"
+                                                    width="60"
                                                 >
                                                     账号
                                                 </td>
@@ -293,23 +328,24 @@ class CarTemplate extends BaseTemplate {
                                 </td>
                             </tr>
                             <tr>
-                                <td className="title">
+                                <td height="40" className="title">
                                     地址
                                 </td>
                                 <td className="wrapper">
                                     <table
-
+                                        width="100%"
+                                        height="40"
                                         cellPadding="0"
                                         cellSpacing="0"
                                     >
                                         <tbody>
                                             <tr className="wrapper">
-                                                <td >
+                                                <td width="300">
                                                     {data.supplierAddressPhone}
                                                 </td>
                                                 <td
                                                     className="title"
-
+                                                    width="80"
                                                 >
                                                     开户银行
                                                 </td>
@@ -322,34 +358,35 @@ class CarTemplate extends BaseTemplate {
                                 </td>
                             </tr>
                             <tr>
-                                <td className="title">
+                                <td height="70" className="title">
                                     增值税税率
                                 </td>
                                 <td className="wrapper">
                                     <table
-
+                                        width="100%"
+                                        height="70"
                                         cellPadding="0"
                                         cellSpacing="0"
                                     >
                                         <tbody>
                                             <tr>
-                                                <td>
+                                                <td width="70">
                                                     {data.taxRate}
                                                 </td>
                                                 <td
-
+                                                    width="100"
                                                     className="title"
                                                 >
                                                     增值税税额
                                                 </td>
-                                                <td >¥{data.amountTax.toFixed(2)}</td>
+                                                <td width="100">¥{data.amountTax.toFixed(2)}</td>
                                                 <td
-
+                                                    width="120"
                                                     className="title"
                                                 >
                                                     主管税务机关及代码
                                                 </td>
-                                                <td>
+                                                <td width="200">
                                                     {data.taxBureauName} <br />
                                                     {data.taxBureauCode}
                                                 </td>
@@ -359,41 +396,42 @@ class CarTemplate extends BaseTemplate {
                                 </td>
                             </tr>
                             <tr>
-                                <td className="title">
+                                <td height="40" className="title">
                                     不含税价
                                 </td>
                                 <td className="wrapper last-line">
                                     <table
-
+                                        width="100%"
+                                        height="41"
                                         cellPadding="0"
                                         cellSpacing="0"
                                     >
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    <span className="with-color">小写</span> ¥{data.amountWithoutTax.toFixed(2)}
+                                                <td width="150">
+                                                    小写 ¥{data.amountWithoutTax.toFixed(2)}
                                                 </td>
                                                 <td
                                                     className="title"
-
+                                                    width="120"
                                                 >
                                                     完税凭证号码
                                                 </td>
-                                                <td >
+                                                <td width="160">
                                                     {data.taxRecords}
                                                 </td>
                                                 <td
                                                     className="title"
-
+                                                    width="63"
                                                 >
                                                     吨位
                                                 </td>
-                                                <td >
+                                                <td width="80">
                                                     {data.tonnage}
                                                 </td>
                                                 <td
                                                     className="title"
-
+                                                    width="100"
                                                 >
                                                     限乘人数
                                                 </td>
@@ -421,5 +459,6 @@ class CarTemplate extends BaseTemplate {
         );
     }
 }
+
 
 export default CarTemplate;
