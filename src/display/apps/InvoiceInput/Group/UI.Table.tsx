@@ -4,6 +4,7 @@ import { connect } from 'src/redux';
 import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
+const css = require('./index.scss');
 import {
     Table,
     Card,
@@ -52,8 +53,8 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     }
 
     private InvoiceSure = props => {
-      return (props.sure ? <span><Icon type="check" style={{color: `rgba(34,172,56,1)`}} /></span> :
-        <span><Icon type="close" style={{color: 'rgba(230,0,18,1)'}} /></span>);
+      return (props.sure ? <span><Icon className={css['action']} type="gou" style={{color: `rgba(34,172,56,1)`}} /></span> :
+        <span><Icon className={css['action']} type="cha" style={{color: 'rgba(230,0,18,1)'}} /></span>);
     }
 
     private tableColumn = (createType: string): any => {
