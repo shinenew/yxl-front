@@ -1,9 +1,46 @@
 // 模块样式
 .modules {
-  margin: 0 auto;
+  margin: 19px 15px 20px 16px;
 
   // 全局样式
   // :global(.app) {
   //  margin: 0 auto;
   //}
+}
+.invoice {
+  &-card {
+    :global(.ant-card-body) {
+      padding: 0px;
+    }
+    :global(.ant-form) {
+      padding: 17px 14px;
+      background:rgba(245,247,248,1);
+    }
+    :global(.ant-form label) {
+      font-size: 12px;
+    }
+    :global(.ant-table-thead > tr > th) {
+      padding: 8px 32px;
+      white-space: nowrap;
+      background: rgba(245,247,248,1);
+    }
+    :global(.ant-table-tbody > tr:hover > td) {
+      background: rgba(203,211,219,1);
+    }
+    &-button {
+      height: 25px;
+    }
+    &-hander {
+      height: 60px !important;
+      padding: 0px 14px;
+      line-height: 60px;
+      background: rgba(245,247,248,1);
+    }
+    &-but31 {
+      height: 31px;
+    }
+    &-but-width63 {
+      width: 64px;
+    }
+  }
 }

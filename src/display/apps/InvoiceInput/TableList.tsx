@@ -13,6 +13,7 @@ import { invoiceInput } from 'src/api';
 import { formatTime, formatDate } from 'src/utils';
 import { typeDesc } from 'src/entry/constant/InvoiceType/EnumInvoiceType';
 import Template from 'src/display/components/InvoiceTemplate';
+const css = require('./index.scss');
 @withRouter
 class UserForm extends React.Component<any, any> {
 
@@ -359,22 +360,38 @@ class UserForm extends React.Component<any, any> {
         };
         const extraButtons = (
             <div>
-                <Button icon="sync" className="mr10" onClick={this.refreshInvoice} />
-                <Button className="mr10" type="primary" onClick={this.onAddGroup}>新增发票组</Button>
-                <Button className="mr10" type="primary" onClick={this.onOpenInvoiceImport}>发票录入</Button>
+                <Button icon="sync" className={`mr10 ${css['invoice-card-but31']}`} onClick={this.refreshInvoice} />
+                <Button className={`mr10 ${css['invoice-card-but31']}`} type="primary" onClick={this.onAddGroup}>新增发票组</Button>
+                <Button className={`mr10 ${css['invoice-card-but31']}`} type="primary" onClick={this.onOpenInvoiceImport}>发票录入</Button>
             </div>
         );
         return (
             <div>
-                <Card title="发票录入" extra={extraButtons}>
-                    <Row className="mb10">
+                <Card className={css['invoice-card']} title="发票录入" extra={extraButtons}>
+                    <Row className={`${css['invoice-card-hander']}`}>
                         <Col span={12} className="text-left">
-                            <Button type="primary" onClick={this.onAddToGroup}>添加到发票组</Button>
+                            <Button
+                                className={`mr10 font10 ${css['invoice-card-button']}`}
+                                onClick={this.onAddToGroup}
+                                icon="tianjia font10"
+                            >
+                                添加到发票组
+                            </Button>
+                            <Button
+                                className={`font10 ${css['invoice-card-button']}`}
+                                icon="chixugengxin font10"
+                            >
+                                更新加载信息
+                            </Button>
                         </Col>
                         <Col span={12} className="text-right">
-                            <Button className="ml-10 mb-10" onClick={this.toggle}>
-                                筛选{' '}
-                                <Icon type={this.state.expand ? 'up' : 'down'} />
+                            <Button
+                                onClick={this.toggle}
+                                className={`mr10 mb-10 font10 ${css['invoice-card-button']}`}
+                                htmlType="submit"
+                                icon="caret-down font10"
+                            >
+                                筛选
                             </Button>
                         </Col>
                     </Row>

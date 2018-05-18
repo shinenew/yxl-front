@@ -69,10 +69,10 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             key: 'number',
           }, {
             title: '应收',
-            dataIndex: 'waitState',
-            key: 'waitState',
+            dataIndex: 'shouldState',
+            key: 'shouldState',
             render: (text, record) => (
-                <this.InvoiceSure sure={record.waitState}/>
+                <this.InvoiceSure sure={record.shouldState}/>
             ),
           }, {
             title: '已收',
@@ -86,7 +86,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             key: 'action',
             render: (text, record) => (
               <span>
-                <a href="javascript:;" onClick={() => ModulesAction.deleteDetailInfoList(record.invoiceCode, record.waitState)}>移除</a>
+                <a href="javascript:;" onClick={() => ModulesAction.deleteDetailInfoList(record.invoiceCode, record.shouldState)}>移除</a>
               </span>
             ),
           }

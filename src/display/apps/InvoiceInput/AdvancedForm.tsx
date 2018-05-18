@@ -7,6 +7,7 @@ import {transformTypeStringShort} from 'src/entry/Language';
 import MyStore from 'src/redux/MyStore';
 const FormItem = Form.Item;
 const Option = Select.Option;
+const css = require('./index.scss');
 interface UserFormProps extends FormComponentProps {
 
 }
@@ -99,7 +100,7 @@ class Component extends React.Component<IProps, any> {
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} lg={12} sm={12}>
+                    <Col xl={8} lg={12} sm={12} className={css['invoice-filter']}>
                         <FormItem label="开票时间" {...formItemLayout}>
                             <Col span={11}>
                                 <FormItem>
@@ -166,10 +167,20 @@ class Component extends React.Component<IProps, any> {
                             )}
                         </FormItem>
                     </Col>
-                    <Col span={24} className="mb10 ">
-                        
-                        <Button className="mr10 pull-right" onClick={this.handleReset}>清空</Button>
-                        <Button type="primary" className="mr10 pull-right" htmlType="submit">查询</Button>
+                    <Col span={24} className="mb10 ">  
+                        <Button
+                            className={`mr10 pull-right ${css['invoice-card-but31']} ${css['invoice-card-but-width62']}`}
+                            onClick={this.handleReset}
+                        >
+                            清空
+                        </Button>
+                        <Button
+                            type="primary"
+                            className={`mr10 pull-right ${css['invoice-card-but31']} ${css['invoice-card-but-width62']}`}
+                            htmlType="submit"
+                        >
+                            查询
+                        </Button>
                     </Col>
                 </Row>
             </Form>

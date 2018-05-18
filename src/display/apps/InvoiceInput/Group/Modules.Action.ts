@@ -35,9 +35,9 @@ class ModulesAction extends ActionBasic<ModulesState> {
         message.success(res.res.description);
     }
 
-    public deleteDetailInfoList = (invoiceCode: string, waitState?: string) => {
+    public deleteDetailInfoList = (invoiceCode: string, shouldState?: string) => {
         let detailInfoList = this.modulesState.detailInfoList;
-        if (waitState) {
+        if (shouldState) {
             detailInfoList.forEach((el, index) => {
                 if(el.invoiceCode === invoiceCode) {
                     detailInfoList[index]['receivedState'] = 0;
