@@ -11,16 +11,22 @@ class ModulesAction extends ActionBasic<ModulesState> {
         }
         let uniqueArray = [];
         rebornlist = rebornlist.map((item, index) => {
-            if (item.invoiceGroupId) {
-                uniqueArray.push(item.invoiceGroupId);
+            let appendData={...item,id: index};
+            if (item.recordType===2) {
+                uniqueArray.push(item.loggingId);
+                appendData={
+                    ...appendData,
+                    pId: null
+                };
+            }else if(item.recordType===1){
+                appendData={
+                    ...appendData,
+                    pId: item.invoiceGroupId
+                };
             }
-            return {
-                ...item,
-                id: index,
-                pId: item.invoiceGroupId
-            };
+            return appendData;
         });
-        uniqueArray = Array.from(new Set(uniqueArray));
+        //uniqueArray = Array.from(new Set(uniqueArray));
         if (uniqueArray.length === 0) {
             return rebornlist;
         }

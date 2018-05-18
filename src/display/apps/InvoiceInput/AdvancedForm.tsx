@@ -4,6 +4,7 @@ import { FormComponentProps } from 'antd/lib/form';
 import { Form, Row, Col, DatePicker, InputNumber, Select, Input, Button } from 'antd';
 import { TransformType } from 'src/entry/constant';
 import {transformTypeStringShort} from 'src/entry/Language';
+import MyStore from 'src/redux/MyStore';
 const FormItem = Form.Item;
 const Option = Select.Option;
 interface UserFormProps extends FormComponentProps {
@@ -149,8 +150,8 @@ class Component extends React.Component<IProps, any> {
                         <FormItem {...formItemLayout} label={`状态`}>
                             {getFieldDecorator('unusualState')(
                                 <Select allowClear={true} >
-                                    <Option value={1}>正常</Option>
-                                    <Option value={2}>异常</Option>
+                                    <Option value="NORMAL">正常</Option>
+                                    <Option value="UNUSUAL">异常</Option>
                                 </Select>
                             )}
                         </FormItem>
@@ -160,7 +161,7 @@ class Component extends React.Component<IProps, any> {
                             {getFieldDecorator('userId')(
                                 <Select allowClear={true}>
                                     <Option value="">全部用户</Option>
-                                    <Option value="">当前用户</Option>
+                                    <Option value={MyStore.instance.getState().user.userInfo.cUserId}>当前用户</Option>
                                 </Select>
                             )}
                         </FormItem>
