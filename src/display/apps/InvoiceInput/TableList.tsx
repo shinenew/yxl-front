@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Card, Button, message, Alert, Popconfirm, Icon, Tooltip } from 'antd';
+import { Table, Card, Button, message, Alert, Popconfirm, Icon, Tooltip, Col, Row } from 'antd';
 import AdvancedForm from './AdvancedForm';
 import ModulesAction from './Modules.Action';
 import { tree } from 'src/utils';
@@ -26,8 +26,8 @@ class UserForm extends React.Component<any, any> {
                     <div >
                         {
                             record.recordType === 2 &&
-                            <Icon type="folder" style={{ fontSize: 16, color: '#5CC4E9'}} />
-                            
+                            <Icon type="folder" style={{ fontSize: 16, color: '#5CC4E9' }} />
+
                         }
                         {
                             record.recordType === 1 &&
@@ -334,6 +334,10 @@ class UserForm extends React.Component<any, any> {
             />
         );
     }
+    toggle = () => {
+        const { expand } = this.state;
+        this.setState({ expand: !expand });
+    }
     render() {
 
         let columns = this.columns;
@@ -357,19 +361,31 @@ class UserForm extends React.Component<any, any> {
         return (
             <div>
                 <Card title="发票录入" extra={extraButtons}>
-                    <AdvancedForm
-                        clearFields={this.clearFields}
-                        fields={fields}
-                        onValuesChange={this.handleFormChange}
-                        onAddToGroup={this.onAddToGroup}
-                        getData={this.getData}
-                    />
+                    <Row className="mb10">
+                        <Col span={12} className="text-left">
+                            <Button type="primary" onClick={this.onAddToGroup}>添加到发票组</Button>
+                        </Col>
+                        <Col span={12} className="text-right">
+                            <Button className="ml-10 mb-10" onClick={this.toggle}>
+                                筛选{' '}
+                                <Icon type={this.state.expand ? 'up' : 'down'} />
+                            </Button>
+                        </Col>
+                    </Row>
+                    <div style={{ display: this.state.expand ? 'block' : 'none' }}>
+                        <AdvancedForm
+                            clearFields={this.clearFields}
+                            fields={fields}
+                            onValuesChange={this.handleFormChange}
+                            getData={this.getData}
+                        />
+                    </div>
                     {
                         this.state.show && this.addAlert()
                     }
                     <Table
                         className="ui-list"
-                        style={{borderColor:'#E9EAEB'}}
+                        style={{ borderColor: '#E9EAEB' }}
                         loading={this.props.loading}
                         bordered={true}
                         dataSource={dataSource}
