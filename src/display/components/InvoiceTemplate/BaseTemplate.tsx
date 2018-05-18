@@ -14,8 +14,9 @@ class BaseTemplate extends React.Component<any, any> {
         this.state = {
             value: this.props.data
         };
+        this.handleRoleCancel=this.handleRoleCancel.bind(this);
     }
-    handleRoleCancel = () => {
+    public handleRoleCancel() {
         this.props.onClose();
     }
     template = () => {

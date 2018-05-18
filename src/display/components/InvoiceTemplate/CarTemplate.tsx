@@ -11,7 +11,8 @@ class CarTemplate extends BaseTemplate {
         super(props);
     }
     handleCancel = () => {
-        this.props.onClose();
+        debugger;
+        super.handleRoleCancel();
     }
     
     render() {

@@ -40,7 +40,7 @@ class UserForm extends React.Component<any, any> {
             dataIndex: 'unusualState',
             render: (text) => {
                 return (
-                    <span>{text==='UNUSUAL'&&<Icon type="warning" style={{color:'#EB6100'}}/>}
+                    <span>{text === 'UNUSUAL' && <Icon type="warning" style={{ color: '#EB6100' }} />}
                     </span>
                 );
             }
@@ -73,10 +73,13 @@ class UserForm extends React.Component<any, any> {
             render: (text, record) => {
                 return (
                     <div>
-                        <span className="pd5 hand" onClick={() => { this.onDetail(record); }}>详情</span>
                         {
-                            !record.group&&
-                            <span className="pd5 hand" onClick={()=>{this.onShowTemplate(record);}}>票面信息</span>
+                            record.realcheckState === 'PASS' &&
+                            <span className="pd5 hand" onClick={() => { this.onDetail(record); }}>详情</span>
+                        }
+                        {
+                            (!record.group && record.realcheckState === 'PASS') &&
+                            <span className="pd5 hand" onClick={() => { this.onShowTemplate(record); }}>票面信息</span>
                         }
                         {
                             record.group &&
@@ -106,8 +109,8 @@ class UserForm extends React.Component<any, any> {
             addModal: false,
             message: null,
             show: false,
-            template:false,
-            templateData:null,
+            template: false,
+            templateData: null,
         };
     }
     onDelete = (record) => {
@@ -153,7 +156,7 @@ class UserForm extends React.Component<any, any> {
             addToModal: false
         });
     }
-    onShowTemplate=(record)=>{
+    onShowTemplate = (record) => {
         invoiceInput.querySingleDetail(this, { incomeInvoiceBizId: record.loggingId }).then((response: any) => {
             const err = response.err;
             const res = response.res;
@@ -163,17 +166,17 @@ class UserForm extends React.Component<any, any> {
             } else {
                 if (res) {
                     this.setState({
-                        template:true,
-                        templateData:res.body,
-                        templateType:record.invoiceType
+                        template: true,
+                        templateData: res.invoiceDetail,
+                        templateType: record.invoiceType
                     });
                 }
             }
         });
     }
-    closeTemplate=()=>{
+    closeTemplate = () => {
         this.setState({
-            template:false
+            template: false
         });
     }
     onDetail = (record) => {
@@ -310,8 +313,8 @@ class UserForm extends React.Component<any, any> {
                     }
                     {
                         this.state.template &&
-                        Template({type:this.state.templateType,data:this.state.templateData,onClose:this.closeTemplate})
-                        
+                        Template({ type: this.state.templateType, data: this.state.templateData, onClose: this.closeTemplate })
+
                     }
                 </Card>
             </div >

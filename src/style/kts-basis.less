@@ -48,4 +48,976 @@ ul li{
 .hand{
     cursor: pointer;
 }
+
+.select-company {
+    padding: 24px;
+    padding-bottom: 12px;
+    background: #fbfbfb;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+    margin-bottom: 20px;
+
+    .ant-form-item {
+        margin-bottom: 12px !important;
+    }
+}
+.divide span{
+    border-right:1px solid #3f3f3f;
+    padding: 0 5px 0 5px;
+}
+.divide span:last-child{
+    border:none;
+}
+.doc-item.ui-item {
+    overflow: hidden;
+}
+.ui-list .ui-item .special .ui-item-description .ui-item-left-space{
+    max-width: 357px;
+}
+.ui-list .ui-item .ant-tag{
+    margin-bottom: 4px
+}
+.ui-list {
+    .ui-item {
+        position: relative;
+        padding: 11px 0;
+        margin: 0 11px;
+        font-size: 12px;
+        color: #3f3f3f;
+        line-height: 22px;
+        height: 66px;
+        .ui-item-description {
+            display: inline-block;
+            .ui-item-left-space {
+                display: block;
+                line-height: 22px;
+                max-width: 497px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .supplier-name {
+                font-size: 14px;
+                margin-left: 5.5px;
+                font-weight: bold;
+                padding-right: 12px;
+            }
+            .amount {
+                font-size: 14px !important;
+                font-weight: bold;
+            }
+        }
+    }
+}
+.input-time {
+    color: #999;
+}
+
+.ui-list .ui-item .ui-item-description .ui-item-info-tertiary {
+    margin-left: 11px;
+    font-size: 12px;
+    color: #3f3f3f;
+}
+.doc-item.ui-item .ui-item-description .ui-item-info-secondary,
+.doc-item.ui-item .ui-item-description .ui-item-info-tertiary,
+.doc-item.ui-item .ui-item-description .ui-item-left-space {
+    margin-left: 5.5px;
+}
+.ui-list .ui-item .ui-item-description .ui-item-info-primary,
+.ui-list .ui-item .ui-item-description .ui-item-info-secondary,
+.ui-list .ui-item .ui-item-description .ui-item-info-tertiary,
+.ui-list .ui-item .ui-item-icon {
+    display: inline-block;
+}
+.view-invoice {
+    width: 100%;
+    text-align: center;
+    color: #3f3f3f;
+}
+
+.view-invoice div,
+.view-invoice input,
+.view-invoice label,
+.view-invoice span,
+.view-invoice textarea {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+.view-invoice div h1 {
+    color: #9c5326;
+}
+
+.view-invoice .label,
+.view-invoice label {
+    color: #9c5326;
+}
+
+.view-invoice .input,
+.view-invoice input[type="text"],
+.view-invoice select {
+    width: 98%;
+    height: 100%;
+    display: inline-block;
+    text-align: left;
+}
+
+.view-invoice .top-line {
+    border-top: 1px solid #9c5326;
+}
+
+.view-invoice .left-line {
+    border-left: 1px solid #9c5326;
+}
+
+.view-invoice .right-line {
+    border-right: 1px solid #9c5326;
+}
+
+.view-invoice .editable-field {
+    border-bottom: 1px solid green;
+}
+
+.view-invoice i {
+    word-break: break-all;
+    white-space: normal;
+    font-style: normal;
+    word-wrap: break-word;
+    display: inline-block;
+}
+
+.view-invoice .money,
+.view-invoice .number {
+    font-size: 12px;
+}
+
+.view-invoice .ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.view-invoice .invoice {
+    margin: 0 auto;
+    clear: both;
+    width: 786px;
+    display: inline-block;
+    padding: 15px;
+    background: #fff;
+}
+
+.view-invoice .invoice > div {
+    border-top: 1px solid #9c5326;
+    top: -1px;
+    float: left;
+    width: 100%;
+}
+
+.view-invoice .invoice img.invalid {
+    width: 220px;
+    margin-bottom: -165px;
+}
+
+.view-invoice .invoice .header {
+    position: relative;
+    border-top: none;
+    margin-bottom: 11px;
+    height: 64px;
+}
+
+.view-invoice .invoice .header .title {
+    float: none;
+    color: #9e520a;
+    font-size: 17.33px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+}
+
+.view-invoice .invoice .header .title .region {
+    height: 24px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.view-invoice .invoice .header .title .hr {
+    box-sizing: content-box;
+    height: 2px;
+    border: 1px solid #89420a;
+    border-left: 0;
+    border-right: 0;
+    margin-top: 11px;
+}
+
+.view-invoice .invoice .header .left-block {
+    position: absolute;
+    top: 0;
+    left: 1%;
+    height: 100%;
+    width: 22%;
+}
+
+.view-invoice .invoice .header .left-block .isRed {
+    font-size: 12px;
+    position: absolute;
+    left: 11px;
+    bottom: 2em;
+    background: #9c5326;
+    color: #fff;
+    line-height: 22px;
+    padding: 0 11px;
+}
+
+.view-invoice .invoice .header .left-block .machineNumber {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.view-invoice .invoice .header .right-block {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+}
+
+.view-invoice .invoice .header .right-block .label-input-fields {
+    width: 100%;
+    padding: 0;
+}
+
+.view-invoice
+    .invoice
+    .header
+    .right-block
+    .label-input-fields
+    .label-input-field {
+    padding-left: 6em;
+}
+
+.view-invoice
+    .invoice
+    .header
+    .right-block
+    .label-input-fields
+    .label-input-field
+    label {
+    width: 6em;
+}
+
+.view-invoice
+    .invoice
+    .header
+    .right-block
+    .label-input-fields
+    .label-input-field.signature
+    .input {
+    width: 12em;
+}
+
+.view-invoice .invoice .sell-info {
+    position: relative;
+}
+
+.view-invoice .invoice .sell-info > div {
+    float: left;
+    height: 100%;
+}
+
+.view-invoice .invoice .sell-info .vertical-title {
+    display: block;
+    position: absolute;
+    text-align: center;
+    width: 7.45%;
+    height: 100%;
+    float: left;
+}
+
+.view-invoice .invoice .sell-info .vertical-title .labelHolder {
+    border-left: 1px solid #9c5326;
+    border-right: 1px solid #9c5326;
+    display: table;
+    height: 100%;
+}
+
+.view-invoice .invoice .sell-info .vertical-title .labelHolder label {
+    display: table-cell;
+    vertical-align: middle;
+    letter-spacing: 0.5em;
+    position: relative;
+    top: 0.1em;
+    left: 0.2em;
+}
+
+.view-invoice .invoice .sell-info .vertical-title.smaller {
+    width: 6.1%;
+}
+
+.view-invoice .invoice .sell-info .label-input-fields {
+    float: right;
+    width: 92.55%;
+    padding: 11px;
+}
+
+.view-invoice .invoice .sell-info .label-input-fields .label-input-field {
+    width: 100%;
+    padding-left: 23.5%;
+    position: relative;
+}
+
+.view-invoice .invoice .sell-info .label-input-fields .label-input-field label {
+    position: absolute;
+    left: 1%;
+    line-height: 16px;
+    width: 23.5%;
+    text-align-last: justify;
+    -moz-text-align-last: justify;
+}
+
+.view-invoice .invoice .sell-info .label-input-fields .label-input-field .input,
+.view-invoice .invoice .sell-info .label-input-fields .label-input-field input {
+    height: 16px;
+    line-height: 16px;
+}
+
+.view-invoice
+    .invoice
+    .sell-info
+    .label-input-fields
+    .label-input-field
+    .input.small-font,
+.view-invoice
+    .invoice
+    .sell-info
+    .label-input-fields
+    .label-input-field
+    input.small-font {
+    line-height: 8px;
+    font-size: 7.5px;
+}
+
+.view-invoice
+    .invoice
+    .sell-info
+    .label-input-fields
+    .label-input-field
+    .input.small-font.line-one,
+.view-invoice
+    .invoice
+    .sell-info
+    .label-input-fields
+    .label-input-field
+    input.small-font.line-one {
+    line-height: 16px;
+}
+
+.view-invoice .invoice .sell-info .sell {
+    position: relative;
+    display: inline-block;
+    width: 64.9%;
+}
+
+.view-invoice .invoice .sell-info .info {
+    position: absolute;
+    right: 0;
+    width: 35.1%;
+    display: inline-block;
+    border-right: 1px solid #9c5326;
+}
+
+.view-invoice .invoice .sell-info .comments {
+    float: right;
+    width: 91%;
+    height: 100%;
+}
+
+.view-invoice .invoice .sell-info .comments .textarea,
+.view-invoice .invoice .sell-info .comments textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    text-align: left;
+    display: inline-block;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+.view-invoice .invoice .product-list {
+    position: relative;
+    min-height: 180px;
+    padding-bottom: 16px;
+    padding: 11px 0;
+}
+
+.view-invoice .invoice .product-list .products-content {
+    overflow-y: hidden;
+}
+
+.view-invoice .invoice .product-list .product {
+    position: relative;
+    width: 100%;
+    line-height: 16px;
+    display: inline-block;
+    height: auto;
+    min-height: 22px;
+}
+
+.view-invoice .invoice .product-list .product > div {
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+
+.view-invoice .invoice .product-list .product > div input {
+    width: 90%;
+    height: 70%;
+}
+
+.view-invoice .invoice .product-list .product .input {
+    text-align: center;
+}
+
+.view-invoice .invoice .product-list .product .input.small-font {
+    font-size: 7.5px;
+}
+
+.view-invoice .invoice .product-list .product .input.small-font.line-one {
+    line-height: 16px;
+}
+
+.view-invoice .invoice .product-list .product .name {
+    width: 26.88%;
+    padding-left: 1%;
+}
+
+.view-invoice .invoice .product-list .product .name .input {
+    text-align: left;
+}
+
+.view-invoice .invoice .product-list .product .name .discount {
+    width: 100%;
+    height: 100%;
+    padding: 0 10% 0 30%;
+    position: relative;
+}
+
+.view-invoice .invoice .product-list .product .name .discount .label-before {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30%;
+}
+
+.view-invoice .invoice .product-list .product .name .discount .label-after {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10%;
+}
+
+.view-invoice .invoice .product-list .product .model {
+    width: 7.75%;
+}
+
+.view-invoice .invoice .product-list .product .unit {
+    width: 6.25%;
+}
+
+.view-invoice .invoice .product-list .product .quantity {
+    width: 11.25%;
+}
+
+.view-invoice .invoice .product-list .product .unitPrice {
+    width: 12.87%;
+}
+
+.view-invoice .invoice .product-list .product .priceAmount {
+    width: 14%;
+}
+
+.view-invoice .invoice .product-list .product .priceAmount .hasRateSwitch {
+    cursor: pointer;
+}
+
+.view-invoice .invoice .product-list .product .taxRate {
+    width: 7%;
+}
+
+.view-invoice .invoice .product-list .product .taxAmount {
+    width: 14%;
+}
+
+.view-invoice .invoice .product-list .product.summary {
+    min-height: 0;
+    height: 16px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.view-invoice .invoice .product-list .product.active {
+    background-color: #e3e3e3;
+}
+
+.view-invoice .invoice .product-list .v-lines {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border-right: 1px solid #9c5326;
+}
+
+.view-invoice .invoice .product-list .v-lines.line-0 {
+    left: 0;
+}
+
+.view-invoice .invoice .product-list .v-lines.line-1 {
+    left: 26.88%;
+}
+
+.view-invoice .invoice .product-list .v-lines.line-2 {
+    left: 34.63%;
+}
+
+.view-invoice .invoice .product-list .v-lines.line-3 {
+    left: 40.88%;
+}
+
+.view-invoice .invoice .product-list .v-lines.line-4 {
+    left: 52.13%;
+}
+
+.view-invoice .invoice .product-list .v-lines.line-5 {
+    left: 65%;
+}
+
+.view-invoice .invoice .product-list .v-lines.line-6 {
+    left: 79%;
+}
+
+.view-invoice .invoice .product-list .v-lines.line-7 {
+    left: 86%;
+}
+
+.view-invoice .invoice .product-list .v-lines.line-8 {
+    right: 0;
+}
+
+.view-invoice .invoice .product-price-tax-total {
+    line-height: 30px;
+    position: relative;
+}
+
+.view-invoice .invoice .product-price-tax-total > div {
+    float: left;
+    height: 24px;
+    line-height: 24px;
+}
+
+.view-invoice .invoice .product-price-tax-total .title {
+    border-left: 1px solid #9c5326;
+    width: 26.88%;
+    text-align: center;
+}
+
+.view-invoice .invoice .product-price-tax-total .price-chinese {
+    border: none;
+    width: 48.12%;
+    padding-left: 1%;
+    text-align: left;
+}
+
+.view-invoice .invoice .product-price-tax-total .price-chinese .price-icon {
+    width: 12px;
+    height: 12px;
+}
+
+.view-invoice .invoice .product-price-tax-total .price-number {
+    float: right;
+    border-right: 1px solid #9c5326;
+    width: 25%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.view-invoice .invoice .product-price-tax-total .v-lines.line-1 {
+    border-right: 1px solid #9c5326;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 26.88%;
+}
+
+.view-invoice .invoice .invoice-footer {
+    height: auto;
+}
+
+.view-invoice .invoice .invoice-footer .label-input-fields {
+    width: 100%;
+    padding: 5.5px 0 0;
+}
+
+.view-invoice .invoice .invoice-footer .label-input-fields .label-input-field {
+    float: left;
+    width: 25%;
+    padding-left: 8%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.view-invoice
+    .invoice
+    .invoice-footer
+    .label-input-fields
+    .label-input-field
+    label {
+    width: 30%;
+}
+
+.view-invoice
+    .invoice
+    .invoice-footer
+    .label-input-fields
+    .label-input-field.signature
+    label {
+    width: 55%;
+}
+
+.view-invoice .invoice .invoice-footer .label-input-fields.moreInfo label {
+    color: #666;
+}
+
+.view-invoice
+    .invoice
+    .invoice-footer
+    .label-input-fields.moreInfo
+    .label-input-field {
+    float: left;
+    width: 50%;
+    padding-left: 15%;
+}
+
+.view-invoice
+    .invoice
+    .invoice-footer
+    .label-input-fields.moreInfo
+    .label-input-field
+    label {
+    width: 30%;
+}
+
+.view-invoice
+    .invoice
+    .invoice-footer
+    .label-input-fields.moreInfo
+    .label-input-field.signature
+    label {
+    width: 50%;
+}
+
+.view-invoice .invoice-list {
+    margin: 0 auto;
+    clear: both;
+    width: 786px;
+    background: #fff;
+    padding: 39.666px 48px 53px 53px;
+    margin-bottom: 4px;
+    .voColor {
+        color: #9c5326;
+    }
+}
+
+.view-invoice .invoice-list .list-header .header-block {
+    text-align: left;
+    height: 90px;
+}
+
+.view-invoice .invoice-list .list-header .header-block .header-block-item,
+.view-invoice .invoice-list .list-header .header-block span {
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.view-invoice
+    .invoice-list
+    .list-header
+    .header-block
+    .header-block-item
+    .inline-block-item,
+.view-invoice .invoice-list .list-header .header-block span .inline-block-item {
+    font-size: 14px;
+    display: inline-block;
+}
+
+.view-invoice
+    .invoice-list
+    .list-header
+    .header-block
+    .header-block-item
+    .invoiceCode,
+.view-invoice .invoice-list .list-header .header-block span .invoiceCode {
+    float: left;
+    width: 46%;
+}
+
+.view-invoice
+    .invoice-list
+    .list-header
+    .header-block
+    .header-block-item
+    .invoiceNo,
+.view-invoice .invoice-list .list-header .header-block span .invoiceNo {
+    text-align: center;
+}
+
+.view-invoice
+    .invoice-list
+    .list-header
+    .header-block
+    .header-block-item
+    .pageNo,
+.view-invoice .invoice-list .list-header .header-block span .pageNo {
+    float: right;
+    text-align: right;
+}
+
+.view-invoice .invoice-list .list-detail table {
+    width: 100%;
+    margin: 22px 0;
+    border-collapse: collapse;
+    text-align: center;
+    border: 1px solid #9c5326;
+}
+
+.view-invoice .invoice-list .list-detail table .name {
+    border-bottom: 1px solid #9c5326;
+    color: #9c5326;
+}
+
+.view-invoice .invoice-list .list-detail table .lineItems {
+    line-height: 16px;
+}
+
+.view-invoice .invoice-list .list-detail table .center {
+    text-align: center;
+}
+
+.view-invoice .invoice-list .list-detail table .right {
+    text-align: right;
+}
+
+.view-invoice .invoice-list .list-detail table .index {
+    width: 7%;
+}
+
+.view-invoice .invoice-list .list-detail table .item-name {
+    width: 26.88%;
+    text-align: left;
+}
+
+.view-invoice .invoice-list .list-detail table .model {
+    width: 7.75%;
+}
+
+.view-invoice .invoice-list .list-detail table .unit {
+    width: 6.25%;
+}
+
+.view-invoice .invoice-list .list-detail table .quantity {
+    width: 11.25%;
+}
+
+.view-invoice .invoice-list .list-detail table .unitPrice {
+    width: 12.87%;
+}
+
+.view-invoice .invoice-list .list-detail table .priceAmount {
+    width: 14%;
+}
+
+.view-invoice .invoice-list .list-detail table .taxRate {
+    width: 7%;
+}
+
+.view-invoice .invoice-list .list-detail table .taxAmount {
+    width: 14%;
+}
+
+.view-invoice .invoice-list .list-detail table .remark {
+    text-align: left;
+    border-top: 1px solid #9c5326;
+}
+
+.view-invoice .invoice-list .list-detail table tr td,
+.view-invoice .invoice-list .list-detail table tr th {
+    padding: 11px 2px;
+    border: none;
+    border-left: 1px solid #9c5326;
+}
+
+.view-invoice .invoice-list .list-footer {
+}
+
+.view-invoice .invoice-list .list-footer .footer-left {
+    width: 50%;
+    float: left;
+    text-align: left;
+}
+
+.view-invoice .invoice-list .list-footer .footer-right {
+    float: right;
+}
+
+.view-invoice .invoice-list .list-footer .footer-right div {
+    display: inline-block;
+}
+
+.view-invoice-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: none;
+}
+
+.view-invoice-container.visible {
+    display: block;
+}
+.ui-list .ui-item .ui-item-icon {
+    height: 30px;
+    width: 55px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 13px;
+    color: #6b6b6b;
+    margin-left: 11px;
+    margin-top: 6px;
+}
+.doc-item.ui-item .input-type {
+    color: #fff;
+    font-size: 16px;
+    line-height: 26px;
+    width: 30px;
+    border-radius: 2px;
+}
+.doc-item.ui-item .bg-green {
+    border: 2px solid #72b148;
+    border-radius: 5px;
+    color: #72b148;
+}
+.doc-item.ui-item .bg-red {
+    border: 2px solid #bf0000;
+    border-radius: 5px;
+    color: #bf0000;
+}
+.doc-item.ui-item .bg-yellow {
+    border: 2px solid #fcbf12;
+    color: #fcbf12;
+}
+.doc-item.ui-item .bg-grey {
+    border: 2px solid #a19292;
+    border-radius: 5px;
+    color: #a19292;
+}
+.red-tag {
+    color: #bf0000;
+}
+.green-tag {
+    color: #72b148;
+}
+.yellow-tag {
+    color: #fcbf12;
+}
+.ui-list .ui-item .ui-item-icon,
+.ui-list .ui-item .ui-item-info-group {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.special-modal .ant-modal-content {
+    background: none;
+    box-shadow: none;
+}
+.page-total {
+    position: absolute;
+    right: 0;
+    font-size: 16px;
+    .number {
+        font-weight: 600;
+    }
+}
+
+// 机动车发票票面详情样式
+.car-invoice .header {
+    margin: 20px 0;
+}
+.car-invoice .tips {
+    padding-bottom: 12px;
+}
+.car-invoice .invoice-tips {
+    width: 200px;
+    position: absolute;
+    right: 0px;
+    top: 100px;
+}
+.car-invoice .footer {
+    padding-top: 8px;
+    height: 30px;
+}
+.car-invoice .with-color {
+    color: #9c5326;
+    padding-right: 6px;
+}
+
+.car-invoice .header h2 {
+    width: 260px;
+    margin: auto;
+    text-align: center;
+    font-size: 20px;
+    color: #9c5326;
+}
+.car-invoice .header h3 {
+    width: 260px;
+    margin: auto;
+    margin-top: 6px;
+    text-align: center;
+    font-size: 18px;
+    color: #9c5326;
+}
+
+.car-invoice table {
+    border-collapse: collapse;
+}
+
+.car-invoice td {
+    border: 1px solid #9c5326;
+}
+.car-invoice .wrapper {
+    border: none;
+}
+.car-invoice .wrapper table {
+}
+.car-invoice .wrapper tr td:first-of-type {
+    border-left: none;
+}
+.car-invoice .wrapper tr td {
+    border-bottom: none;
+    padding-left: 8px;
+}
+.car-invoice .last-line {
+    border-bottom: 1px solid #9c5326 !important;
+}
+
+.car-invoice table .title {
+    padding-left: 8px;
+    color: #9c5326;
+    font-size: 14px;
+}
+.ui-list .ui-item .ui-item-description .ui-item-info-tertiary{
+    display: inline;
+}
 //hulk 样式结束
