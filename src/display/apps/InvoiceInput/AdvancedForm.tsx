@@ -5,9 +5,9 @@ import { Form, Row, Col, DatePicker, InputNumber, Select, Input, Button } from '
 import { TransformType } from 'src/entry/constant';
 import {transformTypeStringShort} from 'src/entry/Language';
 import MyStore from 'src/redux/MyStore';
-const css = require('./index.scss');
 const FormItem = Form.Item;
 const Option = Select.Option;
+const css = require('./index.scss');
 interface UserFormProps extends FormComponentProps {
 
 }
@@ -100,7 +100,7 @@ class Component extends React.Component<IProps, any> {
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} lg={12} sm={12}>
+                    <Col xl={8} lg={12} sm={12} className={css['invoice-filter']}>
                         <FormItem label="开票时间" {...formItemLayout}>
                             <Col span={11}>
                                 <FormItem>
@@ -167,24 +167,20 @@ class Component extends React.Component<IProps, any> {
                             )}
                         </FormItem>
                     </Col>
-                    <Col span={24} className="mb10 ">
+                    <Col span={24} className="mb10 ">  
                         <Button
-                            className={`font10 ${css['invoice-card-button']}`}
-                            icon="chixugengxin font10"
+                            className={`mr10 pull-right ${css['invoice-card-but31']} ${css['invoice-card-but-width62']}`}
+                            onClick={this.handleReset}
                         >
-                            更新加载信息
+                            清空
                         </Button>
-                        {/* <Button className="mr10 pull-right" onClick={this.handleReset}>清空</Button> */}
                         <Button
-                            className={`mr10 pull-right font10 ${css['invoice-card-button']}`}
+                            type="primary"
+                            className={`mr10 pull-right ${css['invoice-card-but31']} ${css['invoice-card-but-width62']}`}
                             htmlType="submit"
-                            icon="caret-down font10"
                         >
-                            筛选
+                            查询
                         </Button>
-                        
-                        <Button className="mr10 pull-right" onClick={this.handleReset}>清空</Button>
-                        <Button type="primary" className="mr10 pull-right" htmlType="submit">查询</Button>
                     </Col>
                 </Row>
             </Form>
