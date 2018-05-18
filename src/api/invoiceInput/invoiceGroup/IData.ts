@@ -8,4 +8,5 @@ export default interface IData {
     groupNumber?: string;
     matchCount?:number;
     waitCount?:number;
+    shouldCount?:number;
 }

@@ -21,6 +21,12 @@ class UserForm extends React.Component<any, any> {
             title: '',
             dataIndex: 'loggingId',
             className: 'text-center',
+            render:()=>''
+        },
+        {
+            title: '',
+            dataIndex: 'loggingId',
+            className: 'text-center',
             render: (text, record) => {
                 return (
                     <div >
