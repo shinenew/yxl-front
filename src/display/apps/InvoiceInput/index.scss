@@ -43,4 +43,13 @@
       width: 64px;
     }
   }
+  &-filter {
+    :global(.ant-col-6) {
+      width: 62px;
+      text-align: left;
+    }
+    :global(.ant-form-item) {
+      margin-bottom: 10px;
+    }
+  }
 }

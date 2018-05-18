@@ -63,7 +63,10 @@ class Component extends React.Component<IProps, any> {
             wrapperCol: { span: 18 },
         };
         return (
-            <Form onSubmit={this.handleSearch}>
+            <Form
+                onSubmit={this.handleSearch}
+                className={css['invoice-filter']}
+            >
                 <Row>
                     <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`发票代码`}>
