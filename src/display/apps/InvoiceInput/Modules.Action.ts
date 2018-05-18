@@ -44,7 +44,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
                                 invoiceCount:groupRes.res[i].invoiceCount,
                                 loggedCount:groupRes.res[i].loggedCount,
                                 matchCount:groupRes.res[i].matchCount,
-                                waitCount:groupRes.res[i].waitCount,
+                                waitCount:groupRes.res[i].shouldCount,
                             };
                         }
                     }
