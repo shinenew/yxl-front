@@ -11,11 +11,12 @@ class ModulesAction extends ActionBasic<ModulesState> {
         }
         let uniqueArray = [];
         rebornlist = rebornlist.map((item, index) => {
-            let appendData={...item,id: index};
+            let appendData={...item,id: item.loggingId};
             if (item.recordType===2) {
                 uniqueArray.push(item.loggingId);
                 appendData={
                     ...appendData,
+                    id:item.loggingId,
                     pId: null
                 };
             }else if(item.recordType===1){
@@ -33,15 +34,28 @@ class ModulesAction extends ActionBasic<ModulesState> {
         const groupRes = await invoiceInput.group(this, uniqueArray);
         if (!groupRes.er) {
             let reborngrouplist = [];
-            reborngrouplist = groupRes.res && groupRes.res.map((item, index) => {
-                return {
-                    ...item,
-                    pId: null,
-                    id: item.groupId,
-                    group: true,
-                };
+            reborngrouplist=rebornlist.map((item)=>{
+                if(item.recordType===2){
+                    for(let i=0;i<groupRes.res.length;i++){
+                        if(item.loggingId===groupRes.res[i].groupId){
+                            return {
+                                ...item,
+                                groupNumber:groupRes.res[i].groupNumber,
+                                invoiceCount:groupRes.res[i].invoiceCount,
+                                loggedCount:groupRes.res[i].loggedCount,
+                                matchCount:groupRes.res[i].matchCount,
+                                waitCount:groupRes.res[i].waitCount,
+                            };
+                        }else{
+                            return {...item};
+                        }
+                    }
+                    return {...item};
+                }else{
+                    return {...item};
+                }
             });
-            rebornlist = rebornlist.concat(...reborngrouplist);
+            rebornlist = reborngrouplist;
         }
         return rebornlist;
     }

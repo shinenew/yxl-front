@@ -11,6 +11,7 @@ import CreatGroup from './UI.CreatGroup';
 import SwitchGroup from './UI.SwitchGroup';
 import { invoiceInput } from 'src/api';
 import { formatTime, formatDate } from 'src/utils';
+import { typeDesc } from 'src/entry/constant/InvoiceType/EnumInvoiceType';
 import Template from 'src/display/components/InvoiceTemplate';
 @withRouter
 class UserForm extends React.Component<any, any> {
@@ -21,7 +22,18 @@ class UserForm extends React.Component<any, any> {
             dataIndex: 'supplierName',
             render: (text, record) => {
                 return (
-                    <span>
+                    <div>
+                        {record.invoiceType === 'UNKOWN_INVOICE_TYPE' && (
+                            <div className="ui-item-icon input-type bg-green">
+                                {typeDesc(record)}
+                            </div>
+                        )}
+                        {record.invoiceType !== 'UNKOWN_INVOICE_TYPE' && (
+                            <div className="ui-item-icon input-type bg-green">
+                                {typeDesc(record)}
+                            </div>
+                        )}
+
                         {
                             record.groupNumber ?
                                 <span>
@@ -30,7 +42,7 @@ class UserForm extends React.Component<any, any> {
                                 </span>
                                 : <span>{text}</span>
                         }
-                    </span>
+                    </div>
                 );
 
             }
@@ -79,12 +91,16 @@ class UserForm extends React.Component<any, any> {
                 return (
                     <div>
                         {
-                            record.realcheckState === 'PASS' &&
+                            (record.realcheckState === 'PASS' || record.recordType === 2) &&
                             <span className="pd5 hand" onClick={() => { this.onDetail(record); }}>详情</span>
                         }
                         {
                             (!record.group && record.realcheckState === 'PASS') &&
                             <span className="pd5 hand" onClick={() => { this.onShowTemplate(record); }}>票面信息</span>
+                        }
+                        {
+                            record.decodeState === 'PASS' &&
+                            <span className="pd5 hand" onClick={() => this.viewFailedImage(record)}>查看文件</span>
                         }
                         {
                             record.group &&
@@ -118,21 +134,35 @@ class UserForm extends React.Component<any, any> {
             templateData: null,
         };
     }
+    viewFailedImage = record => {
+        invoiceInput.ImgQuery(this, { invoiceLoggingId: record.loggingId }).then((response: any) => {
+            const err = response.err;
+            const res = response.res;
+            if (err) {
+                message.error(err.status.description);
+                return null;
+            } else {
+                if (res) {
+                    window.open(res.imageUrl);
+                }
+            }
+        });
+    }
     creatTip = (record) => {
-        let warnArray=[];
-        if(record.decodeState==='FAILED'){
-            warnArray.push(<div>未识别</div>);
+        let warnArray = [];
+        if (record.decodeState === 'FAILED') {
+            warnArray.push(<div key="0">未识别</div>);
         }
-        if(record.duplicateState==='FAILED'){
-            warnArray.push(<div>重复录入</div>);
+        if (record.duplicateState === 'FAILED') {
+            warnArray.push(<div key="1">重复录入</div>);
         }
-        if(record.realcheckState==='FAILED'){
-            warnArray.push(<div>查验状态:{record.realcheckMsg||'查验异常'}</div>);
+        if (record.realcheckState === 'FAILED') {
+            warnArray.push(<div key="2">查验状态:{record.realcheckMsg || '查验异常'}</div>);
         }
-        if(record.standardState==='FAILED'){
-            warnArray.push(<div>合规状态:{record.standardMsg||'不合规'}</div>);
+        if (record.standardState === 'FAILED') {
+            warnArray.push(<div key="3">合规状态:{record.standardMsg || '不合规'}</div>);
         }
-        const warnMessage=<div>{warnArray}</div>;
+        const warnMessage = <div>{warnArray}</div>;
         return (
             <Tooltip title={warnMessage}>
                 <Icon type="warning" style={{ color: '#EB6100' }} />
@@ -207,7 +237,7 @@ class UserForm extends React.Component<any, any> {
     }
     onDetail = (record) => {
         if (record.groupNumber) {
-            this.props.history.push(`invoiceInput/group/${record.groupId}`);
+            this.props.history.push(`invoiceInput/group/${record.loggingId}`);
         } else {
             this.props.history.push(`invoiceInput/invoiceDetail/${record.loggingId}`);
         }
@@ -268,7 +298,7 @@ class UserForm extends React.Component<any, any> {
                         return null;
                     });
                     this.setState({
-                        message: insert,
+                        message: insert || '移动成功',
                         show: true
                     });
 
@@ -321,10 +351,14 @@ class UserForm extends React.Component<any, any> {
                         this.state.show && this.addAlert()
                     }
                     <Table
+                        className="ui-list"
                         loading={this.props.loading}
                         bordered={true}
                         dataSource={dataSource}
                         columns={columns}
+                        rowClassName={(record, index) => {
+                            return 'ui-item doc-item';
+                        }}
                         rowKey="id"
                         rowSelection={rowSelection}
                         scroll={{ x: 800 }}
