@@ -14,7 +14,7 @@ interface IProps extends UserFormProps {
     fields: any;
     clearFields: () => void;
     onValuesChange: (values: Array<any>) => void;
-    onAddToGroup: () => void;
+    onAddToGroup?: () => void;
     getData: () => void;
 }
 class Component extends React.Component<IProps, any> {
@@ -167,9 +167,9 @@ class Component extends React.Component<IProps, any> {
                         </FormItem>
                     </Col>
                     <Col span={24} className="mb10 ">
-                        <Button type="primary" onClick={this.onAddToGroup}>添加到发票组</Button>
+                        
                         <Button className="mr10 pull-right" onClick={this.handleReset}>清空</Button>
-                        <Button type="primary" className="mr10 pull-right" htmlType="submit">筛选</Button>
+                        <Button type="primary" className="mr10 pull-right" htmlType="submit">查询</Button>
                     </Col>
                 </Row>
             </Form>
