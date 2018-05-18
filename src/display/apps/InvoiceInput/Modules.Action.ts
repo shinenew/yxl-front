@@ -46,8 +46,6 @@ class ModulesAction extends ActionBasic<ModulesState> {
                                 matchCount:groupRes.res[i].matchCount,
                                 waitCount:groupRes.res[i].waitCount,
                             };
-                        }else{
-                            return {...item};
                         }
                     }
                     return {...item};

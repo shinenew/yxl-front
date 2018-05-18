@@ -18,26 +18,35 @@ class UserForm extends React.Component<any, any> {
 
     private columns = [
         {
+            title: '',
+            dataIndex: 'loggingId',
+            render: (text, record) => {
+                return (
+                    <div>
+                        {
+                            record.recordType === 2 &&
+                            <Icon type="folder" style={{ fontSize: 16, color: '#5CC4E9', marginRight: 21 }} />
+                        }
+                        {
+                            record.recordType === 1 &&
+                            <div className="ui-item-icon input-type bg-green">
+                                {typeDesc(record)}
+                            </div>
+
+                        }
+                    </div>
+                );
+            }
+        },
+        {
             title: '销售方名称',
             dataIndex: 'supplierName',
             render: (text, record) => {
                 return (
                     <div>
-                        {record.invoiceType === 'UNKOWN_INVOICE_TYPE' && (
-                            <div className="ui-item-icon input-type bg-green">
-                                {typeDesc(record)}
-                            </div>
-                        )}
-                        {record.invoiceType !== 'UNKOWN_INVOICE_TYPE' && (
-                            <div className="ui-item-icon input-type bg-green">
-                                {typeDesc(record)}
-                            </div>
-                        )}
-
                         {
                             record.groupNumber ?
                                 <span>
-                                    <Icon type="folder" style={{ fontSize: 16, color: '#5CC4E9', marginRight: 21 }} />
                                     {record.groupNumber}({record.matchCount}/{record.waitCount})
                                 </span>
                                 : <span>{text}</span>

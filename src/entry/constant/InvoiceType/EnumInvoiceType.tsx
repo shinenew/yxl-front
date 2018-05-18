@@ -60,7 +60,7 @@ export function typeDesc (str: any) {
                 return '普';
         }
     }
-    return null;
+    return  '未';
 }
 //获取发票城市
 export function getCityName(invoice: string) {
