@@ -40,7 +40,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     render() {
         const { refreshInvoice,urlData } = this.props;
         const { tabkey } = this.modulesState;
-        console.log(this.modulesState);
+        console.log('tabkey', tabkey);
         return (
             <div>
                 <div style={{padding:15}}>
