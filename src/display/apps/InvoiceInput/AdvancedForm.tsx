@@ -5,6 +5,7 @@ import { Form, Row, Col, DatePicker, InputNumber, Select, Input, Button } from '
 import { TransformType } from 'src/entry/constant';
 import {transformTypeStringShort} from 'src/entry/Language';
 import MyStore from 'src/redux/MyStore';
+const css = require('./index.scss');
 const FormItem = Form.Item;
 const Option = Select.Option;
 interface UserFormProps extends FormComponentProps {
@@ -167,9 +168,28 @@ class Component extends React.Component<IProps, any> {
                         </FormItem>
                     </Col>
                     <Col span={24} className="mb10 ">
-                        <Button type="primary" onClick={this.onAddToGroup}>添加到发票组</Button>
-                        <Button className="mr10 pull-right" onClick={this.handleReset}>清空</Button>
-                        <Button type="primary" className="mr10 pull-right" htmlType="submit">筛选</Button>
+                        <Button 
+                            // className="mr10 font10 invoice-card-button"
+                            className={`mr10 font10 ${css['invoice-card-button']}`}
+                            onClick={this.onAddToGroup}
+                            icon="tianjia font10"
+                        >
+                            添加到发票组
+                        </Button>
+                        <Button
+                            className={`font10 ${css['invoice-card-button']}`}
+                            icon="chixugengxin font10"
+                        >
+                            更新加载信息
+                        </Button>
+                        {/* <Button className="mr10 pull-right" onClick={this.handleReset}>清空</Button> */}
+                        <Button
+                            className={`mr10 pull-right font10 ${css['invoice-card-button']}`}
+                            htmlType="submit"
+                            icon="caret-down font10"
+                        >
+                            筛选
+                        </Button>
                     </Col>
                 </Row>
             </Form>

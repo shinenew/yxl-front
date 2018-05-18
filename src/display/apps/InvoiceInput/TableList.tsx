@@ -13,6 +13,7 @@ import { invoiceInput } from 'src/api';
 import { formatTime, formatDate } from 'src/utils';
 import { typeDesc } from 'src/entry/constant/InvoiceType/EnumInvoiceType';
 import Template from 'src/display/components/InvoiceTemplate';
+const css = require('./index.scss');
 @withRouter
 class UserForm extends React.Component<any, any> {
 
@@ -339,7 +340,7 @@ class UserForm extends React.Component<any, any> {
         );
         return (
             <div>
-                <Card title="发票录入" extra={extraButtons}>
+                <Card className={css['invoice-card']} title="发票录入" extra={extraButtons}>
                     <AdvancedForm
                         clearFields={this.clearFields}
                         fields={fields}
