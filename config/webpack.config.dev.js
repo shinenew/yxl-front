@@ -327,6 +327,7 @@ module.exports = {
       env: webEnv,
       mock: mockData,
       version: new Date().getTime(),
+      compileTime: new Date().toString(),
     }),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),
