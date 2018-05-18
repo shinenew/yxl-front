@@ -378,8 +378,9 @@ module.exports = {
       env: webEnv,
       mock: 'undefined',
       version: new Date().getTime(),
+      compileTime: new Date().toString(),
       minify: {
-        removeComments: true,
+        removeComments: false,
         collapseWhitespace: true,
         removeRedundantAttributes: true,
         useShortDoctype: true,
