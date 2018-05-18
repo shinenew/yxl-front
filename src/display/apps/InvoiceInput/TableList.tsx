@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Card, Button, message, Alert, Popconfirm, Icon } from 'antd';
+import { Table, Card, Button, message, Alert, Popconfirm, Icon, Tooltip } from 'antd';
 import AdvancedForm from './AdvancedForm';
 import ModulesAction from './Modules.Action';
 import { tree } from 'src/utils';
@@ -38,23 +38,26 @@ class UserForm extends React.Component<any, any> {
         {
             title: '',
             dataIndex: 'unusualState',
-            render: (text) => {
+            render: (text, record) => {
                 return (
-                    <span>{text === 'UNUSUAL' && <Icon type="warning" style={{ color: '#EB6100' }} />}
+                    <span>{text === 'UNUSUAL' && this.creatTip(record)}
                     </span>
                 );
             }
         },
         {
             title: '发票代码',
+            width: 125,
             dataIndex: 'invoiceCode'
         },
         {
             title: '发票号码',
+            width: 95,
             dataIndex: 'invoiceNumber'
         },
         {
             title: '开票日期',
+            width: 110,
             dataIndex: 'invoiceDate',
             render: (text) => formatDate(text)
         },
@@ -70,6 +73,8 @@ class UserForm extends React.Component<any, any> {
         {
             title: '操作',
             dataIndex: 'operation',
+            key: 'operation',
+            width: 140,
             render: (text, record) => {
                 return (
                     <div>
@@ -112,6 +117,27 @@ class UserForm extends React.Component<any, any> {
             template: false,
             templateData: null,
         };
+    }
+    creatTip = (record) => {
+        let warnArray=[];
+        if(record.decodeState==='FAILED'){
+            warnArray.push(<div>未识别</div>);
+        }
+        if(record.duplicateState==='FAILED'){
+            warnArray.push(<div>重复录入</div>);
+        }
+        if(record.realcheckState==='FAILED'){
+            warnArray.push(<div>查验状态:{record.realcheckMsg||'查验异常'}</div>);
+        }
+        if(record.standardState==='FAILED'){
+            warnArray.push(<div>合规状态:{record.standardMsg||'不合规'}</div>);
+        }
+        const warnMessage=<div>{warnArray}</div>;
+        return (
+            <Tooltip title={warnMessage}>
+                <Icon type="warning" style={{ color: '#EB6100' }} />
+            </Tooltip>
+        );
     }
     onDelete = (record) => {
         invoiceInput.DeleteGroup(this, { invoiceGroupId: record.groupId }).then((response: any) => {
