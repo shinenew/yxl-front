@@ -48,6 +48,23 @@
       width: 62px;
       text-align: left;
     }
+    :global(.ant-input) {
+      height: 24px;
+    }
+    :global(.ant-input-number-input) {
+      height: 24px;
+    }
+    :global(.ant-select-selection--single) {
+      height: 24px;
+    }
+    :global(.ant-select-selection__rendered) {
+      line-height: 24px;
+    }
+    :global(.ant-input-number) {
+      height: 24px;
+      line-height: 24px;
+      overflow: hidden;
+    }
     :global(.ant-form-item) {
       margin-bottom: 10px;
     }
