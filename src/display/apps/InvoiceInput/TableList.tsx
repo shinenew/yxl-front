@@ -316,7 +316,7 @@ class UserForm extends React.Component<any, any> {
                 if (res) {
                     const insert = res.map((item, index) => {
                         if (!item.success) {
-                            return <div key={index}>发票代码:{item.invoiceCode},发票号码:{item.invoiceGroupNumber} 设置发票组失败</div>;
+                            return <div key={index}>发票代码:{item.invoiceCode},发票号码:{item.invoiceGroupNumber} 设置发票组失败,{item.message}</div>;
                         }
                         return null;
                     });
