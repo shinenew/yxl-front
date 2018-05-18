@@ -56,7 +56,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                         isMatch={this.modulesState.groupInfo.matchState}
                         createType={this.modulesState.groupInfo.createType}
                     />
-                    <FormItem className={css['group-formitem']} label="发票租编号">
+                    <FormItem className={css['group-formitem']} label="发票组编号">
                         {getFieldDecorator('invoice', {
                             initialValue: this.modulesState.groupId,
                             rules: [
