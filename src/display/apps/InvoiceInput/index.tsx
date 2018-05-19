@@ -5,7 +5,7 @@ import ReduxState, { } from 'src/redux/ReduxState';
 import ModulesState from './Modules.State';
 import ModulesAction from './Modules.Action';
 //import UIComponents from './UI.Components';
-import ModulesRoute, { Switch } from './Modules.Route';
+import ModulesRoute, { } from './Modules.Route';
 
 // import UIComponents from './UI.Components';
 
@@ -42,7 +42,7 @@ export default class InvoiceInput extends ModulesBasic<IProps, ModulesState> {
         return (
             <ModulesRoot action={ModulesAction}>
                 <div className={css.modules}>
-                    <Switch>{ModulesRoute.getChildReact()}</Switch>
+                    {ModulesRoute.getChildReact()}
                 </div>
             </ModulesRoot>
         );

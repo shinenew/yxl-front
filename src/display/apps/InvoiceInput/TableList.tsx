@@ -14,9 +14,15 @@ import { formatDate } from 'src/utils';
 import moment from 'moment';
 import { typeDesc } from 'src/entry/constant/InvoiceType/EnumInvoiceType';
 import Template from 'src/display/components/InvoiceTemplate';
+import { IPropsBasic } from 'kts-scaffold-framework/modules';
+import { Link } from 'react-router-dom';
 const css = require('./index.scss');
+
+interface IProps extends IPropsBasic{
+    loading: any;
+}
 @withRouter
-class UserForm extends React.Component<any, any> {
+class UserForm extends React.Component<IProps, any> {
 
     private columns = [
         {
@@ -69,7 +75,7 @@ class UserForm extends React.Component<any, any> {
         {
             title: '',
             dataIndex: 'unusualState',
-            className:'text-center',
+            className: 'text-center',
             render: (text, record) => {
                 return (
                     <span>{text === 'UNUSUAL' && this.creatTip(record)}
@@ -126,7 +132,7 @@ class UserForm extends React.Component<any, any> {
                             <span className="pd5 hand" onClick={() => { this.onShowTemplate(record); }}>票面信息</span>
                         }
                         {
-                            !!record.decodeState  &&
+                            !!record.decodeState &&
                             <span className="pd5 hand" onClick={() => this.viewFailedImage(record)}>查看文件</span>
                         }
                         {
@@ -303,7 +309,7 @@ class UserForm extends React.Component<any, any> {
             scanerurl: Urls.group_ocrtoken
         };
         MyStore.instance.dispatch(reducers.aside.ActionTypes.show, {
-            Components: <InvoiceImport urlData={urlData} refreshInvoice={this.refreshInvoice}/>,
+            Components: <InvoiceImport urlData={urlData} refreshInvoice={this.refreshInvoice} />,
             title: '发票录入'
         });
     }
@@ -375,8 +381,10 @@ class UserForm extends React.Component<any, any> {
                 <Button className={`mr10 ${css['invoice-card-but31']}`} type="primary" onClick={this.onOpenInvoiceImport}>发票录入</Button>
             </div>
         );
+        const { match, location } = this.props;
+        console.log(match.url === location.pathname);
         return (
-            <div>
+            <div style={{display:match.url === location.pathname?'':'none'}} >
                 <Card className={css['invoice-card']} title="发票录入" extra={extraButtons}>
                     <Row className={`${css['invoice-card-hander']}`}>
                         <Col span={12} className="text-left">
@@ -392,6 +400,14 @@ class UserForm extends React.Component<any, any> {
                                 icon="chixugengxin font10"
                             >
                                 更新加载信息
+                            </Button>
+                            <Button
+                                className={`font10 ${css['invoice-card-button']}`}
+                                icon="chixugengxin font10"
+                            >
+                                <Link to="/workbench/invoiceInput/group/1231">
+                                测试
+                                </Link>
                             </Button>
                         </Col>
                         <Col span={12} className="text-right">
@@ -458,7 +474,7 @@ class UserForm extends React.Component<any, any> {
             const treeData = tree(data.items);
             this.setState({
                 list: treeData,
-                pageMeta:data.pageMeta
+                pageMeta: data.pageMeta
             });
         }
     }
