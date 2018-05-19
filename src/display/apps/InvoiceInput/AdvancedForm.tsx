@@ -4,8 +4,11 @@ import { FormComponentProps } from 'antd/lib/form';
 import { Form, Row, Col, DatePicker, InputNumber, Select, Input, Button } from 'antd';
 import { TransformType } from 'src/entry/constant';
 import {transformTypeStringShort} from 'src/entry/Language';
+import MyStore from 'src/redux/MyStore';
+import { withRouter } from 'src/routes';
 const FormItem = Form.Item;
 const Option = Select.Option;
+const css = require('./index.scss');
 interface UserFormProps extends FormComponentProps {
 
 }
@@ -13,9 +16,11 @@ interface IProps extends UserFormProps {
     fields: any;
     clearFields: () => void;
     onValuesChange: (values: Array<any>) => void;
-    onAddToGroup: () => void;
+    onAddToGroup?: () => void;
     getData: () => void;
+    //history:any;
 }
+@withRouter
 class Component extends React.Component<IProps, any> {
     /**
      * 高级搜索
@@ -50,6 +55,7 @@ class Component extends React.Component<IProps, any> {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 this.props.getData();
+                //this.props.history.push('invoiceInput');
             }
 
         });
@@ -61,7 +67,10 @@ class Component extends React.Component<IProps, any> {
             wrapperCol: { span: 18 },
         };
         return (
-            <Form onSubmit={this.handleSearch}>
+            <Form
+                onSubmit={this.handleSearch}
+                className={css['invoice-filter']}
+            >
                 <Row>
                     <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`发票代码`}>
@@ -98,7 +107,7 @@ class Component extends React.Component<IProps, any> {
                             )}
                         </FormItem>
                     </Col>
-                    <Col xl={8} lg={12} sm={12}>
+                    <Col xl={8} lg={12} sm={12} className={css['invoice-filter']}>
                         <FormItem label="开票时间" {...formItemLayout}>
                             <Col span={11}>
                                 <FormItem>
@@ -149,8 +158,8 @@ class Component extends React.Component<IProps, any> {
                         <FormItem {...formItemLayout} label={`状态`}>
                             {getFieldDecorator('unusualState')(
                                 <Select allowClear={true} >
-                                    <Option value={1}>正常</Option>
-                                    <Option value={2}>异常</Option>
+                                    <Option value="NORMAL">正常</Option>
+                                    <Option value="UNUSUAL">异常</Option>
                                 </Select>
                             )}
                         </FormItem>
@@ -160,15 +169,25 @@ class Component extends React.Component<IProps, any> {
                             {getFieldDecorator('userId')(
                                 <Select allowClear={true}>
                                     <Option value="">全部用户</Option>
-                                    <Option value="">当前用户</Option>
+                                    <Option value={MyStore.instance.getState().user.userInfo.cUserId}>当前用户</Option>
                                 </Select>
                             )}
                         </FormItem>
                     </Col>
-                    <Col span={24} className="mb10 ">
-                        <Button type="primary" onClick={this.onAddToGroup}>添加到发票组</Button>
-                        <Button className="mr10 pull-right" onClick={this.handleReset}>清空</Button>
-                        <Button type="primary" className="mr10 pull-right" htmlType="submit">筛选</Button>
+                    <Col span={24} className="mb10 ">  
+                        <Button
+                            className={`mr10 pull-right ${css['invoice-card-but31']} ${css['invoice-card-but-width62']}`}
+                            onClick={this.handleReset}
+                        >
+                            清空
+                        </Button>
+                        <Button
+                            type="primary"
+                            className={`mr10 pull-right ${css['invoice-card-but31']} ${css['invoice-card-but-width62']}`}
+                            htmlType="submit"
+                        >
+                            查询
+                        </Button>
                     </Col>
                 </Row>
             </Form>
