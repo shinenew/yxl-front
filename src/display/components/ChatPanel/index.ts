@@ -3,12 +3,20 @@ import IChatInfo from './IChatInfo';
 
 /** 组建的props接口 */
 interface IProps {
-    chatList: IChatInfo[];
+
+    /** 聊天内容 */
+    chatList?: IChatInfo[];
+
+    /** 当前聊天类型 */
+    chatValue?: string;
+
+    /** 聊天内容 */
+    onchatValue?: (value: string) => void;
 }
 
 /** 组建的state接口 */
 interface IState {
-    
+
 }
 
 export default class FormDiscount extends ComponentBasic<IProps, IState> {
