@@ -130,7 +130,7 @@ class UserForm extends React.Component<any, any> {
                             <span className="pd5 hand" onClick={() => this.viewFailedImage(record)}>查看文件</span>
                         }
                         {
-                            record.group &&
+                            record.recordType===2 &&
                             <Popconfirm
                                 title="确认删除"
                                 onConfirm={() => this.onDelete(record)}
@@ -184,7 +184,7 @@ class UserForm extends React.Component<any, any> {
             warnArray.push(<div key="1">重复录入</div>);
         }
         if (record.realcheckState === 'FAILED') {
-            warnArray.push(<div key="2">查验状态:{record.realcheckMsg || '查验异常'}</div>);
+            warnArray.push(<div key="2">查验失败:{record.realcheckMsg || '查验异常'}</div>);
         }
         if (record.standardState === 'FAILED') {
             warnArray.push(<div key="3">不合规:{record.standardMsg}</div>);
