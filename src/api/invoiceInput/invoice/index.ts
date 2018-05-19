@@ -5,10 +5,10 @@ import ApiBasic from 'src/api/ApiBasic';
 import IData from './IData';
 import IOptions from './IOptions';
 
-class Invoice extends ApiBasic<IOptions, Array<IData>> {
+class Invoice extends ApiBasic<IOptions, IData> {
 
     /** 入口 */
-    public async api(option: IOptions): Promise<Response<Array<IData>>> {
+    public async api(option: IOptions): Promise<Response<IData>> {
         
         const req: Request = new Request(CallType.POST, Urls.group_invoice_list, option);
 

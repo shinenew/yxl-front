@@ -455,9 +455,10 @@ class UserForm extends React.Component<any, any> {
         fields = { ...fields, pageNum, pageSize };
         const data = await ModulesAction.getGroupData(fields);
         if (data) {
-            const treeData = tree(data);
+            const treeData = tree(data.items);
             this.setState({
-                list: treeData
+                list: treeData,
+                pageMeta:data.pageMeta
             });
         }
     }

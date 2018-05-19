@@ -10,7 +10,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
             return null;
         }
         let uniqueArray = [];
-        rebornlist = rebornlist.map((item, index) => {
+        rebornlist.items = rebornlist.items.map((item, index) => {
             let appendData={...item,id: item.loggingId,index};
             if (item.recordType===2) {
                 uniqueArray.push(item.loggingId);
@@ -34,7 +34,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
         const groupRes = await invoiceInput.group(this, uniqueArray);
         if (!groupRes.er) {
             let reborngrouplist = [];
-            reborngrouplist=rebornlist.map((item)=>{
+            reborngrouplist=rebornlist.items.map((item)=>{
                 if(item.recordType===2){
                     for(let i=0;i<groupRes.res.length;i++){
                         if(item.loggingId===groupRes.res[i].groupId){
@@ -53,7 +53,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
                     return {...item};
                 }
             });
-            rebornlist = reborngrouplist;
+            rebornlist.items = reborngrouplist;
         }
         return rebornlist;
     }
