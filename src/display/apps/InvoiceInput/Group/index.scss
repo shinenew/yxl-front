@@ -1,8 +1,7 @@
 // 模块样式
 .modules {
-  margin: 0 auto;
+  margin: 19px 15px 20px 16px;
   background: #ffffff;
-  margin: 12px;
   border: 1px solid #DBDDDF;
   box-shadow: 0px 0px 5px #DBDDDF;
   :global(.ant-card-head) {
@@ -61,4 +60,7 @@
   &-handler {
     margin-right: 12px;
   }
+}
+.action {
+  font-size: 13px !important;
 }
