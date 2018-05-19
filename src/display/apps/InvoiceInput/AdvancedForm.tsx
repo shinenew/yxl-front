@@ -102,7 +102,7 @@ class Component extends React.Component<IProps, any> {
                     </Col>
                     <Col xl={8} lg={12} sm={12}>
                         <FormItem {...formItemLayout} label={`销售方`}>
-                            {getFieldDecorator('fuzzySupplierName')(
+                            {getFieldDecorator('supplierName')(
                                 <Input placeholder="支持模糊搜索" />
                             )}
                         </FormItem>
@@ -111,7 +111,7 @@ class Component extends React.Component<IProps, any> {
                         <FormItem label="开票时间" {...formItemLayout}>
                             <Col span={11}>
                                 <FormItem>
-                                    {getFieldDecorator('minInvoiceDate')(
+                                    {getFieldDecorator('invoiceStartDate')(
                                         <DatePicker style={{ width: '100%' }} />
                                     )}
                                 </FormItem>
@@ -123,7 +123,7 @@ class Component extends React.Component<IProps, any> {
                             </Col>
                             <Col span={11}>
                                 <FormItem>
-                                    {getFieldDecorator('maxInvoiceDate')(
+                                    {getFieldDecorator('invoiceEndDate')(
                                         <DatePicker style={{ width: '100%' }} />
                                     )}
                                 </FormItem>
@@ -197,8 +197,8 @@ class Component extends React.Component<IProps, any> {
 const WrappedAdvancedSearchForm = Form.create({
     mapPropsToFields(props: IProps) {
         return {
-            fuzzySupplierName:
-                Form.createFormField({ value: props.fields && props.fields.fuzzySupplierName })
+            supplierName:
+                Form.createFormField({ value: props.fields && props.fields.supplierName })
             ,
             invoiceCode:
                 Form.createFormField({ value: props.fields && props.fields.invoiceCode })
@@ -215,11 +215,11 @@ const WrappedAdvancedSearchForm = Form.create({
             unusualState:
                 Form.createFormField({ value: props.fields && props.fields.unusualState })
             ,
-            minInvoiceDate:
-                Form.createFormField({ value: props.fields && (props.fields.minInvoiceDate && moment(props.fields.minInvoiceDate)) })
+            invoiceStartDate:
+                Form.createFormField({ value: props.fields && (props.fields.invoiceStartDate && moment(props.fields.minInvoiceDate)) })
             ,
-            maxInvoiceDate:
-                Form.createFormField({ value: props.fields && (props.fields.maxInvoiceDate && moment(props.fields.maxInvoiceDate)) })
+            invoiceEndDate:
+                Form.createFormField({ value: props.fields && (props.fields.invoiceEndDate && moment(props.fields.maxInvoiceDate)) })
             ,
             minAmount:
                 Form.createFormField({ value: props.fields && props.fields.minAmount })
