@@ -18,6 +18,7 @@ interface IReduxStatePart {
 /** Props接口 */
 interface IProps extends IReduxStatePart, IPropsBasic {
     urlData: IOption;
+    refreshInvoice:()=>void;
 }
 
 /** 绑定全局数据 */
@@ -37,7 +38,7 @@ export default class InvoiceImport extends ModulesBasic<IProps, ModulesState> {
         return (
             <ModulesRoot action={ModulesAction}>
                 <div className={css.modules}>
-                    <UIComponents urlData={this.props.urlData} />
+                    <UIComponents urlData={this.props.urlData} refreshInvoice={this.props.refreshInvoice}/>
                 </div>
             </ModulesRoot>
         );
