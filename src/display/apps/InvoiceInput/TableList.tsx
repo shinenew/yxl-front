@@ -99,7 +99,7 @@ class UserForm extends React.Component<any, any> {
             render: (text) => text && text.toFixed(2)
         },
         {
-            title: '录入日期',
+            title: '录入时间',
             dataIndex: 'loggingTime',
             render: (text, record) => {
                 return (
@@ -187,7 +187,7 @@ class UserForm extends React.Component<any, any> {
             warnArray.push(<div key="2">查验状态:{record.realcheckMsg || '查验异常'}</div>);
         }
         if (record.standardState === 'FAILED') {
-            warnArray.push(<div key="3">合规状态:{record.standardMsg || '不合规'}</div>);
+            warnArray.push(<div key="3">不合规:{record.standardMsg}</div>);
         }
         const warnMessage = <div>{warnArray}</div>;
         return (
@@ -456,7 +456,6 @@ class UserForm extends React.Component<any, any> {
         const data = await ModulesAction.getGroupData(fields);
         if (data) {
             const treeData = tree(data);
-            console.log(treeData);
             this.setState({
                 list: treeData
             });
