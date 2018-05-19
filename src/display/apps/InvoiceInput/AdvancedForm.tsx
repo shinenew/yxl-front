@@ -5,6 +5,7 @@ import { Form, Row, Col, DatePicker, InputNumber, Select, Input, Button } from '
 import { TransformType } from 'src/entry/constant';
 import {transformTypeStringShort} from 'src/entry/Language';
 import MyStore from 'src/redux/MyStore';
+import { withRouter } from 'src/routes';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const css = require('./index.scss');
@@ -17,7 +18,9 @@ interface IProps extends UserFormProps {
     onValuesChange: (values: Array<any>) => void;
     onAddToGroup?: () => void;
     getData: () => void;
+    //history:any;
 }
+@withRouter
 class Component extends React.Component<IProps, any> {
     /**
      * 高级搜索
@@ -52,6 +55,7 @@ class Component extends React.Component<IProps, any> {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 this.props.getData();
+                //this.props.history.push('invoiceInput');
             }
 
         });

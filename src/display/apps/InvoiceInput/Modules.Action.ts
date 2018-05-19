@@ -11,7 +11,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
         }
         let uniqueArray = [];
         rebornlist = rebornlist.map((item, index) => {
-            let appendData={...item,id: item.loggingId};
+            let appendData={...item,id: item.loggingId,index};
             if (item.recordType===2) {
                 uniqueArray.push(item.loggingId);
                 appendData={

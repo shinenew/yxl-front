@@ -44,7 +44,7 @@ class Component extends React.Component<UserFormProps, any> {
                     <FormItem
                         labelCol={{ span: 5 }}
                         wrapperCol={{ span: 19 }}
-                        label="发票组名字"
+                        label="发票组编号"
                     >
                         {getFieldDecorator('groupNumber', {
                             rules: [

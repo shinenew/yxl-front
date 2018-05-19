@@ -10,7 +10,8 @@ import { withRouter } from 'src/routes';
 import CreatGroup from './UI.CreatGroup';
 import SwitchGroup from './UI.SwitchGroup';
 import { invoiceInput } from 'src/api';
-import { formatTime, formatDate } from 'src/utils';
+import { formatDate } from 'src/utils';
+import moment from 'moment';
 import { typeDesc } from 'src/entry/constant/InvoiceType/EnumInvoiceType';
 import Template from 'src/display/components/InvoiceTemplate';
 const css = require('./index.scss');
@@ -20,9 +21,9 @@ class UserForm extends React.Component<any, any> {
     private columns = [
         {
             title: '',
-            dataIndex: 'loggingId',
+            dataIndex: 'index',
             className: 'text-center',
-            render:()=>''
+            render: () => ''
         },
         {
             title: '',
@@ -68,6 +69,7 @@ class UserForm extends React.Component<any, any> {
         {
             title: '',
             dataIndex: 'unusualState',
+            className:'text-center',
             render: (text, record) => {
                 return (
                     <span>{text === 'UNUSUAL' && this.creatTip(record)}
@@ -93,7 +95,8 @@ class UserForm extends React.Component<any, any> {
         },
         {
             title: '税价合计',
-            dataIndex: 'amount'
+            dataIndex: 'amount',
+            render: (text) => text && text.toFixed(2)
         },
         {
             title: '录入日期',
@@ -101,7 +104,7 @@ class UserForm extends React.Component<any, any> {
             render: (text, record) => {
                 return (
                     <div>
-                        {record.recordType === 1 && formatTime(text)}
+                        {record.recordType === 1 && moment.unix(text / 1000).format('YYYY-MM-DD hh:mm:ss')}
                     </div>
                 );
             }
@@ -123,7 +126,7 @@ class UserForm extends React.Component<any, any> {
                             <span className="pd5 hand" onClick={() => { this.onShowTemplate(record); }}>票面信息</span>
                         }
                         {
-                            record.decodeState === 'PASS' &&
+                            !!record.decodeState  &&
                             <span className="pd5 hand" onClick={() => this.viewFailedImage(record)}>查看文件</span>
                         }
                         {
@@ -147,7 +150,7 @@ class UserForm extends React.Component<any, any> {
             pageMeta: null,
             expand: false,
             pageNum: 1,
-            pageSize: 10,
+            pageSize: 50,
             fields: null,
             selectedRows: [],
             selectedRowKeys: [],
@@ -278,7 +281,14 @@ class UserForm extends React.Component<any, any> {
         });
     }
     refreshInvoice = () => {
+        this.clearRows();
         this.getData();
+    }
+    clearRows = () => {
+        this.setState({
+            selectedRows: [],
+            selectedRowKeys: []
+        });
     }
     componentDidMount() {
         this.getData();
@@ -293,7 +303,7 @@ class UserForm extends React.Component<any, any> {
             scanerurl: Urls.group_ocrtoken
         };
         MyStore.instance.dispatch(reducers.aside.ActionTypes.show, {
-            Components: <InvoiceImport urlData={urlData} />,
+            Components: <InvoiceImport urlData={urlData} refreshInvoice={this.refreshInvoice}/>,
             title: '发票录入'
         });
     }
@@ -446,6 +456,7 @@ class UserForm extends React.Component<any, any> {
         const data = await ModulesAction.getGroupData(fields);
         if (data) {
             const treeData = tree(data);
+            console.log(treeData);
             this.setState({
                 list: treeData
             });

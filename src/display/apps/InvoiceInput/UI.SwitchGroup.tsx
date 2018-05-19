@@ -47,7 +47,7 @@ class Component extends React.Component<UserFormProps, any> {
         const { getFieldDecorator } = this.props.form;
         const {list} = this.state;
         const data = list.map((item, index) => {
-            return <Option key={item.groupId}>{item.groupNumber}</Option>;
+            return <Option key={item.groupId} title={item.groupNumber}>{item.groupNumber}</Option>;
         });
         return (
             <Modal
@@ -71,7 +71,9 @@ class Component extends React.Component<UserFormProps, any> {
                             ]
                         })(
                             <Select
+                                showSearch={true}
                                 allowClear={true}
+                                optionFilterProp="title"
                                 style={{ width: '100%' }}
                                 placeholder="请选择发票组"
                             >
