@@ -119,7 +119,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             } else {
                 return (
                     <FormItem className={css['group-formitem']} label="匹配状态">
-                        <span className={css['group-formitem-match']}><span className={css['group-formitem-error']}/>匹配失败</span>
+                        <span className={css['group-formitem-match']}><span className={css['group-formitem-error']}/>匹配中</span>
                     </FormItem>
                 );
             }
