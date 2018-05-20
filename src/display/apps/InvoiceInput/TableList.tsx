@@ -5,6 +5,7 @@ import ModulesAction from './Modules.Action';
 import { tree } from 'src/utils';
 import { MyStore, reducers } from 'src/redux';
 import { InvoiceImport } from 'src/display/part';
+import InfiniteScroll from 'react-infinite-scroller';
 import { Urls } from 'src/entry/constant';
 import { withRouter } from 'src/routes';
 import CreatGroup from './UI.CreatGroup';
@@ -18,7 +19,7 @@ import { IPropsBasic } from 'kts-scaffold-framework/modules';
 import { Link } from 'react-router-dom';
 const css = require('./index.scss');
 
-interface IProps extends IPropsBasic{
+interface IProps extends IPropsBasic {
     loading: any;
 }
 @withRouter
@@ -136,7 +137,7 @@ class UserForm extends React.Component<IProps, any> {
                             <span className="pd5 hand" onClick={() => this.viewFailedImage(record)}>查看文件</span>
                         }
                         {
-                            record.recordType===2 &&
+                            record.recordType === 2 &&
                             <Popconfirm
                                 title="确认删除"
                                 onConfirm={() => this.onDelete(record)}
@@ -152,11 +153,11 @@ class UserForm extends React.Component<IProps, any> {
     constructor(props: any) {
         super(props);
         this.state = {
-            list: null,
-            pageMeta: null,
+            list: [],
+            pageMeta: {},
             expand: false,
             pageNum: 1,
-            pageSize: 50,
+            pageSize: 10,
             fields: null,
             selectedRows: [],
             selectedRowKeys: [],
@@ -165,6 +166,8 @@ class UserForm extends React.Component<IProps, any> {
             show: false,
             template: false,
             templateData: null,
+            hasMore: true,
+            loading: false,
         };
     }
     viewFailedImage = record => {
@@ -361,6 +364,18 @@ class UserForm extends React.Component<IProps, any> {
         const { expand } = this.state;
         this.setState({ expand: !expand });
     }
+    handleInfiniteOnLoad = async () => {
+        this.setState({
+            loading: true,
+        });
+        const { pageMeta } = this.state;
+        
+        if (pageMeta.pageSize < pageMeta.total) {
+            this.setState({
+                pageSize: this.state.pageSize + 10
+            }, () => {this.getData();});
+        }
+    }
     render() {
 
         let columns = this.columns;
@@ -382,9 +397,8 @@ class UserForm extends React.Component<IProps, any> {
             </div>
         );
         const { match, location } = this.props;
-        console.log(match.url === location.pathname);
         return (
-            <div style={{display:match.url === location.pathname?'':'none'}} >
+            <div style={{ display: match.url === location.pathname ? '' : 'none' }} >
                 <Card className={css['invoice-card']} title="发票录入" extra={extraButtons}>
                     <Row className={`${css['invoice-card-hander']}`}>
                         <Col span={12} className="text-left">
@@ -406,7 +420,7 @@ class UserForm extends React.Component<IProps, any> {
                                 icon="chixugengxin font10"
                             >
                                 <Link to="/workbench/invoiceInput/group/1231">
-                                测试
+                                    测试
                                 </Link>
                             </Button>
                         </Col>
@@ -432,22 +446,31 @@ class UserForm extends React.Component<IProps, any> {
                     {
                         this.state.show && this.addAlert()
                     }
-                    <Table
-                        className="ui-list"
-                        style={{ borderColor: '#E9EAEB' }}
-                        loading={this.props.loading}
-                        bordered={true}
-                        dataSource={dataSource}
-                        columns={columns}
-                        rowClassName={(record, index) => {
-                            return (
-                                record.recordType === 2 ? 'groupItem' : 'ui-item doc-item'
-                            );
-                        }}
-                        rowKey="id"
-                        rowSelection={rowSelection}
-                        scroll={{ x: 800 }}
-                    />
+                    <InfiniteScroll
+                        initialLoad={false}
+                        pageStart={0}
+                        loadMore={this.handleInfiniteOnLoad}
+                        hasMore={!this.state.loading &&this.state.hasMore}
+                        useWindow={true}
+                    >
+                        <Table
+                            className="ui-list"
+                            style={{ borderColor: '#E9EAEB' }}
+                            loading={this.props.loading}
+                            bordered={true}
+                            dataSource={dataSource}
+                            columns={columns}
+                            rowClassName={(record, index) => {
+                                return (
+                                    record.recordType === 2 ? 'groupItem' : 'ui-item doc-item'
+                                );
+                            }}
+                            rowKey="id"
+                            rowSelection={rowSelection}
+                            scroll={{ x: 800 }}
+                            pagination={false}
+                        />
+                    </InfiniteScroll>
                     {
                         this.state.addModal &&
                         <CreatGroup onCloseModal={this.onCloseModal} />
@@ -469,12 +492,21 @@ class UserForm extends React.Component<IProps, any> {
     getData = async () => {
         let { fields, pageNum, pageSize } = this.state;
         fields = { ...fields, pageNum, pageSize };
+        //let list = this.state.list;
         const data = await ModulesAction.getGroupData(fields);
         if (data) {
             const treeData = tree(data.items);
+            console.log(treeData);
+            if (data.pageMeta.pageSize >= data.pageMeta.total) {
+                console.log('没有更多了');
+                this.setState({
+                    hasMore: false
+                });
+            }
             this.setState({
                 list: treeData,
-                pageMeta: data.pageMeta
+                pageMeta: data.pageMeta,
+                loading:false
             });
         }
     }
