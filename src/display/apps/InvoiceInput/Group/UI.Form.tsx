@@ -58,7 +58,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                     />
                     <FormItem className={css['group-formitem']} label="发票组编号">
                         {getFieldDecorator('invoice', {
-                            initialValue: this.modulesState.groupId,
+                            initialValue: this.modulesState.groupInfo.groupNumber,
                             rules: [
                                 {
                                     required: true, message: '请输入发票组编号!',
