@@ -28,9 +28,15 @@ class UserForm extends React.Component<IProps, any> {
     private columns = [
         {
             title: '',
-            dataIndex: 'index',
+            dataIndex: 'invoiceGroupId',
             className: 'text-center',
-            render: () => ''
+            render: (text) => {
+                return (
+                    <span>
+                        {text && <Icon type="zicengji" style={{ fontSize: 9, color: '#999999' }} />}
+                    </span>
+                );
+            }
         },
         {
             title: '',
@@ -111,7 +117,7 @@ class UserForm extends React.Component<IProps, any> {
             render: (text, record) => {
                 return (
                     <div>
-                        {record.recordType === 1 && moment.unix(text / 1000).format('YYYY-MM-DD hh:mm:ss')}
+                        {record.recordType === 1 && text && moment.unix(text / 1000).format('YYYY-MM-DD hh:mm:ss')}
                     </div>
                 );
             }
@@ -150,6 +156,146 @@ class UserForm extends React.Component<IProps, any> {
             }
         }
     ];
+    public expandedRowRender = (data) => {
+        const columns = [
+            {
+                title: '',
+                dataIndex: 'invoiceGroupId',
+                className: 'text-center',
+                render: (text) => {
+                    return (
+                        <span>
+                            {text && <Icon type="zicengji" style={{ fontSize: 9, color: '#999999' }} />}
+                        </span>
+                    );
+                }
+            },
+            {
+                title: '',
+                dataIndex: 'loggingId',
+                className: 'text-center',
+                render: (text, record) => {
+                    return (
+                        <div >
+                            {
+                                record.recordType === 2 &&
+                                <Icon type="wendang" style={{ fontSize: 16, color: '#5CC4E9' }} />
+    
+                            }
+                            {
+                                record.recordType === 1 &&
+                                <div className="ui-item-icon input-type bg-green">
+                                    {typeDesc(record)}
+                                </div>
+    
+                            }
+                        </div>
+                    );
+                }
+            },
+            {
+                title: '销售方名称',
+                dataIndex: 'supplierName',
+                render: (text, record) => {
+                    return (
+                        <div>
+                            {
+                                record.groupNumber ?
+                                    <span>
+                                        {record.groupNumber}({record.matchCount}/{record.waitCount})
+                                    </span>
+                                    : <span>{text}</span>
+                            }
+                        </div>
+                    );
+    
+                }
+            },
+            {
+                title: '',
+                dataIndex: 'unusualState',
+                className: 'text-center',
+                render: (text, record) => {
+                    return (
+                        <span>{text === 'UNUSUAL' && this.creatTip(record)}
+                        </span>
+                    );
+                }
+            },
+            {
+                title: '发票代码',
+                width: 125,
+                dataIndex: 'invoiceCode'
+            },
+            {
+                title: '发票号码',
+                width: 95,
+                dataIndex: 'invoiceNumber'
+            },
+            {
+                title: '开票日期',
+                width: 110,
+                dataIndex: 'invoiceDate',
+                render: (text) => formatDate(text)
+            },
+            {
+                title: '税价合计',
+                dataIndex: 'amount',
+                render: (text) => text && text.toFixed(2)
+            },
+            {
+                title: '录入时间',
+                dataIndex: 'loggingTime',
+                render: (text, record) => {
+                    return (
+                        <div>
+                            {record.recordType === 1 && text && moment.unix(text / 1000).format('YYYY-MM-DD hh:mm:ss')}
+                        </div>
+                    );
+                }
+            },
+            {
+                title: '操作',
+                dataIndex: 'operation',
+                key: 'operation',
+                width: 140,
+                render: (text, record) => {
+                    return (
+                        <div>
+                            {
+                                (record.realcheckState === 'PASS' || record.recordType === 2) &&
+                                <span className="pd5 hand" onClick={() => { this.onDetail(record); }}>详情</span>
+                            }
+                            {
+                                (!record.group && record.realcheckState === 'PASS') &&
+                                <span className="pd5 hand" onClick={() => { this.onShowTemplate(record); }}>票面信息</span>
+                            }
+                            {
+                                !!record.decodeState &&
+                                <span className="pd5 hand" onClick={() => this.viewFailedImage(record)}>查看文件</span>
+                            }
+                            {
+                                record.recordType === 2 &&
+                                <Popconfirm
+                                    title="确认删除"
+                                    onConfirm={() => this.onDelete(record)}
+                                >
+                                    <span className="pd5 hand">删除</span>
+                                </Popconfirm>
+                            }
+                        </div>
+                    );
+                }
+            }
+        ];
+        return (
+            <Table
+              columns={columns}
+              dataSource={data}
+              pagination={false}
+            />
+          );
+    }
     constructor(props: any) {
         super(props);
         this.state = {
@@ -169,6 +315,7 @@ class UserForm extends React.Component<IProps, any> {
             hasMore: true,
             loading: false,
         };
+        
     }
     viewFailedImage = record => {
         invoiceInput.ImgQuery(this, { invoiceLoggingId: record.loggingId }).then((response: any) => {
@@ -338,10 +485,10 @@ class UserForm extends React.Component<IProps, any> {
                         if (!item.success) {
                             return <div key={index}>发票代码:{item.invoiceCode},发票号码:{item.invoiceGroupNumber} 设置发票组失败,{item.message}</div>;
                         }
-                        return null;
+                        return <div key={index}>发票代码:{item.invoiceCode},发票号码:{item.invoiceGroupNumber} {item.message}</div>;
                     });
                     this.setState({
-                        message: insert || '移动成功',
+                        message: insert,
                         show: true
                     });
 
@@ -459,6 +606,7 @@ class UserForm extends React.Component<IProps, any> {
                             loading={this.props.loading}
                             bordered={true}
                             dataSource={dataSource}
+                            indentSize={0}
                             columns={columns}
                             rowClassName={(record, index) => {
                                 return (

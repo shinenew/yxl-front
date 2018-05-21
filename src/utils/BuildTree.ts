@@ -3,15 +3,18 @@ const loopChildData = (parent, children, insert = false) => {
         for (let x = 0; x < children.length; x++) {
             if (parent[i].id === children[x].pId) {
                 if (!parent[i].children) {
-                    parent[i].children=[];
+                    parent[i].children = [];
                 }
                 parent[i].children.push(children[x]);
             }
         }
-        if (parent[i].children&&parent[i].children.length > 0) {
+        if (parent[i].children && parent[i].children.length > 0) {
             //如果父节点下有子节点，那么循环执行函数继续找这个子节点是否有下级节点
             loopChildData(parent[i].children, children, true);
         }
+    }
+    if (parent.length===0) {
+        return children;
     }
     if (insert) {
         return null;
@@ -19,6 +22,7 @@ const loopChildData = (parent, children, insert = false) => {
         return parent;
     }
 };
+//拥有pId的就是子节点，没有的就是根结点
 const BuildTree = (data) => {
     let dataChildList = data.filter((item) => item.pId);
     let dataRootList = [];
