@@ -70,7 +70,10 @@ class UserForm extends React.Component<IProps, any> {
                         {
                             record.groupNumber ?
                                 <span>
-                                    {record.groupNumber}({record.matchCount}/{record.waitCount})
+                                    {record.groupNumber}
+                                    {
+                                       record.createType===1&&<span>({record.matchCount}/{record.waitCount})</span>
+                                    }
                                 </span>
                                 : <span>{text}</span>
                         }
