@@ -151,17 +151,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
 
     private saveConfirm = (): void => {
         const groupId = this.props.match.params.id;
-        confirm({
-            title: '确认保存',
-            content: '即将保存发票分组详情和移除发票项',
-            onOk() {
-                ModulesAction.groupSaveDetail(groupId)
-                    .then(res => {
-                        if(!res.er) {
-                            ModulesAction.groupInfo(groupId);
-                        }
-                    });
-            }
-        });
+        ModulesAction.groupSaveDetail(groupId);
+        history.goBack();
     }
 }
