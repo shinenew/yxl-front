@@ -174,6 +174,7 @@ class UserForm extends React.Component<IProps, any> {
             templateData: null,
             hasMore: true,
             loading: false,
+            refresh: false,
         };
 
     }
@@ -320,8 +321,16 @@ class UserForm extends React.Component<IProps, any> {
     componentDidMount() {
         this.getData();
     }
-    componentDidUpdate() {
-        console.log(2);
+    componentWillReceiveProps(nextProps: any) {
+        if(nextProps.location.state){
+            if ( nextProps.location.state.refresh&&!this.state.refresh) {
+                this.setState({
+                    refresh:true
+                },()=>{this.getData();});
+                //this.getData();
+            }
+        }
+        
     }
     onOpenInvoiceImport = () => {
         const urlData = {
@@ -560,7 +569,8 @@ class UserForm extends React.Component<IProps, any> {
             this.setState({
                 list: treeData,
                 pageMeta: data.pageMeta,
-                loading: false
+                loading: false,
+                refresh:false
             });
         }
     }
