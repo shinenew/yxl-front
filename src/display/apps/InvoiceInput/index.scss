@@ -46,13 +46,16 @@
   &-filter {
     :global(.ant-col-6) {
       width: 62px;
+      line-height: 24px;
       text-align: left;
     }
     :global(.ant-input) {
       height: 24px;
+      font-size: 12px;
     }
     :global(.ant-input-number-input) {
       height: 24px;
+      font-size: 12px;
     }
     :global(.ant-select-selection--single) {
       height: 24px;
@@ -66,7 +69,14 @@
       overflow: hidden;
     }
     :global(.ant-form-item) {
-      margin-bottom: 10px;
+      margin-bottom: 14px;
+    }
+    :global(.ant-form-item-control) {
+      line-height: 24px;
+    }
+    :global(.ant-btn) {
+      height: 25px;
+      font-size: 12px;
     }
   }
 }
