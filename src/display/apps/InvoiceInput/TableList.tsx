@@ -449,7 +449,7 @@ class UserForm extends React.Component<IProps, any> {
                             clearFields={this.clearFields}
                             fields={fields}
                             onValuesChange={this.handleFormChange}
-                            getData={this.getData}
+                            getData={this.clearData}
                         />
                     </div>
                     {
@@ -499,7 +499,12 @@ class UserForm extends React.Component<IProps, any> {
             </div >
         );
     }
+    clearData = () => {
+        this.setState({
+            list: []
+        }, () => { this.getData(); });
 
+    }
     getData = async () => {
         let { fields, pageNum, pageSize } = this.state;
         fields = { ...fields, pageNum, pageSize };
@@ -518,13 +523,11 @@ class UserForm extends React.Component<IProps, any> {
                 fields['loggingEndTime'] &&
                 fields['loggingEndTime'].format('YYYY-MM-DD HH:mm:ss')
         };
-        let list = JSON.parse(JSON.stringify(this.state.list));
+        let list = this.state.list;
         const data = await ModulesAction.getGroupData(fields);
-        console.log(data);
         if (data) {
             const treeData = tree(list.concat(data.items));
-            //console.log(treeData);
-            if (data.pageMeta.pageNum * data.pageMeta.pages > data.pageMeta.total) {
+            if (data.pageMeta.pageNum * data.pageMeta.pageSize > data.pageMeta.total) {
                 console.log('没有更多了');
                 this.setState({
                     hasMore: false
