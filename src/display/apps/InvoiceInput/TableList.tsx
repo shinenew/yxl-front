@@ -302,12 +302,18 @@ class UserForm extends React.Component<IProps, any> {
     }
     clearRows = () => {
         this.setState({
+            list: [],
             selectedRows: [],
-            selectedRowKeys: []
+            selectedRowKeys: [],
+            pageNum: 1,
+            pageSize: 10,
         });
     }
     componentDidMount() {
         this.getData();
+    }
+    componentDidUpdate() {
+        console.log(2);
     }
     onOpenInvoiceImport = () => {
         const urlData = {
@@ -349,11 +355,16 @@ class UserForm extends React.Component<IProps, any> {
                     });
                     this.setState({
                         message: insert,
-                        show: true
-                    });
+                        show: true,
+                        pageNum: 1,
+                        pageSize: 10,
+                        list: [],
+                        selectedRows: [],
+                        selectedRowKeys: []
+                    }, () => { this.refreshInvoice(); });
 
                 }
-                this.refreshInvoice();
+
                 //window.location.reload();
             }
         });
@@ -503,9 +514,9 @@ class UserForm extends React.Component<IProps, any> {
     clearData = () => {
         this.setState({
             list: [],
-            pageNum:1,
-            hasMore:true,
-            loading:false
+            pageNum: 1,
+            hasMore: true,
+            loading: false
         }, () => { this.getData(); });
 
     }
@@ -531,9 +542,9 @@ class UserForm extends React.Component<IProps, any> {
         const data = await ModulesAction.getGroupData(fields);
         if (data) {
             const treeData = tree(list.concat(data.items));
-            console.log(treeData);
+            // console.log(treeData);
             if (data.pageMeta.pageNum * data.pageMeta.pageSize > data.pageMeta.total) {
-                console.log('没有更多了');
+                // console.log('没有更多了');
                 this.setState({
                     hasMore: false
                 });
