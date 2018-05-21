@@ -40,7 +40,7 @@ class UserForm extends React.Component<IProps, any> {
         },
         {
             title: '',
-            dataIndex: 'loggingId',
+            dataIndex: 'index',
             className: 'text-center',
             render: (text, record) => {
                 return (
@@ -175,7 +175,7 @@ class UserForm extends React.Component<IProps, any> {
             hasMore: true,
             loading: false,
         };
-        
+
     }
     viewFailedImage = record => {
         invoiceInput.ImgQuery(this, { invoiceLoggingId: record.loggingId }).then((response: any) => {
@@ -353,8 +353,8 @@ class UserForm extends React.Component<IProps, any> {
                     });
 
                 }
-                //this.refreshInvoice();
-                window.location.reload();
+                this.refreshInvoice();
+                //window.location.reload();
             }
         });
     }
@@ -379,9 +379,9 @@ class UserForm extends React.Component<IProps, any> {
         });
         const { pageMeta } = this.state;
 
-        if (pageMeta.pageSize < pageMeta.total) {
+        if (pageMeta.pageSize * pageMeta.pageNum < pageMeta.total) {
             this.setState({
-                pageSize: this.state.pageSize + 10
+                pageNum: this.state.pageNum + 1
             }, () => { this.getData(); });
         }
     }
@@ -469,7 +469,7 @@ class UserForm extends React.Component<IProps, any> {
                             bordered={true}
                             dataSource={dataSource}
                             indentSize={0}
-                            
+
                             columns={columns}
                             rowClassName={(record, index) => {
                                 return (
@@ -518,13 +518,14 @@ class UserForm extends React.Component<IProps, any> {
                 fields['loggingEndTime'] &&
                 fields['loggingEndTime'].format('YYYY-MM-DD HH:mm:ss')
         };
-        //let list = this.state.list;
+        let list = JSON.parse(JSON.stringify(this.state.list));
         const data = await ModulesAction.getGroupData(fields);
+        console.log(data);
         if (data) {
-            const treeData = tree(data.items);
-            console.log(treeData);
-            if (data.pageMeta.pageSize >= data.pageMeta.total) {
-                //console.log('没有更多了');
+            const treeData = tree(list.concat(data.items));
+            //console.log(treeData);
+            if (data.pageMeta.pageNum * data.pageMeta.pages > data.pageMeta.total) {
+                console.log('没有更多了');
                 this.setState({
                     hasMore: false
                 });
