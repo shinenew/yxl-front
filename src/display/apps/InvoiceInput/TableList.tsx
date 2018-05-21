@@ -303,6 +303,8 @@ class UserForm extends React.Component<IProps, any> {
             selectedRowKeys: [],
             pageNum: 1,
             pageSize: 10,
+            loadMore:true,
+            loading:false
         },()=>{this.getData();});
         
     }
