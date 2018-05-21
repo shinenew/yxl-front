@@ -41,7 +41,7 @@ class UserForm extends React.Component<IProps, any> {
                     <div >
                         {
                             record.recordType === 2 &&
-                            <Icon type="folder" style={{ fontSize: 16, color: '#5CC4E9' }} />
+                            <Icon type="wendang" style={{ fontSize: 16, color: '#5CC4E9' }} />
 
                         }
                         {
@@ -206,7 +206,7 @@ class UserForm extends React.Component<IProps, any> {
         );
     }
     onDelete = (record) => {
-        invoiceInput.DeleteGroup(this, { invoiceGroupId: record.groupId }).then((response: any) => {
+        invoiceInput.DeleteGroup(this, { invoiceGroupId: record.loggingId }).then((response: any) => {
             const err = response.err;
             const res = response.res;
             if (err) {
@@ -369,11 +369,11 @@ class UserForm extends React.Component<IProps, any> {
             loading: true,
         });
         const { pageMeta } = this.state;
-        
+
         if (pageMeta.pageSize < pageMeta.total) {
             this.setState({
                 pageSize: this.state.pageSize + 10
-            }, () => {this.getData();});
+            }, () => { this.getData(); });
         }
     }
     render() {
@@ -450,7 +450,7 @@ class UserForm extends React.Component<IProps, any> {
                         initialLoad={false}
                         pageStart={0}
                         loadMore={this.handleInfiniteOnLoad}
-                        hasMore={!this.state.loading &&this.state.hasMore}
+                        hasMore={!this.state.loading && this.state.hasMore}
                         useWindow={true}
                     >
                         <Table
@@ -492,13 +492,28 @@ class UserForm extends React.Component<IProps, any> {
     getData = async () => {
         let { fields, pageNum, pageSize } = this.state;
         fields = { ...fields, pageNum, pageSize };
+        fields = {
+            ...fields,
+            invoiceStartDate:
+                fields['invoiceStartDate'] &&
+                fields['invoiceStartDate'].format('YYYY-MM-DD'),
+            invoiceEndDate:
+                fields['invoiceEndDate'] &&
+                fields['invoiceEndDate'].format('YYYY-MM-DD'),
+            loggingStartTime:
+                fields['loggingStartTime'] &&
+                fields['loggingStartTime'].format('YYYY-MM-DD HH:mm:ss'),
+            loggingEndTime:
+                fields['loggingEndTime'] &&
+                fields['loggingEndTime'].format('YYYY-MM-DD HH:mm:ss')
+        };
         //let list = this.state.list;
         const data = await ModulesAction.getGroupData(fields);
         if (data) {
             const treeData = tree(data.items);
-            console.log(treeData);
+            //console.log(treeData);
             if (data.pageMeta.pageSize >= data.pageMeta.total) {
-                console.log('没有更多了');
+                //console.log('没有更多了');
                 this.setState({
                     hasMore: false
                 });
@@ -506,7 +521,7 @@ class UserForm extends React.Component<IProps, any> {
             this.setState({
                 list: treeData,
                 pageMeta: data.pageMeta,
-                loading:false
+                loading: false
             });
         }
     }
