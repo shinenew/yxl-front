@@ -511,7 +511,7 @@ class UserForm extends React.Component<IProps, any> {
         const data = await ModulesAction.getGroupData(fields);
         if (data) {
             const treeData = tree(data.items);
-            //console.log(treeData);
+            console.log(treeData);
             if (data.pageMeta.pageSize >= data.pageMeta.total) {
                 //console.log('没有更多了');
                 this.setState({
