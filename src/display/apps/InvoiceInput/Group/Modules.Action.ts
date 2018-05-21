@@ -33,6 +33,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
             detailInfoList
         });
         message.success(res.res.description);
+        return res;
     }
 
     public deleteDetailInfoList = (invoiceCode: string, shouldState?: string) => {
@@ -41,6 +42,7 @@ class ModulesAction extends ActionBasic<ModulesState> {
             detailInfoList.forEach((el, index) => {
                 if(el.invoiceCode === invoiceCode) {
                     detailInfoList[index]['receivedState'] = 0;
+                    detailInfoList[index]['invoiceLoggingId'] = '';
                 }
             });
         } else {
@@ -48,7 +50,12 @@ class ModulesAction extends ActionBasic<ModulesState> {
             let filtered = detailInfoList.filter(notInvoice);
             this.modulesState.detailInfoList = filtered;
         }
+        this.recoverMechanism();
         this.setModulesState(this.modulesState);
+    }
+
+    private recoverMechanism() {
+        this.modulesState.recover = true;
     }
 }
 

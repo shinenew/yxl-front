@@ -129,20 +129,24 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
 
     private closeConfirm = (): void => {
         const groupId = this.props.match.params.id;
-        confirm({
-            title: '关闭',
-            content: '关闭后修改的内容将丢失，是否保存？',
-            cancelText: '不保存',
-            okText: '保存',
-            onOk() {
-                ModulesAction.groupSaveDetail(groupId);
-                ModulesAction.groupInfo(groupId);
-                history.goBack();
-            },
-            onCancel() {
-                history.goBack();
-            }
-        });
+        if (this.modulesState.recover) {
+            confirm({
+                title: '关闭',
+                content: '关闭后修改的内容将丢失，是否保存？',
+                cancelText: '不保存',
+                okText: '保存',
+                onOk() {
+                    ModulesAction.groupSaveDetail(groupId);
+                    ModulesAction.groupInfo(groupId);
+                    history.goBack();
+                },
+                onCancel() {
+                    history.goBack();
+                }
+            });
+        } else {
+            history.goBack();
+        }
     }
 
     private saveConfirm = (): void => {
@@ -151,8 +155,12 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             title: '确认保存',
             content: '即将保存发票分组详情和移除发票项',
             onOk() {
-                ModulesAction.groupSaveDetail(groupId);
-                ModulesAction.groupInfo(groupId);
+                ModulesAction.groupSaveDetail(groupId)
+                    .then(res => {
+                        if(!res.er) {
+                            ModulesAction.groupInfo(groupId);
+                        }
+                    });
             }
         });
     }

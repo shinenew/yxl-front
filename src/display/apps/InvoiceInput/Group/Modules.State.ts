@@ -7,4 +7,5 @@ export default class ModulesState extends ModulesStateBasic {
     public groupId: string = '';
     public detailInfoList: Array<any> = [];
     public groupInfo: any = {};
+    public recover: boolean = false;
 }
