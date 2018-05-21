@@ -138,20 +138,28 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                 onOk() {
                     ModulesAction.groupSaveDetail(groupId);
                     ModulesAction.groupInfo(groupId);
-                    history.goBack();
+                    history.push(`/workbench/invoiceInput/`, {
+                        refresh: true
+                    });
                 },
                 onCancel() {
-                    history.goBack();
+                    history.push(`/workbench/invoiceInput/`, {
+                        refresh: true
+                    });
                 }
             });
         } else {
-            history.goBack();
+            history.push(`/workbench/invoiceInput/`, {
+                refresh: true
+            });
         }
     }
 
     private saveConfirm = (): void => {
         const groupId = this.props.match.params.id;
         ModulesAction.groupSaveDetail(groupId);
-        history.goBack();
+        history.push(`/workbench/invoiceInput/`, {
+            refresh: true
+        });
     }
 }
