@@ -28,9 +28,15 @@ class UserForm extends React.Component<IProps, any> {
     private columns = [
         {
             title: '',
-            dataIndex: 'index',
+            dataIndex: 'invoiceGroupId',
             className: 'text-center',
-            render: () => ''
+            render: (text) => {
+                return (
+                    <span>
+                        {text && <Icon type="zicengji" style={{ fontSize: 9, color: '#999999' }} />}
+                    </span>
+                );
+            }
         },
         {
             title: '',
@@ -111,7 +117,7 @@ class UserForm extends React.Component<IProps, any> {
             render: (text, record) => {
                 return (
                     <div>
-                        {record.recordType === 1 && moment.unix(text / 1000).format('YYYY-MM-DD hh:mm:ss')}
+                        {record.recordType === 1 && text && moment(text).format('YYYY-MM-DD HH:mm:ss')}
                     </div>
                 );
             }
@@ -169,6 +175,7 @@ class UserForm extends React.Component<IProps, any> {
             hasMore: true,
             loading: false,
         };
+        
     }
     viewFailedImage = record => {
         invoiceInput.ImgQuery(this, { invoiceLoggingId: record.loggingId }).then((response: any) => {
@@ -338,10 +345,10 @@ class UserForm extends React.Component<IProps, any> {
                         if (!item.success) {
                             return <div key={index}>发票代码:{item.invoiceCode},发票号码:{item.invoiceGroupNumber} 设置发票组失败,{item.message}</div>;
                         }
-                        return null;
+                        return <div key={index}>发票代码:{item.invoiceCode},发票号码:{item.invoiceGroupNumber} {item.message}</div>;
                     });
                     this.setState({
-                        message: insert || '移动成功',
+                        message: insert,
                         show: true
                     });
 
@@ -459,6 +466,7 @@ class UserForm extends React.Component<IProps, any> {
                             loading={this.props.loading}
                             bordered={true}
                             dataSource={dataSource}
+                            indentSize={0}
                             columns={columns}
                             rowClassName={(record, index) => {
                                 return (
