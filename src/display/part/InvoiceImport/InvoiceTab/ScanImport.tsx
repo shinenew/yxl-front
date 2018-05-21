@@ -38,7 +38,7 @@ class Component extends BaseImport<IProps, any> {
                         message.error(err.status.description);
                         return null;
                     } else {
-                        super.forceUpdate();
+                        super.callback();
                         this.success();
                     }
                 });
