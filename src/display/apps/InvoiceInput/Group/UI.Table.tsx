@@ -37,7 +37,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     }
 
     render() {
-        const data = this.modulesState.detailInfoList;
+        const data = this.dealData(this.modulesState.detailInfoList);
         const columns = this.tableColumn(this.modulesState.groupInfo.createType);
         return (
             <Card title="发票列表" bordered={false}>
@@ -57,17 +57,42 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
         <span><Icon className={css['action']} type="cha" style={{color: 'rgba(230,0,18,1)'}} /></span>);
     }
 
+    private dealData = list => {
+      let dealWidthData = [];
+      list.forEach(ele => {
+        if(ele.shouldState && ele.receivedState) {
+          dealWidthData.push(ele);
+        } else {
+          dealWidthData.unshift(ele);
+        }
+      });
+      return dealWidthData;
+    }
+
     private tableColumn = (createType: string): any => {
       if (createType) {
         return [{
             title: '发票代码',
             dataIndex: 'invoiceCode',
             key: 'name',
-            render: text => <a href="javascript:;">{text}</a>,
+            render: (text, record) => {
+              if(!record.shouldState || !record.receivedState) {
+                return <span className={css['font-red']}>{text}</span>;
+              } else {
+                return <span>{text}</span>;
+              }
+            }
           }, {
             title: '发票号码',
             dataIndex: 'invoiceNumber',
             key: 'number',
+            render: (text, record) => {
+              if(!record.shouldState || !record.receivedState) {
+                return <span className={css['font-red']}>{text}</span>;
+              } else {
+                return <span>{text}</span>;
+              }
+            }
           }, {
             title: '应收',
             dataIndex: 'shouldState',
