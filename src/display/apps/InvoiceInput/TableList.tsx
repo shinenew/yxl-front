@@ -117,7 +117,7 @@ class UserForm extends React.Component<IProps, any> {
             render: (text, record) => {
                 return (
                     <div>
-                        {record.recordType === 1 && text && moment.unix(text / 1000).format('YYYY-MM-DD hh:mm:ss')}
+                        {record.recordType === 1 && text && moment(text).format('YYYY-MM-DD HH:mm:ss')}
                     </div>
                 );
             }
