@@ -343,9 +343,9 @@ class UserForm extends React.Component<IProps, any> {
                 if (res) {
                     const insert = res.map((item, index) => {
                         if (!item.success) {
-                            return <div key={index}>发票代码:{item.invoiceCode},发票号码:{item.invoiceGroupNumber} 设置发票组失败,{item.message}</div>;
+                            return <div key={index}>发票代码:{item.invoiceCode},发票号码:{item.invoiceNumber} 设置发票组失败,{item.message}</div>;
                         }
-                        return <div key={index}>发票代码:{item.invoiceCode},发票号码:{item.invoiceGroupNumber} {item.message}</div>;
+                        return <div key={index}>发票代码:{item.invoiceCode},发票号码:{item.invoiceNumber} {item.message}</div>;
                     });
                     this.setState({
                         message: insert,
@@ -353,6 +353,8 @@ class UserForm extends React.Component<IProps, any> {
                     });
 
                 }
+                //this.refreshInvoice();
+                window.location.reload();
             }
         });
     }
@@ -467,6 +469,7 @@ class UserForm extends React.Component<IProps, any> {
                             bordered={true}
                             dataSource={dataSource}
                             indentSize={0}
+                            
                             columns={columns}
                             rowClassName={(record, index) => {
                                 return (
@@ -475,7 +478,7 @@ class UserForm extends React.Component<IProps, any> {
                             }}
                             rowKey="id"
                             rowSelection={rowSelection}
-                            scroll={{ x: 800 }}
+                            defaultExpandAllRows={true}
                             pagination={false}
                         />
                     </InfiniteScroll>

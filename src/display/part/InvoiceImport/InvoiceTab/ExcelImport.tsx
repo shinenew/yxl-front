@@ -65,6 +65,7 @@ class Component extends React.Component<any, any>{
                                     downloadFilePath: downloadFilePath
                                 });
                             }
+                            this.props.fnForceUpdate();
                         } else {
                             message.error(info.file.response.status.description);
                         }
