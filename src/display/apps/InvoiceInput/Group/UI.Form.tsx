@@ -130,6 +130,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
     private closeConfirm = (): void => {
         const groupId = this.props.match.params.id;
         if (this.modulesState.recover) {
+            const that = this;
             confirm({
                 title: '关闭',
                 content: '关闭后修改的内容将丢失，是否保存？',
@@ -138,26 +139,24 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
                 onOk() {
                     ModulesAction.groupSaveDetail(groupId);
                     ModulesAction.groupInfo(groupId);
-                    history.push(`/workbench/invoiceInput/`, {
-                        refresh: true
-                    });
+                    that.historyJump();
                 },
                 onCancel() {
-                    history.push(`/workbench/invoiceInput/`, {
-                        refresh: true
-                    });
+                    that.historyJump();
                 }
             });
         } else {
-            history.push(`/workbench/invoiceInput/`, {
-                refresh: true
-            });
+            this.historyJump();
         }
     }
 
     private saveConfirm = (): void => {
         const groupId = this.props.match.params.id;
         ModulesAction.groupSaveDetail(groupId);
+        this.historyJump();
+    }
+
+    private historyJump = () => {
         history.push(`/workbench/invoiceInput/`, {
             refresh: true
         });
