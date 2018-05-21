@@ -28,7 +28,7 @@ class Invoice extends ApiBasic<IOptions, any> {
 
 
         };
-        return await this.callCompany(new Request(CallType.POST,'',data2), true);
+        return await this.callScaner(new Request(CallType.POST,'',data2), true);
     }
 }
 

@@ -174,6 +174,29 @@ class Component extends React.Component<IProps, any> {
                             )}
                         </FormItem>
                     </Col>
+                    <Col xl={8} lg={12} sm={12} className={css['invoice-filter']}>
+                        <FormItem label="录入时间" {...formItemLayout}>
+                            <Col span={11}>
+                                <FormItem>
+                                    {getFieldDecorator('loggingStartTime')(
+                                        <DatePicker style={{ width: '100%' }} format="YYYY-MM-DD HH:mm:ss" showTime={true}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                            <Col span={2}>
+                                <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>
+                                    -
+                            </span>
+                            </Col>
+                            <Col span={11}>
+                                <FormItem>
+                                    {getFieldDecorator('loggingEndTime')(
+                                        <DatePicker style={{ width: '100%' }} format="YYYY-MM-DD HH:mm:ss" showTime={true}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                        </FormItem>
+                    </Col>
                     <Col span={24} className="mb10 ">  
                         <Button
                             className={`mr10 pull-right ${css['invoice-card-but31']} ${css['invoice-card-but-width62']}`}
@@ -216,10 +239,10 @@ const WrappedAdvancedSearchForm = Form.create({
                 Form.createFormField({ value: props.fields && props.fields.unusualState })
             ,
             invoiceStartDate:
-                Form.createFormField({ value: props.fields && (props.fields.invoiceStartDate && moment(props.fields.minInvoiceDate)) })
+                Form.createFormField({ value: props.fields && (props.fields.invoiceStartDate && moment(props.fields.invoiceStartDate)) })
             ,
             invoiceEndDate:
-                Form.createFormField({ value: props.fields && (props.fields.invoiceEndDate && moment(props.fields.maxInvoiceDate)) })
+                Form.createFormField({ value: props.fields && (props.fields.invoiceEndDate && moment(props.fields.invoiceEndDate)) })
             ,
             minAmount:
                 Form.createFormField({ value: props.fields && props.fields.minAmount })
@@ -227,6 +250,11 @@ const WrappedAdvancedSearchForm = Form.create({
             maxAmount:
                 Form.createFormField({ value: props.fields && props.fields.maxAmount })
             ,
+            loggingStartTime:
+                Form.createFormField({ value: props.fields && props.fields.loggingStartTime })
+            ,
+            loggingEndTime:
+                Form.createFormField({ value: props.fields && props.fields.loggingEndTime })
 
         };
     },
