@@ -374,6 +374,7 @@ class UserForm extends React.Component<IProps, any> {
         this.setState({ expand: !expand });
     }
     handleInfiniteOnLoad = async () => {
+        console.log(this.state.hasMore);
         this.setState({
             loading: true,
         });
@@ -501,7 +502,10 @@ class UserForm extends React.Component<IProps, any> {
     }
     clearData = () => {
         this.setState({
-            list: []
+            list: [],
+            pageNum:1,
+            hasMore:true,
+            loading:false
         }, () => { this.getData(); });
 
     }
@@ -527,6 +531,7 @@ class UserForm extends React.Component<IProps, any> {
         const data = await ModulesAction.getGroupData(fields);
         if (data) {
             const treeData = tree(list.concat(data.items));
+            console.log(treeData);
             if (data.pageMeta.pageNum * data.pageMeta.pageSize > data.pageMeta.total) {
                 console.log('没有更多了');
                 this.setState({
