@@ -297,8 +297,14 @@ class UserForm extends React.Component<IProps, any> {
         });
     }
     refreshInvoice = () => {
-        this.clearRows();
-        this.getData();
+        this.setState({
+            list: [],
+            selectedRows: [],
+            selectedRowKeys: [],
+            pageNum: 1,
+            pageSize: 10,
+        },()=>{this.getData();});
+        
     }
     clearRows = () => {
         this.setState({
