@@ -322,15 +322,22 @@ class UserForm extends React.Component<IProps, any> {
         this.getData();
     }
     componentWillReceiveProps(nextProps: any) {
-        if(nextProps.location.state){
-            if ( nextProps.location.state.refresh&&!this.state.refresh) {
+        if (nextProps.location.state) {
+            if (nextProps.location.state.refresh && !this.state.refresh) {
                 this.setState({
-                    refresh:true
-                },()=>{this.getData();});
+                    refresh: true,
+                    list: [],
+                    selectedRows: [],
+                    selectedRowKeys: [],
+                    pageNum: 1,
+                    pageSize: 10,
+                    hasMore: true,
+                    loading: false
+                }, () => { this.getData(); });
                 //this.getData();
             }
         }
-        
+
     }
     onOpenInvoiceImport = () => {
         const urlData = {
@@ -570,7 +577,7 @@ class UserForm extends React.Component<IProps, any> {
                 list: treeData,
                 pageMeta: data.pageMeta,
                 loading: false,
-                refresh:false
+                refresh: false
             });
         }
     }
