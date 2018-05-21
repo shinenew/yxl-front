@@ -206,7 +206,7 @@ export default class UIDetailslist extends UIDetailsBasis<IProps, ModulesState> 
                                 <span>{this.modulesState.invoiceDetails.taxRate}</span>
                             </div>
                             <div className="tax-amount">
-                                <span>¥{this.modulesState.invoiceDetails.amountTax}</span>
+                                <span>¥{this.modulesState.invoiceDetails.amountTax.toFixed(2)}</span>
                             </div>
                         </div>
                     </div>
