@@ -53,17 +53,20 @@ class Component extends React.Component<any, any>{
                     } else {
                         if (info.file.response.ok) {
                             if (info.file.response.body.allSuccess) {
-                                message.success('上传成功！');
+                                //message.success('上传成功！');
                             } else {
                                 let downloadFilePath =`//${MyStore.instance.getState().user.zoneUrl}${Urls.DOWNLOADFILE}/?filepath=${info.file.response.body.downloadFilePath}`;
                                 const errorCount = info.file.response.body.errorCount;
                                 const successCount = info.file.response.body.successCount;
                                 this.setState({
                                     excel: false,
-                                    errorModal: true,
+                                    errorModal: !!errorCount,
                                     errorInfo: `录入成功${successCount} 条,失败${errorCount} 条!`,
                                     downloadFilePath: downloadFilePath
                                 });
+                                if(!!errorCount===false){
+                                    message.success('上传成功！');
+                                }
                             }
                             this.props.fnForceUpdate();
                         } else {
