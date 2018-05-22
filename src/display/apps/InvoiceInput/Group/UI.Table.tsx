@@ -112,7 +112,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
             key: 'action',
             render: (text, record) => (
               <span>
-                <a href="javascript:;" onClick={() => ModulesAction.deleteDetailInfoList(record.invoiceNumber, record.shouldState)}>移除</a>
+                <a href="javascript:;" onClick={() => ModulesAction.deleteDetailInfoList(record.groupDetailId, record.shouldState)}>移除</a>
               </span>
             ),
           }
@@ -132,7 +132,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
           key: 'action',
           render: (text, record) => (
             <span>
-              <a href="javascript:;" onClick={() => ModulesAction.deleteDetailInfoList(record.invoiceNumber)}>移除</a>
+              <a href="javascript:;" onClick={() => ModulesAction.deleteDetailInfoList(record.groupDetailId)}>移除</a>
             </span>
           ),
         }
