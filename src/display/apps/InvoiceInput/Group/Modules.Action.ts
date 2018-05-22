@@ -36,17 +36,17 @@ class ModulesAction extends ActionBasic<ModulesState> {
         return res;
     }
 
-    public deleteDetailInfoList = (invoiceNumber: string, shouldState?: string) => {
+    public deleteDetailInfoList = (groupDetailId: string, shouldState?: string) => {
         let detailInfoList = this.modulesState.detailInfoList;
         if (shouldState) {
             detailInfoList.forEach((el, index) => {
-                if(el.invoiceNumber === invoiceNumber) {
+                if(el.groupDetailId === groupDetailId) {
                     detailInfoList[index]['receivedState'] = 0;
                     detailInfoList[index]['invoiceLoggingId'] = '';
                 }
             });
         } else {
-            const notInvoice = val => val.invoiceNumber !== invoiceNumber;
+            const notInvoice = val => val.groupDetailId !== groupDetailId;
             let filtered = detailInfoList.filter(notInvoice);
             this.modulesState.detailInfoList = filtered;
         }
