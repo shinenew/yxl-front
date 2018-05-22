@@ -9,6 +9,10 @@
 }
 .invoice {
   &-card {
+    :global(.ant-card-head) {
+      margin-bottom: 0px;
+      border-bottom: 1px solid #DBDDDF;
+    }
     :global(.ant-card-body) {
       padding: 0px;
     }

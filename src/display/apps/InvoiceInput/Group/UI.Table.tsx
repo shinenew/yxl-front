@@ -121,8 +121,7 @@ export default class UIComponents extends UIBasic<IProps, ModulesState> {
         return [{
           title: '发票代码',
           dataIndex: 'invoiceCode',
-          key: 'name',
-          render: text => <a href="javascript:;">{text}</a>,
+          key: 'name'
         }, {
           title: '发票号码',
           dataIndex: 'invoiceNumber',
