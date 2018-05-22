@@ -431,9 +431,9 @@ class UserForm extends React.Component<IProps, any> {
 
         let columns = this.columns;
         let { selectedRowKeys, fields, list } = this.state;
-        if (list.length === 0) {
-            return false;
-        }
+        // if (list.length === 0) {
+        //     return false;
+        // }
         let dataSource = list;
         const rowSelection = {
             selectedRowKeys,
