@@ -100,7 +100,6 @@ class UserForm extends React.Component<IProps, any> {
         },
         {
             title: '发票号码',
-            width: 95,
             dataIndex: 'invoiceNumber'
         },
         {
@@ -117,6 +116,7 @@ class UserForm extends React.Component<IProps, any> {
         {
             title: '录入时间',
             dataIndex: 'loggingTime',
+            width: 240,
             render: (text, record) => {
                 return (
                     <div>
@@ -208,6 +208,9 @@ class UserForm extends React.Component<IProps, any> {
         }
         if (record.standardState === 'FAILED') {
             warnArray.push(<div key="3">不合规:{record.standardMsg}</div>);
+        }
+        if (record.invoiceType === 'UNKOWN_INVOICE_TYPE') {
+            warnArray.push(<div key="3">未识别</div>);
         }
         const warnMessage = <div>{warnArray}</div>;
         return (
@@ -429,7 +432,7 @@ class UserForm extends React.Component<IProps, any> {
         let columns = this.columns;
         let { selectedRowKeys, fields, list } = this.state;
         if (list.length === 0) {
-            //return false;
+            return false;
         }
         let dataSource = list;
         const rowSelection = {
@@ -467,7 +470,7 @@ class UserForm extends React.Component<IProps, any> {
                                 更新加载信息
                             </Button>
                             <Button
-                                className={`font10 ${css['invoice-card-button']}`}
+                                className={`font10 ${css['invoice-card-button']} hide`}
                                 icon="chixugengxin font10"
                             >
                                 <Link to="/workbench/invoiceInput/group/1231">
@@ -497,14 +500,13 @@ class UserForm extends React.Component<IProps, any> {
                     {
                         this.state.show && this.addAlert()
                     }
-                    <div style={{ height: 500, overflow: 'auto' }}>
+                    <div style={{ height: 550, overflow: 'auto' }}>
                         <InfiniteScroll
                             initialLoad={false}
                             pageStart={0}
                             loadMore={this.handleInfiniteOnLoad}
                             hasMore={!this.state.loading && this.state.hasMore}
                             useWindow={false}
-                            threshold={0}
                         >
                             <Table
                                 className="ui-list"
