@@ -72,7 +72,7 @@ class UserForm extends React.Component<IProps, any> {
                                 <span>
                                     {record.groupNumber}
                                     {
-                                       record.createType===1&&<span>({record.matchCount}/{record.waitCount})</span>
+                                        record.createType === 1 && <span>({record.matchCount}/{record.waitCount})</span>
                                     }
                                 </span>
                                 : <span>{text}</span>
@@ -428,6 +428,9 @@ class UserForm extends React.Component<IProps, any> {
 
         let columns = this.columns;
         let { selectedRowKeys, fields, list } = this.state;
+        if (list.length === 0) {
+            //return false;
+        }
         let dataSource = list;
         const rowSelection = {
             selectedRowKeys,
@@ -494,33 +497,34 @@ class UserForm extends React.Component<IProps, any> {
                     {
                         this.state.show && this.addAlert()
                     }
-                    <InfiniteScroll
-                        initialLoad={false}
-                        pageStart={0}
-                        loadMore={this.handleInfiniteOnLoad}
-                        hasMore={!this.state.loading && this.state.hasMore}
-                        useWindow={true}
-                    >
-                        <Table
-                            className="ui-list"
-                            style={{ borderColor: '#E9EAEB' }}
-                            loading={this.props.loading}
-                            bordered={true}
-                            dataSource={dataSource}
-                            indentSize={0}
-
-                            columns={columns}
-                            rowClassName={(record, index) => {
-                                return (
-                                    record.recordType === 2 ? 'groupItem' : 'ui-item doc-item'
-                                );
-                            }}
-                            rowKey="id"
-                            rowSelection={rowSelection}
-                            defaultExpandAllRows={true}
-                            pagination={false}
-                        />
-                    </InfiniteScroll>
+                    <div style={{ height: 500, overflow: 'auto' }}>
+                        <InfiniteScroll
+                            initialLoad={false}
+                            pageStart={0}
+                            loadMore={this.handleInfiniteOnLoad}
+                            hasMore={!this.state.loading && this.state.hasMore}
+                            useWindow={false}
+                            threshold={0}
+                        >
+                            <Table
+                                className="ui-list"
+                                style={{ borderColor: '#E9EAEB' }}
+                                bordered={true}
+                                dataSource={dataSource}
+                                indentSize={0}
+                                columns={columns}
+                                rowClassName={(record, index) => {
+                                    return (
+                                        record.recordType === 2 ? 'groupItem' : 'ui-item doc-item'
+                                    );
+                                }}
+                                rowKey="id"
+                                rowSelection={rowSelection}
+                                defaultExpandAllRows={true}
+                                pagination={false}
+                            />
+                        </InfiniteScroll>
+                    </div>
                     {
                         this.state.addModal &&
                         <CreatGroup onCloseModal={this.onCloseModal} />
@@ -569,7 +573,7 @@ class UserForm extends React.Component<IProps, any> {
         const data = await ModulesAction.getGroupData(fields);
         if (data) {
             const treeData = tree(list.concat(data.items));
-            // console.log(treeData);
+            console.log(treeData);
             if (data.pageMeta.pageNum * data.pageMeta.pageSize > data.pageMeta.total) {
                 // console.log('没有更多了');
                 this.setState({
