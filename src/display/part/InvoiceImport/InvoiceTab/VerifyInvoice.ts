@@ -106,7 +106,7 @@ export let alxd = function (a:any) {
       }
     }
     if (c === '99') { //如果还是99，且第8位是2，则是机动车发票
-      if (b === 2 && a.charAt(0) !== '0') {
+      if (b === '2' && a.charAt(0) !== '0') {
         c = '03';
       }
     }
