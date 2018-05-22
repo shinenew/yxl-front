@@ -31,6 +31,14 @@
     :global(.ant-table-tbody > tr:hover > td) {
       background: rgba(203,211,219,1);
     }
+    :global(.ant-table .ant-table-row-indent + .ant-table-row-expand-icon) {
+      margin-right: 0px;
+    }
+    :global(.ant-table .ant-table-row-level-1 .ant-table-row-indent + .ant-table-row-expand-icon) {
+      width: 0px;
+      height: 0px;
+      margin-right: 0px;
+    }
     &-button {
       height: 25px;
     }

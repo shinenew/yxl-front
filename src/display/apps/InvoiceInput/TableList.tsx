@@ -29,7 +29,8 @@ class UserForm extends React.Component<IProps, any> {
         {
             title: '',
             dataIndex: 'invoiceGroupId',
-            className: `text-center ${css['invoice-card-son']}`,
+            width: 33,
+            className: `text-center`,
             render: (text) => {
                 return (
                     <span>
@@ -41,6 +42,7 @@ class UserForm extends React.Component<IProps, any> {
         {
             title: '',
             dataIndex: 'index',
+            width: 33,
             className: 'text-center',
             render: (text, record) => {
                 return (
@@ -438,6 +440,7 @@ class UserForm extends React.Component<IProps, any> {
         const rowSelection = {
             selectedRowKeys,
             onChange: this.onChange,
+            columnWidth: 33,
             hideDefaultSelections: true,
             getCheckboxProps: (record) => {
                 return { disabled: record.groupNumber ? true : false };
