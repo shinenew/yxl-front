@@ -29,7 +29,7 @@ class UserForm extends React.Component<IProps, any> {
         {
             title: '',
             dataIndex: 'invoiceGroupId',
-            className: 'text-center',
+            className: `text-center ${css['invoice-card-son']}`,
             render: (text) => {
                 return (
                     <span>
@@ -456,13 +456,13 @@ class UserForm extends React.Component<IProps, any> {
                             <Button
                                 className={`mr10 font10 ${css['invoice-card-button']}`}
                                 onClick={this.onAddToGroup}
-                                icon="tianjia font10"
+                                icon="tianjia font13"
                             >
                                 添加到发票组
                             </Button>
                             <Button
                                 className={`font10 ${css['invoice-card-button']}`}
-                                icon="chixugengxin font10"
+                                icon="chixugengxin font13"
                             >
                                 更新加载信息
                             </Button>
@@ -480,7 +480,7 @@ class UserForm extends React.Component<IProps, any> {
                                 onClick={this.toggle}
                                 className={`mr10 mb-10 font10 ${css['invoice-card-button']}`}
                                 htmlType="submit"
-                                icon="caret-down font10"
+                                icon="caret-down font13"
                             >
                                 筛选
                             </Button>
